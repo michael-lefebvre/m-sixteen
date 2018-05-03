@@ -1,0 +1,238 @@
+@import "Scss/variables.scss";
+
+.bkgd {
+  // background: linear-gradient(to right, rgba( $album-2-bkgd, .2) 0%,  rgba( $album-1-bkgd, 1) 100%);
+  // background: linear-gradient(to right, rgba( #812125, 0) 0%,  rgba( red, 0) 100%);
+  // background-size: 400% 400%;
+  // animation: AnimationName 2s ease forwards;
+  height: 100%;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  // transition: background 0.5s ease-out;
+  width: 100%;
+  z-index: 100;
+  // animation: AnimationBkgd0 .3s ease-out forwards;
+  background: transparent;
+
+  &:before {
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0
+  }
+
+  &--0-1 {
+    &:before {
+      animation: BkgdFrom0To1 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-1-bkgd, 0) 0%,  rgba( black, 0) 100%)
+    }
+  }
+  &--0-2 {
+    &:before {
+      animation: BkgdFrom0To2 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-2-bkgd, 0) 0%,  rgba( black, 0) 100%)
+    }
+  }
+  &--0-3 {
+    &:before {
+      animation: BkgdFrom0To3 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-3-bkgd, 0) 0%,  rgba( black, 0) 100%)
+    }
+  }
+
+  &--1-0 {
+
+    &:before {
+      animation: BkgdFrom1To0 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 100%,  rgba( black, 0) 100%)
+    }
+  }
+  &--1-2 {
+    background: $album-1-bkgd;
+    &:before {
+      animation: BkgdFrom1To2 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-2-bkgd, 0) 0%,  rgba( $album-1-bkgd, 1) 100%)
+    }
+  }
+  &--1-3 {
+    background: $album-1-bkgd;
+    &:before {
+      animation: BkgdFrom1To3 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-3-bkgd, 0) 0%,  rgba( $album-1-bkgd, 1) 100%)
+    }
+  }
+
+  &--2-0 {
+    // background: $album-1-bkgd;
+    &:before {
+      animation: BkgdFrom2To0 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 100%,  rgba( $album-1-bkgd, 0) 100%);
+    }
+  }
+  &--2-1 {
+    background: $album-1-bkgd;
+    &:before {
+      animation: BkgdFrom2To1 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 100%,  rgba( $album-1-bkgd, 0) 100%);
+    }
+  }
+
+  &--3-1 {
+    background: $album-1-bkgd;
+    &:before {
+      animation: BkgdFrom3To1 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 100%,  rgba( $album-1-bkgd, 0) 100%);
+    }
+  }
+  &--3-2 {
+    background: $album-2-bkgd;
+    &:before {
+      animation: BkgdFrom3To2 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 100%,  rgba( $album-2-bkgd, 0) 100%);
+    }
+  }
+  &--2-3 {
+    background: $album-2-bkgd;
+    &:before {
+      animation: BkgdFrom2To3 .4s $ease forwards;
+      background: linear-gradient(to right, rgba( $album-3-bkgd, 0) 0%,  rgba( $album-2-bkgd, 1) 100%)
+    }
+  }
+}
+
+@keyframes BkgdFrom0To1 {
+  0%   { background: linear-gradient(to right, rgba( $album-1-bkgd, 0) 0%,  rgba( black, 0) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-1-bkgd, .3) 0%,  rgba( black, 0) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-1-bkgd, .6) 0%,  rgba( black, 0) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-1-bkgd, .9) 0%,  rgba( black, 0) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 10%,  rgba( black, 0) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 30%,  rgba( black, 0) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 60%,  rgba( black, 0) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 80%,  rgba( black, 0) 100%) }
+  100% { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 100%,  rgba( black, 0) 100%) }
+}
+
+@keyframes BkgdFrom0To2 {
+  0%   { background: linear-gradient(to right, rgba( $album-2-bkgd, 0) 0%,  rgba( black, 0) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .3) 0%,  rgba( black, 0) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .6) 0%,  rgba( black, 0) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .9) 0%,  rgba( black, 0) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 10%,  rgba( black, 0) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 30%,  rgba( black, 0) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 60%,  rgba( black, 0) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 80%,  rgba( black, 0) 100%) }
+  100% { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 100%,  rgba( black, 0) 100%) }
+}
+
+@keyframes BkgdFrom0To3 {
+  0%   { background: linear-gradient(to right, rgba( $album-3-bkgd, 0) 0%,  rgba( black, 0) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .3) 0%,  rgba( black, 0) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .6) 0%,  rgba( black, 0) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .9) 0%,  rgba( black, 0) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 10%,  rgba( black, 0) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 30%,  rgba( black, 0) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 60%,  rgba( black, 0) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 80%,  rgba( black, 0) 100%) }
+  100% { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 100%,  rgba( black, 0) 100%) }
+}
+
+@keyframes BkgdFrom1To0 {
+  100% { background: linear-gradient(to right, rgba( $album-1-bkgd, 0) 0%,  rgba( black, 0) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-1-bkgd, .3) 0%,  rgba( black, 0) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-1-bkgd, .6) 0%,  rgba( black, 0) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-1-bkgd, .9) 0%,  rgba( black, 0) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 10%,  rgba( black, 0) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 30%,  rgba( black, 0) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 60%,  rgba( black, 0) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 80%,  rgba( black, 0) 100%) }
+  0%   { background: linear-gradient(to right, rgba( $album-1-bkgd, 1) 100%,  rgba( black, 0) 100%) }
+}
+
+
+@keyframes BkgdFrom2To0 {
+  100% { background: linear-gradient(to right, rgba( $album-2-bkgd, 0) 0%,  rgba( black, 0) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .3) 0%,  rgba( black, 0) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .6) 0%,  rgba( black, 0) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .9) 0%,  rgba( black, 0) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 10%,  rgba( black, 0) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 30%,  rgba( black, 0) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 60%,  rgba( black, 0) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 80%,  rgba( black, 0) 100%) }
+  0%   { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 100%,  rgba( black, 0) 100%) }
+}
+@keyframes BkgdFrom2To1 {
+  100% { background: linear-gradient(to right, rgba( $album-2-bkgd, 0) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .3) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .6) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .9) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 10%,  rgba( $album-1-bkgd, 1) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 30%,  rgba( $album-1-bkgd, 1) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 60%,  rgba( $album-1-bkgd, 1) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 80%,  rgba( $album-1-bkgd, 1) 100%) }
+  0%   { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 100%,  rgba( $album-1-bkgd, 1) 100%) }
+}
+
+@keyframes BkgdFrom1To2 {
+  0%   { background: linear-gradient(to right, rgba( $album-2-bkgd, 0) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .3) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .6) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-2-bkgd, .9) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 10%,  rgba( $album-1-bkgd, 1) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 30%,  rgba( $album-1-bkgd, 1) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 60%,  rgba( $album-1-bkgd, 1) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 80%,  rgba( $album-1-bkgd, 1) 100%) }
+  100% { background: linear-gradient(to right, rgba( $album-2-bkgd, 1) 100%,  rgba( $album-1-bkgd, 1) 100%) }
+}
+
+@keyframes BkgdFrom1To3 {
+  0%   { background: linear-gradient(to right, rgba( $album-3-bkgd, 0) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .3) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .6) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .9) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 10%,  rgba( $album-1-bkgd, 1) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 30%,  rgba( $album-1-bkgd, 1) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 60%,  rgba( $album-1-bkgd, 1) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 80%,  rgba( $album-1-bkgd, 1) 100%) }
+  100% { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 100%,  rgba( $album-1-bkgd, 1) 100%) }
+}
+
+@keyframes BkgdFrom3To1 {
+  100% { background: linear-gradient(to right, rgba( $album-3-bkgd, 0) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .3) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .6) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .9) 0%,  rgba( $album-1-bkgd, 1) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 10%,  rgba( $album-1-bkgd, 1) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 30%,  rgba( $album-1-bkgd, 1) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 60%,  rgba( $album-1-bkgd, 1) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 80%,  rgba( $album-1-bkgd, 1) 100%) }
+  0%   { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 100%,  rgba( $album-1-bkgd, 1) 100%) }
+}
+@keyframes BkgdFrom3To2 {
+  100% { background: linear-gradient(to right, rgba( $album-3-bkgd, 0) 0%,  rgba( $album-2-bkgd, 1) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .3) 0%,  rgba( $album-2-bkgd, 1) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .6) 0%,  rgba( $album-2-bkgd, 1) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .9) 0%,  rgba( $album-2-bkgd, 1) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 10%,  rgba( $album-2-bkgd, 1) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 30%,  rgba( $album-2-bkgd, 1) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 60%,  rgba( $album-2-bkgd, 1) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 80%,  rgba( $album-2-bkgd, 1) 100%) }
+  0%   { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 100%,  rgba( $album-2-bkgd, 1) 100%) }
+}
+
+@keyframes BkgdFrom2To3 {
+  0%   { background: linear-gradient(to right, rgba( $album-3-bkgd, 0) 0%,  rgba( $album-2-bkgd, 1) 100%) }
+  10%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .3) 0%,  rgba( $album-2-bkgd, 1) 100%) }
+  20%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .6) 0%,  rgba( $album-2-bkgd, 1) 100%) }
+  30%  { background: linear-gradient(to right, rgba( $album-3-bkgd, .9) 0%,  rgba( $album-2-bkgd, 1) 100%) }
+  40%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 10%,  rgba( $album-2-bkgd, 1) 100%) }
+  50%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 30%,  rgba( $album-2-bkgd, 1) 100%) }
+  60%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 60%,  rgba( $album-2-bkgd, 1) 100%) }
+  80%  { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 80%,  rgba( $album-2-bkgd, 1) 100%) }
+  100% { background: linear-gradient(to right, rgba( $album-3-bkgd, 1) 100%,  rgba( $album-2-bkgd, 1) 100%) }
+}
+

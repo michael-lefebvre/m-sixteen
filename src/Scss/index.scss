@@ -1,0 +1,32 @@
+@import "./variables.scss";
+@import "./reset.css";
+
+::-webkit-scrollbar {
+  height: $scroll-bar-height;
+  width: $scroll-bar-height;
+}
+
+::-webkit-scrollbar-button {
+  height: $scroll-bar-height;
+  width: $scroll-bar-height;
+}
+
+html, body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  font-family: $font-family-system;
+  font-size: $font-size-base;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+#root {
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  min-width: 375px;
+  overflow: hidden;
+  user-select: none;
+  position: relative;
+}

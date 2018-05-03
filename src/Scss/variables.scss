@@ -1,0 +1,86 @@
+//
+// Variables
+// --------------------------------------------------
+
+//== Miscellaneous
+//
+//## stuffs
+
+
+  //== Scroll Bar
+  //
+
+$scroll-bar-height: 1px;
+
+  //== Fake transparent GIF
+  //
+
+$oldschool-spacer:  'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)';
+
+
+  //== Transitions
+  //
+
+$ease: cubic-bezier(0, 0.79, 0.38, 0.96);
+
+@mixin pane-transition( $duration: 800ms, $property: all ) {
+    transition: $property $duration $ease;
+}
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+  //== Font Size
+  //
+
+$font-size-extra-small:   11px;
+$font-size-small:         12px;
+$font-size-regular:       14px;
+$font-size-base:          $font-size-regular;
+$font-size-large:         16px;
+$font-size-extra:         20px;
+
+  //== Font Weight
+  //
+
+$font-weight-regular: 400;
+$font-weight-medium:  500;
+$font-weight-bold:    700;
+
+  //== Font Family
+  //
+
+$font-family-system:     'Source Sans Pro', sans-serif;
+// -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+  //== Colors
+  //
+
+$color-medium:            #d6e8fe;
+$color-light:             #e8f3fe;
+$color-extra-light:       #f4faff;
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+  //== Screen break points
+  //
+
+$screen-xs: 480px;
+$screen-sm: 600px;
+$screen-mp: 700px;
+$screen-ms: 840px;
+$screen-md: 960px;
+$screen-lg: 1080px;
+$screen-xl: 1280px;
+
+
+//== Albums
+//
+//## Settings for some of the most global styles.
+
+$album-1-bkgd: #040301;
+$album-2-bkgd: #812125;
+$album-3-bkgd: #DD472E;
