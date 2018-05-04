@@ -1,14 +1,9 @@
 import React, { PureComponent, Fragment } from 'react'
-// import { findDOMNode }                    from 'react-dom'
-// import classNames                         from 'classnames'
-import YouTube                            from 'react-youtube'
 import Inertia                            from 'wheel-inertia'
-// import debounce                           from 'lodash.debounce'
 
-// import ScrollTo                           from 'Utils/Scroll'
-
-import Background from 'Views/Background'
-import Record from 'Views/Record'
+import Background                         from 'Views/Background'
+import Home                               from 'Views/Home'
+import Record                             from 'Views/Record'
 
 import './styles.css'
 
@@ -18,13 +13,12 @@ class App extends PureComponent
   {
     super( props )
 
+    this.handleOnPlayerReady  = this.handleOnPlayerReady.bind( this )
     this.handleOnResize       = this.handleOnResize.bind( this )
     this.handleOnKeyDown      = this.handleOnKeyDown.bind( this )
     this.handleOnScroll       = this.handleOnScroll.bind( this )
     this.handleOnWheelInertia = this.handleOnWheelInertia.bind( this )
     this.handleOnNavigation   = this.handleOnNavigation.bind( this )
-    // this.handleOnScroll = debounce( this.handleOnScroll.bind( this ), 150, { leading: true, trailing: false } )
-    // this._scrollToView  = debounce( this._scrollToView.bind( this ), 500, { leading: false, trailing: true } )
 
 
     Inertia.addCallback( this.handleOnScroll )
@@ -47,24 +41,16 @@ class App extends PureComponent
 
   componentWillMount()
   {
-    window.addEventListener( 'resize', this.handleOnResize, { passive: true } )
-    document.addEventListener( 'keydown', this.handleOnKeyDown, { passive: true } )
-    // document.body.addEventListener('DOMMouseScroll', this.handleOnWheelInertia, false ) // for Firefox
+    window.addEventListener('resize', this.handleOnResize, { passive: true } )
+    document.addEventListener('keydown', this.handleOnKeyDown, { passive: true } )
     window.addEventListener('DOMMouseScroll', this.handleOnWheelInertia, false ) // for Firefox
     window.addEventListener('mousewheel', this.handleOnWheelInertia, false )     // for everyone else
   }
 
   componentDidMount()
   {
-    // findDOMNode( this.refs.app ).focus()
     this._setHeight()
   }
-
-  // componentDidUpdate( prevProps )
-  // {
-  //   // if( prevProps.isHistoryOpen && !this.props.isHistoryOpen )
-  //   //   findDOMNode( this.refs.app ).focus()
-  // }
 
   //
   // Helpers
@@ -84,16 +70,6 @@ class App extends PureComponent
         }
 
     this.setState({ finalHeight, finalWidth, style, screenHeight: height }, () => this._scrollToView( this.state.currentView ))
-//     , () =>
-//     {
-//       // findDOMNode(this.refs.app).scrollTop = (height - 100)
-// setTimeout( () =>
-//       ScrollTo({
-//           element:  findDOMNode( this.refs.app )
-//         , callback: () => console.log('callback') //this.setState({ isScrolling: false, currentView })
-//         , to:       finalHeight
-//       }), 5000 )
-//     })
   }
 
   _scrollToView( view )
@@ -146,10 +122,6 @@ class App extends PureComponent
       return false
 
     this._setHomeVideo( view === 0 )
-    // if(  )
-    //   this.state.homeVideo.pauseVideo()
-    // else
-    //   this.state.homeVideo.playVideo()
 
     return this.setState({ isScrolling: true, currentView: view, previousView: currentView }, () => this._scrollToView( view ) )
   }
@@ -172,6 +144,11 @@ class App extends PureComponent
       return
 
     return this.setState({ isScrolling: true, currentView: view, previousView: currentView }, () => this._scrollToView( view ) )
+  }
+
+  handleOnPlayerReady({ target })
+  {
+    this.setState({ homeVideo: target })
   }
 
   //
@@ -217,74 +194,12 @@ class App extends PureComponent
 
   render()
   {
-    // const { style, currentView } = this.state
-    // const { currentView } = this.state
-    //     , isView1                = currentView === 1
-    //     , isView2                = currentView === 2
-    //     , isView3                = currentView === 3
-
-
-    // https://codebushi.com/react-youtube-background/
-    const videoOptions = {
-      playerVars: { // https://developers.google.com/youtube/player_parameters
-        autoplay: 1,
-        controls: 0,
-        rel: 0,
-        showinfo: 0,
-        loop: 1
-      }
-    }
-
-    const _onReady = ( e ) => {
-    // access to player in all event handlers via event.target
-    // event.target.mute();
-      this.setState({ homeVideo: e.target })
-    }
-
-    const _onEnd = ( e ) => {
-      e.target.playVideo()
-    }
-
- // style={style}>
     return (
       <div className="app" ref="app">
-        {/*this.slidesRenderer()*/}
-        <div className="home">
-          <div className="home__content">
-            <div>
-              <h1>m-sixteen</h1>
-              <p>paris punk rock, 2001-2008</p>
-            </div>
-          </div>
-          <div className="home__background">
-            <div className="home__background__foreground">
-              <YouTube
-               videoId="Pdni_p27l_0"
-               opts={videoOptions}
-               className="home__background__foreground__iframe"
-               onReady={_onReady}
-               onEnd={_onEnd} />
-            </div>
-          </div>
-        </div>
+        <Home onReady={this.handleOnPlayerReady} />
         <Background currentView={this.state.currentView} previousView={this.state.previousView}>
           <Record currentView={this.state.currentView} isScrolling={this.state.isScrolling} />
         </Background>
-        {/*<div className={classNames('bkgd', { 'bkgd--1': isView1, 'bkgd--2': isView2, 'bkgd--3': isView3 })} />*/}
-        {/*<div className={classNames('views', { 'views--1': isView1, 'views--2': isView2, 'views--3': isView3 })}>
-          <div className="view view--1">
-            <div className="view__content">view 1</div>
-            <div className="view__bkgd" />
-          </div>
-          <div className="view view--2">
-            <div className="view__content">view 2</div>
-            <div className="view__bkgd" />
-          </div>
-          <div className="view view--3">
-            <div className="view__content">view 3</div>
-            <div className="view__bkgd" />
-          </div>
-        </div>*/}
         <div className="navigation">
           <div className="navigation__link" onClick={this.handleOnNavigation} data-index="1">Album</div>
           <div className="navigation__link" onClick={this.handleOnNavigation} data-index="2">Split</div>
