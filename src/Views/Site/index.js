@@ -6,6 +6,7 @@ import Inertia                  from 'wheel-inertia'
 import Home                     from 'Views/Home'
 import Headers                  from 'Views/Headers'
 import Pages                    from 'Views/Pages'
+import Video                    from 'Views/Video'
 
 import './styles.css'
 
@@ -39,6 +40,8 @@ export default class Index extends PureComponent
     this.handleOnHeaderReady    = this.handleOnHeaderReady.bind( this )
     this.handleOnGoNext         = this.handleOnGoNext.bind( this )
     this.handleOnGoPrev         = this.handleOnGoPrev.bind( this )
+    this.handleOnOpenVideo      = this.handleOnOpenVideo.bind( this )
+    this.handleOnCloseVideo     = this.handleOnCloseVideo.bind( this )
 
     this.state = {
         screenHeight:    null
@@ -51,6 +54,7 @@ export default class Index extends PureComponent
       , previousView:    null
       , homeVideo:       null
       , pageScrollable:  false
+      , video:           null
     }
   }
 
@@ -141,7 +145,7 @@ export default class Index extends PureComponent
     if( currentView === 3 && nextView === 0 )
       return
 
-    this.setState({ currentView: nextView, previousView: currentView, isScrollable: ( nextView === 0 ), pageScrollable: false }) //, scrollTop: 0, scrollBottom: null }) //, () => findDOMNode( this.refs.site ).scrollTop = 0 )
+    this.setState({ scrollDirection: direction, currentView: nextView, previousView: currentView, isScrollable: ( nextView === 0 ), pageScrollable: false }) //, scrollTop: 0, scrollBottom: null }) //, () => findDOMNode( this.refs.site ).scrollTop = 0 )
   }
 
   handleOnPlayerReady({ target })
@@ -151,7 +155,10 @@ export default class Index extends PureComponent
 
   handleOnHeaderReady()
   {
-    this.setState({ previousView: null }) //, isScrollable: true })
+    // if( this.state.scrollDirection > 0 )
+    //   return setTimeout(() => this.setState({ previousView: null, isScrollable: true }), 300)
+
+    this.setState({ previousView: null })
   }
 
   handleOnResetScroll()
@@ -193,6 +200,16 @@ export default class Index extends PureComponent
     this.setState({ scrollBottom, pageScrollable: true })
   }
 
+  handleOnOpenVideo( video )
+  {
+    this.setState({ video })
+  }
+
+  handleOnCloseVideo()
+  {
+    this.setState({ video: null })
+  }
+
   //
   // Render
   // --------------------------------------------------
@@ -205,7 +222,8 @@ export default class Index extends PureComponent
       <div className={classNames('site', { 'site--scroll': pageScrollable })} ref="site" onScroll={this.handleOnPageScroll}>
         <Home onReady={this.handleOnPlayerReady} />
         <Headers currentView={currentView} previousView={previousView} onReady={this.handleOnHeaderReady} />
-        <Pages currentView={currentView} isScrollable={isScrollable} screenHeight={screenHeight} lineHeight={lineHeight} onReady={this.handleOnPageRendered} resetScroll={this.handleOnResetScroll} />
+        <Pages {...this.state} onReady={this.handleOnPageRendered} resetScroll={this.handleOnResetScroll} onClickVideo={this.handleOnOpenVideo} />
+        <Video video={this.state.video} onClose={this.handleOnCloseVideo} />
         <Debug {...this.state} />
       </div>
     )

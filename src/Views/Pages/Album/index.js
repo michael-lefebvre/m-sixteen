@@ -112,7 +112,7 @@ class Index extends PureComponent
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere ex non nisl rutrum dapibus. Nullam eleifend maximus libero at maximus.</p>
             </div>
             {/*<YouTube videoId="Fj8WOeQamvw" opts={videoOpts} containerClassName="page__img page__img--album4" />*/}
-            <div className="page__img page__img--video page__img--album4"><img src={Vid1} alt="" /></div>
+            <div className="page__img page__img--video page__img--album4" onClick={ e => this.props.onClickVideo('Fj8WOeQamvw')}><img src={Vid1} alt="" /></div>
           </div>
           {/*<img src={Img1} className="img-vert" alt="" />
           <img src={Img3} className="img-horz" alt="" />

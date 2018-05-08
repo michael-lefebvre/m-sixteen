@@ -51,7 +51,7 @@ export default class Index extends PureComponent
     return (
       <div className="page" ref="page" style={style}>
         { this.state.loading && <div className="page__loading"><Spinner /></div> }
-        { currentView === 1 && <Album lineHeight={lineHeight} pageRef={ ref => this._pageRef = ref } /> }
+        { currentView === 1 && <Album lineHeight={lineHeight} onClickVideo={this.props.onClickVideo} pageRef={ ref => this._pageRef = ref } /> }
         { currentView === 2 && <Album lineHeight={lineHeight} pageRef={ ref => this._pageRef = ref } /> }
         { currentView === 3 && <Album lineHeight={lineHeight} pageRef={ ref => this._pageRef = ref } /> }
       </div>
