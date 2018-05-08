@@ -227,7 +227,7 @@ $scrollBarHeight: 1px;
   bottom: 10px;
   left: 10px;
   position: fixed;
-  z-index: 100;
+  z-index: 10000;
   color: #fff;
   display: flex;
   flex-direction: row-reverse;

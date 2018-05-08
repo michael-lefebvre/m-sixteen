@@ -1,0 +1,30 @@
+@import "Scss/variables.scss";
+
+.headers {
+  // background: rgba( pink, .3);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: -10;
+  pointer-events: none;
+}
+
+.header {
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+
+  &--current,
+  &--previous {
+    opacity: 1
+  }
+
+  &--current { z-index: 100 }
+  &--previous { z-index: 50 }
+}

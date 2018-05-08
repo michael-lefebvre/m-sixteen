@@ -1,9 +1,10 @@
 import React, { PureComponent, Fragment } from 'react'
 import Inertia                            from 'wheel-inertia'
 
-import Background                         from 'Views/Background'
+// import Background                         from 'Views/Background'
 import Home                               from 'Views/Home'
-import Record                             from 'Views/Record'
+// import Record                             from 'Views/Record'
+import Pages                              from 'Views/Pages'
 
 import './styles.css'
 
@@ -197,10 +198,12 @@ class App extends PureComponent
     return (
       <div className="app" ref="app">
         <Home onReady={this.handleOnPlayerReady} />
-        <Background currentView={this.state.currentView} previousView={this.state.previousView}>
+        <Pages currentView={this.state.currentView} previousView={this.state.previousView} />
+        {/*<Background currentView={this.state.currentView} previousView={this.state.previousView}>
           <Record currentView={this.state.currentView} isScrolling={this.state.isScrolling} />
-        </Background>
+        </Background>*/}
         <div className="navigation">
+          <div className="navigation__link" onClick={this.handleOnNavigation} data-index="0">Home</div>
           <div className="navigation__link" onClick={this.handleOnNavigation} data-index="1">Album</div>
           <div className="navigation__link" onClick={this.handleOnNavigation} data-index="2">Split</div>
           <div className="navigation__link" onClick={this.handleOnNavigation} data-index="3">EP</div>

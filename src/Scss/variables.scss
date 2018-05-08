@@ -6,6 +6,14 @@
 //
 //## stuffs
 
+  //== z-index
+  //
+
+$zindex-higher:          2000;
+$zindex-content:         1000;
+$zindex-header:          200;
+$zindex-home:            100;
+$zindex-root:             10;
 
   //== Scroll Bar
   //
@@ -83,4 +91,4 @@ $screen-xl: 1280px;
 
 $album-1-bkgd: #040301;
 $album-2-bkgd: #812125;
-$album-3-bkgd: #DD472E;
+$album-3-bkgd: #e65139;

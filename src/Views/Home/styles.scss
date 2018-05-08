@@ -1,8 +1,14 @@
 @import "Scss/variables.scss";
 
 .home {
-  position: relative;
-  z-index: 0
+  height: 100%;
+  // position: relative;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: -99;
 }
 
 .home__content {

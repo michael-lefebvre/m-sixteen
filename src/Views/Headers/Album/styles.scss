@@ -1,0 +1,168 @@
+@import "Scss/variables.scss";
+
+.header__album {
+  clip-path: polygon(0 100%, 0% 0%, 0% 0%);
+  background: url(bkgd.jpg) bottom left no-repeat;
+  background-size: cover;
+  z-index: 0;
+}
+
+.header__album--in {
+  clip-path: polygon(0 100%, 0% 0%, 0% 0%);
+  animation: animPageAlbumIn .4s forwards cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  z-index: 100;
+}
+
+.header__album--back {
+  clip-path: polygon( 0% -240%, 0% 100%, 164% 100%)
+}
+
+.header__album--out {
+  animation: animPageAlbumOut .4s forwards ease-out
+}
+
+@keyframes animPageAlbumIn {
+  0%   { clip-path: polygon( 0% 100%, 0% 100%, 0% 100%) }
+  // 10%  { clip-path: polygon( 0% 66%, 0% 100%, 16.4% 100%) }
+  20%  { clip-path: polygon( 0% 32%, 0% 100%, 32.8% 100%) }
+  // 30%  { clip-path: polygon( 0% -2%, 0% 100%, 49.2% 100%) }
+  40%  { clip-path: polygon( 0% -36%, 0% 100%, 65.6% 100%) }
+  // 50%  { clip-path: polygon( 0% -70%, 0% 100%, 82% 100%) }
+  60%  { clip-path: polygon( 0% -104%, 0% 100%, 98.4% 100%) }
+  // 70%  { clip-path: polygon( 0% -138%, 0% 100%, 114.8% 100%) }
+  80%  { clip-path: polygon( 0% -172%, 0% 100%, 131.2% 100%) }
+  // 90%  { clip-path: polygon( 0% -206%, 0% 100%, 147.6% 100%) }
+  100% { clip-path: polygon( 0% -240%, 0% 100%, 164% 100%) }
+}
+
+@keyframes animPageAlbumOut {
+  0%   { clip-path: polygon( -80% 0%, 100% 240%, 100% 0%) }
+  // 10%  { clip-path: polygon( -62% 0%, 100% 216%, 100% 0%) }
+  20%  { clip-path: polygon( -44% 0%, 100% 192%, 100% 0%) }
+  // 30%  { clip-path: polygon( -26% 0%, 100% 168%, 100% 0%) }
+  40%  { clip-path: polygon( -8% 0%, 100% 144%, 100% 0%) }
+  // 50%  { clip-path: polygon( 10% 0%, 100% 120%, 100% 0%) }
+  60%  { clip-path: polygon( 28% 0%, 100% 96%, 100% 0%) }
+  // 70%  { clip-path: polygon( 46% 0%, 100% 72%, 100% 0%) }
+  80%  { clip-path: polygon( 64% 0%, 100% 48%, 100% 0%) }
+  // 90%  { clip-path: polygon( 82% 0%, 100% 24%, 100% 0%) }
+  100% { clip-path: polygon( 100% 0%, 100% 0%, 100% 0% ) }
+}
+
+
+
+.header__album__tracks {
+  background: rgba( $album-1-bkgd, .3);
+  bottom: 50px;
+  color: #fff;
+  display: flex;
+  flex-direction: column-reverse;
+  font-family: 'Rubik', sans-serif;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 32px;
+  list-style: none;
+  position: absolute;
+  right: 20px;
+  text-transform: uppercase;
+  z-index: 1000;
+  transform: rotate( -45deg );
+
+  li {
+    height: 21px;
+    // margin-bottom: 4px;
+    // margin-bottom: 2px;
+    // margin-bottom: 1px;
+    margin-bottom: -1px;
+    line-height: 21px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  span {
+    position: relative
+  }
+}
+
+.header__album__track__regular {
+  background: #fff;
+  color: $album-1-bkgd;
+  display: inline-block;
+  height: 21px;
+  line-height: 22px;
+}
+
+.header__album__track__collapse { margin-left: -2px }
+.header__album__track__collapse--f { margin-left: -3px }
+
+.header__album__track__regular--ff1,
+.header__album__track__regular--ff2,
+.header__album__track__regular--a1 {
+  position: relative;
+
+  &:before {
+    background: #fff;
+    content: '';
+    height: 10px;
+    width: 5px;
+    position: absolute;
+  }
+}
+
+.header__album__track__regular--ff1:before {
+  left: -2px;
+  top: 6px;
+}
+
+.header__album__track__regular--ff2:before {
+  // background: red;
+  height: 10px;
+  width: 5px;
+  left: -4px;
+  top: 0;
+}
+
+.header__album__track__regular--a1:before {
+  background: #000;
+  height: 14px;
+  width: 8px;
+  left: 0px;
+  top: 0;
+}
+.header__album__track__regular--a1:after {
+  background: #000;
+  content: '';
+  height: 10px;
+  width: 5px;
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+}
+
+.header__album__track__collapse--f--a2:before {
+  background: #fff;
+  content: '';
+  height: 26px;
+  width: 5px;
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+}
+.header__album__track__collapse--f--a3:before {
+  background: #fff;
+  content: '';
+  height: 29px;
+  width: 6px;
+  position: absolute;
+  left: -1px;
+  bottom: 0;
+}
+.header__album__track__collapse--f--a3:after {
+  background: #fff;
+  content: '';
+  height: 15px;
+  width: 6px;
+  position: absolute;
+  left: 3px;
+  top: 15px;
+}

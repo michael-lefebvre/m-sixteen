@@ -17,12 +17,6 @@ const Index = ({ onReady }) =>
         }
   }
 
-  // const _onReady = e => {
-  // // access to player in all event handlers via event.target
-  // // event.target.mute();
-  //   this.setState({ homeVideo: e.target })
-  // }
-
   const _onEnd = e => {
     e.target.playVideo()
   }
@@ -32,17 +26,17 @@ const Index = ({ onReady }) =>
       <div className="home__content">
         <div>
           <h1>m-sixteen</h1>
-          <p>paris punk rock, 2001-2008</p>
+          <p>paris punk rock, 2000-2010</p>
         </div>
       </div>
       <div className="home__background">
         <div className="home__background__foreground">
-          <YouTube
+          {/*<YouTube
            videoId="Pdni_p27l_0"
            opts={videoOptions}
            className="home__background__foreground__iframe"
            onReady={onReady}
-           onEnd={_onEnd} />
+           onEnd={_onEnd} />*/}
         </div>
       </div>
     </div>
