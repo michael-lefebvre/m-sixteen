@@ -1,31 +1,6 @@
 @import "Scss/variables.scss";
 
 .site {
-  // height: 100%;
-  // overflow-y: auto;
-  // overflow-x: hidden;
-  // padding-top: 1000px;
   position: relative;
   width: 100%;
-
-  &--scroll { overflow-y: auto }
-}
-
-.site__view {
-  // height: 100%;
-
-  // & > div { height: 100% }
-}
-
-.page {
-  margin: 0 auto;
-  max-width: 1280px;
-  padding: 0 20px;
-  width: calc( 100% - 40px );
-}
-
-.page__line {
-  margin-bottom: 10px;
-  position: relative;
-  // z-index: $zindex-content;
 }

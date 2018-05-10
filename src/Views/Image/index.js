@@ -4,6 +4,8 @@ import PropTypes                      from 'prop-types'
 import TrackVisibility                from 'react-on-screen'
 import classNames                     from 'classnames'
 
+import { withApp }                    from 'Views/Provider'
+
 import './styles.css'
 
 class Image extends Component
@@ -73,7 +75,7 @@ class Image extends Component
 
   handleOnClick()
   {
-    if( !this.props.video || !this.props.openVideo )
+    if( !this.props.video )
       return
 
     this.props.openVideo( this.props.video )
@@ -94,12 +96,22 @@ class Image extends Component
   }
 }
 
-const Index = ({ className, portrait, style, ...props }) =>
+const Index = (p) =>
 {
+  // console.log(p)
+  const { className, portrait, flyer, imgPortrait, imgLandscape, imgFlyer, ...props } = p
+
   const cx = classNames('page__image', className, {
       'page__image--portrait': portrait
+    , 'page__image--flyer':    flyer
     , 'page__image--video':    props.video && typeof props.video === 'string'
   })
+
+  const style = ( !portrait && !flyer )
+                ? imgLandscape
+                : portrait
+                  ? imgPortrait
+                  : imgFlyer
 
   return (
     <TrackVisibility className={cx} partialVisibility={true} style={style} once>
@@ -112,6 +124,7 @@ const Index = ({ className, portrait, style, ...props }) =>
 Index.propTypes = {
     path:      PropTypes.string.isRequired
   , portrait:  PropTypes.bool
+  , flyer:     PropTypes.bool
   , video:     PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ])
   , className: PropTypes.string
   , style:     PropTypes.object
@@ -119,9 +132,10 @@ Index.propTypes = {
 
 Index.defaultProps = {
     portrait:  false
+  , flyer:     false
   , video:     false
   , className: ''
   , style:     {}
 }
 
-export default Index
+export default withApp( Index )

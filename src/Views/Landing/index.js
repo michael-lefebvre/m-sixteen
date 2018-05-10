@@ -1,9 +1,10 @@
 import React from 'react'
 // import YouTube from 'react-youtube'
+import { withApp } from 'Views/Provider'
 
 import './styles.css'
 
-const Index = ({ onReady }) =>
+const Index = ({ landingReady }) =>
 {
   // https://codebushi.com/react-youtube-background/
   // https://developers.google.com/youtube/player_parameters
@@ -23,24 +24,16 @@ const Index = ({ onReady }) =>
 
   return (
     <div className="landing">
-      {/*<div className="landing__content">
-        <div>
-          <h1>m-sixteen</h1>
-          <p>paris punk rock, 2000-2010</p>
-        </div>
-      </div>*/}
       <div className="landing__background">
-        <div className="landing__background__foreground">
-          {/*<YouTube
-           videoId="Pdni_p27l_0"
-           opts={videoOptions}
-           className="landing__background__foreground__iframe"
-           onReady={onReady}
-           onEnd={_onEnd} />*/}
-        </div>
+        {/*<YouTube
+         videoId="Pdni_p27l_0"
+         opts={videoOptions}
+         className="landing__background__foreground__iframe"
+         onReady={landingReady}
+         onEnd={_onEnd} />*/}
       </div>
     </div>
   )
 }
 
-export default Index
+export default withApp( Index )

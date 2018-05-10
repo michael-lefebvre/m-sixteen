@@ -21,6 +21,13 @@
     max-width: 400px;
   }
 
+  &--flyer {
+    // height: 400px;
+    // width: 300px
+    max-height: 400px;
+    max-width: 300px;
+  }
+
   &--video {
     cursor: pointer;
 
@@ -74,4 +81,5 @@
   filter: blur(50px);
   // this is needed so Safari keeps sharp edges
   transform: scale(1);
+  object-fit: scale-down;
 }

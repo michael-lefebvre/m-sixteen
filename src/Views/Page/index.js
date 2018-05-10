@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import TrackVisibility          from 'react-on-screen'
+import TrackVisibility      from 'react-on-screen'
+
+import { withApp }          from 'Views/Provider'
+
+import './styles.css'
 
 class ComponentToTrack extends Component
 {
@@ -23,13 +27,28 @@ class ComponentToTrack extends Component
   }
 }
 
+export const PageLine = withApp( ({ children, lineLandscape, linePortrait, lineFlyer, portrait = false, flyer = false }) =>
+{
+  const style = ( !portrait && !flyer )
+                ? lineLandscape
+                : portrait
+                  ? linePortrait
+                  : lineFlyer
+
+  return (
+    <div className="page__line" style={style}>
+      {children}
+    </div>
+  )
+})
+
 const Page = ({ id, screenRatio, screenHeight, onNavigate, children }) =>
   <TrackVisibility partialVisibility={true}>
     <ComponentToTrack id={id} screenRatio={screenRatio} onNavigate={onNavigate}>
-      { id !== '0' && <div style={{ height: screenHeight }} />}
+      { id !== '0' && <div style={{ height: screenHeight * .5 }} />}
       {children}
       { id !== '0' && <div style={{ height: screenHeight }} />}
     </ComponentToTrack>
   </TrackVisibility>
 
-export default Page
+export default withApp( Page )

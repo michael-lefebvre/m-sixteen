@@ -1,0 +1,14 @@
+@import "Scss/variables.scss";
+
+.page {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 20px;
+  width: calc( 100% - 40px );
+}
+
+.page__line {
+  margin-bottom: 10px;
+  position: relative;
+  // z-index: $zindex-content;
+}

@@ -1,12 +1,13 @@
-import React      from 'react'
+import React       from 'react'
 
-import Album from './Album'
-import Split from './Split'
-import Ep    from './Ep'
+import { withApp } from 'Views/Provider'
+import Album       from './Album'
+import Split       from './Split'
+import Ep          from './Ep'
 
 import './styles.css'
 
-const Index = ({ currentView, backgroundView, onReady }) =>
+const Index = ({ currentView, backgroundView, headerReady }) =>
 {
   const AlbumActive = currentView === 1
       , AlbumBack   = backgroundView === 1
@@ -19,11 +20,11 @@ const Index = ({ currentView, backgroundView, onReady }) =>
 
   return (
     <div className="headers">
-      <Album active={AlbumActive} back={AlbumBack} off={AlbumOff} onReady={onReady} />
-      <Split active={SplitActive} back={SplitBack} onReady={onReady} />
-      <Ep active={EpActive} back={EpBack} off={EpOff} onReady={onReady} />
+      <Album active={AlbumActive} back={AlbumBack} off={AlbumOff} onReady={headerReady} />
+      <Split active={SplitActive} back={SplitBack} onReady={headerReady} />
+      <Ep active={EpActive} back={EpBack} off={EpOff} onReady={headerReady} />
     </div>
   )
 }
 
-export default Index
+export default withApp( Index )
