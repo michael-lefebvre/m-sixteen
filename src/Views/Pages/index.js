@@ -1,61 +1,46 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
-import Spinner from 'Views/Spinner'
+import Image                     from 'Views/Image'
+import Page from 'Views/Page'
+import Home from 'Views/Home'
 import Album from './Album'
 // import Split from './Split'
 // import Ep    from './Ep'
 
 import './styles.css'
 
-export default class Index extends PureComponent
+const Index = props =>
 {
-  constructor( props )
-  {
-    super( props )
+  const { screenHeight, screenRatio, lineLandscape, linePortrait, imgLandscape, imgPortrait, onNavigate } = props
 
-    this._pageRef = null
-
-    this.state = { loading: true }
-  }
-
-  componentWillReceiveProps( nextProps )
-  {
-    if( nextProps.currentView !== this.props.currentView )
-      this.setState({ loading: true }, this.props.resetScroll )
-  }
-
-  componentDidUpdate( prevProps )
-  {
-    if( this.props.currentView !== 0 && prevProps.currentView !== this.props.currentView && this.state.loading )
-    {
-      const { lineHeight, screenHeight } = this.props
-
-      var pageBottom = ( lineHeight * 2 ) + ( lineHeight * 1.5 ) + screenHeight
-
-      this.setState({ loading: false }, () => this.props.onReady( pageBottom ) )
-    }
-  }
-
-  render()
-  {
-    const { currentView, isScrollable, screenHeight, lineHeight } = this.props
-
-    if( currentView === 0 )
-      return null
-
-    if( currentView < 1 && !isScrollable )
-      return null
-
-    var style = { padding: `${screenHeight}px 0`}
-
-    return (
-      <div className="page" ref="page" style={style}>
-        { this.state.loading && <div className="page__loading"><Spinner /></div> }
-        { currentView === 1 && <Album lineHeight={lineHeight} onClickVideo={this.props.onClickVideo} pageRef={ ref => this._pageRef = ref } /> }
-        { currentView === 2 && <Album lineHeight={lineHeight} pageRef={ ref => this._pageRef = ref } /> }
-        { currentView === 3 && <Album lineHeight={lineHeight} pageRef={ ref => this._pageRef = ref } /> }
-      </div>
-    )
-  }
+  return (
+    <div className="pages">
+      <Page id="0" screenRatio={screenRatio} screenHeight={screenHeight} onNavigate={onNavigate}>
+        <Home screenHeight={screenHeight} />
+      </Page>
+      <Album {...props} />
+      <Page id="2" screenRatio={screenRatio} screenHeight={screenHeight} onNavigate={onNavigate}>
+        <div className="page">
+          <div className="page__line" style={lineLandscape}>
+            <Image path="split/band-1" style={imgLandscape} />
+          </div>
+          <div className="page__line" style={linePortrait}>
+            <Image path="album/img-2" style={imgPortrait} />
+          </div>
+          <div className="page__line" style={lineLandscape}>
+            <Image path="album/video-1" video style={imgLandscape} />
+          </div>
+        </div>
+      </Page>
+      <Page id="3" screenRatio={screenRatio} screenHeight={screenHeight} onNavigate={onNavigate}>
+        <div className="page">
+          <div className="page__line" style={lineLandscape}>
+            <Image path="ep/band-1" style={imgLandscape} />
+          </div>
+        </div>
+      </Page>
+    </div>
+  )
 }
 
+export default Index

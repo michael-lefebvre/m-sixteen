@@ -21,6 +21,21 @@
   animation: animPageAlbumOut .4s forwards ease-out
 }
 
+
+@include respond-below( sm ) {
+  .header__album {
+    background-size: auto 100%;
+    background-position: left bottom;
+    &--in {
+      clip-path: inherit
+    }
+    &--in,
+    &--out {
+      animation: none
+    }
+  }
+}
+
 @keyframes animPageAlbumIn {
   0%   { clip-path: polygon( 0% 100%, 0% 100%, 0% 100%) }
   // 10%  { clip-path: polygon( 0% 66%, 0% 100%, 16.4% 100%) }
@@ -49,22 +64,34 @@
   100% { clip-path: polygon( 100% 0%, 100% 0%, 100% 0% ) }
 }
 
-
-
-.header__album__tracks {
-  background: rgba( $album-1-bkgd, .3);
-  bottom: 50px;
+.album__font {
   color: #fff;
-  display: flex;
-  flex-direction: column-reverse;
   font-family: 'Rubik', sans-serif;
   font-size: 30px;
   letter-spacing: 0;
   line-height: 32px;
+  text-transform: uppercase;
+}
+
+.album__font__regular {
+  background: #fff;
+  color: $album-1-bkgd;
+  display: inline-block;
+  height: 21px;
+  line-height: 22px;
+}
+
+.album__font__collapse { margin-left: -2px }
+.album__font__collapse--f { margin-left: -3px }
+
+.header__album__tracks {
+  background: rgba( $album-1-bkgd, .3);
+  bottom: 50px;
+  display: flex;
+  flex-direction: column-reverse;
   list-style: none;
   position: absolute;
   right: 20px;
-  text-transform: uppercase;
   z-index: 1000;
   transform: rotate( -45deg );
 
@@ -84,16 +111,11 @@
   }
 }
 
-.header__album__track__regular {
-  background: #fff;
-  color: $album-1-bkgd;
-  display: inline-block;
-  height: 21px;
-  line-height: 22px;
+@include respond-below( lg ) {
+  .header__album__tracks {
+    display: none
+  }
 }
-
-.header__album__track__collapse { margin-left: -2px }
-.header__album__track__collapse--f { margin-left: -3px }
 
 .header__album__track__regular--ff1,
 .header__album__track__regular--ff2,

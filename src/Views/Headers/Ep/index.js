@@ -3,12 +3,13 @@ import classNames from 'classnames'
 
 import './styles.css'
 
-const Index = ({ active, back, onReady }) =>
+const Index = ({ active, back, off, onReady }) =>
 {
   const className = classNames('header header__ep', {
-      'header__ep--in':   active || back
+      'header__ep--in':   !off && ( active || back )
     , 'header--current':     active
-    , 'header--previous':    back
+    , 'header--previous':    back && !off
+    , 'header__ep--out':     off
   })
 
   return (

@@ -1,43 +1,17 @@
-import React   from 'react'
-import YouTube from 'react-youtube'
+import React from 'react'
 
 import './styles.css'
 
-const Index = ({ onReady }) =>
+const Index = ({ screenHeight }) =>
 {
-  // https://codebushi.com/react-youtube-background/
-  // https://developers.google.com/youtube/player_parameters
-  const videoOptions = {
-      playerVars: {
-          autoplay: 1
-        , controls: 0
-        , showinfo: 0
-        , loop:     1
-        , rel:      0
-        }
-  }
-
-  const _onEnd = e => {
-    e.target.playVideo()
-  }
-
   return (
-    <div className="home">
+    <div className="home" style={{ height: screenHeight }}>
       <div className="home__content">
-        <div>
+        <div className="home__header">
           <h1>m-sixteen</h1>
           <p>paris punk rock, 2000-2010</p>
         </div>
-      </div>
-      <div className="home__background">
-        <div className="home__background__foreground">
-          {/*<YouTube
-           videoId="Pdni_p27l_0"
-           opts={videoOptions}
-           className="home__background__foreground__iframe"
-           onReady={onReady}
-           onEnd={_onEnd} />*/}
-        </div>
+        <p><a href="https://www.facebook.com/M-SIXTEEN-58910733346/" target="_blank" rel="noopener noreferrer">facebook</a></p>
       </div>
     </div>
   )

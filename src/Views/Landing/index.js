@@ -1,0 +1,46 @@
+import React from 'react'
+// import YouTube from 'react-youtube'
+
+import './styles.css'
+
+const Index = ({ onReady }) =>
+{
+  // https://codebushi.com/react-youtube-background/
+  // https://developers.google.com/youtube/player_parameters
+  // const videoOptions = {
+  //     playerVars: {
+  //         autoplay: 1
+  //       , controls: 0
+  //       , showinfo: 0
+  //       , loop:     1
+  //       , rel:      0
+  //     }
+  // }
+
+  // const _onEnd = e => {
+  //   e.target.playVideo()
+  // }
+
+  return (
+    <div className="landing">
+      {/*<div className="landing__content">
+        <div>
+          <h1>m-sixteen</h1>
+          <p>paris punk rock, 2000-2010</p>
+        </div>
+      </div>*/}
+      <div className="landing__background">
+        <div className="landing__background__foreground">
+          {/*<YouTube
+           videoId="Pdni_p27l_0"
+           opts={videoOptions}
+           className="landing__background__foreground__iframe"
+           onReady={onReady}
+           onEnd={_onEnd} />*/}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Index

@@ -18,16 +18,16 @@ html, body {
   font-family: $font-family-system;
   font-size: $font-size-base;
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
   width: 100%;
-  transform: translateZ(0);
 }
 
-#root {
+#app-root {
   -webkit-overflow-scrolling: touch;
   height: 100%;
   min-width: 375px;
-  overflow: hidden;
+  // overflow: hidden;
   user-select: none;
   position: relative;
+  // transform: translateZ(0);
 }

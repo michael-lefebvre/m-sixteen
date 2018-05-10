@@ -1,83 +1,37 @@
 @import "Scss/variables.scss";
 
-.placeholder {
-  background-color: #f6f6f6;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
-  overflow: hidden;
-  max-width: 600px
-}
-
-.placeholder img {
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transition: opacity 1s linear;
-}
-
-.placeholder img.loaded {
-  opacity: 1;
-}
-
-.img-small {
-  filter: blur(50px);
-  /* this is needed so Safari keeps sharp edges */
-  transform: scale(1);
-}
-
-.img-horz,
-.img-vert {
-  // object-fit: scale-down;
-  display: block;
-}
-
-.img-vert {
-  // width: 40%;
-  // max-height: 400px;
-  // height: 680px;
-  // width: 510px
-}
-
-.img-horz {
-  height: 340px;
-  width: 510px
-  // width: 80%;
-  // max-width: 400px;
-}
-
-.box {
-  background: rgba( $album-1-bkgd, .4);
-  // background-attachment: fixed;
-  // background: url(../../Headers/Album/bkgd.jpg) bottom left no-repeat;
-  // background-size: cover;
-  // background-clip: text;
-  // color: transparent;
-color: white;
-  padding: 20px;
-  width: 510px;
-  position: relative;
-}
-
-// img {
-//   display: block;
-//   height: 300px
-// }
-// .page__content__video {
-//   height: 390px
-// }
-
-// .page--album .page__content {
-//   height: 1980px
-// }
-
-
-// ---------------------
-
-
 .page__box--album1 {
   top: -15%;
   left: 45%
+}
+
+.page__image--album1 {
+
+}
+.page__image--album2 {
+  top: 6.5%;
+  left: 1%;
+  transform: scale(.6)
+}
+.page__image--album3 {
+  top: 10%;
+  left: -13%;
+  transform: scale(.6)
+}
+.page__image--album4 {
+  top: 1%;
+  left: -27%;
+  transform: scale(.6)
+}
+
+.page__box.page__box--album2 {
+  top: 10%;
+  left: 30%;
+  position: absolute;
+  width: 30%
+}
+
+.page__image--album6 {
+  left: 45%;
+  top: 0%;
 }
