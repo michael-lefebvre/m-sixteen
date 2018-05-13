@@ -9,13 +9,13 @@ import './styles.css'
 
 const Index = ({ currentView, backgroundView, headerReady }) =>
 {
-  const AlbumActive = currentView === 1
-      , AlbumBack   = backgroundView === 1
-      , AlbumOff    = currentView === 0 && backgroundView === 1
-      , SplitActive = currentView === 2
-      , SplitBack   = backgroundView === 2
-      , EpActive    = currentView === 3
-      , EpBack      = backgroundView === 3
+  const AlbumActive = currentView === 'album'
+      , AlbumBack   = backgroundView === 'album'
+      , AlbumOff    = currentView === 'home' && backgroundView === 'album'
+      , SplitActive = currentView === 'split'
+      , SplitBack   = backgroundView === 'split'
+      , EpActive    = currentView === 'ep'
+      , EpBack      = backgroundView === 'ep'
       , EpOff       = false //currentView === 4 && backgroundView === 3
 
   return (

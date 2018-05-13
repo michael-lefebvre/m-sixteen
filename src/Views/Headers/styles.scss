@@ -28,3 +28,13 @@
   &--current { z-index: 100 }
   &--previous { z-index: 50 }
 }
+
+@include respond-below( sm ) {
+  .header {
+    transition: opacity .6s linear;
+
+    &--previous {
+      opacity: 0
+    }
+  }
+}

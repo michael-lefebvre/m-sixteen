@@ -18,7 +18,7 @@ class ComponentToTrack extends Component
   {
     const { id, isVisible } = this.props
 
-    this.props.onNavigate( +id, isVisible )
+    this.props.onNavigate( id, isVisible )
   }
 
   render()
@@ -27,27 +27,17 @@ class ComponentToTrack extends Component
   }
 }
 
-export const PageLine = withApp( ({ children, lineLandscape, linePortrait, lineFlyer, portrait = false, flyer = false }) =>
-{
-  const style = ( !portrait && !flyer )
-                ? lineLandscape
-                : portrait
-                  ? linePortrait
-                  : lineFlyer
-
-  return (
-    <div className="page__line" style={style}>
-      {children}
-    </div>
-  )
-})
-
 const Page = ({ id, screenRatio, screenHeight, onNavigate, children }) =>
   <TrackVisibility partialVisibility={true}>
     <ComponentToTrack id={id} screenRatio={screenRatio} onNavigate={onNavigate}>
-      { id !== '0' && <div style={{ height: screenHeight * .5 }} />}
-      {children}
-      { id !== '0' && <div style={{ height: screenHeight }} />}
+      { id !== 'home' && (
+        <div className={`page page--${id}`}>
+          <div style={{ height: screenHeight * .5 }} />
+          {children}
+          <div style={{ height: screenHeight }} />
+        </div>
+      )}
+      { id === 'home' && children }
     </ComponentToTrack>
   </TrackVisibility>
 

@@ -8,15 +8,17 @@ import { withApp }                    from 'Views/Provider'
 
 import './styles.css'
 
-class Image extends Component
+export class Image extends Component
 {
   static propTypes = {
       path:      PropTypes.string.isRequired
     , isVisible: PropTypes.bool.isRequired
+    , extension: PropTypes.oneOf(['jpg', 'png'])
   };
 
   static defaultProps = {
-    isVisible:   false
+      isVisible:   false
+    , extension:   'jpg'
   };
 
   constructor( props )
@@ -40,10 +42,10 @@ class Image extends Component
 
   componentWillMount()
   {
-    const { path } = this.props
+    const { path, extension } = this.props
 
-    var imgSmall = `/static/photos/${path}-sm.jpg`
-      , imgMedium = `/static/photos/${path}-md.jpg`
+    var imgSmall = `${process.env.PUBLIC_URL}/static/photos/${path}-sm.${extension}`
+      , imgMedium = `${process.env.PUBLIC_URL}/static/photos/${path}-md.${extension}`
 
     this.setState({ imgSmall, imgMedium })
   }
@@ -89,33 +91,27 @@ class Image extends Component
   {
     return (
       <Fragment>
-        <img src={this.state.imgSmall} className="page__image__small" ref="small" alt="" onLoad={this.handleOnSmallLoaded} />
-        { this.props.isVisible && <img src={this.state.imgMedium} ref="medium" alt="" onLoad={this.handleOnMediumLoaded} onClick={this.handleOnClick} /> }
+        { this.props.isVisible && <img src={this.state.imgMedium} className="page__image page__image__medium" ref="medium" alt="" onLoad={this.handleOnMediumLoaded} onClick={this.handleOnClick} /> }
+        <img src={this.state.imgSmall} className="page__image page__image__small" ref="small" alt="" onLoad={this.handleOnSmallLoaded} />
+        { this.props.legend && <legend className="page__img__legend">{this.props.legend}</legend>}
       </Fragment>
     )
   }
 }
 
-const Index = (p) =>
+const Index = ({ className, transparent = false, portrait = false, small = false, style = {}, ...props }) =>
 {
-  // console.log(p)
-  const { className, portrait, flyer, imgPortrait, imgLandscape, imgFlyer, ...props } = p
-
-  const cx = classNames('page__image', className, {
-      'page__image--portrait': portrait
-    , 'page__image--flyer':    flyer
-    , 'page__image--video':    props.video && typeof props.video === 'string'
+  const cx = classNames('page__img', className, {
+      'page__img--transparent':    transparent
+    , 'page__img--small':          !portrait && small
+    , 'page__img--portrait':       portrait && !small
+    , 'page__img--portrait-small': portrait && small
+    , 'page__img--video':          props.video && typeof props.video === 'string'
   })
-
-  const style = ( !portrait && !flyer )
-                ? imgLandscape
-                : portrait
-                  ? imgPortrait
-                  : imgFlyer
 
   return (
     <TrackVisibility className={cx} partialVisibility={true} style={style} once>
-      <Image {...props} />
+      <Image {...props} extension={ transparent ? 'png' : 'jpg' } />
     </TrackVisibility>
   )
 }

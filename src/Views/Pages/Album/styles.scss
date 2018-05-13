@@ -1,37 +1,84 @@
 @import "Scss/variables.scss";
 
-.page__box--album1 {
-  top: -40%;
-  left: 45%
+.album__labels {
+  text-align: center;
+  padding: 1rem 0 0
 }
 
-.page__image--album1 {
-
-}
-.page__image--album2 {
-  top: 15%;
-  left: 1%;
-  // transform: scale(.6)
-}
-.page__image--album3 {
-  top: 22%;
-  left: -3%;
-  // transform: scale(.6)
-}
-.page__image--album4 {
-  top: 8%;
-  left: -6%;
-  // transform: scale(.6)
+.img__label {
+  height: 50px;
+  // margin-right: .5rem
+  margin-right: 1rem
 }
 
-.page__box.page__box--album2 {
-  top: 12%;
-  left: 30%;
-  position: absolute;
-  width: 30%
-}
+@include respond-above( lg ) {
 
-.page__image--album6 {
-  left: 45%;
-  top: 2%;
+  .page__img--album-loko {
+    margin-left: 4rem;
+    margin-top: -3rem
+  }
+
+  .page__text {
+    &--album1 .page__text__content {
+      left: -3rem;
+      margin-top: 14rem
+    }
+
+    &.page__text--album-loko {
+      margin-left: -2rem;
+      margin-top: -6rem;
+      max-width: 330px;
+    }
+
+    &.page__text--album-labels {
+      margin-left: 3rem;
+      margin-top: 4rem;
+      max-width: 400px
+    }
+
+    &.page__text--ablum-jp {
+      margin-right: -2rem;
+      margin-top: 2rem;
+      max-width: 230px;
+      text-align: right
+    }
+
+    &.page__text--album-tour1 {
+      margin-left: 4rem;
+      margin-right: -4rem;
+      margin-top: -2rem;
+    }
+  }
+
+  .album__labels {
+    text-align: right;
+  }
+
+  .page__img--album-jp {
+    top: 2rem;
+  }
+
+  .page__row--album-tours {
+    margin-top: -16rem
+  }
+
+  .page__img--album-tours {
+    left: -1.5rem;
+    top: 14rem
+  }
+
+  .page__video--album-tour-1 {
+    margin-top: -3rem
+  }
+
+  .page__img--album-tour-2 {
+    margin-left: 3rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+
+  .page__text--album-tour2 {
+    margin-top: 2rem
+  }
+
 }

@@ -1,0 +1,28 @@
+@import "Scss/variables.scss";
+
+
+.page__video {
+  position: relative;
+  margin: auto;
+  margin-top: 1rem;
+  order: 3;
+}
+
+.page__video--small {
+  height: 214px;
+  width:  100%;
+}
+
+
+@include respond-above( lg ) {
+  .page__video {
+    order: unset;
+    margin: 0;
+  }
+
+  .page__video--small {
+    height: 214px;
+    width:  320px;
+    flex: 0 280px;
+  }
+}

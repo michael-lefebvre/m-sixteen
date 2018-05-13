@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 
 const Context = React.createContext({
-    App: null
+    Desktop: false
 })
 
 export function withApp( ComponentToWrap )
@@ -30,7 +30,8 @@ export default class Index extends PureComponent
     this.handleOnCloseVideo   = this.handleOnCloseVideo.bind( this )
 
     this.state = {
-        currentView:    0
+        isDesktop:      props.Desktop
+      , currentView:    'home'
       , previousView:   null
       , backgroundView: null
       , landingVideo:   null
@@ -66,6 +67,12 @@ export default class Index extends PureComponent
   componentDidMount()
   {
     window.addEventListener('resize', this.handleOnResize, { passive: true } )
+  }
+
+  componentWillReceiveProps( nextProps )
+  {
+    this._setHeight()
+    this.setState({ isDesktop: nextProps.Desktop })
   }
 
   //
@@ -142,7 +149,12 @@ export default class Index extends PureComponent
     if( !nextState )
       return
 
-    this._setLandingVideo( nextState.currentView === 0 )
+    this._setLandingVideo( nextState.currentView === 'home' )
+
+    if( nextState.currentView !== 'home' )
+      document.body.className = `body-${ nextState.currentView }`
+    else
+      document.body.className = ''
 
     this.setState( nextState )
   }
@@ -159,14 +171,15 @@ export default class Index extends PureComponent
 
   handleOnOpenVideo( videoId )
   {
+    document.body.style.overflow = 'hidden'
     this.setState({ videoId })
   }
 
   handleOnCloseVideo()
   {
+    document.body.style.overflow = 'auto'
     this.setState({ videoId: null })
   }
-
 
   render()
   {

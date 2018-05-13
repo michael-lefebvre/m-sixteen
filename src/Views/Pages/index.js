@@ -10,7 +10,7 @@ import './styles.css'
 
 const Index = () =>
   <div className="pages">
-    <Page id="0">
+    <Page id="home">
       <Home />
     </Page>
     <Album />

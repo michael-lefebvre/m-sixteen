@@ -1,55 +1,36 @@
 @import "Scss/variables.scss";
 
-.page__box {
-  background: rgba( $album-1-bkgd, .6);
-  // background-attachment: fixed;
-  // background: url(../../Headers/Album/bkgd.jpg) bottom left no-repeat;
-  // background-size: cover;
-  // background-clip: text;
-  // color: transparent;
-  color: white;
-  padding: 30px 0 0;
-  width: 45%;
-  position: relative;
-  z-index: $zindex-content + 100;
 
-  h3 {
-    // background: rgba( $album-1-bkgd, .6);
-    // mix-blend-mode: screen;
-    position: absolute;
-    // top: -50px;
-    // font-family: 'Times New Roman',serif;
-      // font-family: 'Rubik', sans-serif;
-    // font-size: 14px;
-    transform: translateY(-50px);
-    padding: 0 20px;
+@include respond-above( lg ) {
 
-    span { display: block }
-    span:first-child {
-      color: #e2011b;
-      font-size:  40px;
-      text-transform: uppercase;
-      position: relative;
-
-      // &:before {
-      //   content: 'ROUGE';
-      //   // color: rgba( #000, .2);
-      //   position: absolute;
-      //   z-index: -1;
-      //   left: -2px;
-      //   top: -2px;
-      //   height: 60%;
-      //   overflow: hidden;
-      // }
-    }
-    span:last-child {
-      color: rgba( white, .9);
-      font-size: 16px
-    }
+  .page__img--tours {
+    margin-left: 4rem;
   }
 
-  p {
-    line-height: 18px;
-    padding: 20px;
+  .page__text__content--album2 {
+    margin-right: 2rem
+  }
+
+  .page__text__content--furia {
+    // top: 10%;
+    // right: -10%;
+    // margin-right: -2rem
+  }
+
+  .page__img--furia1 {
+    margin-top: 3rem
+  }
+
+  .page__img--furia2 {
+    margin-right: 3rem
+  }
+
+  .page__row--loko {
+    height: 400px;
+
+    .page__video {
+      top: -50px;
+      left: 10px
+    }
   }
 }
