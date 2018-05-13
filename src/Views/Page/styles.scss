@@ -1,0 +1,35 @@
+@import "Scss/variables.scss";
+
+.page {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 20px;
+  overflow: hidden;
+  width: calc( 100% - 40px );
+}
+
+.page--album {
+  .page__text__content {
+    background: rgba( $album-1-bkgd, .6);
+    color: white;
+  }
+  .page__img:not(.page__img--transparent) { background-color: $album-1-bkgd }
+}
+.page--split {
+  .page__text__content {
+    background: rgba( $album-2-bkgd, .8);
+    color: white;
+  }
+  .page__img:not(.page__img--transparent) { background-color: $album-2-bkgd }
+}
+.page--ep {
+  .page__text__content {
+    background: rgba( $album-3-bkgd, .8);
+    color: black;
+  }
+  .page__img:not(.page__img--transparent) { background-color: $album-3-bkgd }
+}
+
+.body-album { background: $album-1-bkgd }
+.body-split { background: $album-2-bkgd }
+.body-ep { background: $album-3-bkgd }

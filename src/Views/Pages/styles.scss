@@ -1,229 +1,36 @@
 @import "Scss/variables.scss";
 
-.page {
-  // height: 100%
-  // padding: 880px 0
-}
 
-.page__loading {
-  align-items: center;
-  background: rgba( $album-1-bkgd, .6);
-  border-radius: 6px;
-  display: flex;
-  height: 54px;
-  justify-content: center;
-  left: 50%;
-  pointer-events: none;
-  position: fixed;
-  top: 50%;
-  transform: translate3d(-50%,-50%,0);
-  width: 54px;
-  z-index: $zindex-higher;
-}
+@include respond-above( lg ) {
 
-.page__content {
-  // background: rgba( green, .3);
-  // height: 1200px;
-}
-
-// .pages {
-//   padding-bottom: 50%;
-//   padding-top: 10%;
-//   position: relative;
-//   z-index: 100;
-
-//   // &--read {
-//   //   .page--album .page__content { background: rgba( $album-1-bkgd, .6) }
-//   //   .page--split .page__content { background: rgba( $album-2-bkgd, .6) }
-//   //   .page--ep .page__content { background: rgba( $album-3-bkgd, .6) }
-//   // }
-// }
-
-// .page {
-//   // background: rgba( black, .4);
-// }
-
-// .page__header {
-//   // background: rgba( blue, .4);
-// }
-
-.page__container {
-  // background: rgba( pink, .3);
-  // transition: background .6s linear;
-  max-width: 1240px;
-  width: calc( 100% - 40px );
-  margin: auto;
-
-  p {
-    // margin-top: 40px;
-    // padding: 0px 3%;
-    font-weight: 600;
-    line-height: 24px;
-    white-space: pre-line;
-    font-size: 16px;
-  }
-}
-
-.page__content {
-  // background: rgba( pink, .6);
-  margin: auto;
-  position: relative;
-}
-
-.page__line {
-  padding: 0 0 10px;
-  position: relative;
-  // height: 400px;
-  // height: 509px;
-  z-index: zindex-content;
-  // overflow: hidden;
-
-  &--vert {
-    height: 680px
+  .page__img--tours {
+    margin-left: 4rem;
   }
 
-  // + .page__line { margin-top: 20px }
-}
-
-.page__img {
-  display: inline-block;
-  height: 100%;
-  // height: 340px;
-  // width: 55%;
-  position: relative;
-  z-index: $zindex-content - 10;
-
-  img {
-    display: block;
-    height: 100%;
+  .page__text__content--album2 {
+    margin-right: 2rem
   }
 
-  &--vert {
-    // max-height: 680px;
-    height: 100%;
-    width: auto;
+  .page__text__content--furia {
+    // top: 10%;
+    // right: -10%;
+    // margin-right: -2rem
   }
 
-  &--video {
-    cursor: pointer;
+  .page__img--furia1 {
+    margin-top: 3rem
+  }
 
-    &:before {
-      background: rgba( $album-1-bkgd, .6);
-      content: '';
-      border-radius: 42px;
-      display: block;
-      margin-left: -42px;
-      border: 2px solid #fff;
-      height: 84px;
-      margin-top: -42px;
-      width: 84px;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      z-index: 0
-    }
+  .page__img--furia2 {
+    margin-right: 3rem
+  }
 
-    &:after {
-      border-bottom: 15px solid transparent;
-      border-left: 20px solid white;
-      border-top: 15px solid transparent;
-      // border: 2px solid #fff;
-      content: '';
-      height: 0;
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-40%, -40%);
-      width: 0;
-      z-index: 10
-    }
+  .page__row--loko {
+    height: 400px;
 
-    &:hover:before {
-      background: rgba( white, .8);
-      border: 2px solid rgba( white, .5);
-    }
-
-    &:hover:after {
-      border-left: 20px solid $album-1-bkgd;
+    .page__video {
+      top: -50px;
+      left: 10px
     }
   }
-}
-
-.page__box {
-  background: rgba( $album-1-bkgd, .6);
-  // background-attachment: fixed;
-  // background: url(../../Headers/Album/bkgd.jpg) bottom left no-repeat;
-  // background-size: cover;
-  // background-clip: text;
-  // color: transparent;
-  color: white;
-  padding: 30px 0 0;
-  width: 45%;
-  position: relative;
-  z-index: $zindex-content + 100;
-
-  h3 {
-    // background: rgba( $album-1-bkgd, .6);
-    // mix-blend-mode: screen;
-    position: absolute;
-    // top: -50px;
-    // font-family: 'Times New Roman',serif;
-      // font-family: 'Rubik', sans-serif;
-    // font-size: 14px;
-    transform: translateY(-50px);
-    padding: 0 20px;
-
-    span { display: block }
-    span:first-child {
-      color: #e2011b;
-      font-size:  40px;
-      text-transform: uppercase;
-      position: relative;
-
-      // &:before {
-      //   content: 'ROUGE';
-      //   // color: rgba( #000, .2);
-      //   position: absolute;
-      //   z-index: -1;
-      //   left: -2px;
-      //   top: -2px;
-      //   height: 60%;
-      //   overflow: hidden;
-      // }
-    }
-    span:last-child {
-      color: rgba( white, .9);
-      font-size: 16px
-    }
-  }
-
-  p {
-    padding: 20px
-  }
-}
-
-.page__box--album1 {
-  top: -15%;
-  left: 45%
-}
-
-.page__img--album1 {}
-.page__img--album2 {
-  top: 10%;
-  left: 10%
-}
-.page__img--album3 {
-  top: 20%;
-  left: 8%
-}
-
-.page__box--album2 {
-  top: 30%;
-  left: 30%;
-  position: absolute;
-  width: 30%
-}
-
-.page__img--album4 {
-  left: 45%
 }

@@ -1,17 +1,19 @@
 import React, { PureComponent } from 'react'
 import YouTube    from 'react-youtube'
 
+import { withApp } from 'Views/Provider'
+
 import './styles.css'
 
-export default class Index extends PureComponent
+export default withApp( class Index extends PureComponent
 {
   constructor( props )
   {
     super( props )
 
     this.state = {
-        video:  null
-      , active: false
+        videoId: null
+      , active:  false
     }
 
     this.handleOnClose = this.handleOnClose.bind( this )
@@ -19,13 +21,13 @@ export default class Index extends PureComponent
 
   componentWillReceiveProps( nextProps )
   {
-    if( nextProps.video )
-      this.setState({ video: nextProps.video, active: true })
+    if( nextProps.videoId )
+      this.setState({ videoId: nextProps.videoId, active: true })
   }
 
   handleOnClose()
   {
-    this.setState({ active: null, video: null }, this.props.onClose )
+    this.setState({ active: null }, this.props.closeVideo )
   }
 
   render()
@@ -36,7 +38,7 @@ export default class Index extends PureComponent
         width:  854
       , height: 480
       , playerVars: { // https://developers.google.com/youtube/player_parameters
-            autoplay: 1
+            autoplay: 0
           , controls: 1
           , showinfo: 0
           , rel:      0
@@ -47,8 +49,9 @@ export default class Index extends PureComponent
     return (
       <div className={`video ${ this.state.active ? 'video--active': ''}`}>
         <div className="video__close" onClick={this.handleOnClose} />
-        { this.state.video && <YouTube videoId={this.state.video} opts={videoOpts} containerClassName="video__content" />}
+        {/*<div className="video__content" />*/}
+        { this.state.videoId && <div className="video__content" style={{ backgroundImage: 'url(https://i9.ytimg.com/vi_webp/Fj8WOeQamvw/hqdefault.webp?sqp=CLS9z9cF&rs=AOn4CLBjmsoqKX7ny9jw4C-O3HBVTbfXNw)' }}><YouTube videoId={this.state.videoId} opts={videoOpts} /></div>}
       </div>
     )
   }
-}
+})

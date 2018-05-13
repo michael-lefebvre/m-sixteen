@@ -1,133 +1,72 @@
-import React, { PureComponent } from 'react'
-// import { findDOMNode }          from 'react-dom'
-// import YouTube    from 'react-youtube'
+import React     from 'react'
 
-import Img1       from './img-1.jpg'
-// import Img3       from './img-3.jpg'
-import Img5       from './img-5.jpg'
-import Img4       from './img-4.jpg'
-import Vid1       from './video-1.jpg'
+import Figure    from 'Views/Image'
+import Page      from 'Views/Page'
+import PageRow   from 'Views/PageRow'
+import Text      from 'Views/PageText'
+import Video     from 'Views/PageVideo'
 
 import './styles.css'
 
-
-class Index extends PureComponent
-{
-  // constructor( props )
-  // {
-  //   super( props )
-
-  //   this.state = {
-  //       mounted: false
-  //     , visible: false
-  //   }
-  // }
-
-  //
-  // Life cycle
-  // --------------------------------------------------
-
-  // componentWillMount()
-  // {
-  //   console.log('componentWillMount')
-  // }
-
-  // componentDidMount()
-  // {
-  //   var page        = findDOMNode( this.refs.page )
-  //     , placeholder = page.querySelector('.placeholder')
-  //     , small       = placeholder.querySelector('.img-small')
-
-  //   // 1: load small image and show it
-  //   var img = new Image()
-  //   img.src = small.src
-  //   img.onload = function () {
-  //    small.classList.add('loaded')
-  //   }
-
-  //   // 2: load large image
-  //   var imgLarge = new Image()
-  //   imgLarge.src = placeholder.dataset.large
-  //   imgLarge.onload = function () {
-  //     setTimeout(() => imgLarge.classList.add('loaded'), 2000 )
-
-  //   }
-  //   placeholder.appendChild(imgLarge)
-  // }
-
-  // componentDidUpdate()
-  // {
-  //   console.log('componentDidUpdate')
-  // }
-
-  // componentWillUnmount()
-  // {
-  //   console.log('componentWillUnmount')
-  // }
-
-  //
-  // Render
-  // --------------------------------------------------
-
-  render()
-  {
-    // const { styleHeader, styleFooter } = this.props
-
-    // const videoOpts = {
-    //     height: this.props.lineHeight
-    //   , playerVars: { // https://developers.google.com/youtube/player_parameters
-    //         autoplay: 0
-    //       , controls: 1
-    //       , showinfo: 0
-    //       , rel:      0
-    //       , modestbranding: 1
-    //     }
-    // }
-
-    const styleLine = { height: this.props.lineHeight }
-
-    return (
-      <div className="page__container page__container--album" ref={this.props.pageRef}>
-        <div className="page__content">
-          <div className="page__line" style={styleLine}>
-            <img src={Img4} className="page__img page__img--album1" alt="" />
-            <div className="page__box page__box--album1">
-              <h3>
-                <span>self-entitled</span>
-                <span>2008</span>
-              </h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere ex non nisl rutrum dapibus. Nullam eleifend maximus libero at maximus.</p>
-            </div>
+const Index = () =>
+    <Page id="album">
+      <PageRow>
+        <Figure path="album/img-1" />
+        <Text
+         className="page__text--album1"
+         title="self-entitled, 2007"
+         paragraphs={[
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor quam, dapibus sed risus eget, euismod dapibus massa. Cras sollicitudin auctor orci, eu sollicitudin erat viverra ut. Proin varius consectetur sapien id ornare. Proin a nibh eu nisi feugiat pretium.',
+          'Integer ut sodales nunc, pellentesque interdum metus. Suspendisse tristique ipsum condimentum malesuada volutpat. Donec leo sapien, ultricies sed lobortis ut, tristique sed est. Cras maximus vulputate congue. Aenean sit amet congue dui. Integer ut consectetur tortor, at congue velit.'
+         ]} />
+      </PageRow>
+      <PageRow>
+        <Figure path="album/loko" small className="page__img--album-loko" />
+        <Text
+         className="page__text--album-loko"
+         paragraphs={[
+          '<strong>Sebastien Langle</strong> and <strong>Guillaume André</strong> from <strong>Loko Studio</strong>. These guys must have adamantium made nerves to handle us!'
+         ]} />
+        <Text
+         className="page__text--album-labels"
+         paragraphs={[ 'This record was released in France by <strong>STSnework</strong>, in Germany and UK by <strong>Fond Of Life</strong> and in Italia by <strong>Chorus Of One</strong>.' ]}>
+          <div className="album__labels">
+            <img src={ process.env.PUBLIC_URL + '/static/images/logo-sts.png'} alt="STSnework logo" className="img__label" />
+            <img src={ process.env.PUBLIC_URL + '/static/images/logo-coo.png'} alt="Chorus Of One logo" className="img__label" />
+            <img src={ process.env.PUBLIC_URL + '/static/images/logo-fol.png'} alt="Fond Of Life logo" className="img__label" />
           </div>
-          <div className="page__line" style={{ height: this.props.lineHeight * 1.5 }}>
-            <img src={Img1} className="page__img page__img--album2 page__img--vert" style={styleLine} alt="" />
-            <img src={Img5} className="page__img page__img--album3 page__img--vert" style={styleLine} alt="" />
-          </div>
-          <div className="page__line" style={styleLine}>
-            <div className="page__box page__box--album2">
-              <h3>
-                <span>Rouge</span>
-                <span>music video</span>
-              </h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere ex non nisl rutrum dapibus. Nullam eleifend maximus libero at maximus.</p>
-            </div>
-            {/*<YouTube videoId="Fj8WOeQamvw" opts={videoOpts} containerClassName="page__img page__img--album4" />*/}
-            <div className="page__img page__img--video page__img--album4" onClick={ e => this.props.onClickVideo('Fj8WOeQamvw')}><img src={Vid1} alt="" /></div>
-          </div>
-          {/*<img src={Img1} className="img-vert" alt="" />
-          <img src={Img3} className="img-horz" alt="" />
-          <img src={Img5} className="img-vert" alt="" />*/}
-          {/*<YouTube videoId="AymtEvBubmQ" opts={videoOpts} containerClassName="page__container__video" />*/}
-          {/*<YouTube videoId="Fj8WOeQamvw" opts={videoOpts} containerClassName="page__container__video" />*/}
-          {/*<div className="placeholder" data-large="https://cdn-images-1.medium.com/max/1800/1*sg-uLNm73whmdOgKlrQdZA.jpeg">
-            <img src="https://cdn-images-1.medium.com/freeze/max/27/1*sg-uLNm73whmdOgKlrQdZA.jpeg?q=2011" className="img-small" />
-            <div style={{ paddingBottom: '66%' }} />
-          </div>*/}
-        {/*<iframe style={{border: 0, width: '100%', height: 42 }} src="https://bandcamp.com/EmbeddedPlayer/album=3663253985/size=small/bgcol=333333/linkcol=ffffff/transparent=true/" seamless><a href="http://m-sixteen.bandcamp.com/album/s-t">S/T by m-sixteen</a></iframe>*/}
-        </div>
-      </div>
-    )
-  }
-}
+        </Text>
+      </PageRow>
+      <PageRow right>
+        <Text
+         className="page__text--ablum-jp"
+         paragraphs={[
+          'Kinda amazed when our friend Anaïs found our album in a Tokyo record shop.'
+         ]} />
+        <Figure path="album/jp" small className="page__img--album-jp" />
+      </PageRow>
+      <PageRow className="page__row--album-tours">
+        <Figure path="album/tours-1" transparent />
+        {/*<Figure path="album/img-2" small className="page__img--album-tours" />*/}
+      </PageRow>
+      <PageRow>
+        <Text
+         className="page__text--album-tour1"
+         title="European tour w/ Nine Eleven, part 1"
+         paragraphs={[
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor quam, dapibus sed risus eget, euismod dapibus massa. Cras sollicitudin auctor orci, eu sollicitudin erat viverra ut. Proin varius consectetur sapien id ornare. Proin a nibh eu nisi feugiat pretium.<br /> Integer ut sodales nunc, pellentesque interdum metus. Suspendisse tristique ipsum condimentum malesuada volutpat. Donec leo sapien, ultricies sed lobortis ut, tristique sed est. Cras maximus vulputate congue. Aenean sit amet congue dui. Integer ut consectetur tortor, at congue velit.'
+         ]} />
+        <Figure path="album/live-1" />
+      </PageRow>{/* /.page__row */}
+      <PageRow>
+        <Video videoId="We_Mjjsi2Kk" className="page__video--album-tour-1" />
+        <Figure path="album/tour-2" small className="page__img--album-tour-2" />
+        <Text
+         className="page__text--album-tour2"
+         paragraphs={[
+          '21/02/08 – Le rocher – Paris<br />22/02/08 – The point club – Besigheim (Germany)<br />23/02/08 – Diwadlo – Prievidza (Slovakia)<br />24/02/08 – Irish Pub - Banska Bystrika (Slovakia)<br />25/02/08 – Garaboncia – Szgeden (Hungary)<br />26/02/08 – The Rocktogon – Budapest (Hungary)<br />27/02/08 – K-Set Club – Zagreb (Croatia)<br />28/02/08 – Booka – Rijeka (Croatia)<br />29/02/08 – Orto Bar – Ljubljana (Slovenia)<br />30/02/08 – L\'écurie de l\'ilot 13 – Genève (Switzerland)'
+         ]} />
+      </PageRow>{/* /.page__row */}
+    </Page>
 
 export default Index

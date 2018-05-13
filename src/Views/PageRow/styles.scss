@@ -1,0 +1,25 @@
+@import "Scss/variables.scss";
+
+.page__row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  // overflow: hidden;
+  position: relative;
+
+  &--portrait { min-height: 600px }
+  &--portrait-small { min-height: 400px }
+}
+
+@include respond-above( lg ) {
+
+  .page__row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+
+    &--center { justify-content: center }
+    &--left { justify-content: flex-start }
+    &--right { justify-content: flex-end }
+  }
+}

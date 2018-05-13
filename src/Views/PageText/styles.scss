@@ -1,0 +1,48 @@
+@import "Scss/variables.scss";
+
+
+.page__text {
+  margin-bottom: 1rem;
+  order: 2;
+}
+
+.page__text__content {
+  color: white;
+  padding: 10px;
+  position: relative;
+  margin: auto;
+  width: auto;
+  z-index: 30
+}
+
+.page__text__title {
+  margin-bottom: .5rem;
+}
+
+.page__text__paragraph + .page__text__paragraph { margin-top: .5rem }
+
+@include respond-above( lg ) {
+
+  .page__text {
+    order: unset;
+    // background: rgba(pink, .3);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0;
+
+    & > div { width: 100% }
+  }
+
+  .page__text__content {
+    margin: auto;
+
+    &--right { margin-right: 0 }
+    &--left { margin-left: 0 }
+    &--top { margin-top: 0 }
+    &--bottom { margin-bottom: 0 }
+  }
+}

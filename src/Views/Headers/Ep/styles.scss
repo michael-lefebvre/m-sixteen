@@ -44,3 +44,13 @@
 //     display: none
 //   }
 // }
+
+@include respond-below( sm ) {
+  .header__ep {
+    background: $album-3-bkgd url(bkgd.jpg) center no-repeat;
+    background-size: cover;
+  }
+  .header__ep__cover {
+    display: none
+  }
+}

@@ -53,3 +53,16 @@
 //     display: none
 //   }
 // }
+
+
+
+@include respond-below( sm ) {
+  .header__split__container {
+    background: $album-2-bkgd url(bkgd_2.jpg) center no-repeat;
+    background-size: cover;
+  }
+  .header__split__bkgd,
+  .header__split__cover {
+    display: none
+  }
+}

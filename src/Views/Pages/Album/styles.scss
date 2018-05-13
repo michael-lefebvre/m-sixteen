@@ -1,83 +1,84 @@
 @import "Scss/variables.scss";
 
-.placeholder {
-  background-color: #f6f6f6;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
-  overflow: hidden;
-  max-width: 600px
+.album__labels {
+  text-align: center;
+  padding: 1rem 0 0
 }
 
-.placeholder img {
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transition: opacity 1s linear;
+.img__label {
+  height: 50px;
+  // margin-right: .5rem
+  margin-right: 1rem
 }
 
-.placeholder img.loaded {
-  opacity: 1;
-}
+@include respond-above( lg ) {
 
-.img-small {
-  filter: blur(50px);
-  /* this is needed so Safari keeps sharp edges */
-  transform: scale(1);
-}
+  .page__img--album-loko {
+    margin-left: 4rem;
+    margin-top: -3rem
+  }
 
-.img-horz,
-.img-vert {
-  // object-fit: scale-down;
-  display: block;
-}
+  .page__text {
+    &--album1 .page__text__content {
+      left: -3rem;
+      margin-top: 14rem
+    }
 
-.img-vert {
-  // width: 40%;
-  // max-height: 400px;
-  // height: 680px;
-  // width: 510px
-}
+    &.page__text--album-loko {
+      margin-left: -2rem;
+      margin-top: -6rem;
+      max-width: 330px;
+    }
 
-.img-horz {
-  height: 340px;
-  width: 510px
-  // width: 80%;
-  // max-width: 400px;
-}
+    &.page__text--album-labels {
+      margin-left: 3rem;
+      margin-top: 4rem;
+      max-width: 400px
+    }
 
-.box {
-  background: rgba( $album-1-bkgd, .4);
-  // background-attachment: fixed;
-  // background: url(../../Headers/Album/bkgd.jpg) bottom left no-repeat;
-  // background-size: cover;
-  // background-clip: text;
-  // color: transparent;
-color: white;
-  padding: 20px;
-  width: 510px;
-  position: relative;
-}
+    &.page__text--ablum-jp {
+      margin-right: -2rem;
+      margin-top: 2rem;
+      max-width: 230px;
+      text-align: right
+    }
 
-// img {
-//   display: block;
-//   height: 300px
-// }
-// .page__content__video {
-//   height: 390px
-// }
+    &.page__text--album-tour1 {
+      margin-left: 4rem;
+      margin-right: -4rem;
+      margin-top: -2rem;
+    }
+  }
 
-// .page--album .page__content {
-//   height: 1980px
-// }
+  .album__labels {
+    text-align: right;
+  }
 
+  .page__img--album-jp {
+    top: 2rem;
+  }
 
-// ---------------------
+  .page__row--album-tours {
+    margin-top: -16rem
+  }
 
+  .page__img--album-tours {
+    left: -1.5rem;
+    top: 14rem
+  }
 
-.page__box--album1 {
-  top: -15%;
-  left: 45%
+  .page__video--album-tour-1 {
+    margin-top: -3rem
+  }
+
+  .page__img--album-tour-2 {
+    margin-left: 3rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+
+  .page__text--album-tour2 {
+    margin-top: 2rem
+  }
+
 }

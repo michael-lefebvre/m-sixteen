@@ -1,0 +1,10 @@
+@import "Scss/variables.scss";
+
+
+@include respond-above( lg ) {
+  .page__text__content--ep1 {
+    // top: .5rem;
+    left: -3rem;
+    margin-top: 14rem
+  }
+}
