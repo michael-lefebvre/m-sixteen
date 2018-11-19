@@ -6,6 +6,22 @@
   margin: auto;
   margin-top: 1rem;
   order: 3;
+
+  & > span {
+    // position: relative;
+    // padding-bottom: 56.25%;
+    // padding-top: 25px;
+    // height: 0;
+    // display: block;
+
+    // iframe {
+    //   height: 100%;
+    //   left: 0;
+    //   position: absolute;
+    //   top: 0;
+    //   width: 100%;
+    // }
+  }
 }
 
 .page__video--small {

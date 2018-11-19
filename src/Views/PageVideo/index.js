@@ -7,8 +7,8 @@ import './styles.css'
 const videoOpts = {
   //   height: 390
   // , width: 522
-    height: 300
-  , width: 400
+    height: 315
+  , width: 560
   , playerVars: { // https://developers.google.com/youtube/player_parameters
         autoplay: 0
       , controls: 1
