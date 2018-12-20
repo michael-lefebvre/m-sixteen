@@ -10,7 +10,7 @@ const Index = ({ landingReady }) =>
   // https://developers.google.com/youtube/player_parameters
   const videoOptions = {
       playerVars: {
-          autoplay: 1
+          autoplay: 0
         , controls: 0
         , showinfo: 0
         , loop:     1
@@ -22,6 +22,14 @@ const Index = ({ landingReady }) =>
     e.target.playVideo()
   }
 
+  const handleOnReady = ({ target }) => {
+//     if(typeof landingReady === 'function')
+//       return landingReady({ target })
+// console.log(target)
+    // target.playVideo()
+    // setTimeout(() => target.playVideo(), 1000)
+  }
+
   return (
     <div className="landing">
       <div className="landing__background">
@@ -29,7 +37,7 @@ const Index = ({ landingReady }) =>
          videoId="Pdni_p27l_0"
          opts={videoOptions}
          className="landing__background__foreground__iframe"
-         onReady={landingReady}
+         onReady={handleOnReady}
          onEnd={_onEnd} />
       </div>
     </div>

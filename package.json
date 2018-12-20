@@ -9,9 +9,12 @@
     "react-dom": "^16.6.3",
     "react-on-screen": "^2.1.0",
     "react-responsive": "^6.0.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "react-spring": "^6.1.8",
     "react-youtube": "^7.8.0",
-    "wheel-inertia": "^0.0.2"
+    "wheel-inertia": "^0.0.2",
+    "why-did-you-update": "^1.0.6"
   },
   "devDependencies": {
     "gh-pages": "^2.0.1",
