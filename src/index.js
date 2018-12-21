@@ -1,12 +1,26 @@
 import React                 from 'react'
 import ReactDOM              from 'react-dom'
+import MediaQuery from 'react-responsive'
+import Provider   from 'Views/Provider'
+import Landing    from 'Views/Landing'
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // import App                   from 'Routes'
-import App                   from 'Home'
+import Home                   from 'Home'
 // import App                   from 'Views/App'
 // import App                   from 'Views/Timeline'
 import registerServiceWorker from 'registerServiceWorker'
+
+const App = () => (
+  <MediaQuery minWidth={992} className="site">
+  { matches => (
+    <Provider Desktop={matches}>
+      <Landing />
+      <Home />
+    </Provider>
+  )}
+  </MediaQuery>
+)
 
 // import 'Scss/index.css'
 
