@@ -1,10 +1,21 @@
 import React from 'react'
+import classNames from 'classnames'
 import YouTube from 'react-youtube'
 import { withApp } from 'Views/Provider'
 
 import './styles.scss'
 
 class Landing extends React.Component {
+
+  //
+  // Life cycle
+  // --------------------------------------------------
+
+  componentDidMount() {
+
+    // const { isDesktop } = this.props;
+  }
+
   shouldComponentUpdate() {
     return false
   }
@@ -14,22 +25,11 @@ class Landing extends React.Component {
   };
 
   handleOnReady = (e) => {
-    console.log('onReady', e.data)
     e.target.mute()
-
-// const { target } = e
-    // setTimeout(() => target.playVideo(), 1000)
-
-    // if(typeof this.props.landingReady === 'function')
-    //   return this.props.landingReady({ target })
-// console.log(target)
-    // target.playVideo()
-    //
   };
 
-  handleOnPlay =(e) => {
-    const { data, target } = e
-    console.log({data, target})
+  handleOnPlay = ({ target }) => {
+    // target.pauseVideo()
 
     if(typeof this.props.landingReady === 'function')
       return this.props.landingReady({ target })
@@ -41,34 +41,32 @@ class Landing extends React.Component {
   };
 
   render() {
-    // const { landingReady } = this.props;
+    const { isDesktop } = this.props;
     // https://codebushi.com/react-youtube-background/
     // https://developers.google.com/youtube/player_parameters
     const videoOptions = {
-        playerVars: {
-          //   autoplay: 1
-          // , controls: 0
-          // , showinfo: 0
-          // , loop:     1
-          // , rel:      0
-          autoplay: 1,        // Auto-play the video on load
-          // autohide: 1,
-          disablekb: 1,
-          controls: 0,        // Hide pause/play buttons in player
-          showinfo: 0,        // Hide the video title
-          modestbranding: 1,  // Hide the Youtube Logo
-          loop: 1,            // Run the video in a loop
-          fs: 0,              // Hide the full screen button
-          autohide: 0,         // Hide video controls when playing
-          rel: 0,
-          enablejsapi: 1
-        }
+      playerVars: {
+        autoplay: !!isDesktop,        // Auto-play the video on load
+        disablekb: 1,
+        controls: 0,        // Hide pause/play buttons in player
+        showinfo: 0,        // Hide the video title
+        modestbranding: 1,  // Hide the Youtube Logo
+        loop: 1,            // Run the video in a loop
+        fs: 0,              // Hide the full screen button
+        autohide: 0,         // Hide video controls when playing
+        rel: 0,
+        enablejsapi: 1
+      }
     }
 
-  console.log('landing')
+    const className = classNames('landing', {
+      'landing--mobile': !isDesktop
+    })
+
     return (
-      <div className="landing">
+      <div className={className}>
         <div className="landing__background">
+        {isDesktop && (
           <YouTube
            videoId="Pdni_p27l_0"
            opts={videoOptions}
@@ -80,6 +78,7 @@ class Landing extends React.Component {
            // onError={this.handleOnStateChange('onError')}
            onReady={this.handleOnReady}
            onEnd={this.handleOnEnd} />
+        )}
         </div>
       </div>
     )

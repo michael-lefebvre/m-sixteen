@@ -1,9 +1,7 @@
 @import "Scss/variables.scss";
 
 .landing {
-  // background: #000 url(./bkgd.jpg) center no-repeat;
-  // background-size: cover;
-  background: #000;
+  background-color: $color-bkgd;
   bottom: 0;
   height: 100%;
   left: 0;
@@ -13,6 +11,13 @@
   top: 0;
   width: 100%;
   z-index: -99;
+
+  &--mobile {
+    background-image: url(./bkgd.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
   &::after {
     background: rgba(0,0,0,0.35);

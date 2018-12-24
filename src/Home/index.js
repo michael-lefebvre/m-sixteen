@@ -1,6 +1,9 @@
 import React, { PureComponent, Fragment } from 'react'
-import { Spring, Trail, animated } from 'react-spring'
+import { Spring, Trail, animated, config } from 'react-spring'
+import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 import { withApp } from 'Views/Provider'
+import { isHome, getSection } from 'Utils';
 // import delay from 'delay'
 
 import './styles.scss'
@@ -56,7 +59,7 @@ const BlockquoteEnd = ({ ready, children }) => (
     from={{ t: 70 }}
     to={{ t: ready ? 84 : 70 }}
     >
-    {({ y, w, t }) => (
+    {({ t }) => (
       <animated.blockquote className="home__quote home__quote--end" style={{ marginTop: t.interpolate(t => `-${t}px`) }}>
         {children}
       </animated.blockquote>
@@ -103,6 +106,21 @@ const Abstract = ({ ready, onRest }) => (
   </Spring>
 )
 
+// const HomeNavItems = {
+//   releases: ['album', 'split', 'ep'],
+//   videos: ['nevers', 'rouge']
+// }
+
+const getHomeNavItemsSrc = (section, item) => {
+  switch(section) {
+    case 'releases': return `/static/covers/${item}.jpg`
+    case 'videos': return `/static/photos/videos/${item}-md.jpg`
+    case 'shows': return `/static/covers/${item}.jpg`
+    default:
+        // do nothing
+  }
+}
+
 const HomeNav = ({ ready, items, from, section }) => {
   return (
     <Spring
@@ -120,11 +138,15 @@ const HomeNav = ({ ready, items, from, section }) => {
             from={{ opacity: 0 }}
             to={{ opacity: ready ? 1 : 0 }}
             >
-            {item => styles => (
+            {item => styles => {
+              // console.log(item)
+              return (
               <animated.li className="home__nav__item" style={styles}>
-                <img src={item} className="home__nav__thumb" alt="" />
+                <Link to={`/${section}/${item}`}>
+                  <img src={getHomeNavItemsSrc(section, item)} className="home__nav__thumb" alt="" />
+                </Link>
               </animated.li>
-            )}
+            )}}
           </Trail>
         </animated.ul>
       )}
@@ -132,17 +154,46 @@ const HomeNav = ({ ready, items, from, section }) => {
   )
 }
 
-
 class Home extends PureComponent {
-  state = { ready: false, leave: false };
+  state = {
+    // mounted: false,
+    ready: false,
+    leave: !isHome(this.props),
+    // section: getSection(this.props),
+  };
   _ref = React.createRef();
+
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const leave = !isHome(nextProps)
+    const ready = nextProps.homeReady;
+    if(prevState.leave !== leave || prevState.ready !== ready)
+      return {
+        leave,
+        ready
+      }
+
+    return null;
+  }
+
+
+  //
+  // Life cycle
+  // --------------------------------------------------
+
   componentDidMount() {
     this._ref.current.focus()
-    this._setReady()
+    // this._setReady()
   }
+
   componentDidUpdate() {
-    this._setReady()
+    // this._setReady()
   }
+
+  //
+  // Helpers
+  // --------------------------------------------------
+
   _setReady() {
     const ready = !!this.props.landingVideo;
 
@@ -153,54 +204,52 @@ class Home extends PureComponent {
       this.setState({ ready: true })
   }
 
+  //
+  // Events Handlers
+  // --------------------------------------------------
+
   handleOnClick = () => {
-    this.setState({ leave: !this.state.leave })
+    // this.setState({ leave: !this.state.leave })
   };
 
   handleOnRest = () => {
-    console.log('handleOnRest')
-
+    // console.log('handleOnRest')
   };
+
+  //
+  // Renderers
+  // --------------------------------------------------
 
   render() {
     const { ready, leave } = this.state;
+    console.log({leave, ready})
 
     return (
       <Spring
         native
-        immediate={!leave}
+        // immediate={!leave}
+        config={config.stiff}
         from={{ s: 1, o: 1 }}
         to={{ s: leave ? .93 : 1, o: leave ? 0 : 1 }}
         >
         {({ s, o }) => (
-          <Fragment>
-            <header className="home" ref={this._ref} tabIndex="-1" onClick={this.handleOnClick}>
-              <animated.div className="home__wrapper" style={{ opacity: o.interpolate(o => o),  transform: s.interpolate(s => `rotate(-45deg) scale(${s})`)  }}>
-                <BlockquoteStart ready={ready} />
-                <Title ready={ready} />
-                <BlockquoteEnd ready={ready}>
-                  <BlockquoteEndContent ready={ready} />
-                </BlockquoteEnd>
-                <Abstract ready={ready} onRest={this.handleOnRest} />
-                <HomeNav ready={ready} items={['/static/covers/album.jpg', '/static/covers/split.jpg', '/static/covers/ep.jpg']} from={50} section="releases" />
-                <HomeNav ready={ready} items={['/static/photos/videos/nevers-md.jpg', '/static/photos/videos/rouge-md.jpg']} from={-50} section="videos" />
-              </animated.div>
-            </header>
-{/*<div className="horizontal-scroll-wrapper squares">
-  <div>item 1</div>
-  <div>item 2</div>
-  <div>item 3</div>
-  <div>item 4</div>
-  <div>item 5</div>
-  <div>item 6</div>
-  <div>item 7</div>
-  <div>item 8</div>
-</div>*/}
-          </Fragment>
+          <header className="home" ref={this._ref} tabIndex="-1" onClick={this.handleOnClick}>
+            <animated.div className="home__wrapper" style={{ opacity: o.interpolate(o => o),  transform: s.interpolate(s => `rotate(-45deg) scale(${s})`)  }}>
+              <BlockquoteStart ready={ready} />
+              <Title ready={ready} />
+              <BlockquoteEnd ready={ready}>
+                <BlockquoteEndContent ready={ready} />
+              </BlockquoteEnd>
+              <Abstract ready={ready} onRest={this.handleOnRest} />
+              <HomeNav ready={ready} items={['album', 'split', 'ep']} from={50} section="releases" />
+              <HomeNav ready={ready} items={['nevers', 'rouge']} from={-50} section="videos" />
+              {/*<HomeNav ready={ready} items={['album', 'split', 'ep','album', 'split', 'ep','album', 'split', 'ep']} from={0} section="shows" />*/}
+            </animated.div>
+          </header>
         )}
       </Spring>
     )
   }
 }
 
-export default withApp( Home )
+export default withRouter(withApp( Home ))

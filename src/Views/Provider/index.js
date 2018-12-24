@@ -31,6 +31,7 @@ export default class Index extends PureComponent
 
     this.state = {
         isDesktop:      props.Desktop
+      , homeReady:      !props.Desktop ? true : false
       , currentView:    'home'
       , previousView:   null
       , backgroundView: null
@@ -166,7 +167,7 @@ export default class Index extends PureComponent
 
   handleOnLandingReady({ target })
   {
-    this.setState({ landingVideo: target })
+    this.setState({ landingVideo: target, homeReady: true })
   }
 
   handleOnOpenVideo( videoId )

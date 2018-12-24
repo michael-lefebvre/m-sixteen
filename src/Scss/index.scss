@@ -1,42 +1,97 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500');
 @import "./variables.scss";
-@import "./reset.css";
 
-::-webkit-scrollbar {
-  height: $scroll-bar-height;
-  width: $scroll-bar-height;
+body {
+  margin: 0;
+  overflow: hidden;
 }
 
-::-webkit-scrollbar-button {
-  height: $scroll-bar-height;
-  width: $scroll-bar-height;
+html {
+  // font-size: 14px;
+  font-family: Helvetica, sans-serif;
+  font-kerning: normal;
+// font-family: 'Open Sans';
+  font-size: 100%;
+  color: $color-base;
+  font-weight: 400;
 }
 
-html, body {
+img {
+  // max-width: 100%;
+  display: block;
+}
+
+html,
+body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  // background: $album-1-bkgd;
-  font-family: $font-family-system;
-  // font-size: $font-size-base;
-  font-size: calc(12px + (16 - 14) * ((100vw - 375px) / (1280 - 375)));
+  // background: $color-bkgd;
   height: 100%;
-  line-height: $baseline;
-  // overflow-x: hidden;
-  // overflow-y: auto;
-  width: 100%;
+}
+
+
+/* --------------------------------------------------------*/
+
+
+p {
+  font-size: 1em; /* 14px */
+  line-height: 1.4286em; /* 20px */
+  // margin: 0 0 1.4286em 0;
+}
+
+h1,
+h2,
+h3,
+p,
+blockquote {
+  margin: 0;
+  padding: 0;
+  // text-transform: uppercase;
+  // line-height: 1.2;
+}
+
+a {
+  color: $color-base;
+  text-decoration: none;
+  &:hover {
+    color: $color-active;
+  }
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  & > li {
+    padding: 0;
+  }
+}
+
+:focus {
+  outline: none;
 }
 
 #app-root {
   -webkit-overflow-scrolling: touch;
   height: 100%;
   min-width: 375px;
-  // overflow: hidden;
-  // overflow-x: hidden;
-  // overflow-y: auto;
   user-select: none;
   position: relative;
   // transform: translateZ(0);
+}
+
+// Global reset
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*:before,
+*:after {
+  box-sizing: border-box;
 }

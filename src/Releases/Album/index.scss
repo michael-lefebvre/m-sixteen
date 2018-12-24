@@ -1,0 +1,140 @@
+@import "Scss/variables.scss";
+
+.releases__story--album {
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 900;
+
+  .releases__story__content {
+    position: relative;
+    display: block;
+    // padding: 10vh 0 10vh 10vw;
+    // padding-top: 1600px;
+    width: 100vh;
+    height: 100vw;
+    overflow: scroll;
+    transform-origin: 100% 0%;
+    transform: rotate(-90deg) translateY(-100vh);
+
+    .slides {
+      width: 100vw;
+      // height: 100vh;
+      height: calc(100vh - 2rem);
+      // padding: 0 0 0 1600px;
+      transform-origin: 0% 0%;
+      // column-width: 1000px;
+      column-gap: 0;
+      transform: rotate(90deg) translateY(-100%);
+    }
+    .slide {
+      // background: rgba(pink, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      height: 100%;
+      // overflow: hidden;
+      // display: inline-block; width: 100%;
+      break-inside: avoid-column;
+      word-wrap: break-word;
+      hyphens: auto;
+
+      & > div {
+        width: 100%
+      }
+    }
+  }
+}
+
+.releases__cover--album {
+  // background-color: $black;
+  z-index: 0;
+}
+
+.releases__cover--album__cover {
+  clip-path: polygon(0 100%, 0% 0%, 0% 0%);
+  // background: url(bkgd.jpg) bottom left no-repeat;
+  // background-size: cover;
+  background: $black;
+  height: 100%;
+  position: relative;
+  z-index: 11;
+
+  div {
+    height: 100%;
+    background: url(bkgd.jpg) bottom left no-repeat;
+    background-size: cover;
+    // transition: transform .1s linear;
+  }
+}
+
+.releases__cover--album__bkgd {
+  background: red;
+  // content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.releases__cover--album--in {
+  z-index: 100;
+  .releases__cover--album__cover {
+    clip-path: polygon(0 100%, 0% 0%, 0% 0%);
+    animation: animPageAlbumIn .4s forwards cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+}
+
+.releases__cover--album--back {
+  .releases__cover--album__cover {
+    clip-path: polygon( 0% -240%, 0% 100%, 164% 100%)
+  }
+}
+
+.releases__cover--album--out {
+  .releases__cover--album__cover {
+    animation: animPageAlbumOut .4s forwards ease-out
+  }
+}
+
+// @include respond-below( sm ) {
+//   .releases__cover--album {
+//     background: url(bkgd.jpg) bottom left no-repeat;
+//     background-size: auto 100%;
+
+//     .releases__cover--album__cover { display: none }
+//   }
+// }
+
+@keyframes animPageAlbumIn {
+  0%   { clip-path: polygon( 0% 100%, 0% 100%, 0% 100%) }
+  // 10%  { clip-path: polygon( 0% 66%, 0% 100%, 16.4% 100%) }
+  20%  { clip-path: polygon( 0% 32%, 0% 100%, 32.8% 100%) }
+  // 30%  { clip-path: polygon( 0% -2%, 0% 100%, 49.2% 100%) }
+  40%  { clip-path: polygon( 0% -36%, 0% 100%, 65.6% 100%) }
+  // 50%  { clip-path: polygon( 0% -70%, 0% 100%, 82% 100%) }
+  60%  { clip-path: polygon( 0% -104%, 0% 100%, 98.4% 100%) }
+  // 70%  { clip-path: polygon( 0% -138%, 0% 100%, 114.8% 100%) }
+  80%  { clip-path: polygon( 0% -172%, 0% 100%, 131.2% 100%) }
+  // 90%  { clip-path: polygon( 0% -206%, 0% 100%, 147.6% 100%) }
+  100% { clip-path: polygon( 0% -240%, 0% 100%, 164% 100%) }
+}
+
+@keyframes animPageAlbumOut {
+  0%   { clip-path: polygon( -80% 0%, 100% 240%, 100% 0%) }
+  // 10%  { clip-path: polygon( -62% 0%, 100% 216%, 100% 0%) }
+  20%  { clip-path: polygon( -44% 0%, 100% 192%, 100% 0%) }
+  // 30%  { clip-path: polygon( -26% 0%, 100% 168%, 100% 0%) }
+  40%  { clip-path: polygon( -8% 0%, 100% 144%, 100% 0%) }
+  // 50%  { clip-path: polygon( 10% 0%, 100% 120%, 100% 0%) }
+  60%  { clip-path: polygon( 28% 0%, 100% 96%, 100% 0%) }
+  // 70%  { clip-path: polygon( 46% 0%, 100% 72%, 100% 0%) }
+  80%  { clip-path: polygon( 64% 0%, 100% 48%, 100% 0%) }
+  // 90%  { clip-path: polygon( 82% 0%, 100% 24%, 100% 0%) }
+  100% { clip-path: polygon( 100% 0%, 100% 0%, 100% 0% ) }
+}

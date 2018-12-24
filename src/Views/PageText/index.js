@@ -1,7 +1,7 @@
 import React      from 'react'
 import classNames from 'classnames'
 
-import './styles.css'
+import './styles.scss'
 
 const PageText = ({ className = '', title = null, paragraphs = [], children }) =>
   <div className={classNames('page__text', className)}>

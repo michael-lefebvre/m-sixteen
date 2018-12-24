@@ -6,7 +6,7 @@ import classNames                     from 'classnames'
 
 import { withApp }                    from 'Views/Provider'
 
-import './styles.css'
+import './styles.scss'
 
 export class Image extends Component
 {

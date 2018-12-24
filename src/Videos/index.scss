@@ -1,0 +1,115 @@
+@import "Scss/variables.scss";
+
+//== Video Modal
+//
+//##
+
+$bezize: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+.videos {
+  align-items: center;
+  background-color: rgba($black, .9);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  opacity: 0;
+  overflow-y: scroll;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translateY(100%);
+  // transition: opacity 250ms $bezize;
+  z-index: $zindex-higher;
+
+  &--closing {
+    transition: opacity .5s $bezize, transform .5s $bezize;
+  }
+
+  &--active {
+    pointer-events: auto;
+    // animation-delay: 10ms;
+    // animation-iteration-count: 1;
+    // animation: GradientIn 1s ease forwards;
+    transform: translateY(0);
+    opacity: 1;
+    transition: opacity .5s $bezize, transform .5s $bezize;
+
+    .videos__close {
+      opacity: 1;
+      transition: opacity 200ms linear 500ms;
+
+      &:after {
+        transform: rotate(135deg);
+        transition: transform 600ms ease 500ms;
+      }
+
+      &:before {
+        transform: rotate(45deg);
+        transition: transform 300ms ease 500ms;
+      }
+    }
+
+    .videos__content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@keyframes GradientIn {
+  0% { background-position: 0 0 }
+  100% { background-position: 0 100% }
+}
+
+@keyframes GradientOut {
+  0% { background-position: 0 100% }
+  100% { background-position: 0 0 }
+}
+
+.videos__close {
+  position: absolute;
+  top: 20px;
+  right: 37px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 200ms linear;
+
+  &:after,
+  &:before {
+    background: #fff;
+    border-radius: 2px;
+    content: '';
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: rotate(0);
+    transition: transform 1s ease;
+  }
+
+  &:after { transition: transform 300ms ease; }
+  &:before { transition: transform 200ms ease; }
+}
+
+.videos__content {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  height: 480px;
+  width: 854px;
+  transform: translateY(10%);
+  transition: transform 250ms linear, opacity 250ms linear;
+  z-index: 10;
+}
+
+.videos__body {
+  flex: 1;
+}

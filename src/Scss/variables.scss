@@ -2,6 +2,30 @@
 // Variables
 // --------------------------------------------------
 
+  //== Colors
+  //
+
+$black: #040203;
+$red: #e1011c;
+$white: #fff; //#f6f3ea;
+
+$color-base: $white;
+$color-active: $red;
+$color-bkgd: $black;
+
+@function size-ratio($base, $ratio){
+  @return calc(#{$base} * #{$ratio}); //$base * $ratio
+}
+
+$title-primary-size: 40px;
+$title-primary-line-height: 34px;
+$title-sub-margin: 3px; //2px;
+$title-sub-size: 12px;
+$title-sub-line-height: 15px;
+$title-sub-letter-spacing: 2.05px;
+$title-ratio: 1.4;
+
+
 //== Miscellaneous
 //
 //## stuffs
