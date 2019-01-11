@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import { getReleaseStateFromProps } from 'Utils'
 
-import Figure    from 'Views/Image'
+// import Figure    from 'Views/Image'
 // import Text      from 'Views/PageText'
 
 import './index.scss'
@@ -80,7 +80,7 @@ class ReleasesSplit extends PureComponent {
         backgroundPositionCover: '400px center, 0 center',
         opacity: 0,
         opacityContent: 1,
-        paddingTop: this.props.viewPort.offsetHeight * .4
+        // paddingTop: this.props.viewPort.offsetHeight * .4
       })
   };
 
@@ -125,20 +125,14 @@ class ReleasesSplit extends PureComponent {
             <div className="releases__story__container" onScroll={this.handleOnScroll} ref={this._story}>
               <div className="releases__story__content" style={{ paddingTop }}>
                 <div>
-                  <div className="split__img">
-                    <img src={`${process.env.PUBLIC_URL}/static/photos/split/band-1-md.jpg`} width="400" />
-                  </div>
+                  <img className="split__img" src={`${process.env.PUBLIC_URL}/static/photos/split/band-1-md.jpg`} width="400" alt="" />
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor quam, dapibus sed risus eget, euismod dapibus massa. Cras sollicitudin auctor orci, eu sollicitudin erat viverra ut. Proin varius consectetur sapien id ornare. Proin a nibh eu nisi feugiat pretium.</p>
                   <p>Integer ut sodales nunc, pellentesque interdum metus. Suspendisse tristique ipsum condimentum malesuada volutpat. Donec leo sapien, ultricies sed lobortis ut, tristique sed est. Cras maximus vulputate congue. Aenean sit amet congue dui. Integer ut consectetur tortor, at congue velit.</p>
                 </div>
                 <div>
-                  <div className="split__img">
-                    <img src={`${process.env.PUBLIC_URL}/static/photos/split/band-1-md.jpg`} width="300" />
-                  </div>
+                  <img className="split__img" src={`${process.env.PUBLIC_URL}/static/photos/split/band-1-md.jpg`} width="300" alt="" />
 
-                  <div className="split__img">
-                    <img src={`${process.env.PUBLIC_URL}/static/photos/furia/img-1-md.jpg`} width="300" />
-                  </div>
+                  <img className="split__img" src={`${process.env.PUBLIC_URL}/static/photos/furia/img-1-md.jpg`} width="300" alt="" />
 
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor quam, dapibus sed risus eget, euismod dapibus massa. Cras sollicitudin auctor orci, eu sollicitudin erat viverra ut. Proin varius consectetur sapien id ornare. Proin a nibh eu nisi feugiat pretium.</p>
                   <p>Integer ut sodales nunc, pellentesque interdum metus. Suspendisse tristique ipsum condimentum malesuada volutpat. Donec leo sapien, ultricies sed lobortis ut, tristique sed est. Cras maximus vulputate congue. Aenean sit amet congue dui. Integer ut consectetur tortor, at congue velit.</p>

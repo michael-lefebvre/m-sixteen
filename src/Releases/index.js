@@ -89,16 +89,6 @@ class Releases extends Component {
   // Renderers
   // --------------------------------------------------
 
-  // epRenderer() {
-  //   const { id, prevId, wasActive } = this.state;
-
-  //   const EpActive = id === 'ep',
-  //         EpBack = prevId === 'ep',
-  //         EpOff = EpBack && wasActive
-
-  //   return <Ep active={EpActive} back={EpBack} off={EpOff} onReady={this.handleOnCoverReady} />
-  // }
-
   render() {
     const { id, prevId, isActive, wasActive, viewPort } = this.state;
 

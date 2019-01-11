@@ -159,7 +159,8 @@ class Home extends PureComponent {
     // mounted: false,
     ready: false,
     leave: !isHome(this.props),
-    // section: getSection(this.props),
+    section: getSection(this.props),
+    prevSection: null,
   };
   _ref = React.createRef();
 
@@ -167,10 +168,13 @@ class Home extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const leave = !isHome(nextProps)
     const ready = nextProps.homeReady;
-    if(prevState.leave !== leave || prevState.ready !== ready)
+    const section = getSection(nextProps)
+    if(prevState.leave !== leave || prevState.ready !== ready || section !== prevState.section)
       return {
         leave,
-        ready
+        ready,
+        section,
+        prevSection: prevState.section
       }
 
     return null;
@@ -220,20 +224,20 @@ class Home extends PureComponent {
   // Renderers
   // --------------------------------------------------
 
-  render() {
-    const { ready, leave } = this.state;
-    console.log({leave, ready})
+  _render() {
+    const { ready, leave, section, prevSection } = this.state;
+    // console.log({leave, ready, section, prevSection})
 
     return (
       <Spring
         native
         // immediate={!leave}
-        config={config.stiff}
-        from={{ s: 1, o: 1 }}
-        to={{ s: leave ? .93 : 1, o: leave ? 0 : 1 }}
+        config={config[ prevSection ? 'slow' : 'stiff']}
+        from={{ s: 1, o: 1, t: 0 }}
+        to={{ s: (leave && section === 'releases') ? .93 : 1, o: leave ? 0 : 1, t: (leave && section === 'videos') ? 50 : 0 }}
         >
-        {({ s, o }) => (
-          <header className="home" ref={this._ref} tabIndex="-1" onClick={this.handleOnClick}>
+        {({ s, o, t }) => (
+          <animated.header className="home" ref={this._ref} tabIndex="-1" onClick={this.handleOnClick} style={{ transform: t.interpolate(t => `translateY(-${t}%)`) }}>
             <animated.div className="home__wrapper" style={{ opacity: o.interpolate(o => o),  transform: s.interpolate(s => `rotate(-45deg) scale(${s})`)  }}>
               <BlockquoteStart ready={ready} />
               <Title ready={ready} />
@@ -245,9 +249,29 @@ class Home extends PureComponent {
               <HomeNav ready={ready} items={['nevers', 'rouge']} from={-50} section="videos" />
               {/*<HomeNav ready={ready} items={['album', 'split', 'ep','album', 'split', 'ep','album', 'split', 'ep']} from={0} section="shows" />*/}
             </animated.div>
-          </header>
+          </animated.header>
         )}
       </Spring>
+    )
+  }
+
+  render() {
+    const { ready } = this.state;
+
+    return (
+      <header className="home" ref={this._ref} tabIndex="-1">
+        <animated.div className="home__wrapper" style={{ opacity: 1, transform:'rotate(-45deg) scale(1)' }}>
+          <BlockquoteStart ready={ready} />
+          <Title ready={ready} />
+          <BlockquoteEnd ready={ready}>
+            <BlockquoteEndContent ready={ready} />
+          </BlockquoteEnd>
+          <Abstract ready={ready} onRest={this.handleOnRest} />
+          <HomeNav ready={ready} items={['album', 'split', 'ep']} from={50} section="releases" />
+          <HomeNav ready={ready} items={['nevers', 'rouge']} from={-50} section="videos" />
+          {/*<HomeNav ready={ready} items={['album', 'split', 'ep','album', 'split', 'ep','album', 'split', 'ep']} from={0} section="shows" />*/}
+        </animated.div>
+      </header>
     )
   }
 }

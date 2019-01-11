@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { Spring, animated, config } from 'react-spring'
 import classNames from 'classnames'
 import YouTube    from 'react-youtube'
 import { withRouter } from "react-router";
@@ -17,11 +18,15 @@ const getInitialState = (props) => {
     prevId: null,
     isActive: isSectionActive(props, 'videos'),
     id: id || null,
+    ready: false,
+    videoState: 'pause',
   }
 }
 
 class Videos extends PureComponent {
   state = getInitialState(this.props);
+
+  _video = null;
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const isActive = isSectionActive(nextProps, 'videos')
@@ -32,6 +37,7 @@ class Videos extends PureComponent {
         prevId: prevState.id,
         id: id || null,
         isActive,
+        ready: !isActive ? false : prevState.ready
       }
     return null;
   }
@@ -40,6 +46,14 @@ class Videos extends PureComponent {
   // Life cycle
   // --------------------------------------------------
 
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    return prevState.isActive && !this.state.isActive;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(snapshot)
+      this._video = null;
+  }
 
   //
   // Helpers
@@ -50,7 +64,21 @@ class Videos extends PureComponent {
   // --------------------------------------------------
 
   handleOnClose = () => {
+    // if(this.state.videoState === 'play') console.log('pause')
     this.props.history.push('/')
+  };
+
+  handleOnReady = ({ target }) => {
+    console.log('handleOnReady')
+    this._video = target
+    this.setState({ ready: true, videoState: 'pause' })
+  };
+
+  handleOnClick = () => {
+    if(!this._video) return;
+
+    this.setState(({videoState}) => ({ videoState: videoState === 'pause' ? 'play' : 'pause' }))
+    // this._video[ this.state.state === 'pause' ? 'playVideo' : 'pauseVideo']()
   };
 
   //
@@ -58,11 +86,12 @@ class Videos extends PureComponent {
   // --------------------------------------------------
 
   render() {
-    const { id, prevId, isActive, wasActive } = this.state;
+    const { id/*, prevId*/, isActive, wasActive, ready } = this.state;
 
     const className = classNames('videos', {
       'videos--active': isActive,
       'videos--closing': wasActive,
+      'videos--ready': ready
     })
     // var { width } = document.body.getBoundingClientRect()
 
@@ -86,14 +115,25 @@ class Videos extends PureComponent {
     const videoId = {
       rouge: 'Fj8WOeQamvw',
       nevers: 'AymtEvBubmQ',
-    }[id || prevId];
+    }[id];
+
+    const legend = {
+      rouge: {
+        title: '"Rouge" video',
+        note: 'A never finished/published video'
+      },
+      nevers: {
+        title: 'Live at Nevers, France',
+        note: 'Shooted in october 2008'
+      },
+    }[id];
+
+    const style = videoId ? { backgroundImage: `url(/static/photos/videos/${id}-md.jpg)` } : {}
 // console.log({videoId})
     return (
       <HotKeys
         focused={isActive}
         attach={window}
-        className={className}
-        // style={{ backgroundImage: `url(/static/photos/videos/${id}-md.jpg)` }}
         keyMap={{
           esc: "esc"
         }}
@@ -101,12 +141,35 @@ class Videos extends PureComponent {
           esc: this.handleOnClose
         }}
       >
-        <div className="videos__close" onClick={this.handleOnClose} />
-        { videoId && (
-          <div className="videos__content" style={{ backgroundImage: `url(/static/photos/videos/${id}-md.jpg)` }}>
-            <YouTube videoId={videoId} opts={videoOpts} />
-          </div>
-        )}
+        <Spring
+          native
+          config={config[ isActive ? 'slow' : 'stiff']}
+          from={{ o: 1, t: 100 }}
+          to={{ o: isActive ? 1 : 0, t: isActive ? 0 : 100 }}
+          >
+          {({ o, t }) => (
+            <animated.div className={className}  style={{ opacity: o.interpolate(o => o), transform: t.interpolate(t => `translateY(${t}%)`) }}>
+              <div className="videos__close" onClick={this.handleOnClose} />
+                <div className="videos__content">
+                  <div className="videos__thumb" style={style} onClick={this.handleOnClick}>
+                    {isActive && <div className="videos__spinner"><div /><div /><div /><div /></div>}
+                  </div>
+                  {videoId && (
+                    <YouTube
+                      containerClassName="videos__player"
+                      videoId={videoId}
+                      opts={videoOpts}
+                      onReady={this.handleOnReady}
+                      />
+                  )}
+                  <div className="videos__legend">
+                    <h3>{isActive && legend.title}</h3>
+                    <h4>{isActive && legend.note}</h4>
+                  </div>
+              </div>
+            </animated.div>
+          )}
+        </Spring>
       </HotKeys>
     )
   }
