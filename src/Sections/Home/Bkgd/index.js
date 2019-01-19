@@ -82,8 +82,13 @@ class HomeBkgd extends Component {
   // Renderers
   // --------------------------------------------------
 
-  render() {
+  playerRenderer() {
     const { showPlayer, playerState } = this.state;
+
+    if(!showPlayer) {
+      this._player = null;
+      return null;
+    }
 
     // https://codebushi.com/react-youtube-background/
     // https://developers.google.com/youtube/player_parameters
@@ -102,6 +107,25 @@ class HomeBkgd extends Component {
       }
     }
 
+    return (
+      <YouTube
+       videoId="Pdni_p27l_0"
+       opts={videoOptions}
+       className="landing__background__foreground__iframe"
+       // onStateChange={this.handleOnStateChange('onStateChange')}
+       // onPlaybackRateChange={this.handleOnStateChange('onPlaybackRateChange')}
+       // onPlaybackQualityChange={this.handleOnStateChange('onPlaybackQualityChange')}
+       onPlay={this.handleOnPlay}
+       // onError={this.handleOnStateChange('onError')}
+       onReady={this.handleOnReady}
+       onEnd={this.handleOnEnd} />
+    )
+  }
+
+  render() {
+    const { showPlayer, playerState } = this.state;
+
+
     const className = classNames('landing', {
       'landing--mobile': !showPlayer,
       'landing--paused': showPlayer && !playerState
@@ -110,19 +134,7 @@ class HomeBkgd extends Component {
     return (
       <div className={className}>
         <div className="landing__background">
-        {showPlayer && (
-          <YouTube
-           videoId="Pdni_p27l_0"
-           opts={videoOptions}
-           className="landing__background__foreground__iframe"
-           // onStateChange={this.handleOnStateChange('onStateChange')}
-           // onPlaybackRateChange={this.handleOnStateChange('onPlaybackRateChange')}
-           // onPlaybackQualityChange={this.handleOnStateChange('onPlaybackQualityChange')}
-           onPlay={this.handleOnPlay}
-           // onError={this.handleOnStateChange('onError')}
-           onReady={this.handleOnReady}
-           onEnd={this.handleOnEnd} />
-        )}
+        {this.playerRenderer()}
         </div>
       </div>
     )
