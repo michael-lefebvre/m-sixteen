@@ -28,12 +28,15 @@ export const { Provider, Consumer } = React.createContext({
   isReady: () => null,
   getViewPort: () => null,
   hasVideoHeader: () => null,
+  getHistory: () => null,
+  bkgdCanPlay: () => null,
   isDesktop: () => null,
   isTablet: () => null,
   isMobile: () => null,
   isLandscape: () => null,
   onReady: () => null,
   onSectionChange: () => null,
+  onClearPrevSection: () => null,
 });
 
 class App extends Component {
@@ -47,12 +50,14 @@ class App extends Component {
       getViewPort: this.getViewPort,
       getHistory: this.getHistory,
       hasVideoHeader: this.hasVideoHeader,
+      bkgdCanPlay: this.bkgdCanPlay,
       isDesktop: this.isDesktop,
       isTablet: this.isTablet,
       isMobile: this.isMobile,
       isLandscape: this.isLandscape,
       onReady: this.handleOnReady,
       onSectionChange: this.handleOnSectionChange,
+      onClearPrevSection: this.handleOnClearPrevSection,
     };
   }
 
@@ -117,6 +122,10 @@ class App extends Component {
 
   isLandscape = () => this.state.orientation === 'landscape';
 
+  bkgdCanPlay = () => {
+    const { currentSection, prevSection } = this.state;
+    return ( this.hasVideoHeader() === true && currentSection === 'home' && prevSection === null )
+  };
 
   //
   // Events Handlers
@@ -129,6 +138,8 @@ class App extends Component {
   };
 
   handleOnSectionChange = (section) => this.setState(({ currentSection }) => ({ currentSection: section, prevSection: currentSection }));
+
+  handleOnClearPrevSection = () => this.setState({ prevSection: null });
 
   handleOnResize = () => {
     this.setState({ ...getViewport() })

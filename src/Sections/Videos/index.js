@@ -89,7 +89,6 @@ class Videos extends PureComponent {
   };
 
   handleOnReady = ({ target }) => {
-    console.log('handleOnReady')
     this._player = target
     this.setState({ ready: true, videoState: 'pause' })
   };

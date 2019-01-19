@@ -2,25 +2,24 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import YouTube from 'react-youtube'
 import { withApp } from 'Contexts/App'
-import { withHome } from 'Contexts/Home'
 
 import './index.scss'
 
 class HomeBkgd extends Component {
 
   state = {
-    playerState: this.props.isReady,
+    bkgdCanPlay: this.props.bkgdCanPlay,
     showPlayer: this.props.showPlayer,
   };
 
   _player = null;
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { showPlayer, playerState } = nextProps;
-    if(showPlayer !== prevState.showPlayer || playerState !== prevState.playerState)
+    const { showPlayer, bkgdCanPlay } = nextProps;
+    if(showPlayer !== prevState.showPlayer || bkgdCanPlay !== prevState.bkgdCanPlay)
       return {
-        showPlayer,
-        playerState
+        bkgdCanPlay,
+        showPlayer
       }
 
     return null;
@@ -31,26 +30,29 @@ class HomeBkgd extends Component {
   // --------------------------------------------------
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    return prevState.playerState !== this.state.playerState;
+    return prevState.bkgdCanPlay !== this.state.bkgdCanPlay;
   }
 
   componentDidMount() {
-    if (this.state.showPlayer === false && this.props.isReady === false)
-      this.props.handleOnReady()
+    this._shouldForceOnReady()
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (snapshot === true && this._player) {
-      this._player[ this.state.playerState ? 'playVideo' : 'pauseVideo']()
+      this._player[ this.state.bkgdCanPlay ? 'playVideo' : 'pauseVideo']()
       return
     }
-    if (this.state.showPlayer === false && this.props.isReady === false)
-      this.props.handleOnReady()
+    this._shouldForceOnReady()
   }
 
   //
   // Helpers
   // --------------------------------------------------
+
+  _shouldForceOnReady() {
+    if (this.state.showPlayer === false && this.props.isReady === false)
+      this.props.handleOnReady()
+  }
 
   //
   // Events Handlers
@@ -69,7 +71,7 @@ class HomeBkgd extends Component {
     // target.pauseVideo()
     this._player = target
 
-    // if(!this.props.isReady)
+    if(!this.props.isReady)
       this.props.handleOnReady()
   };
 
@@ -83,7 +85,7 @@ class HomeBkgd extends Component {
   // --------------------------------------------------
 
   playerRenderer() {
-    const { showPlayer, playerState } = this.state;
+    const { showPlayer } = this.state;
 
     if(!showPlayer) {
       this._player = null;
@@ -94,14 +96,14 @@ class HomeBkgd extends Component {
     // https://developers.google.com/youtube/player_parameters
     const videoOptions = {
       playerVars: {
-        autoplay: (!!showPlayer && playerState), // Auto-play the video on load
+        autoplay: 1,       // Auto-play the video on load
         disablekb: 1,
-        controls: 0,                             // Hide pause/play buttons in player
-        showinfo: 0,                             // Hide the video title
-        modestbranding: 1,                       // Hide the Youtube Logo
-        loop: 1,                                 // Run the video in a loop
-        fs: 0,                                   // Hide the full screen button
-        autohide: 0,                             // Hide video controls when playing
+        controls: 0,       // Hide pause/play buttons in player
+        showinfo: 0,       // Hide the video title
+        modestbranding: 1, // Hide the Youtube Logo
+        loop: 1,           // Run the video in a loop
+        fs: 0,             // Hide the full screen button
+        autohide: 0,       // Hide video controls when playing
         rel: 0,
         enablejsapi: 1
       }
@@ -111,7 +113,7 @@ class HomeBkgd extends Component {
       <YouTube
        videoId="Pdni_p27l_0"
        opts={videoOptions}
-       className="landing__background__foreground__iframe"
+       className="home-video__background__foreground__iframe"
        // onStateChange={this.handleOnStateChange('onStateChange')}
        // onPlaybackRateChange={this.handleOnStateChange('onPlaybackRateChange')}
        // onPlaybackQualityChange={this.handleOnStateChange('onPlaybackQualityChange')}
@@ -123,17 +125,16 @@ class HomeBkgd extends Component {
   }
 
   render() {
-    const { showPlayer, playerState } = this.state;
+    const { showPlayer, bkgdCanPlay } = this.state;
 
-
-    const className = classNames('landing', {
-      'landing--mobile': !showPlayer,
-      'landing--paused': showPlayer && !playerState
+    const className = classNames('home-video', {
+      'home-video--mobile': !showPlayer,
+      'home-video--paused': showPlayer && !bkgdCanPlay
     })
 
     return (
       <div className={className}>
-        <div className="landing__background">
+        <div className="home-video__background">
         {this.playerRenderer()}
         </div>
       </div>
@@ -142,14 +143,11 @@ class HomeBkgd extends Component {
 }
 
 const mapAppContextToProps = state => ({
-  // showPlayer: false, // state.hasVideoHeader(),
+  bkgdCanPlay: state.bkgdCanPlay(),
   showPlayer: state.hasVideoHeader(),
   isReady: state.isReady(),
-  handleOnReady: state.onReady
-});
-const mapHomeContextToProps = ({ isCurrentSection }) => ({
-  playerState: isCurrentSection
+  handleOnReady: state.onReady,
 });
 
-export default withApp(mapAppContextToProps)(withHome(mapHomeContextToProps)(HomeBkgd));
+export default withApp(mapAppContextToProps)(HomeBkgd);
 

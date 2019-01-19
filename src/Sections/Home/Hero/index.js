@@ -2,7 +2,6 @@ import React, { PureComponent, Fragment } from 'react'
 import { Spring, Trail, animated } from 'react-spring'
 import { Link } from "react-router-dom";
 import { withApp } from 'Contexts/App'
-// import { withHome } from 'Contexts/Home'
 
 import './index.scss'
 
@@ -252,6 +251,11 @@ class Home extends PureComponent {
     this.setState({ mounted: true })
   };
 
+  handleOnSectionRest = () => {
+    if(this.state.isCurrentSection && this.state.prevSection)
+      this.props.onClearPrevSection()
+  };
+
   //
   // Renderers
   // --------------------------------------------------
@@ -266,6 +270,7 @@ class Home extends PureComponent {
       <Spring
         native
         {...this._getTransition()}
+        onRest={this.handleOnSectionRest}
       >
         {({ s, o, t }) => (
           <animated.header className="home" ref={this._ref} tabIndex="-1" style={{ transform: t.interpolate(t => `translateY(-${t}%)`) }}>
@@ -292,12 +297,8 @@ const mapAppContextToProps = state => ({
   currentSection: state.currentSection,
   prevSection: state.prevSection,
   isCurrentSection: state.currentSection === 'home',
+  onClearPrevSection: state.onClearPrevSection,
 });
-// const mapHomeContextToProps = ({ isCurrentSection, currentSection }) => ({
-//   isCurrentSection,
-//   currentSection
-// });
 
-// export default withApp(mapAppContextToProps)(withHome(mapHomeContextToProps)(Home));
 export default withApp(mapAppContextToProps)(Home);
 

@@ -1,6 +1,6 @@
 @import "Scss/variables.scss";
 
-.landing {
+.home-video {
   background-color: $color-bkgd;
   bottom: 0;
   height: 100%;
@@ -19,7 +19,7 @@
     background-size: cover;
   }
 
-  // &--paused .landing__background {
+  // &--paused .home-video__background {
   //   opacity: 0;
   //   transition: opacity .2s linear .2s;
   // }
@@ -51,13 +51,13 @@
   }
 }
 
-.landing__background {
+.home-video__background {
   opacity: 1;
   transition: opacity .2s linear;
 }
 
-.landing__background,
-.landing iframe {
+.home-video__background,
+.home-video iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -67,8 +67,8 @@
 }
 
 @media (min-aspect-ratio: 16/9) {
-  .landing__background { height: 300%; top: -100%; }
+  .home-video__background { height: 300%; top: -100%; }
 }
 @media (max-aspect-ratio: 16/9) {
-  .landing__background { width: 300%; left: -100%; }
+  .home-video__background { width: 300%; left: -100%; }
 }
