@@ -20,3 +20,10 @@ export const hideReleaseStory = ({ active, back, off }) => !active && !back && !
 export const isHome = (props) => !getSection(props)
 export const ImagePath = (img) => `${process.env.PUBLIC_URL}/static/images/${img}`
 export const PhotoPath = (img) => `${process.env.PUBLIC_URL}/static/photos/${img}.jpg`
+export const getViewport = () => {
+  const { width, height } = document.body.getBoundingClientRect()
+  return {
+    offsetWidth: width,
+    offsetHeight: height
+  }
+}

@@ -1,0 +1,42 @@
+@import "Scss/variables.scss";
+
+.release__story--split {
+  position: absolute;
+  top: 0;
+  // right: 0;
+  right: -1rem;
+  width: calc(100% + 1rem);
+  // width: 100%;
+  height: 100%;
+  z-index: 100;
+
+  .release__story__container {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    // direction: rtl;
+  }
+  .release__story__content {
+  // background: green;
+    // background: #fcfdf8;
+    color: black;
+    // direction: ltr;
+    // padding-right: -2rem;
+    width: 680px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 100px;
+    padding-top: 100px;
+    overflow: hidden;
+  }
+}
+
+.split__img {
+  display: inline-block;
+  border-width: 15px;
+  border-image: url(frame_img.png) 15 stretch;
+  border-style: solid;
+  margin: auto;
+}

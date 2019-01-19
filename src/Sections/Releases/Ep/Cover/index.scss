@@ -1,0 +1,15 @@
+@import "Scss/variables.scss";
+
+.release__cover--ep {
+  background: $album-3-bkgd;
+  height: 100%;
+  width: 100%;
+}
+
+.release__cover--ep__inner {
+  background: url(bkgd.jpg) bottom right no-repeat;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  height: 100%;
+  width: 100%;
+}

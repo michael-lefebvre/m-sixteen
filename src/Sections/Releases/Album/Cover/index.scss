@@ -1,0 +1,125 @@
+@import "Scss/variables.scss";
+
+.release__cover--album__bkgd {
+  position: absolute;
+  z-index: 1000;
+  height: 924px;
+  width: 0;
+  left: 0;
+  top: 0;
+  transform: rotate(-45deg) translateX(0);
+  transform-origin: 400px 700px;
+  overflow: hidden;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.release__cover--album__bkgd__letters,
+.release__cover--album__bkgd__strips {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+
+  &--odd {
+    z-index: 2;
+    transform: translateY(0);
+  }
+}
+
+.release__cover--album__bkgd__letters {
+  transform: translate(0, 0);
+  z-index: 10
+}
+
+.release__cover--album__bkgd__strip {
+  height: 40px;
+  background: rgba($white, 1);
+  position: absolute;
+  left: 0;
+  z-index: 1;
+
+  $elements: 12;
+  @for $i from 0 to $elements {
+    &--#{$i + 1} {
+      top: (84px * $i);
+
+      @if $i >= 0 and $i < 5 {
+        width: 520px
+      }
+
+      @if $i >= 5 and $i < 9 {
+        width: 200px
+      }
+
+      @if $i >= 9 {
+        width: 2500px
+      }
+    }
+  }
+  @for $i from 0 to $elements {
+    &--odd--#{$i + 1} {
+      background: $black;
+      top: (84px * $i) + 42px;
+      z-index: 2;
+    }
+  }
+}
+
+/*
+  a___b      d___e
+  |    \    /    |
+  |     \  /     |
+  |  m\  .c  /j  |
+  |  | \    / |  |
+  o__n  l__k  i__f
+*/
+
+$a: 0 0;
+
+.release__cover--album__bkgd__m {
+  // clip-path: polygon(0 0, 92px 0, 162px 200px, 227px 0, 320px 0, 320px 100%, 258px 100%, 258px 90px, 185px 100%, 135px 100%, 62px 90px, 62px 100%, 0 100%);
+  clip-path: polygon(0 0, 92px 0, 162px 0px, 227px 0, 320px 0, 320px 100%, 258px 100%, 258px 100%, 185px 100%, 135px 100%, 62px 100%, 62px 100%, 0 100%);
+  // background: rgba($red, 1);
+  background: $red;
+  border-radius: 0;
+  position: absolute;
+  width: 320px;
+  height: 292.5px;
+  top: 420px;
+  left: 200px;
+  z-index: 10;
+  transition: all .4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  opacity: 1;
+  transform: scale(1);
+
+  &--o {
+    clip-path: polygon(0 0, 92px 0, 162px 200px, 227px 0, 320px 0, 320px 100%, 258px 100%, 258px 90px, 185px 100%, 135px 100%, 62px 90px, 62px 100%, 0 100%);
+  }
+  &--f {
+    border-radius: 50%;
+    transform: scale(.5);
+    opacity: 0;
+  }
+}
+
+.release__cover--album__bkgd__sixteen {
+  text-transform: uppercase;
+  writing-mode: tb;
+  width: 50px;
+  white-space: pre;
+  height: 292.5px;
+  position: absolute;
+  left: 535px;
+  top: 420px;
+  z-index: 100;
+  // background: rgba(green,.3);
+
+  font-family: 'Open Sans';
+  font-size: 55px;
+  line-height: 55px;
+  font-weight: 800;
+  letter-spacing: 11px
+}

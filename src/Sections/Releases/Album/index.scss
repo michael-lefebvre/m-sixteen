@@ -1,0 +1,44 @@
+@import "Scss/variables.scss";
+
+.release--album {}
+
+.release__cover--album {
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes animPageAlbumIn {
+  0%   { clip-path: polygon( 0% 100%, 0% 100%, 0% 100%) }
+  20%  { clip-path: polygon( 0% 32%, 0% 100%, 32.8% 100%) }
+  40%  { clip-path: polygon( 0% -36%, 0% 100%, 65.6% 100%) }
+  60%  { clip-path: polygon( 0% -104%, 0% 100%, 98.4% 100%) }
+  80%  { clip-path: polygon( 0% -172%, 0% 100%, 131.2% 100%) }
+  99% { clip-path: polygon( 0% -240%, 0% 100%, 164% 100%) }
+}
+
+@keyframes animPageAlbumOut {
+  0%   { clip-path: polygon( -80% 0%, 100% 240%, 100% 0%) }
+  20%  { clip-path: polygon( -44% 0%, 100% 192%, 100% 0%) }
+  40%  { clip-path: polygon( -8% 0%, 100% 144%, 100% 0%) }
+  60%  { clip-path: polygon( 28% 0%, 100% 96%, 100% 0%) }
+  80%  { clip-path: polygon( 64% 0%, 100% 48%, 100% 0%) }
+  100% { clip-path: polygon( 100% 0%, 100% 0%, 100% 0% ) }
+}
+
+.release__cover--album__cover {
+  background: $black;
+  height: 100%;
+  position: relative;
+  z-index: 11;
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform-style: preserve-3d;
+  overflow: hidden;
+
+  &--entering {
+    animation: animPageAlbumIn .4s forwards cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  &--leaving {
+    animation: animPageAlbumOut .4s forwards ease-out .1s
+  }
+}

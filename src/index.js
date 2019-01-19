@@ -1,34 +1,27 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import ReactDOM              from 'react-dom'
-import MediaQuery from 'react-responsive'
+// import MediaQuery from 'react-responsive'
 import { BrowserRouter, Route } from "react-router-dom";
-import Provider   from 'Views/Provider'
-import Landing    from 'Views/Landing'
-import Home                   from 'Home'
-import Releases                   from 'Releases'
-import Videos                   from 'Videos'
+import AppContext from 'Contexts/App';
+// import Provider   from 'Views/Provider'
+// import Landing    from 'Views/Landing'
+import Layout                   from 'Layout'
+// import Home                   from 'Home'
+// import Releases                   from 'Releases'
+// import Videos                   from 'Videos'
 import registerServiceWorker from 'registerServiceWorker'
 
 import 'Scss/index.scss'
 
 const MainRoute = () => (
-  <Fragment>
-    <Landing />
-    <Home />
-    <Releases />
-    <Videos />
-  </Fragment>
-);
+  <AppContext>
+    <Layout />
+  </AppContext>
+)
 
 const App = () => (
   <BrowserRouter>
-    <MediaQuery minWidth={992} className="site">
-    { matches => (
-      <Provider Desktop={matches}>
-        <Route path="/:section?/:id?" component={MainRoute} />
-      </Provider>
-    )}
-    </MediaQuery>
+    <Route path="/:section?/:id?" component={MainRoute} />
   </BrowserRouter>
 )
 
