@@ -13,6 +13,7 @@ const ReleaseEp = ({ stage, onRest }) => {
   return (
     <Fragment>
       <Cover stage={stage} onRest={handleOnRest} />
+      <div className={`release__story release__story--ep release__story--ep--${stage}`} />
       <h1 style={{ top: 100, left: 100, position: 'absolute', zIndex: 1000 }}>{stage}</h1>
     </Fragment>
   )

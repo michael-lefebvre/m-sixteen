@@ -43,3 +43,18 @@
 //   // opacity: 0;
 //   transform: translateX(5%);
 // }
+.release__story--ep {
+  background: url(bkgd.png) no-repeat;
+  background-size: 100%;
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 100;
+
+  &--mounted {
+    display: block;
+  }
+}
