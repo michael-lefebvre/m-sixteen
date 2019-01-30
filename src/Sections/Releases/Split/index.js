@@ -5,6 +5,8 @@ import Story from './Story';
 import { ReleasesNav } from '../index';
 import './index.scss'
 
+// console.log(`cssmask: ${window.Modernizr.cssmask ? 'supported' : 'not-supported'}`)
+
 class ReleaseSplit extends PureComponent {
 
   state = {

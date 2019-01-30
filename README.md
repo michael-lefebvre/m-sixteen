@@ -51,3 +51,6 @@
 - stage (entering, entered, mounted, leaving, unmounted)
 - ready
 -
+
+
+https://stackoverflow.com/questions/54211030/how-do-i-import-modernizr-in-react
