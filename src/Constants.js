@@ -43,3 +43,42 @@ export const MEDIA_QUERIES_BY_MATCH = MEDIA_QUERIES_LIST.reduce(
   },
   {}
 );
+
+//
+// Break Points
+// --------------------------------------------------
+
+export const SCROLLBAR_WIDTH = (function() {
+  var outer, outerStyle, scrollbarWidth;
+  if (!document) return 0;
+  outer = document.createElement("div");
+  outerStyle = outer.style;
+  outerStyle.position = "absolute";
+  outerStyle.width = "100px";
+  outerStyle.height = "100px";
+  outerStyle.overflow = "scroll";
+  outerStyle.top = "-9999px";
+  if (document.body !== null) document.body.appendChild(outer);
+  scrollbarWidth = outer.offsetWidth - outer.clientWidth;
+  if (document.body !== null) document.body.removeChild(outer);
+  return scrollbarWidth;
+})();
+
+
+//
+// Idle
+// --------------------------------------------------
+
+export const RELEASE_IDLE_TIMEOUT = 1000 * 3;
+export const RELEASE_IDLE_THROTTLE = 500;
+export const RELEASE_USER_EVENTS = [
+  // 'mousemove',
+  'wheel',
+  'DOMMouseScroll',
+  'mouseWheel',
+  // 'mousedown',
+  'touchstart',
+  'touchmove',
+  'MSPointerDown',
+  'MSPointerMove'
+]

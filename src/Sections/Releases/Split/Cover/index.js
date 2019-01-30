@@ -1,78 +1,100 @@
 import React, { Fragment } from 'react'
-import { Keyframes, animated, config } from 'react-spring'
+import { Keyframes, animated/*, config*/ } from 'react-spring'
+import classNames from 'classnames'
 import delay from 'delay'
-import { withApp } from 'Contexts/App'
+import ImgBkgd from './bkgd.png'
+import ImgMother from './mother.png'
 import './index.scss'
 
 const Cover = Keyframes.Spring({
-  entering: async (next, cancel, { onRest, offsetHeight }) => {
+  open: async (next, cancel, { onRest }) => {
+    await delay(100)
+    next({ sB: 0, from: { sB: 100, sC: 100, mO: 0, mT: 5, pC: 0, cL: 0, bT: 0 } })
     await delay(300)
-    next({ rB: 0, from: { rB: 100, lB: 0, pB: 0, rC: 100, lC: 0, oC: 1, pC: 0, oF: 0, sO: 0, sT: (offsetHeight * .3) }, config: config.slow })
-    await delay(200)
-    next({ rC: 0, config: config.slow  })
-    await delay(400)
-    next({ oF: 1, config: config.slow })
-    await delay(600)
-    next({ pB: 400, pC: 400, oF: 0, config: { tension: 280, friction: 60 }})
+    next({ sC: 0 })
     await delay(500)
-    next({ sT: 0, sO: 1, config: config.slow})
-    onRest()
+    next({ pC: 100 })
+    await delay(200)
+    next({ mT: 0 })
+    await delay(100)
+    next({ mO: 1 })
+    await delay(500)
+    await onRest()
   },
-  leaving: async (next, cancel, ownProps) => {
-    await delay(300)
-    next({ sO: 0 })
-    await delay(300)
-    next({ oC: 0, config: config.slow })
-    await next({ lB: 100, config: config.default })
-    ownProps.onRest()
+  story: async (next, cancel, { onRest }) => {
+    await delay(200)
+    next({ mO: 0 })
+    await delay(200)
+    next({ cL: 25, bT: 25 })
+    await delay(500)
+    await onRest()
   },
+  // leaving: async (next, cancel, ownProps) => {
+  //   await delay(600)
+  //   // next({ sO: 0 })
+  //   // await delay(300)
+  //   // next({ oC: 0 })
+  //   // await next({ lB: 100, config: config.default })
+  //   // ownProps.onRest()
+  // },
 })
 
-const ReleaseSplitCover = ({ stage, onRest, children, offsetHeight }) => (
-  <div className="release__cover releases__cover--split">
-    <Cover
-      native
-      state={stage}
-      offsetHeight={offsetHeight}
-      onRest={onRest('bkgd')}
-    >
-      {({ rB, lB, pB, rC, lC, pC, oC, oF, sO, sT }) => (
-        <Fragment>
+const ReleaseSplitCover = ({ stage, onRest, displayStory }) => (
+  <Cover
+    native
+    state={stage}
+    onRest={onRest('bkgd')}
+  >
+    {({ sB, sC, mO, mT, pC, cL, bT }) => (
+      <Fragment>
+        <animated.div
+          className={classNames('split-container split__cover', { 'split__cover--story': displayStory })}
+          style={{
+            left: cL.interpolate(p => `${p}%`),
+          }}
+        >
           <animated.div
-            className="release__cover--split__bkgd"
+            className="split-container split__cover__bkgd split__dotted-mother"
             style={{
-              backgroundPosition: pB.interpolate(p => `${p}px center`),
-              right: rB.interpolate(r => `${r}%`),
-              left: lB.interpolate(l => `${l}%`),
-            }} />
+              transform: bT.interpolate(p => `translateX(-${p}%)`),
+            }}
+          >
+            <animated.div
+              className="split__cover__stripe split__cover__stripe--bkgd"
+              style={{
+                transform: sB.interpolate(p => `translateX(-${p}%)`),
+              }}
+            />
+          </animated.div>
           <animated.div
-            className="release__cover--split__cover"
+            className="split__cover__img split__cover__img--pattern"
             style={{
-              backgroundPosition: pC.interpolate(p => `${p}px center, 0 center`),
-              right: rC.interpolate(r => `${r}%`),
-              left: lC.interpolate(l => `${l}%`),
-              opacity: oC.interpolate(o => o),
-            }} />
+              clipPath: pC.interpolate(p => `polygon(0 0, 0% 100%, ${p}% 100%, ${p}% 0)`),
+            }}
+          >
+            <img src={ImgBkgd} alt="" />
+          </animated.div>
           <animated.div
-            className="release__cover--split__face"
+            className="split__cover__stripe split__cover__stripe--content"
             style={{
-              right: 0,
-              opacity: oF.interpolate(o => o),
-            }} />
-          {/*children*/}
-          {React.cloneElement(children, {
-            translate: sT,
-            opacity: sO,
-          })}
-        </Fragment>
-      )}
-    </Cover>
-  </div>
+              transform: sC.interpolate(p => `translateX(${p}%)`),
+            }}
+          >
+            <div className="split__cover__arrow" />
+          </animated.div>
+        </animated.div>{/* ./split__cover */}
+        <animated.div
+          className="split__cover__img split__cover__img--mother"
+          style={{
+            opacity: mO.interpolate(p => p),
+            transform: mT.interpolate(p => `translateX(-${p}%)`),
+          }}
+        >
+          <img src={ImgMother} alt="" />
+        </animated.div>
+      </Fragment>
+    )}
+  </Cover>
 );
 
-// export default ReleaseSplitCover;
-const mapAppContextToProps = state => ({
-  offsetHeight: state.getViewPort().offsetHeight
-});
-
-export default withApp(mapAppContextToProps)(ReleaseSplitCover);
+export default ReleaseSplitCover;

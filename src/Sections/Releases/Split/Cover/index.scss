@@ -1,38 +1,88 @@
 @import "Scss/variables.scss";
 
-
-.releases__cover--split {
-  height: 100%;
-  position: relative;
-  width: 100%
-}
-
-.release__cover--split__bkgd,
-.release__cover--split__cover,
-.release__cover--split__face {
-  height: 100%;
-  left: 0;
-  position: absolute;
-  right: 100%;
-  top: 0;
-  opacity: 1;
-  background-size: auto 100%;
+.split__cover {
+  -webkit-mask-position: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-image: url(mask.png);
+  -webkit-mask-size: cover;
   pointer-events: none;
+  z-index: 100;
+
+  &--story {
+    transition: -webkit-mask-position .01s linear .2s;
+    -webkit-mask-position: 0 100%;
+  }
 }
 
-.release__cover--split__bkgd {
-  background-image: url(bkgd_0.jpg);
-  background-repeat: repeat-x;
-  z-index: 80;
-}
-.release__cover--split__cover {
-  background-image: url(bkgd_1.jpg), linear-gradient(90deg, #fcfdf8 500px, transparent 0%);
-  background-repeat: no-repeat, repeat-x;
-  z-index: 90;
+.split__cover__bkgd {
+  background: #9e0000;
+  .split__dotted-mother:before {
+    opacity: .2;
+    z-index: 10;
+  }
 }
 
-.release__cover--split__face {
-  background-image: url(bkgd_2.png);
-  background-repeat: no-repeat;
-  z-index: 110;
+.split__cover__stripe {
+  height: 28%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 28%;
+
+  &--bkgd {
+    background: #b50000;
+    mix-blend-mode: soft-light;
+    z-index: 50;
+  }
+
+  &--content {
+    mix-blend-mode: soft-light;
+    z-index: 150;
+  }
+}
+
+.split__cover__arrow {
+  background: #000;
+  bottom: 15%;
+  height: 30%;
+  position: absolute;
+  right: 0;
+  width: 65%;
+  z-index: 180;
+
+  &:before {
+    background: #000;
+    -webkit-clip-path: polygon(0 50%, 100% 100%, 100% 0);
+    clip-path: polygon(0 50%, 100% 100%, 100% 0);
+    content: '';
+    height: 130%;
+    position: absolute;
+    right: 99.5%;
+    top: -15%;
+    width: 6%;
+  }
+}
+
+.split__cover__img {
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  &--pattern {
+    clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0);
+    z-index: 130;
+  }
+
+  &--mother {
+    z-index: 200;
+  }
+
+  img {
+    height: 100vh;
+    object-fit: fill;
+  }
 }

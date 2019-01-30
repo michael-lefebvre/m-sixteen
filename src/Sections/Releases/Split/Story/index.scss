@@ -1,42 +1,111 @@
 @import "Scss/variables.scss";
 
-.release__story--split {
-  position: absolute;
-  top: 0;
-  // right: 0;
-  right: -1rem;
-  width: calc(100% + 1rem);
-  // width: 100%;
-  height: 100%;
-  z-index: 100;
+.split__story {
+  background-color: #fcfdf8;
+  color: #000;
+  font-family: 'Open Sans', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
 
-  .release__story__container {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
-    // direction: rtl;
-  }
-  .release__story__content {
-  // background: green;
-    // background: #fcfdf8;
-    color: black;
-    // direction: ltr;
-    // padding-right: -2rem;
-    width: 680px;
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-bottom: 100px;
-    padding-top: 100px;
-    overflow: hidden;
+  &--scroll {
+    overflow: auto;
   }
 }
 
-.split__img {
+.split__story__content {
+  /*background: rgba(255,0,0,.5);*/
+  isolation: isolate;
+  min-width: 400px;
+  max-width: 720px;
+  opacity: 0;
+  padding: 100px 20px;
+  transform: translateY(100px);
+  width: 45vw;
+
+
+  &--active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity .3s linear .8s, transform .3s linear .8s
+  }
+}
+
+.split__photo__full {
+  text-align: center;
+}
+
+.split__photo {
   display: inline-block;
   border-width: 15px;
   border-image: url(frame_img.png) 15 stretch;
   border-style: solid;
   margin: auto;
+
+  &--left {
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+
+  &--right {
+    float: right;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+}
+
+.split__story__logos {
+  margin-bottom: 50px;
+  img {
+    margin: 0 0 0 auto;
+    width: 50%;
+  }
+}
+
+.split__story__title {
+  font-family: 'Amaranth', sans-serif;
+  font-size: 2em; /* 14px */
+  margin-bottom: 20px
+}
+
+.split__story__text {
+  font-size: .9em; /* 14px */
+  line-height: 1.4286em; /* 20px */
+
+  a {
+    color: #9e0000
+  }
+
+  & + & {
+    margin-top: 1.4286em;
+  }
+}
+
+.split__story__section,
+.split__story__clear {
+  clear: both;
+}
+
+.split__story__section + .split__story__section {
+  margin-top: 4vh
+}
+
+.split__story__gallery {
+  align-content: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  img {
+    display: block;
+    flex: 0 0 auto;
+    float: left;
+    height: calc(100%/3);
+    margin: 0;
+    max-height: 160px;
+    object-fit: cover;
+    width: calc(100%/3);
+  }
 }
