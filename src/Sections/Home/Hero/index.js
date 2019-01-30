@@ -54,7 +54,7 @@ const BlockquoteEnd = ({ ready, children }) => (
     immediate={!ready}
     config={{ delay: 600 }}
     from={{ t: 70 }}
-    to={{ t: ready ? 84 : 70 }}
+    to={{ t: ready ? 86 : 70 }}
     >
     {({ t }) => (
       <animated.blockquote className="home__quote home__quote--end" style={{ marginTop: t.interpolate(t => `-${t}px`) }}>

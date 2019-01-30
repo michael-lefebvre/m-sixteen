@@ -102,6 +102,7 @@
 }
 
 .home__title {
+  font-family: 'Open Sans';
   overflow: hidden;
   padding-right: 50%;
   text-transform: uppercase;
@@ -114,16 +115,25 @@
     color: $color-active;
     font-size: size-ratio($title-primary-size, $title-ratio);
     line-height: size-ratio($title-primary-line-height, $title-ratio);
-    font-weight: 800;
+    font-family: 'Open Sans';
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+  }
+
+  &__opensans {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    letter-spacing: 0.04rem;
+    font-size: 57px
   }
 
   &__sub {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: size-ratio($title-sub-size, $title-ratio);
-    line-height: size-ratio($title-sub-line-height, $title-ratio);
-    letter-spacing: size-ratio($title-sub-letter-spacing, $title-ratio);
-    margin-top: size-ratio($title-sub-margin, $title-ratio);
+    // line-height: size-ratio($title-sub-line-height, $title-ratio);
+    // letter-spacing: size-ratio($title-sub-letter-spacing, $title-ratio);
+    letter-spacing: 0.15rem;
+    // margin-top: size-ratio($title-sub-margin, $title-ratio);
     overflow: hidden;
 
     span {
