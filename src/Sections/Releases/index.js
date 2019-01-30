@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames'
 import { Transition, animated } from 'react-spring'
 import ReleasesContext from 'Contexts/Releases'
 import Layer from 'Components/Layer';
@@ -9,6 +10,14 @@ import './index.scss'
 
 // const _DEBUG = false;
 
+// https://codepen.io/2xsamurai/pen/WwmjKQ
+export const ReleasesScrollInvite  = ({ show }) => (
+  <div className={classNames('release__scroll-invite', { 'release__scroll-invite--show': show })}>
+    <div className="release__scroll-invite__mouse">
+      <div className="release__scroll-invite__scroller" />
+    </div>
+  </div>
+)
 
 export const ReleasesNav  = ({ onClose, isMounted }) => {
   return (
