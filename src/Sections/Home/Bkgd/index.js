@@ -68,8 +68,10 @@ class HomeBkgd extends Component {
   };
 
   handleOnPlay = ({ target }) => {
-    // target.pauseVideo()
     this._player = target
+
+    if(this.state.bkgdCanPlay !== true)
+      this._player.pauseVideo()
 
     if(!this.props.isReady)
       this.props.handleOnReady()
@@ -145,6 +147,7 @@ class HomeBkgd extends Component {
 const mapAppContextToProps = state => ({
   bkgdCanPlay: state.bkgdCanPlay(),
   showPlayer: state.hasVideoHeader(),
+  // showPlayer: false,
   isReady: state.isReady(),
   handleOnReady: state.onReady,
 });
