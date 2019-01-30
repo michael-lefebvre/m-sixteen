@@ -8,17 +8,31 @@ const Bkgd = Keyframes.Spring({
 })
 
 const Inner = Keyframes.Spring({
-  entering: { delay: 200, o: 1, t: 0, from: { o: 0, t: 5 } },
-  leaving: { delay: 0, o: 0, t: 5 },
+  entering: { delay: 200, o: 1, from: { o: 0 } },
+  leaving: { delay: 0, o: 0 },
 })
 
 const ReleaseEpCover = ({ stage, onRest }) => (
-  <Bkgd native state={stage} onRest={onRest('bkgd')}>
+  <Bkgd
+    native
+    state={stage}
+    onRest={onRest('bkgd')}
+  >
     {({ o }) => (
-      <animated.div className="release__cover release__cover--ep" style={{ opacity: o }}>
-        <Inner native state={stage} onRest={onRest('inner')}>
-          {({ o, t }) => (
-          <animated.div className="release__cover--ep__inner" style={{ transform: t.interpolate(t => `translateX(${t}%)`), opacity: o }} />
+      <animated.div
+        className="release__cover release__cover--ep"
+        style={{ opacity: o }}
+      >
+        <Inner
+          native
+          state={stage}
+          onRest={onRest('inner')}
+        >
+          {({ o }) => (
+            <animated.div
+              className="release__cover--ep__inner"
+              style={{ opacity: o }}
+            />
           )}
         </Inner>
       </animated.div>
