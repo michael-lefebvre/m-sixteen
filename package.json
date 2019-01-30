@@ -10,6 +10,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-hotkeys": "^1.1.4",
+    "react-idle-timer": "^4.2.2",
     "react-on-screen": "^2.1.0",
     "react-responsive": "^6.0.1",
     "react-router-dom": "^4.3.1",
