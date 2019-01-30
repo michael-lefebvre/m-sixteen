@@ -5,6 +5,17 @@
 .release__cover--album {
   height: 100%;
   width: 100%;
+
+  &--mounted {
+    .album--onmounted {
+      opacity: 1;
+    }
+  }
+}
+
+.album--onmounted {
+  opacity: 0;
+  transition: opacity 250ms linear
 }
 
 @keyframes animPageAlbumIn {

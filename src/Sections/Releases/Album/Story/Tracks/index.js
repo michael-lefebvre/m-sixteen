@@ -2,7 +2,7 @@ import React from 'react'
 import './index.scss'
 
 const AlbumTracks = () => (
-  <ul className="header__album__tracks album__font">
+  <ul className="album__trackslist album__font album--onmounted">
     <li style={{zIndex: 1}}>
       <span className="album__font__regular album__font__regular--a1" style={{ marginLeft: 108, paddingRight: 3 }}>ana</span>
       <span className="album__font__collapse--f album__font__collapse--bkgd album__font__collapse--f--a2" style={{ paddingRight: 1 }}>

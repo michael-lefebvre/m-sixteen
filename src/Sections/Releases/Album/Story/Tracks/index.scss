@@ -36,14 +36,21 @@
 .album__font__collapse--f { margin-left: -3px }
 .album__font__collapse--bkgd { background: $black }
 
-.header__album__tracks {
+.album__trackslist {
   cursor: pointer;
   display: flex;
   flex-direction: column-reverse;
   height: 200px;
   list-style: none;
-  transform: rotate( -45deg ) translate(50px, -100px);
+  transform: rotate( -45deg );
   width: 394px;
+  position: absolute;
+  left: 93vw;
+  // left: 155vw;
+  top: -5vh;
+  // bottom: -5vh;
+  transform-origin: top right;
+  // transform-origin: bottom left;
 
   li {
     height: 21px;

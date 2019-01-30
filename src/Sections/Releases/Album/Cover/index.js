@@ -1,42 +1,44 @@
+
 import React from 'react'
 import { Spring, animated } from 'react-spring'
+import { withApp } from 'Contexts/App'
+import { roundToEven } from 'Utils'
 import './index.scss'
 
-let _COVERSTRIPES = [];
+const COVER_STRIPES = Array(12).fill().map((x,i)=>i);
 
-for(let i = 0; ++i < 12;)
-  _COVERSTRIPES.push(i)
-
-const ReleaseAlbumCover = React.forwardRef( ({ displayBkgd, onRest }, _refs) => {
-
-  if(!displayBkgd) return null;
-  return (
-    <Spring
-      native
-      from={{ width: 0 }}
-      to={{ width: 2000 }}
-      onRest={onRest('cover')}
-      >
-      {style => (
-        <animated.div className="release__cover--album__bkgd" style={style}>
-          <span className="release__cover--album__bkgd__letters" ref={_refs._cover}>
-            <span className="release__cover--album__bkgd__m release__cover--album__bkgd__m--o release__cover--album__bkgd__m--f-" />
-            <span className="release__cover--album__bkgd__sixteen">sixteen</span>
-          </span>
-          <span className="release__cover--album__bkgd__strips">
-            {_COVERSTRIPES.map(i =>
-              <span className={`release__cover--album__bkgd__strip release__cover--album__bkgd__strip--${i}`} key={`album__cover__stripes__${i}`} />
-            )}
-          </span>
-          <span className="release__cover--album__bkgd__strips release__cover--album__bkgd__strips--odd" ref={_refs._stripes}>
-            {_COVERSTRIPES.map(i =>
-              <span className={`release__cover--album__bkgd__strip release__cover--album__bkgd__strip--${i} release__cover--album__bkgd__strip--odd--${i}`} key={`album__cover__stripes__odd__${i}`} />
-            )}
-          </span>
+const AlbumCover = ({ height, width, right, onRest }) => (
+  <Spring
+    native
+    from={{ w: 0 }}
+    to={{ w: 100 }}
+    onRest={onRest('cover')}
+    >
+    {({w}) => (
+      <div className="album__cover" style={{ width, right, height }}>
+        <animated.div className="album__cover__stripes" style={{ width: w.interpolate(w => `${w}%`) }}>
+          <div className="album__cover__m" />
+          {COVER_STRIPES.map(i =>
+            <div className={`album__cover__stripe album__cover__stripe--${i}`} key={`album__cover__stripes__${i}`} />
+          )}
         </animated.div>
-      )}
-    </Spring>
-  );
-});
+      </div>
+    )}
+  </Spring>
+);
 
-export default ReleaseAlbumCover;
+const mapAppContextToProps = (state, { factor }) => {
+  const { offsetWidth, offsetHeight } = state.getViewPort();
+  const height = roundToEven(offsetWidth * factor);
+  const width = roundToEven(Math.sqrt(Math.pow(offsetHeight, 2) + Math.pow(height, 2)))
+  const right = offsetWidth - height;
+
+  return {
+    width,
+    right,
+    height
+  }
+};
+
+export default withApp(mapAppContextToProps)(AlbumCover);
+

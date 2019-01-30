@@ -1,33 +1,46 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
+import IdleTimer from 'react-idle-timer'
 import classNames from 'classnames'
+import debounce from "lodash.debounce";
 import withRelease from '../Release';
-import { ReleasesNav } from '../index';
-import Cover from './Cover';
-import Story from './Story';
+import { ReleasesNav, ReleasesScrollInvite } from '../index';
+import Story from './Story/index';
+import { RELEASE_USER_EVENTS, RELEASE_IDLE_TIMEOUT, RELEASE_IDLE_THROTTLE } from 'Constants'
 import './index.scss'
 
-const STRIPES_WIDTH = 42;
-const M_LETTER_BASE = 68;
-
 class ReleaseAlbum extends PureComponent {
-  state = {
-    stage: this.props.stage,
-    displayStory: false,
-    displayBkgd: false,
-  };
 
-  _refs = {
-    _cover: React.createRef(),
-    _stripes: React.createRef(),
-  };
+  constructor( props ){
+    super( props )
+
+    this.state = {
+      stage: props.stage,
+      displayStory: false,
+      displayBkgd: false,
+      showScroller: false,
+    };
+
+    this._layers = [];
+    this._idleTimer = null
+
+    this.handleOnTransitionEnd = debounce(this.handleOnTransitionEnd, 300, { leading: true, trailing: false })
+  }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { stage } = nextProps;
+    // if(
+    //   stage === 'leaving' && prevState.displayStory
+    // )
+    //   return {
+    //     displayStory: false
+    //   }
+
     if(
-      stage === 'leaving' && prevState.displayStory
+      stage !== prevState.stage
     )
       return {
-        displayStory: false
+        showScroller: false,
+        stage
       }
 
     return null;
@@ -39,38 +52,83 @@ class ReleaseAlbum extends PureComponent {
 
   // componentDidMount() {}
 
+  getSnapshotBeforeUpdate(
+    prevProps,
+    prevState
+  ) {
+    return prevProps.stage !== "mounted" && this.props.stage === "mounted"
+  }
+
+  componentDidUpdate(
+    prevProps,
+    prevState,
+    snapshot
+  ) {
+    if (snapshot)
+      this._idleTimer.reset()
+  }
+
   //
   // Helpers
   // --------------------------------------------------
+
+  _registerLayer = (layer) => {
+    this._layers = this._layers.concat(layer)
+  };
 
   //
   // Events Handlers
   // --------------------------------------------------
 
   handleOnRest = (el) => () => {
-    if(this.props.stage === 'leaving' && el === 'story')
-      this.setState({ displayBkgd: false })
+    // if(this.props.stage === 'leaving' && el === 'story')
+    //   this.setState({ displayBkgd: false })
+    // if(this.state.stage === 'entering' && el === 'cover')
+    //   this.props.onRest()
   };
 
-  handleOnScroll = ({scrollTop, offsetWidth }) => {
-    const stripesRatio = offsetWidth / 4;
-    const y = ( scrollTop * STRIPES_WIDTH ) / stripesRatio
-    const stripes_hidden = y < STRIPES_WIDTH;
-    const letterPos = !stripes_hidden ? ( ( y * 1.2 ) - M_LETTER_BASE ) : 0
-    const letterOpacity = !stripes_hidden ? 1 - ((scrollTop - stripesRatio) / (stripesRatio * .95)) : 1
-    this._refs._stripes.current.style.transform = `translateY(-${stripes_hidden ? y : STRIPES_WIDTH}px)`
-    this._refs._cover.current.style.transform = `translate(-${letterPos}px, -${letterPos}px)`
-    this._refs._cover.current.style.opacity = letterOpacity >= 0 ? letterOpacity : 0
+  handleOnTransitionEnd = () => {
+    // const { stage, displayBkgd } = this.state;
+    // console.log('handleOnTransitionEnd', { stage, displayBkgd})
+    // if( this.props.stage === 'leaving')
+    //   this.setState({ displayBkgd: false })
   };
 
   handleOnAnimationEnd = () => {
     const { stage, onRest } = this.props;
-    const { displayBkgd, displayStory } = this.state;
+    const { displayBkgd/*, displayStory*/ } = this.state;
     if( stage === 'entering' && !displayBkgd )
-      return this.setState({ displayBkgd: true, displayStory: true }, onRest)
-    if( stage === 'leaving' && !displayStory )
+      return this.setState({ displayBkgd: true/*, displayStory: true*/ }, onRest)
+    // if( stage === 'leaving' && displayStory )
+    //   return this.setState({ displayStory: false })
+    if( stage === 'leaving') // && !displayStory )
       return onRest()
-  }
+  };
+
+  handleOnScroll = (e) => {
+    const {
+      currentTarget: { scrollTop }
+    } = e;
+
+    const updateLayers = () =>
+      this._layers.forEach(layer => {
+        if( typeof layer.setPosition === 'function')
+          layer.setPosition(scrollTop)
+      })
+
+    if(this.state.stage !== "mounted") return;
+
+    if(this.state.displayStory)
+      return updateLayers()
+
+    this._idleTimer.pause()
+
+    this.setState({ displayStory: true, showScroller: false }, updateLayers)
+  };
+
+  handleOnIdle = (e) => {
+    this.setState({ showScroller: true })
+  };
 
   //
   // Renderers
@@ -78,23 +136,49 @@ class ReleaseAlbum extends PureComponent {
 
   render() {
     const { displayStory, displayBkgd } = this.state;
-    const { stage } = this.props;
+    const { stage, showScroller } = this.state;
+    const isMounted = stage === 'mounted'
 
     const className = classNames('release__cover--album__cover', {
       'release__cover--album__cover--entering': stage === 'entering',
-      'release__cover--album__cover--leaving': stage === 'leaving' && !displayStory
+      'release__cover--album__cover--leaving': stage === 'leaving' // && !displayStory// && !displayBkgd
     })
+    const classNameAlbum = classNames('release__cover release__cover--album', {
+      'release__cover--album--mounted': displayStory
+    })
+// console.log(this.state)
 
     return (
-      <Fragment>
-        <ReleasesNav isMounted={stage === 'mounted'} onClose={this.props.onClose} />
-        <div className="release__cover release__cover--album">
-          <div className={className} onAnimationEnd={this.handleOnAnimationEnd}>
-            <Cover displayBkgd={displayBkgd} onRest={this.handleOnRest} ref={this._refs} />
-          </div>
-          <Story displayBkgd={displayBkgd} displayStory={displayStory} onRest={this.handleOnRest} onScroll={this.handleOnScroll} />
+      <div
+        // onTransitionEnd={this.handleOnTransitionEnd}
+        className={classNameAlbum}
+      >
+        <IdleTimer
+          ref={ref => { this._idleTimer = ref }}
+          element={document}
+          onIdle={this.handleOnIdle}
+          startOnMount={false}
+          throttle={RELEASE_IDLE_THROTTLE}
+          events={RELEASE_USER_EVENTS}
+          timeout={RELEASE_IDLE_TIMEOUT} />
+        <ReleasesNav
+          isMounted={isMounted}
+          onClose={this.props.onClose}
+        />
+        <ReleasesScrollInvite show={showScroller} />
+        <div
+          onAnimationEnd={this.handleOnAnimationEnd}
+          className={className}
+        >
+          <Story
+            onMounted={this._registerLayer}
+            onScroll={this.handleOnScroll}
+            onRest={this.handleOnRest}
+            displayBkgd={displayBkgd}
+            displayStory={displayStory}
+          />
         </div>
-      </Fragment>
+      </div>
     )
   }
 };

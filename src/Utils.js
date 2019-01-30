@@ -1,4 +1,5 @@
-
+import { Globals, animated } from 'react-spring';
+export const AnimatedDiv = animated(Globals.defaultElement)
 export const getParams = ({ match: { params } }) => params
 export const getSection = props => getParams(props).section
 export const isSectionActive = (props, section) => getSection(props) === section
@@ -27,3 +28,4 @@ export const getViewport = () => {
     offsetHeight: height
   }
 }
+export const roundToEven = n => 2 * Math.round(n / 2);
