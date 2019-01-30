@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
-import { withReleases } from 'Contexts/Releases'
+import { withApp } from 'Contexts/App'
 
 const withRelease = (WrappedComponent, ownProps) => {
 
@@ -93,14 +93,14 @@ const withRelease = (WrappedComponent, ownProps) => {
 
   WithRelease.displayName = `WithRelease(${getDisplayName(WrappedComponent)})`;
 
-  const mapReleasesContextToProps = (state) => ({
-    unmount: state.previousId === ownProps.id && state.wasPreviousSection,
+  const mapAppContextToProps = (state) => ({
+    unmount: state.previousId === ownProps.id && state.wasPreviousSection('releases'),
     current: state.currentId === ownProps.id,
     previous: state.previousId === ownProps.id,
-    onCoverReady: state.onCoverReady,
+    onCoverReady: state.onClearPrevSection,
     history: state.getHistory()
   });
-  return withReleases(mapReleasesContextToProps)(WithRelease);
+  return withApp(mapAppContextToProps)(WithRelease);
 }
 
 const getDisplayName = WrappedComponent => WrappedComponent.displayName || WrappedComponent.name || 'Component';

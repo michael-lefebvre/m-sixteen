@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames'
 import { Transition, animated } from 'react-spring'
-import ReleasesContext from 'Contexts/Releases'
 import Layer from 'Components/Layer';
 import Album from './Album'
 import Split from './Split'
@@ -37,13 +36,11 @@ export const ReleasesNav  = ({ onClose, isMounted }) => {
 }
 
 const Releases = () => (
-  <ReleasesContext>
-    <Layer section="releases" className="releases">
-      <Album />
-      <Split />
-      <Ep />
-    </Layer>
-  </ReleasesContext>
+  <Layer section="releases" className="releases">
+    <Album />
+    <Split />
+    <Ep />
+  </Layer>
 );
 
 export default Releases

@@ -20,7 +20,8 @@ const getInitialContext = () => ({
   ready: false,
   currentSection: null,
   currentId: null,
-  prevSection: null
+  prevSection: null,
+  previousId: null
 });
 
 export const { Provider, Consumer } = React.createContext({
@@ -34,6 +35,8 @@ export const { Provider, Consumer } = React.createContext({
   isTablet: () => null,
   isMobile: () => null,
   isLandscape: () => null,
+  isCurrentSection: () => false,
+  wasPreviousSection: () => false,
   onReady: () => null,
   onSectionChange: () => null,
   onClearPrevSection: () => null,
@@ -55,6 +58,8 @@ class App extends Component {
       isTablet: this.isTablet,
       isMobile: this.isMobile,
       isLandscape: this.isLandscape,
+      isCurrentSection: this.isCurrentSection,
+      wasPreviousSection: this.wasPreviousSection,
       onReady: this.handleOnReady,
       onSectionChange: this.handleOnSectionChange,
       onClearPrevSection: this.handleOnClearPrevSection,
@@ -68,12 +73,14 @@ class App extends Component {
     if(currentSection !== prevState.currentSection)
       return {
         prevSection: prevState.currentSection,
+        previousId: prevState.currentId,
         currentSection,
         currentId
       }
 
     if(currentId !== prevState.currentId)
       return {
+        previousId: prevState.currentId,
         currentId
       }
 
@@ -127,6 +134,10 @@ class App extends Component {
     return ( this.hasVideoHeader() === true && currentSection === 'home' && prevSection === null )
   };
 
+  isCurrentSection = section => this.state.currentSection === section;
+
+  wasPreviousSection = section => this.state.prevSection === section;
+
   //
   // Events Handlers
   // --------------------------------------------------
@@ -139,7 +150,7 @@ class App extends Component {
 
   handleOnSectionChange = (section) => this.setState(({ currentSection }) => ({ currentSection: section, prevSection: currentSection }));
 
-  handleOnClearPrevSection = () => this.setState({ prevSection: null });
+  handleOnClearPrevSection = () => this.setState({ prevSection: null, previousId: null });
 
   handleOnResize = () => {
     this.setState({ ...getViewport() })
