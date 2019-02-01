@@ -1,5 +1,7 @@
 import { Globals, animated } from 'react-spring';
 export const AnimatedDiv = animated(Globals.defaultElement)
+export const raf = cb => Globals.requestFrame(cb)
+export const caf = cb => Globals.cancelFrame(cb)
 export const getParams = ({ match: { params } }) => params
 export const getSection = props => getParams(props).section
 export const isSectionActive = (props, section) => getSection(props) === section
