@@ -1,6 +1,7 @@
 import React, { Fragment} from 'react';
 import withRelease from '../Release';
 import Cover from './Cover';
+import ReleasesNav from '../Nav'
 import './index.scss'
 
 const ReleaseEp = ({ stage, onRest }) => {
@@ -12,6 +13,9 @@ const ReleaseEp = ({ stage, onRest }) => {
   };
   return (
     <Fragment>
+      <ReleasesNav
+        isMounted={stage === 'mounted'}
+      />
       <Cover stage={stage} onRest={handleOnRest} />
       <div className={`release__story release__story--ep release__story--ep--${stage}`} />
       <h1 style={{ top: 100, left: 100, position: 'absolute', zIndex: 1000 }}>{stage}</h1>

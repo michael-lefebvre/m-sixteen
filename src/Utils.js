@@ -29,3 +29,12 @@ export const getViewport = () => {
   }
 }
 export const roundToEven = n => 2 * Math.round(n / 2);
+export const getNavImgSrc = (section, item) => {
+  switch(section) {
+    case 'releases': return `${process.env.PUBLIC_URL}/static/covers/${item}.jpg`
+    case 'videos': return `${process.env.PUBLIC_URL}/static/photos/videos/${item}-md.jpg`
+    case 'shows': return `${process.env.PUBLIC_URL}/static/covers/${item}.jpg`
+    default:
+        // do nothing
+  }
+}

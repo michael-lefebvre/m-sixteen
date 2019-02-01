@@ -3,7 +3,8 @@ import IdleTimer from 'react-idle-timer'
 import classNames from 'classnames'
 import debounce from "lodash.debounce";
 import withRelease from '../Release';
-import { ReleasesNav, ReleasesScrollInvite } from '../index';
+import ReleasesNav from '../Nav'
+import { ReleasesScrollInvite } from '../index'
 import Story from './Story/index';
 import { RELEASE_USER_EVENTS, RELEASE_IDLE_TIMEOUT, RELEASE_IDLE_THROTTLE } from 'Constants'
 import './index.scss'
@@ -163,7 +164,6 @@ class ReleaseAlbum extends PureComponent {
           timeout={RELEASE_IDLE_TIMEOUT} />
         <ReleasesNav
           isMounted={isMounted}
-          onClose={this.props.onClose}
         />
         <ReleasesScrollInvite show={showScroller} />
         <div

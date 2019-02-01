@@ -5,7 +5,8 @@ import delay from 'delay'
 import withRelease from '../Release';
 import Cover from './Cover';
 import Story from './Story';
-import { ReleasesNav, ReleasesScrollInvite } from '../index'
+import ReleasesNav from '../Nav'
+import { ReleasesScrollInvite } from '../index'
 import { RELEASE_USER_EVENTS, RELEASE_IDLE_TIMEOUT, RELEASE_IDLE_THROTTLE } from 'Constants'
 
 import './index.scss'
@@ -126,7 +127,7 @@ class ReleaseSplit extends PureComponent {
           events={RELEASE_USER_EVENTS}
           timeout={RELEASE_IDLE_TIMEOUT} />
         <ReleasesScrollInvite show={showScroller} />
-        <ReleasesNav isMounted={stage === 'mounted'} onClose={this.props.onClose} />
+        <ReleasesNav isMounted={stage === 'mounted'} />
         <Container
           native
           state={ContainerState}

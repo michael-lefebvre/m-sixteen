@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import { Spring, Trail, animated } from 'react-spring'
 import { Link } from "react-router-dom";
+import { getNavImgSrc } from 'Utils'
 import { withApp } from 'Contexts/App'
 
 import './index.scss'
@@ -103,16 +104,6 @@ const Abstract = ({ ready, sections }) => (
   </Spring>
 )
 
-const getHomeNavItemsSrc = (section, item) => {
-  switch(section) {
-    case 'releases': return `/static/covers/${item}.jpg`
-    case 'videos': return `/static/photos/videos/${item}-md.jpg`
-    case 'shows': return `/static/covers/${item}.jpg`
-    default:
-        // do nothing
-  }
-}
-
 const HomeNav = ({ ready, items, from, section, onRest = () => null }) => {
   return (
     <Spring
@@ -136,7 +127,7 @@ const HomeNav = ({ ready, items, from, section, onRest = () => null }) => {
               return (
               <animated.li className="home__nav__item" style={styles}>
                 <Link to={`/${section}/${item}`}>
-                  <img src={getHomeNavItemsSrc(section, item)} className="home__nav__thumb" alt="" />
+                  <img src={getNavImgSrc(section, item)} className="home__nav__thumb" alt="" />
                 </Link>
               </animated.li>
             )}}

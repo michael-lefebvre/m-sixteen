@@ -1,38 +1,7 @@
 @import "Scss/variables.scss";
 
-.releases-nav {
-  width: 200px;
-  height: 20px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  cursor: pointer;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  z-index: $zindex-higher + 100;
-}
-.releases-nav > div {
-  background: $album-2-bkgd;
-  padding: 1px 3px;
-  color: white;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  will-change: transform, opacity;
-  overflow: hidden;
-}
-
 .releases {
   overflow: hidden;
-  // bottom: 0;
-  // left: 0;
-  // position: fixed;
-  // right: 0;
-  // top: 0;
-  // pointer-events: none;
-  // z-index: 100;
 
   &__debug,
   &__nav {
@@ -40,25 +9,11 @@
     z-index: 5000;
   }
 
-  &__nav {
-    left: 0;
-    top: 0;
-    opacity: 0;
-  }
-
   &__debug {
     background: #fafafa;
     color: #000;
     bottom: 10px;
     right: 10px;
-  }
-
-  &--active {
-    pointer-events: auto;
-
-    .releases__nav {
-      opacity: 1
-    }
   }
 }
 
