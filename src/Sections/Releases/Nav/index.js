@@ -27,7 +27,6 @@ const NavState = Keyframes.Spring({
     next({ cbT: 0, clT: _NAV_COVERS_Y })
   },
   expend: async next => {
-    await delay(200)
     next({ mbO: 0, clT: 0 })
   },
   unexpend: async next => {
@@ -96,7 +95,10 @@ class ReleasesNav extends PureComponent {
                   transform: clT.interpolate(p => `translateY(-${p}px)`),
                 }}
               >
-                <div className="releases__nav__covers">
+                <div
+                  className="releases__nav__covers"
+                  onMouseEnter={this.handleOnMouseEnter}
+                >
                   {['album', 'split', 'ep'].map(item =>
                     <NavLink
                       to={`/releases/${item}`}
@@ -114,7 +116,7 @@ class ReleasesNav extends PureComponent {
                 </div>
                 <animated.div
                   className="releases__nav__link"
-                  onMouseEnter={this.handleOnMouseEnter}
+                  onClick={this.handleOnMouseEnter}
                   style={{
                     opacity: mbO.interpolate(p => p),
                   }}
