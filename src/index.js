@@ -1,14 +1,8 @@
 import React from 'react'
-import ReactDOM              from 'react-dom'
-// import MediaQuery from 'react-responsive'
-import { BrowserRouter, Route } from "react-router-dom";
-import AppContext from 'Contexts/App';
-// import Provider   from 'Views/Provider'
-// import Landing    from 'Views/Landing'
-import Layout                   from 'Layout'
-// import Home                   from 'Home'
-// import Releases                   from 'Releases'
-// import Videos                   from 'Videos'
+import ReactDOM from 'react-dom'
+import { BrowserRouter, Route } from "react-router-dom"
+import AppContext from 'Contexts/App'
+import Layout from 'Layout'
 import registerServiceWorker from 'registerServiceWorker'
 
 import 'Scss/index.scss'
@@ -26,8 +20,8 @@ const App = () => (
 )
 
 ReactDOM.render(
-    <App />
-  , document.getElementById('app-root')
+  <App />,
+  document.getElementById('app-root')
 )
 
 registerServiceWorker()

@@ -8,9 +8,8 @@ body {
 
 html {
   // font-size: 14px;
-  font-family: Helvetica, sans-serif;
+  font-family: $font-family-system;
   font-kerning: normal;
-// font-family: 'Open Sans';
   font-size: 100%;
   color: $color-base;
   font-weight: 400;
