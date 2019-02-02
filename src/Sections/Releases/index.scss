@@ -61,11 +61,11 @@
   }
 }
 
+.release__loading,
 .release__scroll-invite {
   background: rgba(#000, .5);
   border-radius: 6px;
   bottom: 0;
-  height: 98px;
   left: 0;
   margin: auto;
   opacity: 0;
@@ -75,12 +75,21 @@
   right: 0;
   top: 0;
   transition: opacity 250ms ease-in;
-  width: 76px;
   z-index: 2000;
 
   &--show {
     opacity: 1
   }
+}
+
+.release__loading {
+  height: 84px;
+  width: 84px;
+}
+
+.release__scroll-invite {
+  height: 98px;
+  width: 76px;
 }
 
 .release__scroll-invite__mouse {

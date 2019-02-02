@@ -17,30 +17,12 @@ class Layout extends PureComponent {
 
   componentDidMount() {
     const fonts = [];
-    const families = [
-      {
-        name: 'Open Sans',
-        weight: 400
-      },
-      {
-        name: 'Open Sans',
-        weight: 700
-      },
-      {
-        name: 'Open Sans',
-        weight: 800
-      },
-      {
-        name: 'Open Sans',
-        weight: 900
-      },
-      {
-        name: 'Rubik',
-        weight: 500
-      },
-    ]
-
-    families.forEach(({name, weight}) => {
+    [
+      { name: 'Open Sans', weight: 400 },
+      { name: 'Open Sans', weight: 700 },
+      { name: 'Open Sans', weight: 800 },
+      { name: 'Rubik', weight: 500 },
+    ].forEach(({name, weight}) => {
       const font = new FontFaceObserver(name, { weight });
       fonts.push(font.load(null, 5000));
     });
