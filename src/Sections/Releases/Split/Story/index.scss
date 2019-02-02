@@ -3,7 +3,6 @@
 .split__story {
   background-color: #fcfdf8;
   color: #000;
-  font-family: 'Open Sans', sans-serif;
   height: 100vh;
   overflow: hidden;
   z-index: 0;
@@ -64,7 +63,7 @@
 }
 
 .split__story__title {
-  font-weight: 800;
+  font-weight: $font-weight-heavy;
   font-size: 1.8em; /* 14px */
   margin-bottom: 20px
 }

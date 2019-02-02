@@ -168,7 +168,7 @@ $bezize: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   left: 0;
 
   &:before {
-    background-color: rgba( $album-1-bkgd, .4);
+    background-color: rgba( $black, .4);
     background-image: url(./icon-play.svg);
     background-position: center;
     background-repeat: no-repeat;

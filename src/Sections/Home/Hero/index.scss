@@ -32,9 +32,8 @@
 .home__quote {
   text-transform: uppercase;
   line-height: 1em;
-  font-family: 'Open Sans';
   font-size: 28px;
-  font-weight: 800;
+  font-weight: $font-weight-heavy;
   letter-spacing: -1.2px;
   line-height: 30px;
 
@@ -102,7 +101,6 @@
 }
 
 .home__title {
-  font-family: 'Open Sans';
   overflow: hidden;
   padding-right: 50%;
   text-transform: uppercase;
@@ -115,16 +113,8 @@
     color: $color-active;
     font-size: size-ratio($title-primary-size, $title-ratio);
     line-height: size-ratio($title-primary-line-height, $title-ratio);
-    font-family: 'Open Sans';
-    font-weight: 700;
+    font-weight: $font-weight-bold;
     letter-spacing: 0.04rem;
-  }
-
-  &__opensans {
-    font-family: 'Open Sans';
-    font-weight: 700;
-    letter-spacing: 0.04rem;
-    font-size: 57px
   }
 
   &__sub {

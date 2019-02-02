@@ -70,12 +70,12 @@ $release-nav-cover-margin: 5px;
   width: 100%;
 
   &--ep {
-    background: $album-3-bkgd;
+    background: $release-bkgd-ep;
   }
   &--split {
-    background: $album-2-bkgd;
+    background: $release-bkgd-split;
   }
   &--album {
-    background: $album-1-bkgd;
+    background: $release-bkgd-album;
   }
 }

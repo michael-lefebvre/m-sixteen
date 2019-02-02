@@ -17,9 +17,9 @@ $color-bkgd: $black;
   //
   //## Settings for some of the most global styles.
 
-$album-1-bkgd: #040301;
-$album-2-bkgd: #812125;
-$album-3-bkgd: #e65139;
+$release-bkgd-album: $black;
+$release-bkgd-split: #812125;
+$release-bkgd-ep: #e65139;
 
 
 @function size-ratio($base, $ratio){
@@ -49,24 +49,13 @@ $zindex-legend:          100;
 $zindex-home:            100;
 $zindex-root:             10;
 
-  //== Scroll Bar
-  //
-
-$scroll-bar-height: 1px;
-
-  //== Fake transparent GIF
-  //
-
-$oldschool-spacer:  'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)';
-
-
   //== Transitions
   //
 
 $ease: cubic-bezier(0, 0.79, 0.38, 0.96);
 
 @mixin pane-transition( $duration: 800ms, $property: all ) {
-    transition: $property $duration $ease;
+  transition: $property $duration $ease;
 }
 
 //== Typography
@@ -89,8 +78,8 @@ $font-size-extra:         20px;
   //
 
 $font-weight-regular: 400;
-$font-weight-medium:  500;
-$font-weight-bold:    700;
+$font-weight-bold: 700;
+$font-weight-heavy: 800;
 
   //== Font Family
   //

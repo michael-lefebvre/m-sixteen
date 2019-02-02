@@ -11,19 +11,19 @@
 
 .album__font__regular {
   background: $white;
-  color: $album-1-bkgd;
+  color: $release-bkgd-album;
   display: inline-block;
   height: 21px;
   line-height: 22px;
   // transition: color .2s linear, background .1s linear;
 
   &--border {
-    border-left: 4px solid $black;
+    border-left: 4px solid $release-bkgd-album;
   }
 }
 
 .album__font_i {
-  background: $black;
+  background: $release-bkgd-album;
   display: inline-block;
   width: 7px;
   height: 100%;
@@ -34,7 +34,7 @@
 
 .album__font__collapse { margin-left: -3px }
 .album__font__collapse--f { margin-left: -3px }
-.album__font__collapse--bkgd { background: $black }
+.album__font__collapse--bkgd { background: $release-bkgd-album }
 
 .album__trackslist {
   cursor: pointer;
@@ -66,10 +66,10 @@
       // opacity: .5
       .album__font_i {
         background: $red;
-        border-left: 3px solid $black;
+        border-left: 3px solid $release-bkgd-album;
       }
       .album__font__regular {
-        background: $album-1-bkgd;
+        background: $release-bkgd-album;
         color: $red;
       }
     }
