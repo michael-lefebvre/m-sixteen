@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import IdleTimer from 'react-idle-timer'
 import classNames from 'classnames'
 import debounce from "lodash.debounce";
-import withRelease from '../Release';
+import withRelease from 'Hoc/Release';
 import ReleasesNav from '../Nav'
 import { ReleasesScrollInvite } from '../index'
 import Story from './Story/index';

@@ -1,18 +1,12 @@
-import React, { Component } from 'react'
-import HomeContext from 'Contexts/Home';
+import React, { Fragment } from 'react'
 import Hero from './Hero'
 import Bkgd from './Bkgd'
 
-class Home extends Component {
-  render() {
-    // console.log(this.props)
-    return (
-      <HomeContext>
-        <Hero />
-        <Bkgd />
-      </HomeContext>
-    )
-  }
-}
+const Home = () => (
+  <Fragment>
+    <Hero />
+    <Bkgd />
+  </Fragment>
+)
 
 export default Home;

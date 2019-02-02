@@ -1,5 +1,5 @@
 import React, { Fragment} from 'react';
-import withRelease from '../Release';
+import withRelease from 'Hoc/Release';
 import Cover from './Cover';
 import ReleasesNav from '../Nav'
 import './index.scss'

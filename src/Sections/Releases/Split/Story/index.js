@@ -3,8 +3,6 @@ import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import { Link } from "react-router-dom";
 import Image from 'Components/Image';
-
-import Video from 'Views/PageVideo'
 import ImgLogos from './logos.png'
 import './index.scss'
 
@@ -92,9 +90,9 @@ class ReleaseSplitStory extends PureComponent {
             <p className="split__story__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor quam, dapibus sed risus eget, euismod dapibus massa. Cras sollicitudin auctor orci, eu sollicitudin erat viverra ut. Proin varius consectetur sapien id ornare. Proin a nibh eu nisi feugiat pretium.</p>
             <p className="split__story__text">Integer ut sodales nunc, pellentesque interdum metus. Suspendisse tristique ipsum condimentum malesuada volutpat. Donec leo sapien, ultricies sed lobortis ut, tristique sed est. Cras maximus vulputate congue. Aenean sit amet congue dui. Integer ut consectetur tortor, at congue velit.</p>
           </div>
-          <div className="split__story__section">
+          {/*<div className="split__story__section">
             <Video videoId="K9yGAYd_Jjk" className="split__photo" opts={{ width: 320, height: 214 }} style={{ height: 244 }} />
-          </div>
+          </div>*/}
           <div className="split__story__section">
             <div className="split__photo__full">
               <Image className="split__photo" src='split/band-1' />

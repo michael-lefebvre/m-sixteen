@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import IdleTimer from 'react-idle-timer'
 import { Keyframes, animated/*, config*/ } from 'react-spring'
 import delay from 'delay'
-import withRelease from '../Release';
+import withRelease from 'Hoc/Release';
 import Cover from './Cover';
 import Story from './Story';
 import ReleasesNav from '../Nav'
