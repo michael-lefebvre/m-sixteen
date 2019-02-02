@@ -5,6 +5,7 @@
   "homepage": "http://michael-lefebvre.github.io/m-sixteen",
   "dependencies": {
     "classnames": "^2.2.6",
+    "d3-ease": "^1.0.5",
     "delay": "^4.1.0",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
