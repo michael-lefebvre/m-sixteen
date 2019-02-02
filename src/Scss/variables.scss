@@ -13,6 +13,15 @@ $color-base: $white;
 $color-active: $red;
 $color-bkgd: $black;
 
+  //== Albums
+  //
+  //## Settings for some of the most global styles.
+
+$album-1-bkgd: #040301;
+$album-2-bkgd: #812125;
+$album-3-bkgd: #e65139;
+
+
 @function size-ratio($base, $ratio){
   @return calc(#{$base} * #{$ratio}); //$base * $ratio
 }
@@ -86,15 +95,8 @@ $font-weight-bold:    700;
   //== Font Family
   //
 
-$font-family-system: 'Open Sans', sans-serif;
-// -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+$font-family-system: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
-  //== Colors
-  //
-
-$color-medium:            #d6e8fe;
-$color-light:             #e8f3fe;
-$color-extra-light:       #f4faff;
 
 //== Scaffolding
 //
@@ -163,14 +165,3 @@ $breakpoints: (
     @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
-
-
-
-
-//== Albums
-//
-//## Settings for some of the most global styles.
-
-$album-1-bkgd: #040301;
-$album-2-bkgd: #812125;
-$album-3-bkgd: #e65139;
