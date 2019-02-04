@@ -70,8 +70,8 @@ export const SCROLLBAR_WIDTH = (function() {
 // --------------------------------------------------
 
 export const RELEASE_IDLE_TIMEOUT = 1000 * 3;
-export const RELEASE_IDLE_THROTTLE = 500;
-export const RELEASE_USER_EVENTS = [
+export const STORY_TRIGGER_THROTTLE = 500;
+export const STORY_TRIGGER_EVENTS = [
   // 'mousemove',
   'wheel',
   'DOMMouseScroll',

@@ -1,6 +1,8 @@
 import { Globals, animated } from 'react-spring';
 import { getStaticUrl } from './Paths'
 
+export { default as StoryTrigger } from "./StoryTrigger";
+
 export const AnimatedDiv = animated(Globals.defaultElement)
 export const raf = cb => Globals.requestFrame(cb)
 export const caf = cb => Globals.cancelFrame(cb)

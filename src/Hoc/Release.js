@@ -6,33 +6,7 @@ import { ReleaseMachine } from 'Machines'
 import { withApp } from 'Contexts'
 import { ReleasesScrollInvite } from 'Sections/Releases'
 import ReleasesNav from 'Sections/Releases/Nav'
-import { RELEASE_USER_EVENTS } from 'Constants'
-
-// TODO: move this shite into a dedicated Class
-let eventsBound = false
-
-const _bindEvents  = (_handleEvent) => {
-  if (eventsBound) return
-  RELEASE_USER_EVENTS.forEach(e => {
-    document.addEventListener(e, _handleEvent, {
-      capture: true,
-      passive: true,
-    })
-  })
-  eventsBound = true
-}
-
-const _unbindEvents = (_handleEvent) => {
-  if (!eventsBound) return
-  RELEASE_USER_EVENTS.forEach(e => {
-    document.removeEventListener(e, _handleEvent, {
-      capture: true,
-      passive: true,
-    })
-  })
-  eventsBound = false
-}
-
+import { StoryTrigger } from 'Utils'
 
 const getContextToken = ({ isLeaving, isCurrent, isPrevious }) => `${isLeaving ? 1 : 0}${isCurrent ? 1 : 0}${isPrevious ? 1 : 0}`;
 
@@ -53,14 +27,8 @@ const withRelease = (WrappedComponent, { release, assets = null }) => {
             },
             activities: {
               waitForAction: () => {
-                let _eventTriggered = false
-                const _handleEvent = () => {
-                  if(_eventTriggered) return
-                  _eventTriggered = true
-                  this.service.send('RELEASE.STORY')
-                };
-                _bindEvents(_handleEvent)
-                return () => _unbindEvents(_handleEvent)
+                StoryTrigger.start(release, this.handleOnStoryTrigger)
+                return () => StoryTrigger.stop()
               }
             }
           })
@@ -97,27 +65,39 @@ const withRelease = (WrappedComponent, { release, assets = null }) => {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
       if (snapshot)
-        this._send()
+        this._sendNext()
     }
 
     //
     // Helpers
     // --------------------------------------------------
 
-    _send = () => {
+    _send = evt => {
+      this.service.send(evt)
+    };
+
+    _sendNext = () => {
       const { context } = this.props;
-      this.service.send({ type: 'RELEASE.NEXT', context })
+      this._send({ type: 'RELEASE.NEXT', context })
     };
 
     //
     // Events Handlers
     // --------------------------------------------------
 
-    handleOnMounted = evt => () => this.service.send(evt);
+    handleOnStoryTrigger = _id => {
+      if(_id !== release) {
+        console.error('handleOnStoryTrigger wrong release', { release, _id })
+        return
+      }
+      this._send('RELEASE.STORY');
+    };
+
+    handleOnMounted = evt => () => this._send(evt);
 
     handleOnNext = evt => () => {
       if(this.state.current.matches(evt))
-        this._send()
+        this._sendNext()
     }
 
     //
