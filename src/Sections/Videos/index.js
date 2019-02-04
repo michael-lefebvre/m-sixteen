@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import YouTube    from 'react-youtube'
-import Layer from 'Components/Layer';
-import { withApp } from 'Contexts/App'
+import { Layer } from 'Components'
+import { withApp } from 'Contexts'
 
 import './index.scss'
 

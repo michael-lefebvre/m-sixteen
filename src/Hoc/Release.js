@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import merge from "lodash.merge"
 import { interpret } from 'xstate';
 import { ReleaseMachine } from 'Machines'
-import { withApp } from 'Contexts/App'
+import { withApp } from 'Contexts'
 import { ReleasesScrollInvite } from 'Sections/Releases'
 import ReleasesNav from 'Sections/Releases/Nav'
 import { RELEASE_USER_EVENTS } from 'Constants'

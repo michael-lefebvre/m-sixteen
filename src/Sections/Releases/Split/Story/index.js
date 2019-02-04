@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import { Link } from "react-router-dom";
-import Image from 'Components/Image';
+import { Image } from 'Components';
 import ImgLogos from './logos.png'
 import './index.scss'
 

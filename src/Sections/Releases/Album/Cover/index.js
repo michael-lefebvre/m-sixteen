@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Spring, animated } from 'react-spring'
-import { withApp } from 'Contexts/App'
+import { withApp } from 'Contexts'
 import { roundToEven } from 'Utils'
 import './index.scss'
 

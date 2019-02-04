@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import './index.scss'
 
-const Index = ({ theme, className }) => {
+const Spinner = ({ theme, className }) => {
 
   let w = 44 // width & height
     , s = 4  // stroke
@@ -37,9 +37,9 @@ const Index = ({ theme, className }) => {
   )
 }
 
-Index.defaultProps = {
+Spinner.defaultProps = {
   theme: 'dark',
   className: ''
 }
 
-export default Index
+export default Spinner

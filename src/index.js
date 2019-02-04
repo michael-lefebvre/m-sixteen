@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from "react-router-dom"
-import AppContext from 'Contexts/App'
+import { AppContext } from 'Contexts'
 import Layout from 'Layout'
 import registerServiceWorker from 'registerServiceWorker'
 

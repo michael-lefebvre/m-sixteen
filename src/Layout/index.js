@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import { withApp } from 'Contexts/App'
+import { withApp } from 'Contexts'
 import Home from 'Sections/Home'
 import Releases from 'Sections/Releases'
 import Videos from 'Sections/Videos'

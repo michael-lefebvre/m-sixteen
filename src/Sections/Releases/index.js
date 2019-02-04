@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames'
-import Layer from 'Components/Layer';
+import { Layer } from 'Components';
 import Album from './Album'
 import Split from './Split'
 import Ep from './Ep'

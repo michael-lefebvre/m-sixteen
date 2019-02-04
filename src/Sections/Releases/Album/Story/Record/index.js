@@ -1,8 +1,8 @@
 
 import React from 'react'
-import { withApp } from 'Contexts/App'
+import { withApp } from 'Contexts'
 import { roundToEven } from 'Utils'
-import Image from 'Components/Image';
+import { Image } from 'Components';
 import './index.scss'
 
 const SlideRecord = ({left, height}) => (

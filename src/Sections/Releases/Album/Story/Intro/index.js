@@ -1,10 +1,11 @@
 
 import React, { Component } from 'react'
 // import { Controller, config } from 'react-spring'
-import { withApp } from 'Contexts/App'
+import { withApp } from 'Contexts'
 import { Link } from "react-router-dom";
 // import classNames from 'classnames'
-import { ImagePath, PhotoPath/*, AnimatedDiv*/, roundToEven } from 'Utils'
+import { Image } from 'Components';
+import { getImageUrl/*, AnimatedDiv*/, roundToEven } from 'Utils'
 // import Tracks from '../Tracks'
 import './index.scss'
 
@@ -52,7 +53,10 @@ class SlideIntro extends Component {
           </AnimatedDiv>
         </div>*/}
         <div className="album__intro__content">
-          <img src={PhotoPath('album/img-1-md')} alt="" className="album__photo" />
+          <Image
+            className="album__photo"
+            src='album/img-1'
+          />
           <div className="album__intro__title">
             <div
               className="album__title_1"
@@ -68,9 +72,9 @@ class SlideIntro extends Component {
               This record was released in France by <strong>STSnework</strong>, in Germany and UK by <strong>Fond Of Life</strong> and in Italia by <strong>Chorus Of One</strong>.
             </p>
             <div className="album__labels album__labels--logos">
-              <img src={ImagePath('logo-sts.png')} alt="STSnework logo" className="img__label" />
-              <img src={ImagePath('logo-coo.png')} alt="Chorus Of One logo" className="img__label" />
-              <img src={ImagePath('logo-fol.png')} alt="Fond Of Life logo" className="img__label" />
+              <img src={getImageUrl('logo-sts.png')} alt="STSnework logo" className="img__label" />
+              <img src={getImageUrl('logo-coo.png')} alt="Chorus Of One logo" className="img__label" />
+              <img src={getImageUrl('logo-fol.png')} alt="Fond Of Life logo" className="img__label" />
             </div>
           </div>
         </div>

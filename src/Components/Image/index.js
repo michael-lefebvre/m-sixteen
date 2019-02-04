@@ -1,6 +1,11 @@
 import React, { PureComponent, Fragment } from 'react'
-import { caf, raf } from 'Utils'
+import { caf, raf, getPhotoUrl } from 'Utils'
 // import './styles.scss'
+
+const getImages = ({src, extension}) => ({
+  imgSmall: getPhotoUrl(`${src}-sm.${extension}`),
+  imgMedium: getPhotoUrl(`${src}-md.${extension}`)
+})
 
 export default class Image extends PureComponent {
   static defaultProps = {
@@ -12,8 +17,7 @@ export default class Image extends PureComponent {
 
   state = {
     isVisible: false,
-    imgSmall: `${process.env.PUBLIC_URL}/static/photos/${this.props.src}-sm.${this.props.extension}`,
-    imgMedium: `${process.env.PUBLIC_URL}/static/photos/${this.props.src}-md.${this.props.extension}`
+    ...getImages(this.props)
   };
 
   _imgSmall = React.createRef();

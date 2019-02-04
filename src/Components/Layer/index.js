@@ -1,7 +1,7 @@
 import React from 'react'
 import { HotKeys } from "react-hotkeys";
 import classNames from 'classnames';
-import { withApp } from 'Contexts/App';
+import { withApp } from 'Contexts'
 import "./index.scss";
 
 const Layer = ({ children, history, isActive, className = "" }) => {

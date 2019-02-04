@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Keyframes, animated/*, config*/ } from 'react-spring'
 import delay from 'delay'
-import withRelease from 'Hoc/Release';
+import { withRelease } from 'Hoc'
 import Cover from './Cover';
 import Story from './Story';
 

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
-import withRelease from 'Hoc/Release';
+import { withRelease } from 'Hoc'
 import Story from './Story/index';
 import './index.scss'
 

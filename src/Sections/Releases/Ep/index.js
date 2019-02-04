@@ -1,5 +1,5 @@
 import React from 'react';
-import withRelease from 'Hoc/Release';
+import { withRelease } from 'Hoc'
 import Cover from './Cover';
 import Story from './Story';
 import './index.scss'

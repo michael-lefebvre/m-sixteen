@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { Spring, Trail, animated } from 'react-spring'
 import { Link } from "react-router-dom";
 import { getNavImgSrc } from 'Utils'
-import { withApp } from 'Contexts/App'
+import { withApp } from 'Contexts'
 
 import './index.scss'
 

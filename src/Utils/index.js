@@ -1,4 +1,6 @@
 import { Globals, animated } from 'react-spring';
+import { getStaticUrl } from './Paths'
+
 export const AnimatedDiv = animated(Globals.defaultElement)
 export const raf = cb => Globals.requestFrame(cb)
 export const caf = cb => Globals.cancelFrame(cb)
@@ -21,8 +23,10 @@ export const getReleaseStateFromProps = ({ id, prevId, wasActive, viewPort }, re
 }
 export const hideReleaseStory = ({ active, back, off }) => !active && !back && !off
 export const isHome = (props) => !getSection(props)
-export const ImagePath = (img) => `${process.env.PUBLIC_URL}/static/images/${img}`
-export const PhotoPath = (img) => `${process.env.PUBLIC_URL}/static/photos/${img}.jpg`
+
+export const getImageUrl = path => getStaticUrl(`images/${path}`)
+export const getPhotoUrl = path => getStaticUrl(`photos/${path}`)
+
 export const getViewport = () => {
   const { width, height } = document.body.getBoundingClientRect()
   return {
@@ -31,11 +35,12 @@ export const getViewport = () => {
   }
 }
 export const roundToEven = n => 2 * Math.round(n / 2);
+
 export const getNavImgSrc = (section, item) => {
   switch(section) {
-    case 'releases': return `${process.env.PUBLIC_URL}/static/covers/${item}.jpg`
-    case 'videos': return `${process.env.PUBLIC_URL}/static/photos/videos/${item}-md.jpg`
-    case 'shows': return `${process.env.PUBLIC_URL}/static/covers/${item}.jpg`
+    case 'releases': return getStaticUrl(`covers/${item}.jpg`)
+    case 'videos': return getStaticUrl(`photos/videos/${item}-md.jpg`)
+    // case 'shows': return getStaticUrl(`covers/${item}.jpg`)
     default:
         // do nothing
   }

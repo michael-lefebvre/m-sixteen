@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import YouTube from 'react-youtube'
-import { withApp } from 'Contexts/App'
+import { withApp } from 'Contexts'
 
 import './index.scss'
 
@@ -146,8 +146,8 @@ class HomeBkgd extends Component {
 
 const mapAppContextToProps = state => ({
   bkgdCanPlay: state.bkgdCanPlay(),
-  showPlayer: state.hasVideoHeader(),
-  // showPlayer: false,
+  // showPlayer: state.hasVideoHeader(),
+  showPlayer: false,
   isReady: state.isReady(),
   handleOnReady: state.onReady,
 });
