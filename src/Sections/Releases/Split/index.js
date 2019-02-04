@@ -1,13 +1,9 @@
-import React, { PureComponent, Fragment } from 'react';
-import IdleTimer from 'react-idle-timer'
+import React, { PureComponent } from 'react';
 import { Keyframes, animated/*, config*/ } from 'react-spring'
 import delay from 'delay'
 import withRelease from 'Hoc/Release';
 import Cover from './Cover';
 import Story from './Story';
-import ReleasesNav from '../Nav'
-import { ReleasesScrollInvite } from '../index'
-import { RELEASE_USER_EVENTS, RELEASE_IDLE_TIMEOUT, RELEASE_IDLE_THROTTLE } from 'Constants'
 
 import './index.scss'
 
@@ -28,28 +24,29 @@ const Container = Keyframes.Spring({
 class ReleaseSplit extends PureComponent {
 
   state = {
-    displayStory: false,
-    showScroller: false,
-    stage: this.props.stage,
+    displayStory: this.props.state.matches('mounted.story'),
+    isLeaving: this.props.state.matches('leaving.animate'),
+    isMounted: this.props.state.matches('mounted'),
   };
 
-  _idleTimer = null;
-
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { stage } = nextProps
-    // if( stage === 'mounted' && prevState.stage === 'entering' )
-    //   return {
-    //     stage,
-    //   }
-
-    // if( stage === 'leaving' && prevState.stage !== 'leaving' )
-    //   return {
-    //     stage,
-    //   }
-    if( stage !== prevState.stage )
+    const { state } = nextProps
+    const displayStory = state.matches('mounted.story')
+    const isLeaving = state.matches('leaving.animate')
+    const isMounted = state.matches('mounted')
+    if( isMounted && !prevState.isMounted )
       return {
-        showScroller: false,
-        stage,
+        isMounted
+      }
+
+    if( isLeaving && !prevState.isLeaving )
+      return {
+        isLeaving
+      }
+
+    if( displayStory && !prevState.displayStory )
+      return {
+        displayStory
       }
 
     return null;
@@ -59,24 +56,6 @@ class ReleaseSplit extends PureComponent {
   // Life cycle
   // --------------------------------------------------
 
-  componentDidMount() {}
-
-  getSnapshotBeforeUpdate(
-    prevProps,
-    prevState
-  ) {
-    return prevProps.stage !== "mounted" && this.props.stage === "mounted"
-  }
-
-  componentDidUpdate(
-    prevProps,
-    prevState,
-    snapshot
-  ) {
-    if (snapshot)
-      this._idleTimer.reset()
-  }
-
   //
   // Helpers
   // --------------------------------------------------
@@ -85,84 +64,50 @@ class ReleaseSplit extends PureComponent {
   // Events Handlers
   // --------------------------------------------------
 
-  handleOnRest = (el) => () => {
-    const { stage } = this.state;
-    const { onRest } = this.props;
-
-    if(stage === 'entering' && el === 'bkgd')
-      return onRest()
-    if(stage === 'leaving' && el === 'container')
-      return onRest()
-  };
-
-  handleOnAction = () => {
-    if(this.state.displayStory) return
-    this._idleTimer.pause()
-    this.setState({ displayStory: true, showScroller: false })
-  };
-
-  handleOnIdle = (e) => {
-    if(this.state.displayStory) return
-    this.setState({ showScroller: true })
-  };
-
   //
   // Renderers
   // --------------------------------------------------
 
   render() {
-    const { displayStory, stage, showScroller } = this.state;
+    const { displayStory, isLeaving, isMounted } = this.state;
 
-    const ContainerState = stage === 'leaving'  ? 'close' : displayStory ? 'story' : 'open'
+    const ContainerState = isLeaving  ? 'close' : displayStory ? 'story' : 'open'
 
     return (
-      <Fragment>
-        <IdleTimer
-          ref={ref => { this._idleTimer = ref }}
-          element={document}
-          onIdle={this.handleOnIdle}
-          onAction={this.handleOnAction}
-          startOnMount={false}
-          throttle={RELEASE_IDLE_THROTTLE}
-          events={RELEASE_USER_EVENTS}
-          timeout={RELEASE_IDLE_TIMEOUT} />
-        <ReleasesScrollInvite show={showScroller} />
-        <ReleasesNav isMounted={stage === 'mounted'} />
-        <Container
-          native
-          state={ContainerState}
-          onRest={this.handleOnRest('container')}
-        >
-          {({ l, r, t }) => (
+      <Container
+        native
+        state={ContainerState}
+        onRest={this.props.onNext('leaving.animate')}
+      >
+        {({ l, r, t }) => (
+          <animated.div
+            className="split"
+            style={{
+              right: r.interpolate(r => `${r}%`),
+              left: l.interpolate(l => `${l}%`),
+            }}
+          >
             <animated.div
-              className="split"
+              className="split__root split-container"
               style={{
-                right: r.interpolate(r => `${r}%`),
-                left: l.interpolate(l => `${l}%`),
+                transform: t.interpolate(p => `translateX(-${p}%)`),
               }}
             >
-              <animated.div
-                className="split__root split-container"
-                style={{
-                  transform: t.interpolate(p => `translateX(-${p}%)`),
-                }}
-              >
-                <Story
-                  displayStory={displayStory}
-                  stage={stage}
-                />
-                <Cover
-                  displayStory={displayStory}
-                  stage={ContainerState}
-                  onRest={this.handleOnRest}
-                />
-              </animated.div>{/* ./split__root */}
-            </animated.div>
-          )}
-        </Container>
-      </Fragment>
+              <Story
+                displayStory={displayStory}
+                isMounted={isMounted}
+              />
+              <Cover
+                displayStory={displayStory}
+                stage={ContainerState}
+                onRest={this.props.onNext('entering')}
+              />
+            </animated.div>{/* ./split__root */}
+          </animated.div>
+        )}
+      </Container>
     )
   }
 }
 
-export default withRelease(ReleaseSplit, { id: 'split' });
+export default withRelease(ReleaseSplit, { release: 'split', assets: ['a'] });

@@ -1,12 +1,7 @@
 import React, { PureComponent } from 'react'
-import IdleTimer from 'react-idle-timer'
 import classNames from 'classnames'
-import debounce from "lodash.debounce";
 import withRelease from 'Hoc/Release';
-import ReleasesNav from '../Nav'
-import { ReleasesScrollInvite } from '../index'
 import Story from './Story/index';
-import { RELEASE_USER_EVENTS, RELEASE_IDLE_TIMEOUT, RELEASE_IDLE_THROTTLE } from 'Constants'
 import './index.scss'
 
 class ReleaseAlbum extends PureComponent {
@@ -15,32 +10,27 @@ class ReleaseAlbum extends PureComponent {
     super( props )
 
     this.state = {
-      stage: props.stage,
-      displayStory: false,
+      stage: props.state.toStrings()[0],
+      displayStory: props.state.matches('mounted.story'),
       displayBkgd: false,
-      showScroller: false,
     };
 
     this._layers = [];
-    this._idleTimer = null
-
-    this.handleOnTransitionEnd = debounce(this.handleOnTransitionEnd, 300, { leading: true, trailing: false })
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { stage } = nextProps;
-    // if(
-    //   stage === 'leaving' && prevState.displayStory
-    // )
-    //   return {
-    //     displayStory: false
-    //   }
+    const { state } = nextProps
+    const stage = state.toStrings()[0]
+    const displayStory = state.matches('mounted.story')
 
-    if(
-      stage !== prevState.stage
-    )
+    if(displayStory && !prevState.displayStory)
       return {
-        showScroller: false,
+        stage,
+        displayStory
+      }
+
+    if( stage !== prevState.stage)
+      return {
         stage
       }
 
@@ -50,24 +40,6 @@ class ReleaseAlbum extends PureComponent {
   //
   // Life cycle
   // --------------------------------------------------
-
-  // componentDidMount() {}
-
-  getSnapshotBeforeUpdate(
-    prevProps,
-    prevState
-  ) {
-    return prevProps.stage !== "mounted" && this.props.stage === "mounted"
-  }
-
-  componentDidUpdate(
-    prevProps,
-    prevState,
-    snapshot
-  ) {
-    if (snapshot)
-      this._idleTimer.reset()
-  }
 
   //
   // Helpers
@@ -82,53 +54,33 @@ class ReleaseAlbum extends PureComponent {
   // --------------------------------------------------
 
   handleOnRest = (el) => () => {
-    // if(this.props.stage === 'leaving' && el === 'story')
-    //   this.setState({ displayBkgd: false })
-    // if(this.state.stage === 'entering' && el === 'cover')
-    //   this.props.onRest()
-  };
-
-  handleOnTransitionEnd = () => {
-    // const { stage, displayBkgd } = this.state;
-    // console.log('handleOnTransitionEnd', { stage, displayBkgd})
-    // if( this.props.stage === 'leaving')
-    //   this.setState({ displayBkgd: false })
   };
 
   handleOnAnimationEnd = () => {
-    const { stage, onRest } = this.props;
-    const { displayBkgd/*, displayStory*/ } = this.state;
+    const { onNext } = this.props;
+    const { displayBkgd, stage } = this.state;
     if( stage === 'entering' && !displayBkgd )
-      return this.setState({ displayBkgd: true/*, displayStory: true*/ }, onRest)
-    // if( stage === 'leaving' && displayStory )
-    //   return this.setState({ displayStory: false })
-    if( stage === 'leaving') // && !displayStory )
-      return onRest()
+      return this.setState({ displayBkgd: true }, onNext('entering'))
+
+    if( stage === 'leaving')
+      return onNext('leaving.animate')
   };
 
   handleOnScroll = (e) => {
+    if(!this.props.state.matches('mounted.story')) {
+      e.preventDefault()
+      e.stopPropagation();
+      return false;
+    }
+
     const {
       currentTarget: { scrollTop }
     } = e;
 
-    const updateLayers = () =>
-      this._layers.forEach(layer => {
-        if( typeof layer.setPosition === 'function')
-          layer.setPosition(scrollTop)
-      })
-
-    if(this.state.stage !== "mounted") return;
-
-    if(this.state.displayStory)
-      return updateLayers()
-
-    this._idleTimer.pause()
-
-    this.setState({ displayStory: true, showScroller: false }, updateLayers)
-  };
-
-  handleOnIdle = (e) => {
-    this.setState({ showScroller: true })
+    this._layers.forEach(layer => {
+      if( typeof layer.setPosition === 'function')
+        layer.setPosition(scrollTop)
+    })
   };
 
   //
@@ -136,36 +88,20 @@ class ReleaseAlbum extends PureComponent {
   // --------------------------------------------------
 
   render() {
-    const { displayStory, displayBkgd } = this.state;
-    const { stage, showScroller } = this.state;
-    const isMounted = stage === 'mounted'
+    const { displayStory, displayBkgd, stage } = this.state;
 
     const className = classNames('release__cover--album__cover', {
       'release__cover--album__cover--entering': stage === 'entering',
-      'release__cover--album__cover--leaving': stage === 'leaving' // && !displayStory// && !displayBkgd
+      'release__cover--album__cover--leaving': stage === 'leaving'
     })
     const classNameAlbum = classNames('release__cover release__cover--album', {
       'release__cover--album--mounted': displayStory
     })
-// console.log(this.state)
 
     return (
       <div
-        // onTransitionEnd={this.handleOnTransitionEnd}
         className={classNameAlbum}
       >
-        <IdleTimer
-          ref={ref => { this._idleTimer = ref }}
-          element={document}
-          onIdle={this.handleOnIdle}
-          startOnMount={false}
-          throttle={RELEASE_IDLE_THROTTLE}
-          events={RELEASE_USER_EVENTS}
-          timeout={RELEASE_IDLE_TIMEOUT} />
-        <ReleasesNav
-          isMounted={isMounted}
-        />
-        <ReleasesScrollInvite show={showScroller} />
         <div
           onAnimationEnd={this.handleOnAnimationEnd}
           className={className}
@@ -173,7 +109,7 @@ class ReleaseAlbum extends PureComponent {
           <Story
             onMounted={this._registerLayer}
             onScroll={this.handleOnScroll}
-            onRest={this.handleOnRest}
+            onRest={this.props.onNext}
             displayBkgd={displayBkgd}
             displayStory={displayStory}
           />
@@ -183,4 +119,4 @@ class ReleaseAlbum extends PureComponent {
   }
 };
 
-export default withRelease(ReleaseAlbum, { id: 'album' });
+export default withRelease(ReleaseAlbum, { release: 'album' });

@@ -27,7 +27,6 @@ const Cover = Keyframes.Spring({
     await delay(200)
     next({ cL: 25, bT: 25 })
     await delay(500)
-    await onRest()
   },
   // leaving: async (next, cancel, ownProps) => {
   //   await delay(600)
@@ -43,7 +42,7 @@ const ReleaseSplitCover = ({ stage, onRest, displayStory }) => (
   <Cover
     native
     state={stage}
-    onRest={onRest('bkgd')}
+    onRest={onRest}
   >
     {({ sB, sC, mO, mT, pC, cL, bT }) => (
       <Fragment>

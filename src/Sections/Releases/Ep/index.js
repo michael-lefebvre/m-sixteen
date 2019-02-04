@@ -1,26 +1,18 @@
-import React, { Fragment} from 'react';
+import React from 'react';
 import withRelease from 'Hoc/Release';
 import Cover from './Cover';
-import ReleasesNav from '../Nav'
+import Story from './Story';
 import './index.scss'
 
-const ReleaseEp = ({ stage, onRest }) => {
-  const handleOnRest = (el) => () => {
-    if(stage === 'entering' && el === 'inner')
-      return onRest()
-    if(stage === 'leaving' && el === 'bkgd')
-      return onRest()
-  };
-  return (
-    <Fragment>
-      <ReleasesNav
-        isMounted={stage === 'mounted'}
-      />
-      <Cover stage={stage} onRest={handleOnRest} />
-      <div className={`release__story release__story--ep release__story--ep--${stage}`} />
-      <h1 style={{ top: 100, left: 100, position: 'absolute', zIndex: 1000 }}>{stage}</h1>
-    </Fragment>
-  )
-}
+const ReleaseEp = ({ state, onNext, onMounted }) => (
+  <Cover
+    stage={state.toStrings()[0]}
+    onRest={onNext}
+  >
+    <Story
+      story={state.matches('mounted.story')}
+    />
+  </Cover>
+);
 
-export default withRelease(ReleaseEp, { id: 'ep' });
+export default withRelease(ReleaseEp, { release: 'ep', assets: ['a'] });

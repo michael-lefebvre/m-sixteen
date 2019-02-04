@@ -12,7 +12,7 @@ const AlbumCover = ({ height, width, right, onRest }) => (
     native
     from={{ w: 0 }}
     to={{ w: 100 }}
-    onRest={onRest('cover')}
+    onRest={onRest('entering')}
     >
     {({w}) => (
       <div className="album__cover" style={{ width, right, height }}>

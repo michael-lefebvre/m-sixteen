@@ -19,10 +19,12 @@ const _NAV_COVERS_Y = _NAV_COVERS_HEIGHT;
 // clT: covers list translateY
 // mbO: more button opacity
 
+const getInitialProps = () => ({ nW: 0, cbT: _NAV_CLOSE_Y, clT: _NAV_COVERS_Y_FULL, mbO: 1 });
+
 const NavState = Keyframes.Spring({
-  unmounted: { nW: 0, cbT: _NAV_CLOSE_Y, clT: _NAV_COVERS_Y_FULL, mbO: 1 },
+  unmounted: getInitialProps(),
   mounted: async next => {
-    next({ nW: _NAV_WIDTH })
+    next({ nW: _NAV_WIDTH, from: getInitialProps() })
     await delay(300)
     next({ cbT: 0, clT: _NAV_COVERS_Y })
   },
@@ -45,7 +47,7 @@ class ReleasesNav extends PureComponent {
 
   handleOnMouseEnter = () => {
     if(this.state.coversState === 'expend') return
-    this.setState({ coversState: 'expend' })
+    this.setState({ coversState: 'expend' }, this.props.onMounted)
   };
 
   handleOnMouseLeave = () => {

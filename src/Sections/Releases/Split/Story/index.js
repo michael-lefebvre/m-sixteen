@@ -6,9 +6,9 @@ import Image from 'Components/Image';
 import ImgLogos from './logos.png'
 import './index.scss'
 
-const getInitialState = (props) => ({
-  displayStory: props.displayStory,
-  mount: false,
+const getInitialState = ({displayStory, isMounted}) => ({
+  displayStory,
+  isMounted
 })
 
 class ReleaseSplitStory extends PureComponent {
@@ -32,7 +32,7 @@ class ReleaseSplitStory extends PureComponent {
     prevProps,
     prevState
   ) {
-    return prevProps.stage !== "mounted" && this.props.stage === "mounted"
+    return !prevProps.isMounted && this.props.isMounted
   }
 
   componentDidUpdate(
@@ -41,7 +41,7 @@ class ReleaseSplitStory extends PureComponent {
     snapshot
   ) {
     if (snapshot)
-      this.setState({ mount: true })
+      this.setState({ isMounted: true })
   }
 
   //
@@ -58,7 +58,7 @@ class ReleaseSplitStory extends PureComponent {
 
   render() {
 
-    if(!this.state.mount)
+    if(!this.state.isMounted)
       return null
 
     return (

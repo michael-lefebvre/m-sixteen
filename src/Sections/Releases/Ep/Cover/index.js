@@ -3,20 +3,22 @@ import { Keyframes, animated } from 'react-spring'
 import './index.scss'
 
 const Bkgd = Keyframes.Spring({
-  entering: { delay: 0, o: 1, from: { o: 0 } },
+  entering: { o: 1, from: { o: 0 } },
+  mounted: { o: 1, from: { o: 0 } },
   leaving: { delay: 500, o: 0 },
 })
 
 const Inner = Keyframes.Spring({
   entering: { delay: 200, o: 1, from: { o: 0 } },
+  mounted: { o: 1, from: { o: 0 } },
   leaving: { delay: 0, o: 0 },
 })
 
-const ReleaseEpCover = ({ stage, onRest }) => (
+const ReleaseEpCover = ({ children, stage, onRest }) => (
   <Bkgd
     native
     state={stage}
-    onRest={onRest('bkgd')}
+    onRest={onRest('leaving')}
   >
     {({ o }) => (
       <animated.div
@@ -26,7 +28,7 @@ const ReleaseEpCover = ({ stage, onRest }) => (
         <Inner
           native
           state={stage}
-          onRest={onRest('inner')}
+          onRest={onRest('entering')}
         >
           {({ o }) => (
             <animated.div
@@ -35,6 +37,7 @@ const ReleaseEpCover = ({ stage, onRest }) => (
             />
           )}
         </Inner>
+        {children}
       </animated.div>
     )}
   </Bkgd>

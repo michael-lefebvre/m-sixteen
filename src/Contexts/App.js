@@ -24,7 +24,7 @@ const getInitialContext = () => ({
   previousId: null
 });
 
-export const { Provider, Consumer } = React.createContext({
+export const AppContext = React.createContext({
   ...getInitialContext(),
   isReady: () => null,
   getViewPort: () => null,
@@ -41,6 +41,8 @@ export const { Provider, Consumer } = React.createContext({
   onSectionChange: () => null,
   onClearPrevSection: () => null,
 });
+
+export const { Provider, Consumer } = AppContext;
 
 class App extends Component {
   constructor(props) {

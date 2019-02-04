@@ -1,106 +1,172 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
+import merge from "lodash.merge"
+import { interpret } from 'xstate';
+import { ReleaseMachine } from 'Machines'
 import { withApp } from 'Contexts/App'
+import { ReleasesScrollInvite } from 'Sections/Releases'
+import ReleasesNav from 'Sections/Releases/Nav'
+import { RELEASE_USER_EVENTS } from 'Constants'
 
-const withRelease = (WrappedComponent, ownProps) => {
+// TODO: move this shite into a dedicated Class
+let eventsBound = false
 
-  class WithRelease extends PureComponent {
+const _bindEvents  = (_handleEvent) => {
+  if (eventsBound) return
+  RELEASE_USER_EVENTS.forEach(e => {
+    document.addEventListener(e, _handleEvent, {
+      capture: true,
+      passive: true,
+    })
+  })
+  eventsBound = true
+}
+
+const _unbindEvents = (_handleEvent) => {
+  if (!eventsBound) return
+  RELEASE_USER_EVENTS.forEach(e => {
+    document.removeEventListener(e, _handleEvent, {
+      capture: true,
+      passive: true,
+    })
+  })
+  eventsBound = false
+}
+
+
+const getContextToken = ({ isLeaving, isCurrent, isPrevious }) => `${isLeaving ? 1 : 0}${isCurrent ? 1 : 0}${isPrevious ? 1 : 0}`;
+
+const withRelease = (WrappedComponent, { release, assets = null }) => {
+  class ReleaseHoc extends PureComponent {
+
     state = {
-      stage: 'unmounted',
-      isCurrent: false,
-      isPrevious: false,
+      current: ReleaseMachine.initialState,
+      token: getContextToken(this.props.context),
     };
 
+    service = interpret(
+        ReleaseMachine
+          .withContext(merge({}, ReleaseMachine.context, this.props.context))
+          .withConfig({
+            services: {
+              clearPrevious: () => Promise.resolve(this.props.onClearPrevSection()),
+            },
+            activities: {
+              waitForAction: () => {
+                let _eventTriggered = false
+                const _handleEvent = () => {
+                  if(_eventTriggered) return
+                  _eventTriggered = true
+                  this.service.send('RELEASE.STORY')
+                };
+                _bindEvents(_handleEvent)
+                return () => _unbindEvents(_handleEvent)
+              }
+            }
+          })
+      )
+      .onTransition(current =>
+        this.setState({ current })
+      );
+
     static getDerivedStateFromProps(nextProps, prevState) {
-      const { current, previous, unmount } = nextProps;
-      const { isCurrent, stage } = prevState;
+      const token = getContextToken(nextProps.context)
 
-      if( (!isCurrent && current) && stage === 'unmounted')
+      if(token !== prevState.token)
         return {
-          stage: 'entering',
-          isCurrent: true,
-          isPrevious: false
+          token
         }
-
-      if( (isCurrent && !current && unmount) && stage === 'mounted')
-        return {
-          stage: 'leaving',
-          isCurrent: false,
-          isPrevious: true
-        }
-
-      if( !current && !previous && stage === 'leaving')
-        return {
-          stage: 'unmounted',
-          isCurrent: false,
-          isPrevious: false
-        }
-
-      if( !current && !previous && stage === 'mounted')
-        return {
-          stage: 'unmounted',
-          isCurrent: false,
-          isPrevious: false
-        }
-
-      return null;
+      return null
     }
 
     //
     // Life cycle
     // --------------------------------------------------
 
+    componentDidMount() {
+      this.service.start();
+    }
+
+    componentWillUnmount() {
+      this.service.stop();
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+      return prevState.token !== this.state.token
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+      if (snapshot)
+        this._send()
+    }
+
+    //
+    // Helpers
+    // --------------------------------------------------
+
+    _send = () => {
+      const { context } = this.props;
+      this.service.send({ type: 'RELEASE.NEXT', context })
+    };
+
     //
     // Events Handlers
     // --------------------------------------------------
 
-    handleOnRest = () => {
-      if( this.state.stage === 'entering')
-        return this.setState({ stage: 'mounted' }, this.props.onCoverReady)
+    handleOnMounted = evt => () => this.service.send(evt);
 
-      if( this.state.stage === 'leaving' )
-        this.props.onCoverReady()
-    };
-
-    handleOnClose = () => {
-      this.props.history.push('/')
-    };
+    handleOnNext = evt => () => {
+      if(this.state.current.matches(evt))
+        this._send()
+    }
 
     //
     // Renderers
     // --------------------------------------------------
 
     render() {
-      if(this.state.stage === 'unmounted') return null
-      const { current, previous } = this.props;
+      const { context } = this.props;
+      const { current } = this.state;
+
+      if(current.matches('unmounted'))
+        return null
 
       return (
         <div
-          className={classNames(`release release--${ownProps.id}`, {
-            'release--current': current,
-            'release--previous': previous,
+          className={classNames(`release release--${release}`, {
+            'release--current': context.isCurrent,
+            'release--previous': context.isPrevious,
           })}
         >
+          <ReleasesNav
+            isMounted={current.matches('mounted')}
+            onMounted={this.handleOnMounted('RELEASE.PENDING')}
+          />
+          <ReleasesScrollInvite show={current.matches('mounted.pending.idle')} />
           <WrappedComponent
-            stage={this.state.stage}
-            onRest={this.handleOnRest}
-            onClose={this.handleOnClose}
+            state={current}
+            onNext={this.handleOnNext}
+            onMounted={this.handleOnMounted}
           />
         </div>
-      );
+      )
     }
   }
 
-  WithRelease.displayName = `WithRelease(${getDisplayName(WrappedComponent)})`;
+  ReleaseHoc.displayName = `WithRelease(${getDisplayName(WrappedComponent)})`;
 
-  const mapAppContextToProps = (state) => ({
-    unmount: state.previousId === ownProps.id && state.wasPreviousSection('releases'),
-    current: state.currentId === ownProps.id,
-    previous: state.previousId === ownProps.id,
-    onCoverReady: state.onClearPrevSection,
-    history: state.getHistory()
+  const mapAppContextToProps = ({ previousId, currentId, wasPreviousSection, onClearPrevSection }) => ({
+    context: {
+      release,
+      assets,
+      isLeaving: previousId === release && wasPreviousSection('releases'),
+      isCurrent: currentId === release,
+      isPrevious: previousId === release
+    },
+    onClearPrevSection
   });
-  return withApp(mapAppContextToProps)(WithRelease);
+
+  return withApp(mapAppContextToProps)(ReleaseHoc);
 }
 
 const getDisplayName = WrappedComponent => WrappedComponent.displayName || WrappedComponent.name || 'Component';
