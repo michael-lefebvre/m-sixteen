@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-import { getViewport, getSection, getParams } from 'Utils'
+import { getViewport, getSection, getParams, getComponentName } from 'Utils'
 import { MEDIA_QUERIES_LIST, MEDIA_QUERIES_BY_MATCH } from 'Constants';
 
 const getCurrentSection = (props) => {
@@ -171,10 +171,14 @@ class App extends Component {
 
 export default withRouter(App);
 
-export const withApp = (mapContextToProps = v => v) => (
-  Child
-) => (props) => (
-  <Consumer>
-    {value => <Child {...mapContextToProps(value, props)} {...props} />}
-  </Consumer>
-);
+export const withApp = (mapContextToProps = v => v) => (Child) => {
+  const WithApp = (props) => (
+    <Consumer>
+      {value => <Child {...mapContextToProps(value, props)} {...props} />}
+    </Consumer>
+  );
+
+  WithApp.displayName = `withApp(${getComponentName(Child)})`;
+
+  return WithApp
+}

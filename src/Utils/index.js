@@ -3,6 +3,9 @@ import { getStaticUrl } from './Paths'
 
 export { default as StoryTrigger } from "./StoryTrigger";
 
+
+export const getComponentName = Component => Component.displayName || Component.name || 'Component'
+
 export const AnimatedDiv = animated(Globals.defaultElement)
 export const raf = cb => Globals.requestFrame(cb)
 export const caf = cb => Globals.cancelFrame(cb)

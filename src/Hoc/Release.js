@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import merge from "lodash.merge"
+import hoistStatics from 'hoist-non-react-statics'
 import { interpret } from 'xstate';
 import { ReleaseMachine } from 'Machines'
 import { withApp } from 'Contexts'
 import { ReleasesScrollInvite } from 'Sections/Releases'
 import ReleasesNav from 'Sections/Releases/Nav'
-import { StoryTrigger } from 'Utils'
+import { StoryTrigger, getComponentName } from 'Utils'
 
 const getContextToken = ({ isLeaving, isCurrent, isPrevious }) => `${isLeaving ? 1 : 0}${isCurrent ? 1 : 0}${isPrevious ? 1 : 0}`;
 
@@ -133,7 +134,7 @@ const withRelease = (WrappedComponent, { release, assets = null }) => {
     }
   }
 
-  ReleaseHoc.displayName = `WithRelease(${getDisplayName(WrappedComponent)})`;
+  ReleaseHoc.displayName = `withRelease(${getComponentName(WrappedComponent)})`;
 
   const mapAppContextToProps = ({ previousId, currentId, wasPreviousSection, onClearPrevSection }) => ({
     context: {
@@ -146,9 +147,9 @@ const withRelease = (WrappedComponent, { release, assets = null }) => {
     onClearPrevSection
   });
 
+  hoistStatics(ReleaseHoc, WrappedComponent)
+
   return withApp(mapAppContextToProps)(ReleaseHoc);
 }
-
-const getDisplayName = WrappedComponent => WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
 export default withRelease;
