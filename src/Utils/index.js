@@ -2,6 +2,7 @@ import { Globals, animated } from 'react-spring';
 import { getStaticUrl } from './Paths'
 
 export { default as StoryTrigger } from "./StoryTrigger";
+export * from "./ImgPrefetch";
 
 
 export const getComponentName = Component => Component.displayName || Component.name || 'Component'
