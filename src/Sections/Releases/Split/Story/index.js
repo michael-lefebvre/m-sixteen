@@ -1,9 +1,9 @@
 
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
-import { Link } from "react-router-dom";
-import { Image } from 'Components';
-import ImgLogos from './logos.png'
+import { Link } from "react-router-dom"
+import { Image } from 'Components'
+import { getImageUrl } from 'Utils'
 import './index.scss'
 
 const getInitialState = ({displayStory, isMounted}) => ({
@@ -73,7 +73,7 @@ class ReleaseSplitStory extends PureComponent {
           })}
         >
           <div className="split__story__logos">
-            <img src={ImgLogos} alt="" />
+            <img src={getImageUrl('releases/split/logos.png')} alt="" />
           </div>
           <div className="split__story__section">
             <Image className="split__photo split__photo--left" src='split/band-1' width="350" />

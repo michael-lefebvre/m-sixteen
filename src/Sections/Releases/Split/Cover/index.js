@@ -2,8 +2,7 @@ import React, { Fragment } from 'react'
 import { Keyframes, animated/*, config*/ } from 'react-spring'
 import classNames from 'classnames'
 import delay from 'delay'
-import ImgBkgd from './bkgd.png'
-import ImgMother from './mother.png'
+import { getImageUrl } from 'Utils'
 import './index.scss'
 
 const Cover = Keyframes.Spring({
@@ -71,7 +70,7 @@ const ReleaseSplitCover = ({ stage, onRest, displayStory }) => (
               clipPath: pC.interpolate(p => `polygon(0 0, 0% 100%, ${p}% 100%, ${p}% 0)`),
             }}
           >
-            <img src={ImgBkgd} alt="" />
+            <img src={getImageUrl('releases/split/bkgd.png')} alt="" />
           </animated.div>
           <animated.div
             className="split__cover__stripe split__cover__stripe--content"
@@ -89,7 +88,7 @@ const ReleaseSplitCover = ({ stage, onRest, displayStory }) => (
             transform: mT.interpolate(p => `translateX(-${p}%)`),
           }}
         >
-          <img src={ImgMother} alt="" />
+          <img src={getImageUrl('releases/split/mother.png')} alt="" />
         </animated.div>
       </Fragment>
     )}
