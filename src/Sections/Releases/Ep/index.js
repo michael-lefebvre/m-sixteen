@@ -1,16 +1,18 @@
 import React from 'react';
 import { withRelease } from 'Hoc'
+
 import Cover from './Cover';
 import Story from './Story';
 import './index.scss'
 
-const ReleaseEp = ({ state, onNext, onMounted }) => (
+const ReleaseEp = ({ story, state, onNext, onMounted }) => (
   <Cover
-    stage={state.toStrings()[0]}
+    state={state}
     onRest={onNext}
   >
     <Story
-      story={state.matches('mounted.story')}
+      story={story}
+      // story={state.matches('ready.releases.mounted.story')}
     />
   </Cover>
 );

@@ -1,8 +1,8 @@
 import React, { PureComponent, Fragment } from 'react'
-import { Spring, Trail, animated } from 'react-spring'
+import { Spring, Keyframes, Trail, animated } from 'react-spring'
 import { Link } from "react-router-dom";
 import { getNavImgSrc } from 'Utils'
-import { withApp } from 'Contexts'
+import { withApp } from 'Hoc'
 
 import './index.scss'
 
@@ -138,34 +138,40 @@ const HomeNav = ({ ready, items, from, section, onRest = () => null }) => {
   )
 }
 
+const _homeProps = { s: 1, o: 1, t: 0 };
+const _releasesProps = { s: .95, o: 0, t: 0 };
+const _videosProps = { s: 1, o: 0, t: 5 };
+const _defaultProps = { immediate: true, from: _homeProps, to: _homeProps };
 
-const getInitialState = ({ isReady, isCurrentSection, prevSection, currentSection }) => ({
-  mounted: false,
-  ready: isReady && isCurrentSection,
-  prevSection,
-  currentSection,
-  isCurrentSection,
+const HomeSpring = Keyframes.Spring({
+  entering: _defaultProps,
+  // mounted: _defaultProps,
+  releases_in: { from: _homeProps, to: _releasesProps },
+  releases_out: { to: _homeProps, from: _releasesProps },
+  videos_in: { from: _homeProps, to: _videosProps },
+  videos_out: { to: _homeProps, from: _videosProps },
 })
 
 class Home extends PureComponent {
-  state = getInitialState(this.props);
+  state = {
+    state: this.props.state,
+    mounted: false
+  };
 
   _ref = React.createRef();
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { isReady, isCurrentSection, prevSection, currentSection } = nextProps;
-    const ready = isReady && isCurrentSection
+    const { state } = nextProps;
 
-    if(ready && !prevState.ready)
+    if(!prevState.mounted && state === 'mounted')
       return {
-        ready
+        mounted: true,
+        state,
       }
 
-    if(prevState.ready && currentSection !== prevState.currentSection)
+    if(state !== prevState.state)
       return {
-        isCurrentSection,
-        prevSection,
-        currentSection
+        state
       }
 
     return null;
@@ -175,76 +181,24 @@ class Home extends PureComponent {
   // Life cycle
   // --------------------------------------------------
 
-  componentDidMount() {
-    // this.props.handleOnReady()
-  }
+  // componentDidMount() {
+  //   console.log('HERO componentDidMount', this.state.state)
+  // }
 
-  componentDidUpdate() {}
+  // componentDidUpdate() {
+  //   console.log('HERO componentDidUpdate', this.state.state)
+  // }
 
   //
   // Helpers
   // --------------------------------------------------
-
-  _setReady() {
-    const ready = !!this.props.landingVideo;
-
-    if(!ready)
-      return
-
-    if(ready && !this.state.ready)
-      this.setState({ ready: true })
-  }
-
-  _getTransition() {
-    const { ready, isCurrentSection, prevSection, currentSection } = this.state;
-    const home = { s: 1, o: 1, t: 0 };
-    const releases = { s: .95, o: 0, t: 0 };
-    const videos = { s: 1, o: 0, t: 5 };
-    if(!ready)
-      return {
-        immediate: true,
-        from: home,
-        to: home,
-      }
-
-    if(ready && currentSection === "releases" && prevSection === 'home')
-      return {
-        from: home,
-        to: releases,
-      }
-    if(ready && currentSection === "videos" && prevSection === 'home')
-      return {
-        from: home,
-        to: videos
-      }
-    if(ready && isCurrentSection && prevSection !== 'home')
-      return {
-        from: prevSection === "releases" ? releases : videos,
-        to: home
-      }
-
-    return {
-      immediate: true,
-      from: home,
-      to: home,
-    }
-  }
-
-  // _setStyle = ({ s, o, t }) => {
-  //   const { ready, isCurrentSection, prevSection, currentSection } = this.state;
-  // };
 
   //
   // Events Handlers
   // --------------------------------------------------
 
   handleOnRest = () => {
-    this.setState({ mounted: true })
-  };
-
-  handleOnSectionRest = () => {
-    if(this.state.isCurrentSection && this.state.prevSection)
-      this.props.onClearPrevSection()
+    this.props.onNext()
   };
 
   //
@@ -252,43 +206,52 @@ class Home extends PureComponent {
   // --------------------------------------------------
 
   render() {
-    const { ready, isCurrentSection, prevSection, currentSection } = this.state;
-    const sections = { isCurrentSection, prevSection, currentSection };
+    const { state, mounted: ready } = this.state;
 
-    // if(!ready) return null;
+    // console.log('  ')
+    // console.log({hasVideoHeader: this.props.hasVideoHeader(), bkgdCanPlay: this.props.bkgdCanPlay()})
+    // console.log('HOME.HERO render')
+    // console.log({state: this.state})
+    // console.log(JSON.stringify(this.state, null, 2))
+    // console.log(JSON.stringify(this.props.getValue(), null, 2))
+    // console.log(JSON.stringify(this.props.getStrings(), null, 2))
+    // console.log(JSON.stringify(this.props.getContext(), null, 2))
+
+    if(state === 'idle') return null;
 
     return (
-      <Spring
-        native
-        {...this._getTransition()}
-        onRest={this.handleOnSectionRest}
-      >
-        {({ s, o, t }) => (
-          <animated.header className="home" ref={this._ref} tabIndex="-1" style={{ transform: t.interpolate(t => `translateY(-${t}%)`) }}>
-            <animated.div className="home__wrapper" style={{ opacity: o.interpolate(o => o), transform: s.interpolate(s => `rotate(-45deg) scale(${s})`)  }}>
-              <BlockquoteStart ready={ready} />
-              <Title ready={ready} />
-              <BlockquoteEnd ready={ready}>
-                <BlockquoteEndContent ready={ready} />
-              </BlockquoteEnd>
-              <Abstract ready={ready} sections={sections} />
-              <HomeNav ready={ready} items={['album', 'split', 'ep']} from={50} section="releases" />
-              <HomeNav ready={ready} items={['nevers', 'rouge']} from={-50} section="videos" onRest={this.handleOnRest} />
-            </animated.div>
-          </animated.header>
-        )}
-      </Spring>
+      <Fragment>
+        <HomeSpring
+          native
+          state={state}
+          onRest={this.handleOnRest}
+        >
+          {({ s, o, t }) => (
+            <animated.header className="home" ref={this._ref} tabIndex="-1" style={{ transform: t.interpolate(t => `translateY(-${t}%)`) }}>
+              <animated.div className="home__wrapper" style={{ opacity: o.interpolate(o => o), transform: s.interpolate(s => `rotate(-45deg) scale(${s})`)  }}>
+                <BlockquoteStart ready={ready} />
+                <Title ready={ready} />
+                <BlockquoteEnd ready={ready}>
+                  <BlockquoteEndContent ready={ready} />
+                </BlockquoteEnd>
+                <Abstract ready={ready} sections={{}} />
+                <HomeNav ready={ready} items={['album', 'split', 'ep']} from={50} section="releases" />
+                <HomeNav ready={ready} items={['nevers', 'rouge']} from={-50} section="videos" onRest={this.props.onNext} />
+              </animated.div>
+            </animated.header>
+          )}
+        </HomeSpring>
+        <button onClick={this.props.onNext} style={{ position: 'absolute', zIndex: 5000}}>
+          NEXT
+        </button>
+      </Fragment>
     )
   }
 }
 
-const mapAppContextToProps = state => ({
-  isReady: state.isReady(),
-  handleOnReady: state.onReady,
-  currentSection: state.currentSection,
-  prevSection: state.prevSection,
-  isCurrentSection: state.currentSection === 'home',
-  onClearPrevSection: state.onClearPrevSection,
+const mapAppContextToProps = context => ({
+  // isIdle: context.matches('ready.home.hero.idle'),
+  state: context.value.ready.home.hero
 });
 
 export default withApp(mapAppContextToProps)(Home);

@@ -15,6 +15,13 @@
     bottom: 10px;
     right: 10px;
   }
+
+  $releases: 'ep', 'split', 'album';
+  @each $release in $releases {
+    &--next-#{$release} .release--#{$release} { z-index: 150 }
+    &--current-#{$release} .release--#{$release} { z-index: 100 }
+    &--previous-#{$release} .release--#{$release} { z-index: 50 }
+  }
 }
 
 .release {

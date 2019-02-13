@@ -1,14 +1,19 @@
 import React from 'react'
 import { HotKeys } from "react-hotkeys";
 import classNames from 'classnames';
-import { withApp } from 'Contexts'
+import { withApp } from 'Hoc'
 import "./index.scss";
 
-const Layer = ({ children, history, isActive, className = "" }) => {
+const Layer = ({ children, history, isCurrentSection, section, className = "" }) => {
 
   const handleOnEsc = () => {
-    history.push('/')
+    // history.push('/')
+    console.log('handleOnEsc')
   };
+
+  const isActive = isCurrentSection(section)
+
+  // if(!isActive) return null
 
   const cx = classNames('layer', {
     'layer--active': isActive
@@ -31,9 +36,9 @@ const Layer = ({ children, history, isActive, className = "" }) => {
   );
 };
 
-const mapContextToProps = (state, ownProps) => ({
-  history: state.getHistory(),
-  isActive: state.currentSection === ownProps.section
+const mapContextToProps = (context, ownProps) => ({
+  history: null, //context.getHistory(),
+  // isActive: context.currentSection === ownProps.section
 });
 
 export default withApp(mapContextToProps)(Layer);

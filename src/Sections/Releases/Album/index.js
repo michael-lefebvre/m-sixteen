@@ -10,8 +10,8 @@ class ReleaseAlbum extends PureComponent {
     super( props )
 
     this.state = {
-      stage: props.state.toStrings()[0],
-      displayStory: props.state.matches('mounted.story'),
+      state: props.state,
+      displayStory: props.story,
       displayBkgd: false,
     };
 
@@ -19,19 +19,17 @@ class ReleaseAlbum extends PureComponent {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { state } = nextProps
-    const stage = state.toStrings()[0]
-    const displayStory = state.matches('mounted.story')
+    const { state, story: displayStory } = nextProps
 
     if(displayStory && !prevState.displayStory)
       return {
-        stage,
+        state,
         displayStory
       }
 
-    if( stage !== prevState.stage)
+    if( state !== prevState.state)
       return {
-        stage
+        state
       }
 
     return null;
@@ -58,16 +56,16 @@ class ReleaseAlbum extends PureComponent {
 
   handleOnAnimationEnd = () => {
     const { onNext } = this.props;
-    const { displayBkgd, stage } = this.state;
-    if( stage === 'entering' && !displayBkgd )
-      return this.setState({ displayBkgd: true }, onNext('entering'))
+    const { displayBkgd, state } = this.state;
+    if( state === 'entering' && !displayBkgd )
+      return this.setState({ displayBkgd: true }, onNext('entering')())
 
-    if( stage === 'leaving')
-      return onNext('leaving.animate')
+    if( state === 'leaving')
+      return onNext('leaving')()
   };
 
   handleOnScroll = (e) => {
-    if(!this.props.state.matches('mounted.story')) {
+    if(!this.props.story) {
       e.preventDefault()
       e.stopPropagation();
       return false;
@@ -88,11 +86,11 @@ class ReleaseAlbum extends PureComponent {
   // --------------------------------------------------
 
   render() {
-    const { displayStory, displayBkgd, stage } = this.state;
+    const { displayStory, displayBkgd, state } = this.state;
 
     const className = classNames('release__cover--album__cover', {
-      'release__cover--album__cover--entering': stage === 'entering',
-      'release__cover--album__cover--leaving': stage === 'leaving'
+      'release__cover--album__cover--entering': state === 'entering',
+      'release__cover--album__cover--leaving': state === 'leaving'
     })
     const classNameAlbum = classNames('release__cover release__cover--album', {
       'release__cover--album--mounted': displayStory

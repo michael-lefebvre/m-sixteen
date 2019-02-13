@@ -1,28 +1,68 @@
-import { useState, useMemo, useEffect } from "react"
-import merge from "lodash.merge"
-import { interpret } from "xstate/lib/interpreter"
+import { interpret } from 'xstate'
+import AppMachine from './App';
 
-const useMachine = (machine, { context, ...config } = {}) => {
-  const [state, setState] = useState(machine.initialState)
-  const service = useMemo(
-    () =>
-      interpret(
-        machine
-          .withContext(merge({}, machine.context, context))
-          .withConfig(config)
-      ),
-    []
-  )
+export { default as AppMachine } from './App';
+export { default as ReleaseMachine } from './Release';
 
-  useEffect(() => {
-    service.onTransition(setState).start()
-    return service.stop
-  }, [])
+class MachineInterpret {
+  constructor(){
+    this._service = null
+    this._started = false
 
-  return [state, service.send]
+    return this
+  }
+
+  init(context, config) {
+    if(this._service !== null)
+      throw new Error('Service already init')
+
+    this._service = interpret(
+      AppMachine
+        .withContext(context)
+        .withConfig(config)
+    )
+
+    return this
+  }
+
+  initialState() {
+    return AppMachine.initialState
+  }
+
+  initialContext() {
+    return AppMachine.context
+  }
+
+  get() {
+    if(this._service === null)
+      throw new Error('No service init')
+
+    return this._service
+  }
+
+  start() {
+    if(this._started)
+      throw new Error('Service already started')
+
+    this.get().start()
+
+    this._started = true
+  }
+
+  stop() {
+    if(!this._started)
+      throw new Error('Service not started')
+
+    this.get().stop()
+
+    this._started = false
+  }
+
+  send(o) {
+    return this.get().send(o)
+  }
 }
 
-export { default as AppMachine } from "./App";
-export { default as ReleaseMachine } from "./Release";
+const Machine = new MachineInterpret()
 
-export default useMachine
+export default Machine

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from "react-router-dom"
 import { AppContext } from 'Contexts'
 import Layout from 'Layout'
+// import Layout from 'Layout/Debug'
 import registerServiceWorker from 'registerServiceWorker'
 
 import 'Scss/index.scss'

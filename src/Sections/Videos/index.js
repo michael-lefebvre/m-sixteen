@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import YouTube    from 'react-youtube'
 import { Layer } from 'Components'
-import { withApp } from 'Contexts'
+import { withApp } from 'Hoc'
+import { getPhotoUrl } from 'Utils'
 
 import './index.scss'
 
@@ -84,10 +86,6 @@ class Videos extends PureComponent {
   // Events Handlers
   // --------------------------------------------------
 
-  handleOnClose = () => {
-    this.props.history.push('/')
-  };
-
   handleOnReady = ({ target }) => {
     this._player = target
     this.setState({ ready: true, videoState: 'pause' })
@@ -129,7 +127,7 @@ class Videos extends PureComponent {
     if(!id) return null;
     const isPayling = videoState === 'play';
     const style = {
-      backgroundImage: `url(/static/photos/videos/${id}-md.jpg)`,
+      backgroundImage: `url(${getPhotoUrl(`videos/${id}-md.jpg`)})`,
       opacity: isPayling ? 0 : 1,
       pointerEvents: isPayling ? 'none' : 'auto'
     }
@@ -144,19 +142,22 @@ class Videos extends PureComponent {
   render() {
     const { isActive, wasActive, ready } = this.state;
 
+    if(!isActive)
+      return null
+
     const className = classNames('videos', {
       'videos--active': isActive,
       'videos--closing': wasActive,
       'videos--ready': ready
     })
-
+    console.log(JSON.stringify(this.props.getValue(), null, 2))
     return (
       <Layer section="videos">
         <div className={className}>
-          <div className="videos__close" onClick={this.handleOnClose} />
+          <Link className="videos__close" to="/" />
           <div className="videos__content">
-            {this.thumbRenderer()}
-            {this.playerRenderer()}
+            {/*{this.thumbRenderer()}
+            {this.playerRenderer()}*/}
           </div>
         </div>
       </Layer>
@@ -164,11 +165,11 @@ class Videos extends PureComponent {
   }
 }
 
-const mapContextToProps = state => ({
-  ready: state.isReady(),
-  isActive: state.currentSection === "videos",
-  videoId: state.currentId,
-  history: state.getHistory()
+const mapContextToProps = context => ({
+  isActive: !context.matches('ready.videos.idle'),
+  videoId: context.context.id.current,
+  state: context.value.ready.videos
+  // history: state.getHistory()
 });
 
 export default withApp(mapContextToProps)(Videos);

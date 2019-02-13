@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import classNames from 'classnames'
-import { Layer } from 'Components';
-import Album from './Album'
-import Split from './Split'
-import Ep from './Ep'
+import { withApp } from 'Hoc'
+import ReleasesNav from './Nav'
+import 'Components/Layer/index.scss'
 import './index.scss'
 
-// const _DEBUG = false;
+const Album = lazy(() => import('./Album'));
+const Split = lazy(() => import('./Split'));
+const Ep = lazy(() => import('./Ep'));
 
 // https://codepen.io/2xsamurai/pen/WwmjKQ
 export const ReleasesScrollInvite  = ({ show }) => (
@@ -17,12 +18,29 @@ export const ReleasesScrollInvite  = ({ show }) => (
   </div>
 )
 
-const Releases = () => (
-  <Layer section="releases" className="releases">
-    <Album />
-    <Split />
-    <Ep />
-  </Layer>
+const Releases = ({ isActive, id: { next, current, previous }, scrollInvite }) => (
+  <div
+    className={classNames('layer releases', {
+      'layer--active': isActive,
+      [`releases--previous-${previous}`]: previous,
+      [`releases--current-${current}`]: current && isActive,
+      [`releases--next-${next}`]: next && isActive,
+    })}
+   >
+    <ReleasesNav />
+    <ReleasesScrollInvite show={scrollInvite} />
+    <Suspense fallback={null}>
+      <Album />
+      <Split />
+      <Ep />
+    </Suspense>
+  </div>
 );
 
-export default Releases
+const mapContextToProps = (context) => ({
+  isActive: !context.matches('ready.releases.idle'),
+  scrollInvite: context.matches('ready.releases.mounted.pending.idle'),
+  id: context.context.id,
+});
+
+export default withApp(mapContextToProps)(Releases);

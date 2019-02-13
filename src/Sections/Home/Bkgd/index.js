@@ -1,21 +1,25 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import YouTube from 'react-youtube'
-import { withApp } from 'Contexts'
+import { withApp } from 'Hoc'
 
 import './index.scss'
 
-class HomeBkgd extends Component {
+class HomeBkgd extends PureComponent {
 
   state = {
-    bkgdCanPlay: this.props.bkgdCanPlay,
-    showPlayer: this.props.showPlayer,
+    bkgdCanPlay: this.props.bkgdCanPlay(),
+    showPlayer: this.props.hasVideoHeader(),
   };
 
   _player = null;
 
+  _sendNext = false;
+
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { showPlayer, bkgdCanPlay } = nextProps;
+    const showPlayer = nextProps.hasVideoHeader();
+    const bkgdCanPlay = nextProps.bkgdCanPlay();
+
     if(showPlayer !== prevState.showPlayer || bkgdCanPlay !== prevState.bkgdCanPlay)
       return {
         bkgdCanPlay,
@@ -42,6 +46,7 @@ class HomeBkgd extends Component {
       this._player[ this.state.bkgdCanPlay ? 'playVideo' : 'pauseVideo']()
       return
     }
+
     this._shouldForceOnReady()
   }
 
@@ -50,8 +55,11 @@ class HomeBkgd extends Component {
   // --------------------------------------------------
 
   _shouldForceOnReady() {
-    if (this.state.showPlayer === false && this.props.isReady === false)
-      this.props.handleOnReady()
+    if (this.props.state === "mounted" && !this._sendNext) {
+      console.log('_shouldForceOnReady')
+      this._sendNext = true
+      this.props.onSend('HERO.NEXT')
+    }
   }
 
   //
@@ -73,8 +81,11 @@ class HomeBkgd extends Component {
     if(this.state.bkgdCanPlay !== true)
       this._player.pauseVideo()
 
-    if(!this.props.isReady)
-      this.props.handleOnReady()
+    if(!this.props.isIdle && !this._sendNext){
+      // console.log('onSend')
+      this._sendNext = true;
+      this.props.onSend('HERO.NEXT')
+    }
   };
 
   handleOnStateChange = (evt) => (e) => {
@@ -91,6 +102,7 @@ class HomeBkgd extends Component {
 
     if(!showPlayer) {
       this._player = null;
+      this._sendNext = false;
       return null;
     }
 
@@ -144,12 +156,12 @@ class HomeBkgd extends Component {
   }
 }
 
-const mapAppContextToProps = state => ({
-  bkgdCanPlay: state.bkgdCanPlay(),
+const mapAppContextToProps = context => ({
+  isIdle: context.matches('ready.home.bkgd.idle'),
+  state: context.value.ready.home.bkgd
+  // bkgdCanPlay: state.bkgdCanPlay(),
   // showPlayer: state.hasVideoHeader(),
-  showPlayer: false,
-  isReady: state.isReady(),
-  handleOnReady: state.onReady,
+  // showPlayer: false,
 });
 
 export default withApp(mapAppContextToProps)(HomeBkgd);

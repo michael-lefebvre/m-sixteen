@@ -1,92 +1,68 @@
-import React, { Component } from 'react';
-import { withRouter } from "react-router";
-import { getViewport, getSection, getParams, getComponentName } from 'Utils'
-import { MEDIA_QUERIES_LIST, MEDIA_QUERIES_BY_MATCH } from 'Constants';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router'
+import merge from 'lodash.merge'
+import Machine from 'Machines'
+import { getViewport, getRouteSection, getRouteId, getRouteParams, StoryTrigger, getComponentName } from 'Utils'
+import { MEDIA_QUERIES_LIST, MEDIA_QUERIES_BY_MATCH } from 'Constants'
 
-const getCurrentSection = (props) => {
-  const section = getSection(props)
-  return !section ? 'home' : section
-}
-
-const getCurrentId = (props) => {
-  const { id } = getParams(props)
-  return id || null;
-}
-
-const getInitialContext = () => ({
-  ...getViewport(),
+const defaultViewport = {
+  width: 0,
+  height: 0,
   device: null,
   orientation: null,
-  ready: false,
-  currentSection: null,
-  currentId: null,
-  prevSection: null,
-  previousId: null
+};
+
+const setCurrentMediaQueries = mq => ({ ...MEDIA_QUERIES_BY_MATCH[mq.media], ...getViewport() })
+
+const getInitialViewPort = () => MEDIA_QUERIES_LIST.reduce((a, mq) => {
+  const q = window.matchMedia(mq.match);
+  if(q.matches)
+    a = setCurrentMediaQueries(q)
+  return a
+}, defaultViewport);
+
+const getInitialContext = (props = null) => merge({}, Machine.initialContext(), {
+  section: {
+    current: getRouteSection(props)
+  },
+  id: {
+    current: getRouteId(props)
+  },
+  ...getInitialViewPort()
 });
 
-export const AppContext = React.createContext({
-  ...getInitialContext(),
-  isReady: () => null,
-  getViewPort: () => null,
-  hasVideoHeader: () => null,
-  getHistory: () => null,
-  bkgdCanPlay: () => null,
-  isDesktop: () => null,
-  isTablet: () => null,
-  isMobile: () => null,
-  isLandscape: () => null,
-  isCurrentSection: () => false,
-  wasPreviousSection: () => false,
-  onReady: () => null,
-  onSectionChange: () => null,
-  onClearPrevSection: () => null,
-});
+export const AppContext = React.createContext(getInitialContext());
 
 export const { Provider, Consumer } = AppContext;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...getInitialContext(),
-      currentSection: getCurrentSection(props),
-      currentId: getCurrentId(props),
-      isReady: this.isReady,
-      getViewPort: this.getViewPort,
-      getHistory: this.getHistory,
-      hasVideoHeader: this.hasVideoHeader,
-      bkgdCanPlay: this.bkgdCanPlay,
-      isDesktop: this.isDesktop,
-      isTablet: this.isTablet,
-      isMobile: this.isMobile,
-      isLandscape: this.isLandscape,
-      isCurrentSection: this.isCurrentSection,
-      wasPreviousSection: this.wasPreviousSection,
-      onReady: this.handleOnReady,
-      onSectionChange: this.handleOnSectionChange,
-      onClearPrevSection: this.handleOnClearPrevSection,
-    };
-  }
+
+  state = {
+    machine: Machine.initialState(),
+    pathname: this.props.location.pathname,
+  };
+
+  _escActive = false;
+
+  service = Machine
+    .init(getInitialContext(this.props), {
+      activities: {
+        waitingForStoryTrigger: ctx => this._setWaitingForStoryTrigger(ctx),
+        listenEscKey: ctx => this._setListenEscKey()
+      }
+    })
+    .get()
+    .onTransition(current => this.handleOnTransition(current));
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const currentSection = getCurrentSection(nextProps)
-    const currentId = getCurrentId(nextProps);
+    const { location: { pathname } } = nextProps;
 
-    if(currentSection !== prevState.currentSection)
+    if(pathname !== prevState.pathname)
       return {
-        prevSection: prevState.currentSection,
-        previousId: prevState.currentId,
-        currentSection,
-        currentId
+        pathname
       }
 
-    if(currentId !== prevState.currentId)
-      return {
-        previousId: prevState.currentId,
-        currentId
-      }
-
-    return null;
+    return null
   }
 
   //
@@ -95,67 +71,99 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleOnResize, { passive: true });
+    window.addEventListener('keydown', this.handleOnKeydown);
 
     MEDIA_QUERIES_LIST.forEach(mq => {
       const q = window.matchMedia(mq.match);
-      q.addListener(this.handleMediaQuery);
-      this.handleMediaQuery(q);
+      q.addListener(this.handleOnMediaQuery);
     });
+
+    this.service.start();
+    this.service.devTools.init(this.state.machine)
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleOnResize);
+
+    this.service.stop();
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    return prevState.pathname !== this.props.location.pathname
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (snapshot)
+      this._sectionNavigate()
   }
 
   //
   // Helpers
   // --------------------------------------------------
 
-  isReady = () => this.state.ready;
-
-  getViewPort = () => ({ offsetWidth: this.state.offsetWidth, offsetHeight: this.state.offsetHeight });
-
-  getHistory = () => this.props.history;
-
-  hasVideoHeader = () => {
-    const { device } = this.state;
-    if(device === null) return null;
-    return ['desktop', 'laptop'].indexOf(device) !== -1;
+  _send = evt => {
+    this.service.send(evt)
   };
 
-  isDesktop = () => this.state.device === 'desktop';
+  _setServiceContext = (context = {}) => this._send({ type: 'SET.CONTEXT', context });
 
-  isTablet = () => this.state.device === 'tablet';
+  _sectionNavigate = () => {
+    const { section = 'home', id = null } = getRouteParams(this.props)
+    const { section: { current: currentSection }, id: { current: currentId } } = this.state.machine.context;
 
-  isMobile = () => this.state.device === 'mobild';
+    if(currentSection !== section)
+      return this._send({type: 'SECTION.NAVIGATE', context: {
+        section: {
+          next: section
+        },
+        id: {
+          next: id
+        }
+      }})
 
-  isLandscape = () => this.state.orientation === 'landscape';
-
-  bkgdCanPlay = () => {
-    const { currentSection, prevSection } = this.state;
-    return ( this.hasVideoHeader() === true && currentSection === 'home' && prevSection === null )
+    if(currentId !== id)
+      return this._send({type: 'SECTION.NAVIGATE.ID', id })
   };
 
-  isCurrentSection = section => this.state.currentSection === section;
+  _setWaitingForStoryTrigger = ctx => {
+    StoryTrigger.start(ctx.id.current, this.handleOnStoryTrigger)
+    return () => StoryTrigger.stop()
+  };
 
-  wasPreviousSection = section => this.state.prevSection === section;
+  _setListenEscKey = ctx => {
+    this._escActive = true;
+    return () => this._escActive = false;
+  };
 
   //
   // Events Handlers
   // --------------------------------------------------
 
-  handleOnReady = () => this.setState({ ready: true });
-
-  handleMediaQuery = mq => {
-    if (mq.matches) this.setState({ ...MEDIA_QUERIES_BY_MATCH[mq.media], ...getViewport() })
+  handleOnMediaQuery = mq => {
+    if (mq.matches) this._setServiceContext(setCurrentMediaQueries(mq));
   };
 
-  handleOnSectionChange = (section) => this.setState(({ currentSection }) => ({ currentSection: section, prevSection: currentSection }));
-
-  handleOnClearPrevSection = () => this.setState({ prevSection: null, previousId: null });
-
   handleOnResize = () => {
-    this.setState({ ...getViewport() })
+    this._setServiceContext(getViewport());
+  };
+
+  handleOnTransition = machine => {
+    if(!machine.changed) return
+    this.setState({ machine });
+  };
+
+  handleOnStoryTrigger = _id => {
+    const { context: { id: { current } } } = this.state.machine;
+    if(_id !== current) {
+      console.error('handleOnStoryTrigger wrong release', { current, _id })
+      return
+    }
+    this._send('RELEASE.STORY');
+  };
+
+  handleOnKeydown = ({ keyCode }) => {
+    if(this._escActive && keyCode === 27)
+      this.props.history.push('/')
   };
 
   //
@@ -165,7 +173,10 @@ class App extends Component {
   render() {
     // console.log({ props: this.props})
     // console.log({ state: this.state})
-    return <Provider value={this.state}>{this.props.children}</Provider>;
+    // console.log({ machine: this.state.machine})
+    // console.log({ context: this.state.machine.context})
+    // console.log(this.service)
+    return <Provider value={this.state.machine}>{this.props.children}</Provider>;
   }
 }
 

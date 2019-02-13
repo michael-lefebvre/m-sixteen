@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Keyframes, animated } from 'react-spring'
 import { Link, NavLink } from "react-router-dom";
 import delay from 'delay'
+import { withApp } from 'Hoc'
 import { getNavImgSrc } from 'Utils'
 import './index.scss'
 
@@ -45,20 +46,37 @@ class ReleasesNav extends PureComponent {
     coversState: undefined
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { isIdle, isLeaving } = nextProps
+
+    if(prevState.coversState !== undefined && (isIdle || isLeaving))
+      return {
+        coversState: undefined
+      }
+
+    return null;
+  }
+
+
   handleOnMouseEnter = () => {
+    if(this.props.isIdle) return
     if(this.state.coversState === 'expend') return
-    this.setState({ coversState: 'expend' }, this.props.onMounted)
+    this.setState({ coversState: 'expend' }, () => this.props.onSend('RELEASE.PENDING'))
   };
 
   handleOnMouseLeave = () => {
+    // if(!this.props.isMounted && this.state.coversState !== undefined)
+    //   return this.setState({ coversState: undefined })
+
     if(this.state.coversState === 'unexpend') return
+
     this.setState({ coversState: 'unexpend' })
   };
 
   render() {
-    const { isMounted } = this.props;
+    const { isMounted, isIdle, isLeaving } = this.props;
     const { coversState } = this.state;
-    const state = !isMounted ? 'unmounted' : coversState === undefined ? 'mounted' : coversState;
+    const state = (isIdle || isLeaving) ? 'unmounted' : coversState === undefined ? 'mounted' : coversState;
     return (
       <NavState
         native
@@ -134,4 +152,10 @@ class ReleasesNav extends PureComponent {
   }
 }
 
-export default ReleasesNav;
+const mapContextToProps = (context) => ({
+  isIdle: context.matches('ready.releases.idle'),
+  isMounted:context.matches('ready.releases.mounted'),
+  isLeaving:context.matches('ready.releases.leaving'),
+});
+
+export default withApp(mapContextToProps)(ReleasesNav);

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { withApp } from 'Contexts'
+import { withApp } from 'Hoc'
 import { roundToEven } from 'Utils'
 import { Image } from 'Components';
 import './index.scss'
@@ -43,9 +43,9 @@ const SlideRecord = ({left, height}) => (
   </div>
 );
 
-const mapAppContextToProps = (state, { offset }) => ({
-  left: roundToEven(state.getViewPort().offsetWidth * offset),
-  height: state.getViewPort().offsetHeight
+const mapAppContextToProps = ({ context }, { offset }) => ({
+  left: roundToEven(context.width * offset),
+  height: context.height
 });
 
 export default withApp(mapAppContextToProps)(SlideRecord);

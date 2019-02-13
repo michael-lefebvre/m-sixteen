@@ -82,3 +82,34 @@ export const STORY_TRIGGER_EVENTS = [
   'MSPointerDown',
   'MSPointerMove'
 ]
+
+//
+// RELEASES
+// --------------------------------------------------
+
+export const RELEASES_ID = ['album', 'split', 'ep']
+export const RELEASES_COVERS = RELEASES_ID.map( id => `covers/${id}.jpg`)
+
+
+//
+// VIDEOS
+// --------------------------------------------------
+
+export const VIDEOS_ID = ['nevers', 'rouge']
+export const VIDEOS_THUMBS = VIDEOS_ID.map( id => `photos/videos/${id}-md.jpg`)
+
+//
+// App Loading
+// --------------------------------------------------
+
+export const APP_FONTS_LIST = [
+  { name: 'Open Sans', weight: 400 },
+  { name: 'Open Sans', weight: 700 },
+  { name: 'Open Sans', weight: 800 },
+  // { name: 'Open_Sans', weight: 900 },
+  { name: 'Rubik', weight: 500 },
+]
+export const APP_FONTS_TIMEOUT = 5000;
+export const APP_IMAGES_ONLOAD = [
+  'images/home-bkgd.jpg',
+].concat(RELEASES_COVERS, VIDEOS_THUMBS)

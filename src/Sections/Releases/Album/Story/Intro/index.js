@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 // import { Controller, config } from 'react-spring'
-import { withApp } from 'Contexts'
+import { withApp } from 'Hoc'
 import { Link } from "react-router-dom";
 // import classNames from 'classnames'
 import { Image } from 'Components';
@@ -83,13 +83,9 @@ class SlideIntro extends Component {
   }
 }
 
-const mapAppContextToProps = (state, { offset, factor }) => {
-  const { offsetWidth, offsetHeight } = state.getViewPort();
-
-  return {
-    left: roundToEven(offsetWidth * offset),
-    height: offsetHeight
-  }
-};
+const mapAppContextToProps = ({ context }, { offset, factor }) => ({
+  left: roundToEven(context.width * offset),
+  height: context.height
+});
 
 export default withApp(mapAppContextToProps)(SlideIntro);

@@ -14,10 +14,10 @@ const Inner = Keyframes.Spring({
   leaving: { delay: 0, o: 0 },
 })
 
-const ReleaseEpCover = ({ children, stage, onRest }) => (
+const ReleaseEpCover = ({ children, state, onRest }) => (
   <Bkgd
     native
-    state={stage}
+    state={state}
     onRest={onRest('leaving')}
   >
     {({ o }) => (
@@ -27,7 +27,7 @@ const ReleaseEpCover = ({ children, stage, onRest }) => (
       >
         <Inner
           native
-          state={stage}
+          state={state}
           onRest={onRest('entering')}
         >
           {({ o }) => (

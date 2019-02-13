@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Spring, animated } from 'react-spring'
-import { withApp } from 'Contexts'
+import { withApp } from 'Hoc'
 import { roundToEven } from 'Utils'
 import './index.scss'
 
@@ -27,11 +27,10 @@ const AlbumCover = ({ height, width, right, onRest }) => (
   </Spring>
 );
 
-const mapAppContextToProps = (state, { factor }) => {
-  const { offsetWidth, offsetHeight } = state.getViewPort();
-  const height = roundToEven(offsetWidth * factor);
-  const width = roundToEven(Math.sqrt(Math.pow(offsetHeight, 2) + Math.pow(height, 2)))
-  const right = offsetWidth - height;
+const mapAppContextToProps = ({ context }, { factor }) => {
+  const height = roundToEven(context.width * factor);
+  const width = roundToEven(Math.sqrt(Math.pow(context.height, 2) + Math.pow(height, 2)))
+  const right = context.width - height;
 
   return {
     width,

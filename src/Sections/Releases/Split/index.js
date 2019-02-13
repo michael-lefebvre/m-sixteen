@@ -21,19 +21,19 @@ const Container = Keyframes.Spring({
   },
 })
 
+const getStateFromProps = ({ state, story }) => ({
+  displayStory: story,
+  isLeaving: state === 'leaving',
+  isMounted: state === 'mounted',
+})
+
 class ReleaseSplit extends PureComponent {
 
-  state = {
-    displayStory: this.props.state.matches('mounted.story'),
-    isLeaving: this.props.state.matches('leaving.animate'),
-    isMounted: this.props.state.matches('mounted'),
-  };
+  state = getStateFromProps(this.props);
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { state } = nextProps
-    const displayStory = state.matches('mounted.story')
-    const isLeaving = state.matches('leaving.animate')
-    const isMounted = state.matches('mounted')
+    const { displayStory, isMounted, isLeaving } = getStateFromProps(nextProps);
+
     if( isMounted && !prevState.isMounted )
       return {
         isMounted
@@ -77,7 +77,7 @@ class ReleaseSplit extends PureComponent {
       <Container
         native
         state={ContainerState}
-        onRest={this.props.onNext('leaving.animate')}
+        onRest={this.props.onNext('leaving')}
       >
         {({ l, r, t }) => (
           <animated.div
