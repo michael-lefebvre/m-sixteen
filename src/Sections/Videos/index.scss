@@ -4,38 +4,23 @@
 //
 //##
 
-$bezize: cubic-bezier(0.785, 0.135, 0.15, 0.86);
-
 .videos {
   align-items: center;
   background: linear-gradient(to top, rgba($black,1) 0%,rgba($black,0) 100%);
-  background-size: 500% 500%;
   background-repeat: no-repeat;
   bottom: 0;
   display: flex;
   justify-content: center;
   left: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   pointer-events: none;
   position: fixed;
   right: 0;
   top: 0;
-  transition: all 250ms linear;
   z-index: $zindex-higher;
 
-  &--active {
-    background-size: 100% 100%;
+  &--mounted {
     pointer-events: auto;
-
-    .videos__content {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-      transition: transform 650ms ease-out, opacity 250ms linear 200ms;
-    }
-
-  }
-
-  &--ready {
 
     .videos__close {
       opacity: 1;
@@ -51,10 +36,13 @@ $bezize: cubic-bezier(0.785, 0.135, 0.15, 0.86);
         transition: transform 300ms ease 500ms;
       }
     }
+  }
 
+  &--ready {
     .videos__spinner {
       display: none
     }
+
     .videos__thumb {
       pointer-events: auto;
 
@@ -103,18 +91,17 @@ $bezize: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   background-size: cover;
   display: flex;
   flex-direction: column;
-  opacity: 0;
   height: 480px;
   width: 854px;
-  // transform: translateY(30%);
-  transform: scale(.9) translateY(5%);
-  transition: transform 250ms linear, opacity 250ms linear;
   z-index: 10;
   position: relative;
 }
 
 .videos__legend {
+  display: flex;
   color: #fff;
+  justify-content: space-between;
+
   h3 {
     font-size: 14px;
     margin-top: 10px;
@@ -123,6 +110,10 @@ $bezize: cubic-bezier(0.785, 0.135, 0.15, 0.86);
     font-size: 12px;
     font-weight: normal;
     margin-top: 4px
+  }
+
+  img {
+    height: 50px
   }
 }
 
@@ -135,6 +126,7 @@ $bezize: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   height: 100%;
   width: 100%;
   z-index: 1000;
+  transition: opacity 200ms linear;
   position: absolute;
   top: 0;
   left: 0;
@@ -213,5 +205,18 @@ $bezize: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 .videos__player {
-  opacity: 0
+  // height: 0;
+  opacity: 0;
+  // overflow: hidden;
+  // padding-bottom: 56.25%; /* 16:9 */
+  // padding-top: 25px;
+  // position: relative;
+
+  // iframe {
+  //   height: 100%;
+  //   left: 0;
+  //   position: absolute;
+  //   top: 0;
+  //   width: 100%;
+  // }
 }

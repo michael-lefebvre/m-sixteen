@@ -41,7 +41,7 @@ const getSectionStates = (section) => ({
         },
         'SECTION.NAVIGATE.ID': {
           cond: ctx => contextMatch(ctx, `section.current:${section}`),
-          actions: 'setSectionId'
+          actions: ['setSectionId', send('CONTEXT.UPDATED')]
         },
       }
     },

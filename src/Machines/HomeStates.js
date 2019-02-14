@@ -85,10 +85,10 @@ const homeStates = {
         videos_out: {
           on: {
             'HERO.NEXT': 'mounted',
-            // NEXT: {
-            //   target: 'mounted',
-            //   cond: ctx => contextMatch(ctx, 'section.current:home') && contextMatch(ctx, 'section.previous:videos')
-            // }
+            NEXT: {
+              target: 'mounted',
+              cond: ctx => contextMatch(ctx, 'section.current:home') && contextMatch(ctx, 'section.previous:videos')
+            }
           }
         },
       },

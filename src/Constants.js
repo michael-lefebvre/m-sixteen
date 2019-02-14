@@ -95,7 +95,20 @@ export const RELEASES_COVERS = RELEASES_ID.map( id => `covers/${id}.jpg`)
 // VIDEOS
 // --------------------------------------------------
 
-export const VIDEOS_ID = ['nevers', 'rouge']
+export const VIDEOS = {
+  'nevers': {
+    videoId: 'PhDboaR01zY',
+    title: 'Live at Nevers, FR',
+    description: 'Nov. 16 2007, Le café charbon',
+  },
+  rouge: {
+    videoId: 'Fj8WOeQamvw',
+    title: 'Rouge',
+    description: 'music video',
+  }
+};
+
+export const VIDEOS_ID = Object.keys(VIDEOS);
 export const VIDEOS_THUMBS = VIDEOS_ID.map( id => `photos/videos/${id}-md.jpg`)
 
 //

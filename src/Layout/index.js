@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { AppContext } from 'Contexts/App'
 import Home from 'Sections/Home'
 import Releases from 'Sections/Releases'
-// import Videos from 'Sections/Videos'
+import Videos from 'Sections/Videos'
 
 export default class Layout extends PureComponent {
   static contextType = AppContext;
@@ -32,7 +32,7 @@ export default class Layout extends PureComponent {
       <Fragment>
         <Home />
         <Releases />
-        {/*<Videos />*/}
+        <Videos />
       </Fragment>
     )
   }
