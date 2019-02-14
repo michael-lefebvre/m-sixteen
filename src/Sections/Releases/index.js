@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react';
 import classNames from 'classnames'
 import { withApp } from 'Hoc'
 import ReleasesNav from './Nav'
-import 'Components/Layer/index.scss'
 import './index.scss'
 
 const Album = lazy(() => import('./Album'));
