@@ -241,9 +241,9 @@ class Home extends PureComponent {
             </animated.header>
           )}
         </HomeSpring>
-        <button onClick={this.props.onNext} style={{ position: 'absolute', zIndex: 5000}}>
+        {/*<button onClick={this.props.onNext} style={{ position: 'absolute', zIndex: 5000}}>
           NEXT
-        </button>
+        </button>*/}
       </Fragment>
     )
   }
