@@ -5,6 +5,7 @@ import Bkgd from './Bkgd'
 const Home = () => (
   <Fragment>
     <Hero />
+    <div className="home-bkgd" />
     <Bkgd />
   </Fragment>
 )

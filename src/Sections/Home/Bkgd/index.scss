@@ -10,7 +10,7 @@
   right: 0;
   top: 0;
   width: 100%;
-  z-index: -99;
+  z-index: $zindex-home-video;
 
   &--mobile {
     background-image: url(/static/images/home-bkgd.jpg);

@@ -1,20 +1,28 @@
 @import "Scss/variables.scss";
 
+.home,
+.home-bkgd {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.home-bkgd {
+  background: rgba($color-bkgd, .3);
+  z-index: $zindex-home-bkgd;
+}
+
 .home {
   align-items: center;
-  background: rgba($color-bkgd, .3);
-  bottom: 0;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  left: 0;
   overflow: hidden;
-  position: fixed;
-  right: 0;
   text-align: center;
-  top: 0;
-  z-index: 10;
+  z-index: $zindex-home-hero;
   will-change: transform;
 }
 
