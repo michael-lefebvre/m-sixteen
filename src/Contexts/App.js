@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import merge from 'lodash.merge'
 import Machine from 'Machines'
-import { getViewport, getRouteSection, getRouteId, getRouteParams, StoryTrigger, getComponentName } from 'Utils'
+import { getViewport, getRouteSection, getRouteId, getRouteParams, StoryTrigger } from 'Utils'
 import { MEDIA_QUERIES_LIST, MEDIA_QUERIES_BY_MATCH } from 'Constants'
 
 const defaultViewport = {
@@ -171,25 +171,8 @@ class App extends Component {
   // --------------------------------------------------
 
   render() {
-    // console.log({ props: this.props})
-    // console.log({ state: this.state})
-    // console.log({ machine: this.state.machine})
-    // console.log({ context: this.state.machine.context})
-    // console.log(this.service)
     return <Provider value={this.state.machine}>{this.props.children}</Provider>;
   }
 }
 
 export default withRouter(App);
-
-export const withApp = (mapContextToProps = v => v) => (Child) => {
-  const WithApp = (props) => (
-    <Consumer>
-      {value => <Child {...mapContextToProps(value, props)} {...props} />}
-    </Consumer>
-  );
-
-  WithApp.displayName = `withApp(${getComponentName(Child)})`;
-
-  return WithApp
-}
