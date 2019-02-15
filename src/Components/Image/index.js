@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import { caf, raf, getPhotoUrl } from 'Utils'
-// import './styles.scss'
+import './index.scss'
 
 const getImages = ({src, extension}) => ({
   imgSmall: getPhotoUrl(`${src}-sm.${extension}`),
@@ -20,8 +20,11 @@ export default class Image extends PureComponent {
     ...getImages(this.props)
   };
 
-  _imgSmall = React.createRef();
-  _imgMedium  = React.createRef();
+  _refs = {
+    small: React.createRef(),
+    medium: React.createRef()
+  };
+
 
   // static getDerivedStateFromProps(nextProps, prevState) {
   //   const { isVisible } = nextProps
@@ -83,10 +86,10 @@ export default class Image extends PureComponent {
 
   _isComponentVisible = () => {
     // isComponentVisible might be called from componentDidMount, before component ref is assigned
-    if (!this._imgSmall.current || !this._imgSmall.current.getBoundingClientRect) return;
+    if (!this._refs.small.current || !this._refs.small.current.getBoundingClientRect) return;
 
     const html = document.documentElement;
-    const boundingClientRect = this._imgSmall.current.getBoundingClientRect();
+    const boundingClientRect = this._refs.small.current.getBoundingClientRect();
     const windowWidth = window.innerWidth || html.clientWidth;
     const windowHeight = window.innerHeight || html.clientHeight;
 
@@ -108,20 +111,8 @@ export default class Image extends PureComponent {
   // Handlers
   // --------------------------------------------------
 
-  handleOnSmallLoaded = () => {
-    this._imgSmall.current.style.opacity = 1;
-  };
-
-  handleOnMediumLoaded = () => {
-    this._imgMedium.current.style.opacity = 1;
-    this._imgSmall.current.style.display = 'none';
-  };
-
-  handleOnClick = () => {
-    // if( !this.props.video )
-    //   return
-
-    // this.props.openVideo( this.props.video )
+  handleOnLoad = ref => () => {
+    this._refs[ ref ].current.classList.add('figure__img--loaded')
   };
 
   //
@@ -142,21 +133,21 @@ export default class Image extends PureComponent {
       <Fragment>
         { this.state.isVisible && (
           <img
-            ref={this._imgMedium}
-            className={`page__image page__image__medium ${className}`}
+            ref={this._refs.medium}
+            className={`figure__img figure__img--medium ${className}`}
+            // className="figure__img figure__img--medium"
             src={this.state.imgMedium}
-            onLoad={this.handleOnMediumLoaded}
-            style={{ opacity: 0 }}
+            onLoad={this.handleOnLoad('medium')}
             alt=""
             {...rest}
           />
         )}
         <img
-          ref={this._imgSmall}
+          ref={this._refs.small}
           src={this.state.imgSmall}
-          className={`page__image page__image__small ${className}`}
-          onLoad={this.handleOnSmallLoaded}
-          style={{ opacity: 0 }}
+          className={`figure__img figure__img--small  ${className}`}
+          // className="figure__img figure__img--small"
+          onLoad={this.handleOnLoad('small')}
           alt=""
           {...rest}
         />
