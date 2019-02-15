@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import YouTube from 'react-youtube'
 import { withApp } from 'Hoc'
+import { HOME_BKGD_VIDEOID } from 'Constants'
 
 import './index.scss'
 
@@ -125,7 +126,7 @@ class HomeBkgd extends PureComponent {
 
     return (
       <YouTube
-       videoId="Pdni_p27l_0"
+       videoId={HOME_BKGD_VIDEOID}
        opts={videoOptions}
        className="home-video__background__foreground__iframe"
        // onStateChange={this.handleOnStateChange('onStateChange')}

@@ -126,3 +126,5 @@ export const APP_FONTS_TIMEOUT = 5000;
 export const APP_IMAGES_ONLOAD = [
   'images/home-bkgd.jpg',
 ].concat(RELEASES_COVERS, VIDEOS_THUMBS)
+
+export const HOME_BKGD_VIDEOID = 'Pdni_p27l_0';
