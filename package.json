@@ -27,9 +27,12 @@
   },
   "devDependencies": {
     "gh-pages": "^2.0.1",
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.11.0",
+    "source-map-explorer": "^1.7.0"
   },
   "scripts": {
+    "preanalyze": "react-scripts build",
+    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "PORT=3001 react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test --env=jsdom",
