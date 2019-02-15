@@ -28,13 +28,16 @@
   "devDependencies": {
     "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
+    "rimraf": "^2.6.3",
     "source-map-explorer": "^1.7.0"
   },
   "scripts": {
-    "preanalyze": "react-scripts build",
+    "prebuilder": "rimraf ./build",
+    "builder": "react-scripts build",
+    "preanalyze": "yarn builder",
     "analyze": "source-map-explorer build/static/js/main.*",
     "start": "PORT=3001 react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false yarn builder",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
