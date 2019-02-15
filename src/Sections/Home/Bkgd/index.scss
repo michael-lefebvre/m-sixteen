@@ -16,11 +16,18 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    filter: blur(0);
+    transition: all .2s linear;
   }
 
-  &--paused .home-video__background {
-    opacity: 0;
-    transition: opacity .2s linear .2s;
+  &--paused {
+    background-size: 100%;
+    filter: blur(10px);
+
+    // .home-video__background {
+    //   opacity: 0;
+    //   transition: opacity .2s linear .2s;
+    // }
   }
 
   &::after {

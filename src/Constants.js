@@ -87,7 +87,18 @@ export const STORY_TRIGGER_EVENTS = [
 // RELEASES
 // --------------------------------------------------
 
-export const RELEASES_ID = ['album', 'split', 'ep']
+export const RELEASES = {
+  album: {
+    title: 'Album',
+  },
+  split: {
+    title: 'Split w/ the Missing 23rd',
+  },
+  ep: {
+    title: 'Debut EP',
+  },
+};
+export const RELEASES_ID = Object.keys(RELEASES);
 export const RELEASES_COVERS = RELEASES_ID.map( id => `covers/${id}.jpg`)
 
 

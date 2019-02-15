@@ -3,8 +3,12 @@ import { Spring, Keyframes, Trail, animated } from 'react-spring'
 import { Link } from "react-router-dom";
 import { getNavImgSrc } from 'Utils'
 import { withApp } from 'Hoc'
+import { VIDEOS, VIDEOS_ID, RELEASES, RELEASES_ID } from 'Constants'
 
 import './index.scss'
+
+
+const getItemTitle = ({section, item}) => (section === 'videos' ? VIDEOS : RELEASES)[item].title;
 
 const BlockquoteStart = ({ ready }) => {
   const from = 'polygon(0% 0%, 0% 0%, -10% 100%, 0% 100%)'
@@ -84,7 +88,7 @@ const Title = ({ ready }) => (
   </Spring>
 )
 
-const Abstract = ({ ready, sections }) => (
+const Abstract = ({ ready, breadcrumb }) => (
   <Spring
     native
     immediate={!ready}
@@ -94,17 +98,28 @@ const Abstract = ({ ready, sections }) => (
     >
     {({ w, t }) => (
       <div className="home__abstract">
-        <animated.p className="home__abstract__txt" style={{ transform: t.interpolate(t => `translateY(${t}%)`) }}>
-          {/*JSON.stringify(sections)*/}
+        <animated.p
+          className="home__abstract__txt"
+          style={{
+            opacity: !!breadcrumb ? 0 : 1,
+            transform: t.interpolate(t => `translateY(${t}%)`)
+          }}
+         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent condimentum bibendum rhoncus. Duis viverra tempus felis, eu tempor nisi fringilla ac.
         </animated.p>
+        {breadcrumb && (
+          <div className={`home__breadcrumb home__breadcrumb--${breadcrumb.section}`}>
+            <span className="home__breadcrumb__section">{breadcrumb.section}</span>
+            <span className="home__breadcrumb__id">/{getItemTitle(breadcrumb)}</span>
+          </div>
+        )}
         <animated.hr className="home__abstract__hr" style={{ width: w.interpolate(w => `${w}%`) }} />
       </div>
     )}
   </Spring>
 )
 
-const HomeNav = ({ ready, items, from, section, onRest = () => null }) => {
+const HomeNav = ({ ready, items, from, section, onBreadcrumb, onRest = () => null }) => {
   return (
     <Spring
       native
@@ -115,7 +130,10 @@ const HomeNav = ({ ready, items, from, section, onRest = () => null }) => {
       onRest={onRest}
       >
       {({ t }) => (
-        <animated.ul className={`home__nav home__nav--${section}`} style={{ transform: t.interpolate(t => `translateX(${t}%)`) }}>
+        <animated.ul
+          className={`home__nav home__nav--${section}`}
+          style={{ transform: t.interpolate(t => `translateX(${t}%)`) }}
+        >
           <Trail
             items={items}
             config={{ delay: 1200 }}
@@ -126,7 +144,7 @@ const HomeNav = ({ ready, items, from, section, onRest = () => null }) => {
               // console.log(item)
               return (
               <animated.li className="home__nav__item" style={styles}>
-                <Link to={`/${section}/${item}`}>
+                <Link to={`/${section}/${item}`} onMouseEnter={onBreadcrumb({section, item})}>
                   <img src={getNavImgSrc(section, item)} className="home__nav__thumb" alt="" />
                 </Link>
               </animated.li>
@@ -153,9 +171,11 @@ const HomeSpring = Keyframes.Spring({
 })
 
 class Home extends PureComponent {
+
   state = {
     state: this.props.state,
-    mounted: false
+    mounted: false,
+    breadcrumb: null
   };
 
   _ref = React.createRef();
@@ -171,6 +191,7 @@ class Home extends PureComponent {
 
     if(state !== prevState.state)
       return {
+        breadcrumb: null,
         state
       }
 
@@ -201,12 +222,19 @@ class Home extends PureComponent {
     this.props.onNext()
   };
 
+  handleOnMouseEnter = breadcrumb => () => {
+    if(this.state.state === 'mounted')
+      this.setState({ breadcrumb });
+  };
+
+  handleOnMouseLeave = () => this.setState({ breadcrumb: null });
+
   //
   // Renderers
   // --------------------------------------------------
 
   render() {
-    const { state, mounted: ready } = this.state;
+    const { state, mounted: ready, breadcrumb } = this.state;
 
     // console.log('  ')
     // console.log({hasVideoHeader: this.props.hasVideoHeader(), bkgdCanPlay: this.props.bkgdCanPlay()})
@@ -234,9 +262,24 @@ class Home extends PureComponent {
                 <BlockquoteEnd ready={ready}>
                   <BlockquoteEndContent ready={ready} />
                 </BlockquoteEnd>
-                <Abstract ready={ready} sections={{}} />
-                <HomeNav ready={ready} items={['album', 'split', 'ep']} from={50} section="releases" />
-                <HomeNav ready={ready} items={['nevers', 'rouge']} from={-50} section="videos" onRest={this.props.onNext} />
+                <div onMouseLeave={this.handleOnMouseLeave}>
+                  <Abstract ready={ready} breadcrumb={breadcrumb} />
+                  <HomeNav
+                    ready={ready}
+                    items={RELEASES_ID}
+                    from={50}
+                    section="releases"
+                    onBreadcrumb={this.handleOnMouseEnter}
+                   />
+                  <HomeNav
+                    ready={ready}
+                    items={VIDEOS_ID}
+                    from={-50}
+                    section="videos"
+                    onBreadcrumb={this.handleOnMouseEnter}
+                    onRest={this.props.onNext}
+                  />
+                </div>
               </animated.div>
             </animated.header>
           )}

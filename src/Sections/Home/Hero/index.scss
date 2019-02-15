@@ -39,7 +39,7 @@
 
 .home__quote {
   text-transform: uppercase;
-  line-height: 1em;
+  // line-height: 1em;
   font-size: 28px;
   font-weight: $font-weight-heavy;
   letter-spacing: -1.2px;
@@ -95,6 +95,39 @@
 .home__abstract__txt {
   font-size: 12px;
   line-height: 16px;
+  transition: opacity .2s linear;
+  opacity: 1
+}
+
+.home__breadcrumb {
+  bottom: 2px;
+  left: 0;
+  position: absolute;
+  font-size: 28px;
+  font-weight: $font-weight-heavy;
+  letter-spacing: -1.2px;
+  z-index: 100;
+
+  &--releases {
+    left: -2px
+  }
+}
+
+.home__breadcrumb__id,
+.home__breadcrumb__section {
+}
+
+.home__breadcrumb__section {
+  color: $red;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+.home__breadcrumb__id {
+  font-size: 20px;
+  // margin-left: -2px;
+  small {
+    font-size: 16px
+  }
 }
 
 .home__abstract__hr {
