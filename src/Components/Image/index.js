@@ -1,18 +1,18 @@
-import React, { PureComponent, Fragment } from 'react'
-import { caf, raf, getPhotoUrl } from 'Utils'
-import './index.scss'
+import React, { PureComponent, Fragment } from 'react';
+import { caf, raf, getPhotoUrl } from 'Utils';
+import './index.scss';
 
-const getImages = ({src, extension}) => ({
+const getImages = ({ src, extension }) => ({
   imgSmall: getPhotoUrl(`${src}-sm.${extension}`),
   imgMedium: getPhotoUrl(`${src}-md.${extension}`)
-})
+});
 
 export default class Image extends PureComponent {
   static defaultProps = {
     extension: 'jpg',
     className: '',
     offset: 0,
-    partialVisibility: true,
+    partialVisibility: true
   };
 
   state = {
@@ -24,7 +24,6 @@ export default class Image extends PureComponent {
     small: React.createRef(),
     medium: React.createRef()
   };
-
 
   // static getDerivedStateFromProps(nextProps, prevState) {
   //   const { isVisible } = nextProps
@@ -41,16 +40,13 @@ export default class Image extends PureComponent {
   // --------------------------------------------------
 
   componentDidMount() {
-    if(!this.state.isVisible)
-      this._rafRef = raf(this._isComponentVisible)
+    if (!this.state.isVisible) this._rafRef = raf(this._isComponentVisible);
   }
 
-  componentDidUpdate() {
-  }
+  componentDidUpdate() {}
 
   componentWillUnmount() {
-    if(this._rafRef !== null)
-      caf(this._rafRef)
+    if (this._rafRef !== null) caf(this._rafRef);
   }
 
   //
@@ -86,7 +82,11 @@ export default class Image extends PureComponent {
 
   _isComponentVisible = () => {
     // isComponentVisible might be called from componentDidMount, before component ref is assigned
-    if (!this._refs.small.current || !this._refs.small.current.getBoundingClientRect) return;
+    if (
+      !this._refs.small.current ||
+      !this._refs.small.current.getBoundingClientRect
+    )
+      return;
 
     const html = document.documentElement;
     const boundingClientRect = this._refs.small.current.getBoundingClientRect();
@@ -99,11 +99,10 @@ export default class Image extends PureComponent {
       windowHeight
     );
 
-    if(!isVisible)
-      this._rafRef = raf(this._isComponentVisible)
+    if (!isVisible) this._rafRef = raf(this._isComponentVisible);
     else {
-      this._rafRef = null
-      this.setState({ isVisible })
+      this._rafRef = null;
+      this.setState({ isVisible });
     }
   };
 
@@ -112,7 +111,7 @@ export default class Image extends PureComponent {
   // --------------------------------------------------
 
   handleOnLoad = ref => () => {
-    this._refs[ ref ].current.classList.add('figure__img--loaded')
+    this._refs[ref].current.classList.add('figure__img--loaded');
   };
 
   //
@@ -127,11 +126,11 @@ export default class Image extends PureComponent {
       offset,
       partialVisibility,
       ...rest
-    } = this.props
+    } = this.props;
 
     return (
       <Fragment>
-        { this.state.isVisible && (
+        {this.state.isVisible && (
           <img
             ref={this._refs.medium}
             className={`figure__img figure__img--medium ${className}`}
@@ -152,6 +151,6 @@ export default class Image extends PureComponent {
           {...rest}
         />
       </Fragment>
-    )
+    );
   }
 }

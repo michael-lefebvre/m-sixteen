@@ -1,18 +1,15 @@
 import React from 'react';
-import { withRelease } from 'Hoc'
+import { withRelease } from 'Hoc';
 
 import assets from './Assets';
 
 import Cover from './Cover';
 import Story from './Story';
 
-import './index.scss'
+import './index.scss';
 
 const ReleaseEp = ({ story, state, onNext, onMounted }) => (
-  <Cover
-    state={state}
-    onRest={onNext}
-  >
+  <Cover state={state} onRest={onNext}>
     <Story
       story={story}
       // story={state.matches('ready.releases.mounted.story')}

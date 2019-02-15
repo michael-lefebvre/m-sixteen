@@ -8,10 +8,7 @@
     "venue": "Locaux Larsen",
     "city": "Chambery",
     "country": "France",
-    "bands": [
-      "Pamela",
-      "Softworld"
-    ]
+    "bands": ["Pamela", "Softworld"]
   },
   {
     "date": {
@@ -22,9 +19,7 @@
     "venue": "Fête de la musique",
     "city": "L'Isle adam",
     "country": "France",
-    "bands": [
-      "The Marxmallows"
-    ]
+    "bands": ["The Marxmallows"]
   },
   {
     "date": {
@@ -35,11 +30,7 @@
     "venue": "Maison de l'Isle adam",
     "city": "L'Isle adam",
     "country": "France",
-    "bands": [
-      "Flying Pooh",
-      "The Marxmallows",
-      "Day Off"
-    ]
+    "bands": ["Flying Pooh", "The Marxmallows", "Day Off"]
   },
   {
     "date": {
@@ -50,11 +41,7 @@
     "venue": "Fête de la musique",
     "city": "L'Isle adam",
     "country": "France",
-    "bands": [
-      "The Marxmallows",
-      "Day Off",
-      "Softworld"
-    ]
+    "bands": ["The Marxmallows", "Day Off", "Softworld"]
   },
   {
     "date": {
@@ -65,12 +52,7 @@
     "venue": "Back to your roots fest",
     "city": "Parmain",
     "country": "France",
-    "bands": [
-      "The Marxmallows",
-      "Day Off",
-      "Strike Back",
-      "NHC"
-    ]
+    "bands": ["The Marxmallows", "Day Off", "Strike Back", "NHC"]
   },
   {
     "date": {
@@ -81,12 +63,7 @@
     "venue": "Péniche blues café",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Wake n' Bake",
-      "Sagabronx",
-      "Taste it",
-      "36 Fist"
-    ]
+    "bands": ["Wake n' Bake", "Sagabronx", "Taste it", "36 Fist"]
   },
   {
     "date": {
@@ -97,13 +74,7 @@
     "venue": "House show",
     "city": "Pontoise",
     "country": "France",
-    "bands": [
-      "The Marxmallows",
-      "Day Off",
-      "Strike Back",
-      "NHC",
-      "Full Screen"
-    ]
+    "bands": ["The Marxmallows", "Day Off", "Strike Back", "NHC", "Full Screen"]
   },
   {
     "date": {
@@ -114,11 +85,7 @@
     "venue": "Péniche blues café",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "5 days off",
-      "Six rich dead",
-      "Off your head"
-    ]
+    "bands": ["5 days off", "Six rich dead", "Off your head"]
   },
   {
     "date": {
@@ -140,10 +107,7 @@
     "venue": "La mezzanine",
     "city": "Pierrelaye",
     "country": "France",
-    "bands": [
-      "Strike Back",
-      "Insula"
-    ]
+    "bands": ["Strike Back", "Insula"]
   },
   {
     "date": {
@@ -154,9 +118,7 @@
     "venue": "La Javanaise",
     "city": "Meaux",
     "country": "France",
-    "bands": [
-      "The Marxmallows"
-    ]
+    "bands": ["The Marxmallows"]
   },
   {
     "date": {
@@ -167,12 +129,7 @@
     "venue": "Festival rock",
     "city": "Auvers sur oise",
     "country": "France",
-    "bands": [
-      "Lagony",
-      "Wunjo",
-      "NSVF",
-      "Sismix dub"
-    ]
+    "bands": ["Lagony", "Wunjo", "NSVF", "Sismix dub"]
   },
   {
     "date": {
@@ -183,13 +140,7 @@
     "venue": "Place Jean Taris",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Softworld",
-      "The Marxmallows",
-      "Hogwash",
-      "Sagabronx",
-      "Lumpy"
-    ]
+    "bands": ["Softworld", "The Marxmallows", "Hogwash", "Sagabronx", "Lumpy"]
   },
   {
     "date": {
@@ -200,10 +151,7 @@
     "venue": "Studio de l'usine",
     "city": "Eragny",
     "country": "France",
-    "bands": [
-      "Undeclinable",
-      "Full Screen"
-    ]
+    "bands": ["Undeclinable", "Full Screen"]
   },
   {
     "date": {
@@ -214,12 +162,7 @@
     "venue": "La frat",
     "city": "Arcueil",
     "country": "France",
-    "bands": [
-      "Eths",
-      "The arss",
-      "Peach from the lair",
-      "Bawdy festival"
-    ]
+    "bands": ["Eths", "The arss", "Peach from the lair", "Bawdy festival"]
   },
   {
     "date": {
@@ -230,11 +173,7 @@
     "venue": "Le café montmartre",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Daria",
-      "Full Screen",
-      "Thirty Six Side"
-    ]
+    "bands": ["Daria", "Full Screen", "Thirty Six Side"]
   },
   {
     "date": {
@@ -245,9 +184,7 @@
     "venue": "Tapas la movida",
     "city": "Nice",
     "country": "France",
-    "bands": [
-      "Pink ponk"
-    ]
+    "bands": ["Pink ponk"]
   },
   {
     "date": {
@@ -259,10 +196,7 @@
     "tour": "NTM tour",
     "city": "Toulon",
     "country": "France",
-    "bands": [
-      "Superdumb",
-      "Matavan"
-    ]
+    "bands": ["Superdumb", "Matavan"]
   },
   {
     "date": {
@@ -274,9 +208,7 @@
     "tour": "NTM tour",
     "city": "Marseille",
     "country": "France",
-    "bands": [
-      "Fast4ward"
-    ]
+    "bands": ["Fast4ward"]
   },
   {
     "date": {
@@ -306,9 +238,7 @@
     "venue": "Lycée Massillon",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Full up"
-    ]
+    "bands": ["Full up"]
   },
   {
     "date": {
@@ -367,11 +297,7 @@
     "venue": "Péniche blues café",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Strike anywhere",
-      "NMDS",
-      "Strike Back"
-    ]
+    "bands": ["Strike anywhere", "NMDS", "Strike Back"]
   },
   {
     "date": {
@@ -382,11 +308,7 @@
     "venue": "Café montmartre",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Actions fall short",
-      "Burst one's side",
-      "manifest"
-    ]
+    "bands": ["Actions fall short", "Burst one's side", "manifest"]
   },
   {
     "date": {
@@ -397,12 +319,7 @@
     "venue": "Salle des fêtes",
     "city": "Pontoise",
     "country": "France",
-    "bands": [
-      "Off your head",
-      "Thirty Six Side",
-      "Strike Back",
-      "Union Jack"
-    ]
+    "bands": ["Off your head", "Thirty Six Side", "Strike Back", "Union Jack"]
   },
   {
     "date": {
@@ -413,10 +330,7 @@
     "venue": "Péniche alternat",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Sixtoys",
-      "Hogwash"
-    ]
+    "bands": ["Sixtoys", "Hogwash"]
   },
   {
     "date": {
@@ -427,11 +341,7 @@
     "venue": "Foyer municipal",
     "city": "Meulan",
     "country": "France",
-    "bands": [
-      "Strike Back",
-      "NHC",
-      "X-eed"
-    ]
+    "bands": ["Strike Back", "NHC", "X-eed"]
   },
   {
     "date": {
@@ -453,11 +363,7 @@
     "venue": "Salle des fêtes",
     "city": "Pontoise",
     "country": "France",
-    "bands": [
-      "Union Jack",
-      "courir les rues",
-      "Logoré"
-    ]
+    "bands": ["Union Jack", "courir les rues", "Logoré"]
   },
   {
     "date": {
@@ -468,10 +374,7 @@
     "venue": "Squat Alternation",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Metronome Charisma",
-      "Backsight"
-    ]
+    "bands": ["Metronome Charisma", "Backsight"]
   },
   {
     "date": {
@@ -501,14 +404,7 @@
     "venue": "Furia sound festival",
     "city": "Taverny",
     "country": "France",
-    "bands": [
-      "Zeke",
-      "Unsane",
-      "Ska-P",
-      "Svinkels",
-      "Cali",
-      "les Wampas"
-    ]
+    "bands": ["Zeke", "Unsane", "Ska-P", "Svinkels", "Cali", "les Wampas"]
   },
   {
     "date": {
@@ -519,11 +415,7 @@
     "venue": "Péniche alternat",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Shai-hulud",
-      "Draft",
-      "Last quiet time"
-    ]
+    "bands": ["Shai-hulud", "Draft", "Last quiet time"]
   },
   {
     "date": {
@@ -534,10 +426,7 @@
     "venue": "Studios de l'usine",
     "city": "Eragny",
     "country": "France",
-    "bands": [
-      "Union Jack",
-      "Minimum Serious"
-    ]
+    "bands": ["Union Jack", "Minimum Serious"]
   },
   {
     "date": {
@@ -548,10 +437,7 @@
     "venue": "Péniche alternat",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Justice",
-      "Mental"
-    ]
+    "bands": ["Justice", "Mental"]
   },
   {
     "date": {
@@ -562,11 +448,7 @@
     "venue": "Café montmartre",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Dumb resolution",
-      "Strike Back",
-      "NHC"
-    ]
+    "bands": ["Dumb resolution", "Strike Back", "NHC"]
   },
   {
     "date": {
@@ -578,9 +460,7 @@
     "tour": "Hogsteen tour",
     "city": "Dunkerke",
     "country": "France",
-    "bands": [
-      "Hogwash"
-    ]
+    "bands": ["Hogwash"]
   },
   {
     "date": {
@@ -592,11 +472,7 @@
     "tour": "Hogsteen tour",
     "city": "Charlerois",
     "country": "Belgium",
-    "bands": [
-      "Hogwash",
-      "Furious",
-      "Incriminate 77"
-    ]
+    "bands": ["Hogwash", "Furious", "Incriminate 77"]
   },
   {
     "date": {
@@ -608,9 +484,7 @@
     "tour": "Hogsteen tour",
     "city": "Le Havre",
     "country": "France",
-    "bands": [
-      "Hogwash"
-    ]
+    "bands": ["Hogwash"]
   },
   {
     "date": {
@@ -622,10 +496,7 @@
     "tour": "Hogsteen tour",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Hogwash",
-      "Mel team plugs"
-    ]
+    "bands": ["Hogwash", "Mel team plugs"]
   },
   {
     "date": {
@@ -637,10 +508,7 @@
     "tour": "Hogsteen tour",
     "city": "Nyon",
     "country": "Switzerland",
-    "bands": [
-      "Hogwash",
-      "Marplodz"
-    ]
+    "bands": ["Hogwash", "Marplodz"]
   },
   {
     "date": {
@@ -652,10 +520,7 @@
     "tour": "Hogsteen tour",
     "city": "Marseille",
     "country": "France",
-    "bands": [
-      "Hogwash",
-      "Day by Day"
-    ]
+    "bands": ["Hogwash", "Day by Day"]
   },
   {
     "date": {
@@ -667,10 +532,7 @@
     "tour": "Hogsteen tour",
     "city": "Lyon",
     "country": "France",
-    "bands": [
-      "Hogwash",
-      "Cortona"
-    ]
+    "bands": ["Hogwash", "Cortona"]
   },
   {
     "date": {
@@ -681,9 +543,7 @@
     "venue": "Le Zicodrome",
     "city": "Compiègne",
     "country": "France",
-    "bands": [
-      "Sanitary Napkins"
-    ]
+    "bands": ["Sanitary Napkins"]
   },
   {
     "date": {
@@ -694,10 +554,7 @@
     "venue": "Le Forum",
     "city": "Vauréal",
     "country": "France",
-    "bands": [
-      "Thirty Six Side",
-      "Strike Back"
-    ]
+    "bands": ["Thirty Six Side", "Strike Back"]
   },
   {
     "date": {
@@ -708,10 +565,7 @@
     "venue": "Le tigre",
     "city": "Selestat",
     "country": "France",
-    "bands": [
-      "By my fist",
-      "The deafening noise"
-    ]
+    "bands": ["By my fist", "The deafening noise"]
   },
   {
     "date": {
@@ -722,10 +576,7 @@
     "venue": "Bar la place",
     "city": "Caen",
     "country": "France",
-    "bands": [
-      "Dumb resolution",
-      "Every second week"
-    ]
+    "bands": ["Dumb resolution", "Every second week"]
   },
   {
     "date": {
@@ -736,10 +587,7 @@
     "venue": "Le Napoleon",
     "city": "Tours",
     "country": "France",
-    "bands": [
-      "Nine eleven",
-      "Get lost"
-    ]
+    "bands": ["Nine eleven", "Get lost"]
   },
   {
     "date": {
@@ -750,11 +598,7 @@
     "venue": "MJC",
     "city": "Plouarzel",
     "country": "France",
-    "bands": [
-      "FTX",
-      "Bunkum",
-      "Youssouf Today"
-    ]
+    "bands": ["FTX", "Bunkum", "Youssouf Today"]
   },
   {
     "date": {
@@ -784,10 +628,7 @@
     "venue": "Magnet club",
     "city": "Berlin",
     "country": "Germany",
-    "bands": [
-      "False Friend",
-      "Gest"
-    ]
+    "bands": ["False Friend", "Gest"]
   },
   {
     "date": {
@@ -798,12 +639,7 @@
     "venue": "Salle des fêtes",
     "city": "Meulan",
     "country": "France",
-    "bands": [
-      "Strike Back",
-      "Burst one's side",
-      "Chépa",
-      "Side effect"
-    ]
+    "bands": ["Strike Back", "Burst one's side", "Chépa", "Side effect"]
   },
   {
     "date": {
@@ -832,9 +668,7 @@
     "venue": "T'es rock coco",
     "city": "Angers",
     "country": "France",
-    "bands": [
-      "The Marxmallows"
-    ]
+    "bands": ["The Marxmallows"]
   },
   {
     "date": {
@@ -845,10 +679,7 @@
     "venue": "Bar des artistes",
     "city": "Laval",
     "country": "France",
-    "bands": [
-      "The Marxmallows",
-      "U-Skull"
-    ]
+    "bands": ["The Marxmallows", "U-Skull"]
   },
   {
     "date": {
@@ -859,12 +690,7 @@
     "venue": "Le Batofar",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Antimaniax",
-      "Union Jack",
-      "ISP",
-      "the Pookis"
-    ]
+    "bands": ["Antimaniax", "Union Jack", "ISP", "the Pookis"]
   },
   {
     "date": {
@@ -875,11 +701,7 @@
     "venue": "Le Batofar",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Thirty Six Side",
-      "The Marxmallows",
-      "Strike Back"
-    ]
+    "bands": ["Thirty Six Side", "The Marxmallows", "Strike Back"]
   },
   {
     "date": {
@@ -890,10 +712,7 @@
     "venue": "Les 18 marches",
     "city": "Moissy Crammayel",
     "country": "France",
-    "bands": [
-      "Leptik Ficus",
-      "Dice curse"
-    ]
+    "bands": ["Leptik Ficus", "Dice curse"]
   },
   {
     "date": {
@@ -904,10 +723,7 @@
     "venue": "Le coliseum café",
     "city": "Charlerois",
     "country": "Belgium",
-    "bands": [
-      "Hogwash",
-      "End over"
-    ]
+    "bands": ["Hogwash", "End over"]
   },
   {
     "date": {
@@ -918,11 +734,7 @@
     "venue": "Alternative festival",
     "city": "Villiers sur marne",
     "country": "France",
-    "bands": [
-      "Burnout",
-      "Toad flanders",
-      "Lethal"
-    ]
+    "bands": ["Burnout", "Toad flanders", "Lethal"]
   },
   {
     "date": {
@@ -933,12 +745,7 @@
     "venue": "Le Batofar",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Hogwash",
-      "Nothing More",
-      "The Marxmallows",
-      "Side effect"
-    ]
+    "bands": ["Hogwash", "Nothing More", "The Marxmallows", "Side effect"]
   },
   {
     "date": {
@@ -949,10 +756,7 @@
     "venue": "L'observatoire",
     "city": "Cergy",
     "country": "France",
-    "bands": [
-      "The Marxmallows",
-      "Thirty Six Side"
-    ]
+    "bands": ["The Marxmallows", "Thirty Six Side"]
   },
   {
     "date": {
@@ -963,11 +767,7 @@
     "venue": "Le backstage",
     "city": "Le Mans",
     "country": "France",
-    "bands": [
-      "Nine eleven",
-      "Monkey Said",
-      "Collaps machine"
-    ]
+    "bands": ["Nine eleven", "Monkey Said", "Collaps machine"]
   },
   {
     "date": {
@@ -995,10 +795,7 @@
     "venue": "le Batofar",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "This is a standoff",
-      "Big D and the kid table"
-    ]
+    "bands": ["This is a standoff", "Big D and the kid table"]
   },
   {
     "date": {
@@ -1010,9 +807,7 @@
     "tour": "knut tour",
     "city": "Berlin",
     "country": "Germany",
-    "bands": [
-      "False Friend"
-    ]
+    "bands": ["False Friend"]
   },
   {
     "date": {
@@ -1024,9 +819,7 @@
     "tour": "knut tour",
     "city": "Braunschweig",
     "country": "Germany",
-    "bands": [
-      "False Friend"
-    ]
+    "bands": ["False Friend"]
   },
   {
     "date": {
@@ -1038,9 +831,7 @@
     "tour": "knut tour",
     "city": "Bernau",
     "country": "Germany",
-    "bands": [
-      "False Friend"
-    ]
+    "bands": ["False Friend"]
   },
   {
     "date": {
@@ -1051,10 +842,7 @@
     "venue": "Le mondo bizarro",
     "city": "Rennes",
     "country": "France",
-    "bands": [
-      "Nine eleven",
-      "Baxter"
-    ]
+    "bands": ["Nine eleven", "Baxter"]
   },
   {
     "date": {
@@ -1065,10 +853,7 @@
     "venue": "Le mars attack",
     "city": "Angoulème",
     "country": "France",
-    "bands": [
-      "Nine eleven",
-      "Mel team plugs"
-    ]
+    "bands": ["Nine eleven", "Mel team plugs"]
   },
   {
     "date": {
@@ -1079,11 +864,7 @@
     "venue": "le Batofar",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Another Breath",
-      "The legacy",
-      "Burst one's side"
-    ]
+    "bands": ["Another Breath", "The legacy", "Burst one's side"]
   },
   {
     "date": {
@@ -1114,9 +895,7 @@
     "venue": "Le Boul et Bill",
     "city": "St Hilaire",
     "country": "France",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1127,10 +906,7 @@
     "venue": "La maroquinerie",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Strike anywhere",
-      "Berri Txarrak"
-    ]
+    "bands": ["Strike anywhere", "Berri Txarrak"]
   },
   {
     "date": {
@@ -1141,12 +917,7 @@
     "venue": "Skate parc",
     "city": "Mery sur oise",
     "country": "France",
-    "bands": [
-      "Side effect",
-      "Strike Back",
-      "Union Jack",
-      "Spark Gap"
-    ]
+    "bands": ["Side effect", "Strike Back", "Union Jack", "Spark Gap"]
   },
   {
     "date": {
@@ -1157,10 +928,7 @@
     "venue": "La scène bastille",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Straightaway",
-      "Idiotsincrazy"
-    ]
+    "bands": ["Straightaway", "Idiotsincrazy"]
   },
   {
     "date": {
@@ -1171,10 +939,7 @@
     "venue": "Le sonic",
     "city": "Lyon",
     "country": "France",
-    "bands": [
-      "Nine eleven",
-      "The amsterdam red light district"
-    ]
+    "bands": ["Nine eleven", "The amsterdam red light district"]
   },
   {
     "date": {
@@ -1185,10 +950,7 @@
     "venue": "Le volume",
     "city": "Nice",
     "country": "France",
-    "bands": [
-      "Nine eleven",
-      "Chasing Paperboy"
-    ]
+    "bands": ["Nine eleven", "Chasing Paperboy"]
   },
   {
     "date": {
@@ -1199,11 +961,7 @@
     "venue": "Le Klub",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "True colors",
-      "Fired up",
-      "Get lost"
-    ]
+    "bands": ["True colors", "Fired up", "Get lost"]
   },
   {
     "date": {
@@ -1214,10 +972,7 @@
     "venue": "Le café charbon",
     "city": "Nevers",
     "country": "France",
-    "bands": [
-      "Guerilla poubelle",
-      "Vulgaires machins"
-    ]
+    "bands": ["Guerilla poubelle", "Vulgaires machins"]
   },
   {
     "date": {
@@ -1229,10 +984,7 @@
     "tour": "European Tour 2008",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Nine eleven",
-      "Strike Back"
-    ]
+    "bands": ["Nine eleven", "Strike Back"]
   },
   {
     "date": {
@@ -1244,9 +996,7 @@
     "tour": "European Tour 2008",
     "city": "Besigheim",
     "country": "Germany",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1258,9 +1008,7 @@
     "tour": "European Tour 2008",
     "city": "Prievidza",
     "country": "Slovakia",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1272,9 +1020,7 @@
     "tour": "European Tour 2008",
     "city": "Banska Bystrika",
     "country": "Slovakia",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1286,9 +1032,7 @@
     "tour": "European Tour 2008",
     "city": "Szgeden",
     "country": "Hungary",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1300,9 +1044,7 @@
     "tour": "European Tour 2008",
     "city": "Budapest",
     "country": "Hungary",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1314,9 +1056,7 @@
     "tour": "European Tour 2008",
     "city": "Zagreb",
     "country": "Croatia",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1328,9 +1068,7 @@
     "tour": "European Tour 2008",
     "city": "Rijeka",
     "country": "Croatia",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1342,9 +1080,7 @@
     "tour": "European Tour 2008",
     "city": "Ljubljana",
     "country": "Slovenia",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1356,9 +1092,7 @@
     "tour": "European Tour 2008",
     "city": "Genève",
     "country": "Switzerland",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1369,9 +1103,7 @@
     "venue": "La fourmi",
     "city": "Limoge",
     "country": "France",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1382,10 +1114,7 @@
     "venue": "Des lendemains qui chantent",
     "city": "Tulle",
     "country": "France",
-    "bands": [
-      "Nine eleven",
-      "25 ta life"
-    ]
+    "bands": ["Nine eleven", "25 ta life"]
   },
   {
     "date": {
@@ -1396,9 +1125,7 @@
     "venue": "La scène bastille",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Headchargers"
-    ]
+    "bands": ["Headchargers"]
   },
   {
     "date": {
@@ -1409,11 +1136,7 @@
     "venue": "La mécanique ondulatoire",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Frank Turner",
-      "Bad Chikens",
-      "For a second"
-    ]
+    "bands": ["Frank Turner", "Bad Chikens", "For a second"]
   },
   {
     "date": {
@@ -1424,10 +1147,7 @@
     "venue": "L'espace B",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Off your head",
-      "Noid"
-    ]
+    "bands": ["Off your head", "Noid"]
   },
   {
     "date": {
@@ -1438,11 +1158,7 @@
     "venue": "Festival la ferme du rock",
     "city": "Pont-Sainte-Maxence",
     "country": "France",
-    "bands": [
-      "Nada Surf",
-      "Empyr",
-      "Tagada Jones"
-    ]
+    "bands": ["Nada Surf", "Empyr", "Tagada Jones"]
   },
   {
     "date": {
@@ -1454,9 +1170,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Micheldorf",
     "country": "Austria",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1468,9 +1182,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Zupanja",
     "country": "Croatia",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1482,9 +1194,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Zrenjanin",
     "country": "Serbia",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1496,9 +1206,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Cluj Napocca",
     "country": "Romania",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1510,9 +1218,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Bucarest",
     "country": "Romania",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1524,9 +1230,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Timisoara",
     "country": "Romania",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1538,9 +1242,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Selencha",
     "country": "Serbia",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1552,9 +1254,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Vicenza",
     "country": "Italy",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1566,9 +1266,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Turin",
     "country": "Italy",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1580,9 +1278,7 @@
     "tour": "European Tour 2008 part. 2",
     "city": "Nevers",
     "country": "France",
-    "bands": [
-      "Nine eleven"
-    ]
+    "bands": ["Nine eleven"]
   },
   {
     "date": {
@@ -1593,10 +1289,7 @@
     "venue": "L'espace B",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "The living Daylights",
-      "the fury furyz"
-    ]
+    "bands": ["The living Daylights", "the fury furyz"]
   },
   {
     "date": {
@@ -1607,11 +1300,7 @@
     "venue": "Le jardin moderne",
     "city": "Rennes",
     "country": "France",
-    "bands": [
-      "The living Daylights",
-      "Ravi",
-      "Sling 69"
-    ]
+    "bands": ["The living Daylights", "Ravi", "Sling 69"]
   },
   {
     "date": {
@@ -1694,12 +1383,7 @@
     "venue": "Alien Fest",
     "city": "Nantes",
     "country": "France",
-    "bands": [
-      "PO BOX",
-      "Diego Pallavas",
-      "Justine",
-      "Canisquare"
-    ]
+    "bands": ["PO BOX", "Diego Pallavas", "Justine", "Canisquare"]
   },
   {
     "date": {
@@ -1721,12 +1405,7 @@
     "venue": "Le happy days",
     "city": "Le Mans",
     "country": "France",
-    "bands": [
-      "Comeback Kid",
-      "Defeater",
-      "Alea Jacta est",
-      "Knock 4 six"
-    ]
+    "bands": ["Comeback Kid", "Defeater", "Alea Jacta est", "Knock 4 six"]
   },
   {
     "date": {
@@ -1737,10 +1416,7 @@
     "venue": "Glaz'art",
     "city": "Paris",
     "country": "France",
-    "bands": [
-      "Propagandhi",
-      "the twisted minds"
-    ]
+    "bands": ["Propagandhi", "the twisted minds"]
   },
   {
     "date": {
@@ -1751,11 +1427,7 @@
     "venue": "La chimère",
     "city": "Lille",
     "country": "France",
-    "bands": [
-      "Fake Off",
-      "Bedtime for charlie",
-      "backtime"
-    ]
+    "bands": ["Fake Off", "Bedtime for charlie", "backtime"]
   },
   {
     "date": {
@@ -1766,10 +1438,7 @@
     "venue": "Le shaka laka",
     "city": "Hazebrouk",
     "country": "France",
-    "bands": [
-      "Fake Off",
-      "Strugglin for reason"
-    ]
+    "bands": ["Fake Off", "Strugglin for reason"]
   },
   {
     "date": {

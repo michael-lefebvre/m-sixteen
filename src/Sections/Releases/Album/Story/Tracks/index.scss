@@ -1,4 +1,4 @@
-@import "Scss/variables.scss";
+@import 'Scss/variables.scss';
 
 .album__font {
   color: $white;
@@ -32,9 +32,15 @@
   // transition: all .2s linear;
 }
 
-.album__font__collapse { margin-left: -3px }
-.album__font__collapse--f { margin-left: -3px }
-.album__font__collapse--bkgd { background: $release-bkgd-album }
+.album__font__collapse {
+  margin-left: -3px;
+}
+.album__font__collapse--f {
+  margin-left: -3px;
+}
+.album__font__collapse--bkgd {
+  background: $release-bkgd-album;
+}
 
 .album__trackslist {
   cursor: pointer;
@@ -42,7 +48,7 @@
   flex-direction: column-reverse;
   height: 200px;
   list-style: none;
-  transform: rotate( -45deg );
+  transform: rotate(-45deg);
   width: 394px;
   position: absolute;
   left: 93vw;
@@ -76,6 +82,6 @@
   }
 
   span {
-    position: relative
+    position: relative;
   }
 }

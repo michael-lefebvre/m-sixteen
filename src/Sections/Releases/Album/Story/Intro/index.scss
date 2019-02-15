@@ -1,4 +1,4 @@
-@import "Scss/variables.scss";
+@import 'Scss/variables.scss';
 
 .album__intro {
   // background:pink;
@@ -7,7 +7,7 @@
   top: 0;
   transform-origin: top left;
   transform: rotate(45deg);
-  width: calc( 55vh + 40px);
+  width: calc(55vh + 40px);
   // z-index: 100;
 }
 
@@ -27,14 +27,13 @@
   z-index: -1;
 }
 
-
 .album__title_1 {
   // background: green;
   color: $red;
   font-size: 40px;
   font-weight: 700;
   letter-spacing: -0.06em;
-  line-height: .7;
+  line-height: 0.7;
   text-transform: uppercase;
   white-space: nowrap;
   writing-mode: vertical-rl;
@@ -44,9 +43,9 @@
     color: $white;
     font-size: 14px;
     letter-spacing: -0.02em;
-    margin-left: -.2rem;
+    margin-left: -0.2rem;
     position: relative;
-    top: -.4rem;
+    top: -0.4rem;
     transform: rotate(90deg);
     writing-mode: vertical-lr;
   }
@@ -85,6 +84,5 @@
 .img__label {
   display: inline-block;
   height: 50px;
-  margin-left: 1rem
+  margin-left: 1rem;
 }
-

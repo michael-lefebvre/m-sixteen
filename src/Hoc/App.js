@@ -1,20 +1,19 @@
-import React, { PureComponent } from 'react'
-import hoistStatics from 'hoist-non-react-statics'
-import _get from 'lodash.get'
-import { AppContext } from 'Contexts/App'
-import Machine from 'Machines'
-import { getComponentName } from 'Utils'
+import React, { PureComponent } from 'react';
+import hoistStatics from 'hoist-non-react-statics';
+import _get from 'lodash.get';
+import { AppContext } from 'Contexts/App';
+import Machine from 'Machines';
+import { getComponentName } from 'Utils';
 
-const withApp = (mapContextToProps = v => v) => (WrappedComponent) => {
+const withApp = (mapContextToProps = v => v) => WrappedComponent => {
   class AppHoc extends PureComponent {
-
     static contextType = AppContext;
 
     //
     // Helpers
     // --------------------------------------------------
 
-    getStateByPath = (path) => _get(this.context.value, path);
+    getStateByPath = path => _get(this.context.value, path);
 
     getValue = () => this.context.value;
 
@@ -28,7 +27,8 @@ const withApp = (mapContextToProps = v => v) => (WrappedComponent) => {
 
     isReady = () => this.context.matches('ready');
 
-    hasVideoHeader = () => ['desktop', 'laptop'].indexOf(this.getDevice()) !== -1;
+    hasVideoHeader = () =>
+      ['desktop', 'laptop'].indexOf(this.getDevice()) !== -1;
 
     getDevice = () => this.getContext().device;
 
@@ -43,8 +43,13 @@ const withApp = (mapContextToProps = v => v) => (WrappedComponent) => {
     isLandscape = () => this.getContext().orientation === 'landscape';
 
     bkgdCanPlay = () => {
-      const { current, previous, next } = this.getContext().section
-      return ( this.hasVideoHeader() && current === 'home' && previous === null  && next === null )
+      const { current, previous, next } = this.getContext().section;
+      return (
+        this.hasVideoHeader() &&
+        current === 'home' &&
+        previous === null &&
+        next === null
+      );
     };
 
     getHelpers = () => ({
@@ -60,14 +65,14 @@ const withApp = (mapContextToProps = v => v) => (WrappedComponent) => {
       isDesktop: this.isDesktop,
       isTablet: this.isTablet,
       isMobile: this.isMobile,
-      isLandscape: this.isLandscape,
+      isLandscape: this.isLandscape
     });
 
     //
     // Events Handlers
     // --------------------------------------------------
 
-    hanleOnSend = (evt) => Machine.send(evt);
+    hanleOnSend = evt => Machine.send(evt);
 
     hanleOnNext = () => this.hanleOnSend('NEXT');
 
@@ -75,7 +80,7 @@ const withApp = (mapContextToProps = v => v) => (WrappedComponent) => {
     // --------------------------------------------------
 
     render() {
-      const { props } = this
+      const { props } = this;
 
       return (
         <WrappedComponent
@@ -91,9 +96,9 @@ const withApp = (mapContextToProps = v => v) => (WrappedComponent) => {
 
   AppHoc.displayName = `withApp(${getComponentName(WrappedComponent)})`;
 
-  hoistStatics(AppHoc, WrappedComponent)
+  hoistStatics(AppHoc, WrappedComponent);
 
-  return AppHoc
-}
+  return AppHoc;
+};
 
-export default withApp
+export default withApp;

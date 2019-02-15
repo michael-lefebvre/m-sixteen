@@ -1,15 +1,19 @@
-@import "Scss/variables.scss";
+@import 'Scss/variables.scss';
 
 //== Spinner
 //
 //##
 
 .c-spinner {
-  animation: spinner .8s infinite cubic-bezier(0.4, 0, 1, 1);
+  animation: spinner 0.8s infinite cubic-bezier(0.4, 0, 1, 1);
   transform-origin: center;
 }
 
 @keyframes spinner {
-  0% { transform: rotate(0deg) }
-  100% { transform: rotate(360deg) }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

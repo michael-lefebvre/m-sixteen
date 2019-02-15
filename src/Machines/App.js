@@ -1,11 +1,11 @@
-import { Machine, assign, send } from 'xstate'
-import _merge from 'lodash.merge'
-import { ObserveFontsLoading, ImgPrefetch, ImgsPrefetch } from 'Utils'
+import { Machine, assign, send } from 'xstate';
+import _merge from 'lodash.merge';
+import { ObserveFontsLoading, ImgPrefetch, ImgsPrefetch } from 'Utils';
 // import { actionLog } from 'Utils'
-import home from './HomeStates'
-import { releases, videos, shows } from './SectionsStates'
-import ImgBkgd from 'Sections/Home/Bkgd/home-bkgd.jpg'
-import { APP_IMAGES_ONLOAD } from 'Constants'
+import home from './HomeStates';
+import { releases, videos, shows } from './SectionsStates';
+import ImgBkgd from 'Sections/Home/Bkgd/home-bkgd.jpg';
+import { APP_IMAGES_ONLOAD } from 'Constants';
 
 const appMachine = Machine(
   {
@@ -24,7 +24,7 @@ const appMachine = Machine(
       width: 0,
       height: 0,
       device: null,
-      orientation: null,
+      orientation: null
     },
     initial: 'loadind',
     states: {
@@ -51,12 +51,12 @@ const appMachine = Machine(
       },
       fatal: {
         type: 'final'
-      },
+      }
     },
     on: {
       'SET.CONTEXT': {
         actions: ['setContext', send('CONTEXT.UPDATED')]
-      },
+      }
     }
   },
   {
@@ -108,25 +108,24 @@ const appMachine = Machine(
             next: null
           }
         })
-      ),
+      )
     },
     services: {
       loadAppAssets: async context => {
-        const image = await ImgPrefetch(ImgBkgd, true).catch(e => false)
-        const images = await ImgsPrefetch(APP_IMAGES_ONLOAD).catch(e => false)
-        const fonts = await ObserveFontsLoading().catch(e => false)
-        const loaded = !!image && !!images && !!fonts
-        return Promise[loaded ? 'resolve' : 'reject'](true)
+        const image = await ImgPrefetch(ImgBkgd, true).catch(e => false);
+        const images = await ImgsPrefetch(APP_IMAGES_ONLOAD).catch(e => false);
+        const fonts = await ObserveFontsLoading().catch(e => false);
+        const loaded = !!image && !!images && !!fonts;
+        return Promise[loaded ? 'resolve' : 'reject'](true);
       }
     },
     guards: {
-      canPlayHomeVideo: ({ device, section: { current, next }}) =>
+      canPlayHomeVideo: ({ device, section: { current, next } }) =>
         ['desktop', 'laptop'].indexOf(device) !== -1 &&
         current === 'home' &&
         next === null,
-      canMountHomeVideo: ({ section: { current, next }}) =>
-        current === 'home'
-        // && next === null
+      canMountHomeVideo: ({ section: { current, next } }) => current === 'home'
+      // && next === null
     }
   }
 );

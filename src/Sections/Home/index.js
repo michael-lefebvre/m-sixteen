@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react'
-import Hero from './Hero'
-import Bkgd from './Bkgd'
+import React, { Fragment } from 'react';
+import Hero from './Hero';
+import Bkgd from './Bkgd';
 
 const Home = () => (
   <Fragment>
@@ -8,6 +8,6 @@ const Home = () => (
     <div className="home-bkgd" />
     <Bkgd />
   </Fragment>
-)
+);
 
 export default Home;

@@ -1,4 +1,4 @@
-@import "Scss/variables.scss";
+@import 'Scss/variables.scss';
 
 .release__story--album {
   position: absolute;
@@ -76,7 +76,7 @@
 }
 
 .album__paragraph {
-  font-size: .95rem;
+  font-size: 0.95rem;
   line-height: 1.5;
 
   & + & {
@@ -88,7 +88,7 @@
   }
 
   &--labels {
-    font-size: .8rem
+    font-size: 0.8rem;
   }
 }
 

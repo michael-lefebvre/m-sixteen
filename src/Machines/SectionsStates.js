@@ -1,17 +1,20 @@
 import { send } from 'xstate';
-import _merge from 'lodash.merge'
-import { contextMatch } from 'Utils'
-import { RELEASE_IDLE_TIMEOUT } from 'Constants'
+import _merge from 'lodash.merge';
+import { contextMatch } from 'Utils';
+import { RELEASE_IDLE_TIMEOUT } from 'Constants';
 
-const getSectionStates = (section) => ({
+const getSectionStates = section => ({
   initial: 'unknown',
   states: {
     unknown: {
       on: {
         '': [
-          { target: 'entering', cond: ctx => contextMatch(ctx, `section.current:${section}`) },
-          { target: 'idle' },
-        ],
+          {
+            target: 'entering',
+            cond: ctx => contextMatch(ctx, `section.current:${section}`)
+          },
+          { target: 'idle' }
+        ]
       }
     },
     idle: {
@@ -28,7 +31,7 @@ const getSectionStates = (section) => ({
           target: 'mounted',
           cond: ctx => contextMatch(ctx, `section.current:${section}`)
         }
-      },
+      }
     },
     mounted: {
       activities: ['listenEscKey'],
@@ -42,7 +45,7 @@ const getSectionStates = (section) => ({
         'SECTION.NAVIGATE.ID': {
           cond: ctx => contextMatch(ctx, `section.current:${section}`),
           actions: ['setSectionId', send('CONTEXT.UPDATED')]
-        },
+        }
       }
     },
     leaving: {
@@ -51,15 +54,17 @@ const getSectionStates = (section) => ({
         NEXT: {
           target: 'idle',
           actions: ['setNextToCurrentSection', send('NEXT')],
-          cond: ctx => contextMatch(ctx, `section.previous:${section}`) && contextMatch(ctx, 'section.next:home')
+          cond: ctx =>
+            contextMatch(ctx, `section.previous:${section}`) &&
+            contextMatch(ctx, 'section.next:home')
         }
-      },
-    },
-  },
-})
+      }
+    }
+  }
+});
 
-export const videos = _merge({}, getSectionStates('videos'))
-export const shows = _merge({}, getSectionStates('shows'))
+export const videos = _merge({}, getSectionStates('videos'));
+export const shows = _merge({}, getSectionStates('shows'));
 
 export const releases = _merge({}, getSectionStates('releases'), {
   states: {
@@ -67,33 +72,33 @@ export const releases = _merge({}, getSectionStates('releases'), {
       on: {
         'SECTION.NAVIGATE.ID': {
           target: 'entering'
-        },
+        }
       },
       initial: 'pending',
       states: {
         pending: {
-          initial: "init",
+          initial: 'init',
           states: {
             init: {
               after: {
                 [RELEASE_IDLE_TIMEOUT]: 'idle'
-              },
+              }
             },
             idle: {
               on: {
-                'RELEASE.PENDING': 'init',
-              },
-            },
+                'RELEASE.PENDING': 'init'
+              }
+            }
           },
           on: {
-            'RELEASE.STORY': 'story',
+            'RELEASE.STORY': 'story'
           },
-          activities: ['waitingForStoryTrigger'],
+          activities: ['waitingForStoryTrigger']
         },
         story: {
           type: 'final'
-        },
+        }
       }
     }
   }
-})
+});

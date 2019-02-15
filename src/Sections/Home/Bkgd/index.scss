@@ -1,4 +1,4 @@
-@import "Scss/variables.scss";
+@import 'Scss/variables.scss';
 
 .home-video {
   background-color: $color-bkgd;
@@ -18,7 +18,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(0);
-    transition: all .2s linear;
+    transition: all 0.2s linear;
   }
 
   &--paused {
@@ -32,7 +32,7 @@
   }
 
   &::after {
-    background: rgba(0,0,0,0.35);
+    background: rgba(0, 0, 0, 0.35);
     content: '';
     display: block;
     height: 100%;
@@ -44,10 +44,19 @@
   }
 
   &:before {
-    background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-image: linear-gradient(
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 1) 50%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.06),
+        rgba(0, 255, 0, 0.02),
+        rgba(0, 0, 255, 0.06)
+      );
     background-size: 100% 2px, 3px 100%;
     bottom: 0;
-    content: " ";
+    content: ' ';
     display: block;
     left: 0;
     pointer-events: none;
@@ -60,7 +69,7 @@
 
 .home-video__background {
   opacity: 1;
-  transition: opacity .2s linear;
+  transition: opacity 0.2s linear;
 }
 
 .home-video__background,
@@ -74,8 +83,14 @@
 }
 
 @media (min-aspect-ratio: 16/9) {
-  .home-video__background { height: 300%; top: -100%; }
+  .home-video__background {
+    height: 300%;
+    top: -100%;
+  }
 }
 @media (max-aspect-ratio: 16/9) {
-  .home-video__background { width: 300%; left: -100%; }
+  .home-video__background {
+    width: 300%;
+    left: -100%;
+  }
 }

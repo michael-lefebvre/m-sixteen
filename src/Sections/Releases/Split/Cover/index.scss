@@ -1,4 +1,4 @@
-@import "Scss/variables.scss";
+@import 'Scss/variables.scss';
 
 .split__cover {
   -webkit-mask-position: 100% 100%;
@@ -9,7 +9,7 @@
   z-index: 100;
 
   &--story {
-    transition: -webkit-mask-position .01s linear .2s;
+    transition: -webkit-mask-position 0.01s linear 0.2s;
     -webkit-mask-position: 0 100%;
   }
 }
@@ -17,7 +17,7 @@
 .split__cover__bkgd {
   background: #9e0000;
   .split__dotted-mother:before {
-    opacity: .2;
+    opacity: 0.2;
     z-index: 10;
   }
 }

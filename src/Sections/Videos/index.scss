@@ -1,4 +1,4 @@
-@import "Scss/variables.scss";
+@import 'Scss/variables.scss';
 
 //== Video Modal
 //
@@ -6,7 +6,7 @@
 
 .videos {
   align-items: center;
-  background: linear-gradient(to top, rgba($black,1) 0%,rgba($black,0) 100%);
+  background: linear-gradient(to top, rgba($black, 1) 0%, rgba($black, 0) 100%);
   background-repeat: no-repeat;
   bottom: 0;
   display: flex;
@@ -40,7 +40,7 @@
 
   &--ready {
     .videos__spinner {
-      display: none
+      display: none;
     }
 
     .videos__thumb {
@@ -52,7 +52,7 @@
     }
 
     .videos__player {
-      opacity: 1
+      opacity: 1;
     }
   }
 }
@@ -81,8 +81,12 @@
     transition: transform 1s ease;
   }
 
-  &:after { transition: transform 300ms ease; }
-  &:before { transition: transform 200ms ease; }
+  &:after {
+    transition: transform 300ms ease;
+  }
+  &:before {
+    transition: transform 200ms ease;
+  }
 }
 
 .videos__content {
@@ -109,11 +113,11 @@
   h4 {
     font-size: 12px;
     font-weight: normal;
-    margin-top: 4px
+    margin-top: 4px;
   }
 
   img {
-    height: 50px
+    height: 50px;
   }
 }
 
@@ -132,13 +136,13 @@
   left: 0;
 
   &:before {
-    background-color: rgba( $black, .4);
+    background-color: rgba($black, 0.4);
     background-image: url(./icon-play.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 40%;
     border-radius: 42px;
-    border: 2px solid rgba( #fff, .8);
+    border: 2px solid rgba(#fff, 0.8);
     content: '';
     display: block;
     height: 84px;
@@ -148,7 +152,7 @@
     margin-top: -42px;
     position: absolute;
     top: 50%;
-    transition: all .2s linear;
+    transition: all 0.2s linear;
     width: 84px;
     z-index: 100;
     cursor: pointer;

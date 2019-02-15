@@ -1,11 +1,10 @@
-@import "Scss/variables.scss";
+@import 'Scss/variables.scss';
 
 .release__cover--split {
   background: #ccc;
   height: 100%;
   width: 60%;
 }
-
 
 .split {
   bottom: 0;
@@ -21,12 +20,11 @@
   }
 }
 
-
 /* Generic
 --------------------------------------------- */
 
 .split-container {
-/* /
+  /* /
   background: blue;
   border: 2px solid red;
 /**/
@@ -48,7 +46,7 @@
   content: '';
   left: 0;
   mix-blend-mode: multiply;
-  opacity: .05;
+  opacity: 0.05;
   pointer-events: none;
   position: absolute;
   right: 0;
@@ -61,4 +59,3 @@
     background-size: contain;
   }
 }
-

@@ -1,10 +1,10 @@
-import React, { PureComponent, Fragment } from 'react'
-import { AppContext } from 'Contexts/App'
-import Home from 'Sections/Home'
-import Releases, { ReleasesLoading } from 'Sections/Releases'
-import Videos from 'Sections/Videos'
-import Shows from 'Sections/Shows'
-import ImgErr from './img_error.jpg'
+import React, { PureComponent, Fragment } from 'react';
+import { AppContext } from 'Contexts/App';
+import Home from 'Sections/Home';
+import Releases, { ReleasesLoading } from 'Sections/Releases';
+import Videos from 'Sections/Videos';
+import Shows from 'Sections/Shows';
+import ImgErr from './img_error.jpg';
 
 const _DEBUG = false;
 
@@ -22,14 +22,15 @@ export default class Layout extends PureComponent {
   // --------------------------------------------------
 
   componentDidCatch(error, info) {
-    console.log(info.componentStack)
+    console.log(info.componentStack);
   }
 
   //
   // Helpers
   // --------------------------------------------------
 
-  _hasErrorBoundary = () => this.state.hasError || this.context.matches('fatal')
+  _hasErrorBoundary = () =>
+    this.state.hasError || this.context.matches('fatal');
 
   //
   // Events Handlers
@@ -40,7 +41,7 @@ export default class Layout extends PureComponent {
   // --------------------------------------------------
 
   miniDebugRenderer() {
-    if(!_DEBUG) return null
+    if (!_DEBUG) return null;
 
     return (
       <div className="mini-debug">
@@ -49,7 +50,7 @@ export default class Layout extends PureComponent {
         <pre>{JSON.stringify(this.context.context, null, 2)}</pre>
         <pre>{JSON.stringify(this.context.nextEvents, null, 2)}</pre>
       </div>
-    )
+    );
   }
 
   errorBoundaryRenderer() {
@@ -65,11 +66,9 @@ export default class Layout extends PureComponent {
   }
 
   render() {
-    if (this._hasErrorBoundary())
-      return this.errorBoundaryRenderer()
+    if (this._hasErrorBoundary()) return this.errorBoundaryRenderer();
 
-    if(!this.context.matches('ready'))
-      return <ReleasesLoading />
+    if (!this.context.matches('ready')) return <ReleasesLoading />;
 
     return (
       <Fragment>
@@ -79,6 +78,6 @@ export default class Layout extends PureComponent {
         <Shows />
         {this.miniDebugRenderer()}
       </Fragment>
-    )
+    );
   }
 }

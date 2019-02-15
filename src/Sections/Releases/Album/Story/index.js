@@ -1,18 +1,18 @@
+import React, { PureComponent } from 'react';
+import { Controller, config } from 'react-spring';
+import { AnimatedDiv } from 'Utils';
+import Cover from '../Cover';
+import Intro from './Intro';
+import Record from './Record';
+import Tracks from './Tracks';
 
-import React, { PureComponent } from 'react'
-import { Controller, config } from 'react-spring'
-import { AnimatedDiv } from 'Utils'
-import Cover from '../Cover'
-import Intro from './Intro'
-import Record from './Record'
-import Tracks from './Tracks'
-
-import './index.scss'
-
+import './index.scss';
 
 const TOTAL_SLIDES = 5;
-const SLIDES_ARR = Array(TOTAL_SLIDES).fill().map((x,i)=>i);
-const SLIDES_SPEED = .7;
+const SLIDES_ARR = Array(TOTAL_SLIDES)
+  .fill()
+  .map((x, i) => i);
+const SLIDES_SPEED = 0.7;
 
 const _setPosition = scrollTop => ({
   translate: parseFloat(-(scrollTop * SLIDES_SPEED)),
@@ -20,29 +20,28 @@ const _setPosition = scrollTop => ({
 });
 
 class ReleaseAlbumStory extends PureComponent {
-
   controller = new Controller(_setPosition(0));
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { displayStory, displayBkgd } = nextProps;
-    if(
+    if (
       prevState.displayBkgd !== displayBkgd ||
       prevState.displayStory !== displayStory
     )
       return {
         displayBkgd,
-        displayStory,
-      }
+        displayStory
+      };
 
     return null;
   }
 
-  constructor( props ) {
-    super( props )
+  constructor(props) {
+    super(props);
 
     this.state = {
       displayStory: props.displayStory,
-      displayBkgd: props.displayBkgd,
+      displayBkgd: props.displayBkgd
     };
   }
 
@@ -51,7 +50,7 @@ class ReleaseAlbumStory extends PureComponent {
   // --------------------------------------------------
 
   componentDidMount() {
-    this.props.onMounted(this)
+    this.props.onMounted(this);
   }
 
   //
@@ -59,7 +58,7 @@ class ReleaseAlbumStory extends PureComponent {
   // --------------------------------------------------
 
   setPosition(scrollTop) {
-    this.controller.update(_setPosition(scrollTop))
+    this.controller.update(_setPosition(scrollTop));
   }
 
   //
@@ -80,13 +79,13 @@ class ReleaseAlbumStory extends PureComponent {
   // --------------------------------------------------
 
   render() {
-    const { displayBkgd, /*displayStory, width, height*/ } = this.state;
+    const { displayBkgd /*displayStory, width, height*/ } = this.state;
 
-    if(!displayBkgd) return null
+    if (!displayBkgd) return null;
 
     const translate3d = this.controller.interpolations.translate.interpolate(
       x => `translate3d(${x}px,0,0)`
-    )
+    );
 
     return (
       <div className="release__story release__story--album">
@@ -95,25 +94,23 @@ class ReleaseAlbumStory extends PureComponent {
           // ref={this._scroller}
           onScroll={this.props.onScroll}
         >
-          <div
-            className="slides"
-          >
-            {SLIDES_ARR.map((s,i) =>
-              <div
-                className="slide"
-                key={`album__scroller_slide__${i}`}
-              />
-            )}
+          <div className="slides">
+            {SLIDES_ARR.map((s, i) => (
+              <div className="slide" key={`album__scroller_slide__${i}`} />
+            ))}
           </div>
         </div>
-        <AnimatedDiv className="release__story__content" style={{ transform: translate3d }}>
-          <Cover onRest={this.props.onRest} factor={.8} />
-          <Intro onMounted={this.props.onMounted} factor={.6} offset={.8} />
+        <AnimatedDiv
+          className="release__story__content"
+          style={{ transform: translate3d }}
+        >
+          <Cover onRest={this.props.onRest} factor={0.8} />
+          <Intro onMounted={this.props.onMounted} factor={0.6} offset={0.8} />
           <Record offset={1} />
           <Tracks />
         </AnimatedDiv>
       </div>
-    )
+    );
   }
 }
 

@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react'
-import { Keyframes, animated, interpolate } from 'react-spring'
-import { Link } from 'react-router-dom'
-import YouTube from 'react-youtube'
-import classNames from 'classnames'
-import { VideoContext } from 'Contexts'
-import { getInitialContext } from 'Contexts/Video'
-import { withApp } from 'Hoc'
-import { VIDEOS } from 'Constants'
-import Thumb from './Thumb'
-import Legend from './Legend'
-import NextLink from './Next'
+import React, { PureComponent } from 'react';
+import { Keyframes, animated, interpolate } from 'react-spring';
+import { Link } from 'react-router-dom';
+import YouTube from 'react-youtube';
+import classNames from 'classnames';
+import { VideoContext } from 'Contexts';
+import { getInitialContext } from 'Contexts/Video';
+import { withApp } from 'Hoc';
+import { VIDEOS } from 'Constants';
+import Thumb from './Thumb';
+import Legend from './Legend';
+import NextLink from './Next';
 
-import './index.scss'
+import './index.scss';
 
 const _defaultProps = { b: 500, s: 1, t: 5, o: 0 };
 const _mountedProps = { b: 100, s: 1, t: 0, o: 1 };
@@ -20,35 +20,36 @@ const VideoSpring = Keyframes.Spring({
   idle: { immediate: true, from: _defaultProps, to: _defaultProps },
   entering: { to: _mountedProps, from: _defaultProps },
   // mounted: { s: 1, t: 0, o: 1 },
-  leaving: _defaultProps,
-})
+  leaving: _defaultProps
+});
 
-const getId = ({ current, next, previous }) => current || previous || next || null;
+const getId = ({ current, next, previous }) =>
+  current || previous || next || null;
 
 const getInitialState = ({ state, videoId }) => ({
   ...getInitialContext(),
   videoId,
   state
-})
+});
 
 class Videos extends PureComponent {
-
   state = getInitialState(this.props);
 
   _player = null;
 
   _videoOpts = {
-    width:  854,
+    width: 854,
     height: 480,
-    playerVars: { // https://developers.google.com/youtube/player_parameters
-      autoplay: 0,        // Auto-play the video on load
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0, // Auto-play the video on load
       disablekb: 1,
-      controls: 0,                             // Hide pause/play buttons in player
-      showinfo: 0,                             // Hide the video title
-      modestbranding: 1,                       // Hide the Youtube Logo
-      loop: 0,                                 // Run the video in a loop
-      fs: 0,                                   // Hide the full screen button
-      autohide: 2,                             // Hide video controls when playing
+      controls: 0, // Hide pause/play buttons in player
+      showinfo: 0, // Hide the video title
+      modestbranding: 1, // Hide the Youtube Logo
+      loop: 0, // Run the video in a loop
+      fs: 0, // Hide the full screen button
+      autohide: 2, // Hide video controls when playing
       rel: 0,
       enablejsapi: 1
     }
@@ -57,20 +58,20 @@ class Videos extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { videoId, state, isMounted } = nextProps;
 
-    if(prevState.playerState === 'playVideo' && !isMounted )
-      return getInitialState(nextProps)
+    if (prevState.playerState === 'playVideo' && !isMounted)
+      return getInitialState(nextProps);
 
-    if(videoId !== prevState.videoId)
+    if (videoId !== prevState.videoId)
       return {
         playState: 'pauseVideo',
         videoId
-      }
-      // return getInitialState(nextProps)
+      };
+    // return getInitialState(nextProps)
 
-    if(state !== prevState.state )
+    if (state !== prevState.state)
       return {
         state
-      }
+      };
 
     return null;
   }
@@ -90,18 +91,18 @@ class Videos extends PureComponent {
   // --------------------------------------------------
 
   handleOnRest = () => {
-    this.props.onNext()
+    this.props.onNext();
   };
 
   handleOnReady = ({ target }) => {
-    this._player = target
-    this.setState({ playerReady: true, playerState: 'pauseVideo' })
+    this._player = target;
+    this.setState({ playerReady: true, playerState: 'pauseVideo' });
   };
 
   handleOnClick = () => {
-    if(!this._player || !this.state.playerReady) return;
+    if (!this._player || !this.state.playerReady) return;
 
-    this._player.playVideo()
+    this._player.playVideo();
 
     // const playerState = this.state.playerState === 'pauseVideo' ? 'playVideo' : 'pauseVideo';
 
@@ -109,11 +110,11 @@ class Videos extends PureComponent {
   };
 
   handleOnPlay = () => {
-    this._setPlayerState('playVideo')
+    this._setPlayerState('playVideo');
   };
 
   handleOnPause = () => {
-    this._setPlayerState('pauseVideo')
+    this._setPlayerState('pauseVideo');
   };
 
   //
@@ -121,7 +122,7 @@ class Videos extends PureComponent {
   // --------------------------------------------------
 
   playerRenderer() {
-    if(!this.props.isMounted) return null;
+    if (!this.props.isMounted) return null;
 
     return (
       <YouTube
@@ -144,16 +145,12 @@ class Videos extends PureComponent {
 
     const className = classNames('videos', {
       'videos--mounted': this.props.isMounted,
-      'videos--ready': playerReady,
-    })
+      'videos--ready': playerReady
+    });
 
     return (
       <VideoContext.Provider value={this.state}>
-        <VideoSpring
-          native
-          state={state}
-          onRest={this.handleOnRest}
-        >
+        <VideoSpring native state={state} onRest={this.handleOnRest}>
           {({ b, o, s, t }) => (
             <animated.div
               style={{ backgroundSize: b.interpolate(t => `${t}% ${t}%`) }}
@@ -164,7 +161,10 @@ class Videos extends PureComponent {
                 className="videos__content"
                 style={{
                   opacity: o.interpolate(o => o),
-                  transform: interpolate([s, t], (s, t) => `scale(${s}) translateY(${t}%)`)
+                  transform: interpolate(
+                    [s, t],
+                    (s, t) => `scale(${s}) translateY(${t}%)`
+                  )
                 }}
               >
                 <Thumb onClick={this.handleOnClick} />
@@ -178,16 +178,18 @@ class Videos extends PureComponent {
           )}
         </VideoSpring>
       </VideoContext.Provider>
-    )
+    );
   }
 }
 
 const mapContextToProps = context => ({
   isActive: !context.matches('ready.videos.idle'),
   isMounted: context.matches('ready.videos.mounted'),
-  videoId: getId(context.context.section) === 'videos' ? getId(context.context.id) : null,
+  videoId:
+    getId(context.context.section) === 'videos'
+      ? getId(context.context.id)
+      : null,
   state: context.value.ready.videos
 });
 
 export default withApp(mapContextToProps)(Videos);
-

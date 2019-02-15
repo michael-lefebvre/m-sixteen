@@ -1,23 +1,21 @@
-import React, { PureComponent } from 'react'
-import classNames from 'classnames'
-import YouTube from 'react-youtube'
-import { withApp } from 'Hoc'
-import { HOME_BKGD_VIDEOID } from 'Constants'
+import React, { PureComponent } from 'react';
+import classNames from 'classnames';
+import YouTube from 'react-youtube';
+import { withApp } from 'Hoc';
+import { HOME_BKGD_VIDEOID } from 'Constants';
 
-import './index.scss'
+import './index.scss';
 
 const getInitialState = ({ state }) => {
-
   const showPlayer = ['idle', 'mounted'].indexOf(state) === -1;
 
   return {
     playerState: showPlayer ? state : null,
     showPlayer
-  }
+  };
 };
 
 class HomeBkgd extends PureComponent {
-
   state = getInitialState(this.props);
 
   _player = null;
@@ -25,11 +23,14 @@ class HomeBkgd extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { showPlayer, playerState } = getInitialState(nextProps);
 
-    if(showPlayer !== prevState.showPlayer || playerState !== prevState.playerState )
+    if (
+      showPlayer !== prevState.showPlayer ||
+      playerState !== prevState.playerState
+    )
       return {
         playerState,
         showPlayer
-      }
+      };
 
     return null;
   }
@@ -43,14 +44,13 @@ class HomeBkgd extends PureComponent {
   }
 
   componentDidMount() {
-    this._shouldForceOnReady()
+    this._shouldForceOnReady();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (snapshot === true)
-      return this._togglePlayer()
+    if (snapshot === true) return this._togglePlayer();
 
-    this._shouldForceOnReady()
+    this._shouldForceOnReady();
   }
 
   //
@@ -58,20 +58,19 @@ class HomeBkgd extends PureComponent {
   // --------------------------------------------------
 
   _shouldForceOnReady() {
-    if (this.props.state === "mounted" && this._hasNext()) {
-      this.props.onSend('HERO.NEXT')
+    if (this.props.state === 'mounted' && this._hasNext()) {
+      this.props.onSend('HERO.NEXT');
     }
   }
 
   _togglePlayer() {
-    const { playerState } = this.state
+    const { playerState } = this.state;
 
-    if (!this._player || !playerState) return
+    if (!this._player || !playerState) return;
 
     try {
-      this._player[playerState]()
-    }
-    catch( e ) {
+      this._player[playerState]();
+    } catch (e) {
       // console.log(e)
     }
   }
@@ -83,22 +82,21 @@ class HomeBkgd extends PureComponent {
   // --------------------------------------------------
 
   handleOnEnd = e => {
-    e.target.playVideo()
+    e.target.playVideo();
   };
 
   handleOnReady = ({ target }) => {
-    target.mute()
-    this._player = target
+    target.mute();
+    this._player = target;
   };
 
   handleOnPlay = ({ target }) => {
-    this._player = target
+    this._player = target;
 
-    if(this.state.playerState !== 'playVideo')
-      this._player.pauseVideo()
+    if (this.state.playerState !== 'playVideo') this._player.pauseVideo();
 
-    if(this._hasNext()){
-      this.props.onSend('HERO.NEXT')
+    if (this._hasNext()) {
+      this.props.onSend('HERO.NEXT');
     }
   };
 
@@ -109,7 +107,7 @@ class HomeBkgd extends PureComponent {
   playerRenderer() {
     const { showPlayer } = this.state;
 
-    if(!showPlayer) {
+    if (!showPlayer) {
       this._player = null;
       return null;
     }
@@ -118,52 +116,50 @@ class HomeBkgd extends PureComponent {
     // https://developers.google.com/youtube/player_parameters
     const videoOptions = {
       playerVars: {
-        autoplay: 1,       // Auto-play the video on load
+        autoplay: 1, // Auto-play the video on load
         disablekb: 1,
-        controls: 0,       // Hide pause/play buttons in player
-        showinfo: 0,       // Hide the video title
+        controls: 0, // Hide pause/play buttons in player
+        showinfo: 0, // Hide the video title
         modestbranding: 1, // Hide the Youtube Logo
-        loop: 1,           // Run the video in a loop
-        fs: 0,             // Hide the full screen button
-        autohide: 0,       // Hide video controls when playing
+        loop: 1, // Run the video in a loop
+        fs: 0, // Hide the full screen button
+        autohide: 0, // Hide video controls when playing
         rel: 0,
         enablejsapi: 1
       }
-    }
+    };
 
     return (
       <YouTube
-       videoId={HOME_BKGD_VIDEOID}
-       opts={videoOptions}
-       className="home-video__background__foreground__iframe"
-       // onStateChange={this.handleOnStateChange('onStateChange')}
-       // onPlaybackRateChange={this.handleOnStateChange('onPlaybackRateChange')}
-       // onPlaybackQualityChange={this.handleOnStateChange('onPlaybackQualityChange')}
-       onPlay={this.handleOnPlay}
-       // onError={this.handleOnStateChange('onError')}
-       onReady={this.handleOnReady}
-       onEnd={this.handleOnEnd} />
-    )
+        videoId={HOME_BKGD_VIDEOID}
+        opts={videoOptions}
+        className="home-video__background__foreground__iframe"
+        // onStateChange={this.handleOnStateChange('onStateChange')}
+        // onPlaybackRateChange={this.handleOnStateChange('onPlaybackRateChange')}
+        // onPlaybackQualityChange={this.handleOnStateChange('onPlaybackQualityChange')}
+        onPlay={this.handleOnPlay}
+        // onError={this.handleOnStateChange('onError')}
+        onReady={this.handleOnReady}
+        onEnd={this.handleOnEnd}
+      />
+    );
   }
 
   render() {
-    if(this.props.state === 'idle')
-      return null
+    if (this.props.state === 'idle') return null;
 
-    const {showPlayer, playerState } = this.state;
+    const { showPlayer, playerState } = this.state;
 
     const className = classNames('home-video', {
       'home-video--mobile': !showPlayer,
       'home-video--paused': playerState === 'pauseVideo'
-    })
+    });
 
     return (
       <div className={className}>
-        <div className="home-video__background">
-        {this.playerRenderer()}
-        </div>
+        <div className="home-video__background">{this.playerRenderer()}</div>
       </div>
-    )
+    );
   }
 }
 
@@ -172,4 +168,3 @@ const mapAppContextToProps = context => ({
 });
 
 export default withApp(mapAppContextToProps)(HomeBkgd);
-
