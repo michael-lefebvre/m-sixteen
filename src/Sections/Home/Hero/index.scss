@@ -83,51 +83,21 @@
 
 .home__abstract {
   text-align: left;
-  padding: 0 0 16px;
   margin-left: 160px; //24%;
   margin-top: 40px;
   width: 430px;
   opacity: 1;
   position: relative;
+}
+
+.home__abstract__drawer {
   overflow: hidden;
 }
 
 .home__abstract__txt {
   font-size: 12px;
   line-height: 16px;
-  transition: opacity .2s linear;
-  opacity: 1
-}
-
-.home__breadcrumb {
-  bottom: 2px;
-  left: 0;
-  position: absolute;
-  font-size: 28px;
-  font-weight: $font-weight-heavy;
-  letter-spacing: -1.2px;
-  z-index: 100;
-
-  &--releases {
-    left: -2px
-  }
-}
-
-.home__breadcrumb__id,
-.home__breadcrumb__section {
-}
-
-.home__breadcrumb__section {
-  color: $red;
-  font-size: 28px;
-  text-transform: uppercase;
-}
-.home__breadcrumb__id {
-  font-size: 20px;
-  // margin-left: -2px;
-  small {
-    font-size: 16px
-  }
+  padding: 0 0 16px;
 }
 
 .home__abstract__hr {
@@ -139,6 +109,51 @@
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.home__breadcrumb {
+  font-size: 28px;
+  font-weight: $font-weight-heavy;
+  height: 30px;
+  left: 0;
+  letter-spacing: -1.2px;
+  line-height: 20px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+
+  &--releases .home__breadcrumb__section {
+    left: -2px
+  }
+
+  &--section {
+    top: 100%;
+  }
+  &--item {
+    bottom: -5px;
+  }
+}
+
+.home__breadcrumb__item,
+.home__breadcrumb__section {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.home__breadcrumb__section {
+  color: $red;
+  height: 20px;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+
+.home__breadcrumb__item {
+  font-size: 20px;
+  small {
+    font-size: 16px
+  }
 }
 
 .home__title {
@@ -171,6 +186,10 @@
       display: block;
     }
   }
+}
+
+.home__menu {
+  position: relative;
 }
 
 .home__nav {

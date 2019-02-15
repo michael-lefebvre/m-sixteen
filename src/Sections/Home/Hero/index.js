@@ -88,38 +88,56 @@ const Title = ({ ready }) => (
   </Spring>
 )
 
-const Abstract = ({ ready, breadcrumb }) => (
-  <Spring
+const _abstractDefaultProps = { w: 0, t: -100, sY: -21, o: 1, iY: -100 }
+const AbstractKf = Keyframes.Spring({
+  idle: { immediate: true, from: _abstractDefaultProps, to: _abstractDefaultProps },
+  mounted: { delay: 800, w: 100, t: 0, from: _abstractDefaultProps },
+  breadcrumb_in: { delay: 100,  t: 100, sY: 1, o: 0, iY: 0 },
+  breadcrumb_out: { delay: 300, iY: -100, t: 0, sY: -21, o: 1 }
+})
+
+const Abstract = ({ ready, breadcrumb, state }) => (
+  <AbstractKf
     native
-    immediate={!ready}
-    config={{ delay: 800 }}
-    from={{ w: 0, t: -100 }}
-    to={{ w: ready ? 100: 0, t: ready ? 0 : -100 }}
+    state={state}
+    // config={{ mass: 5, tension: 2000, friction: 200 }}
     >
-    {({ w, t }) => (
+    {({ w, t, sY, o, iY }) => (
       <div className="home__abstract">
-        <animated.p
-          className="home__abstract__txt"
-          style={{
-            opacity: !!breadcrumb ? 0 : 1,
-            transform: t.interpolate(t => `translateY(${t}%)`)
-          }}
-         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent condimentum bibendum rhoncus. Duis viverra tempus felis, eu tempor nisi fringilla ac.
-        </animated.p>
-        {breadcrumb && (
-          <div className={`home__breadcrumb home__breadcrumb--${breadcrumb.section}`}>
-            <span className="home__breadcrumb__section">{breadcrumb.section}</span>
-            <span className="home__breadcrumb__id">/{getItemTitle(breadcrumb)}</span>
-          </div>
-        )}
+        <div className="home__abstract__drawer">
+          <animated.p
+            className="home__abstract__txt"
+            style={{
+              opacity: o,
+              transform: t.interpolate(t => `translateY(${t}%)`)
+            }}
+           >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent condimentum bibendum rhoncus. Duis viverra tempus felis.
+          </animated.p>
+        </div>
+        <div className="home__breadcrumb home__breadcrumb--item">
+          <animated.div
+            className="home__breadcrumb__item"
+            style={{ transform: iY.interpolate(t => `translateY(${t}%)`) }}
+          >
+            {breadcrumb ? getItemTitle(breadcrumb) : ''}
+          </animated.div>
+        </div>
+        <div className={`home__breadcrumb home__breadcrumb--section home__breadcrumb--${breadcrumb ? breadcrumb.section : ''}`}>
+          <animated.div
+            className="home__breadcrumb__section"
+            style={{ transform: sY.interpolate(t => `translateY(${t}px)`) }}
+          >
+             {breadcrumb ? breadcrumb.section : ''}
+          </animated.div>
+        </div>
         <animated.hr className="home__abstract__hr" style={{ width: w.interpolate(w => `${w}%`) }} />
       </div>
     )}
-  </Spring>
+  </AbstractKf>
 )
 
-const HomeNav = ({ ready, items, from, section, onBreadcrumb, onRest = () => null }) => {
+const HomeNav = ({ ready, items, from, section, onMouseEnter, onMouseLeave, onRest = () => null }) => {
   return (
     <Spring
       native
@@ -131,6 +149,7 @@ const HomeNav = ({ ready, items, from, section, onBreadcrumb, onRest = () => nul
       >
       {({ t }) => (
         <animated.ul
+          onMouseLeave={onMouseLeave}
           className={`home__nav home__nav--${section}`}
           style={{ transform: t.interpolate(t => `translateX(${t}%)`) }}
         >
@@ -144,7 +163,7 @@ const HomeNav = ({ ready, items, from, section, onBreadcrumb, onRest = () => nul
               // console.log(item)
               return (
               <animated.li className="home__nav__item" style={styles}>
-                <Link to={`/${section}/${item}`} onMouseEnter={onBreadcrumb({section, item})}>
+                <Link to={`/${section}/${item}`} onMouseEnter={onMouseEnter({section, item})}>
                   <img src={getNavImgSrc(section, item)} className="home__nav__thumb" alt="" />
                 </Link>
               </animated.li>
@@ -163,7 +182,6 @@ const _defaultProps = { immediate: true, from: _homeProps, to: _homeProps };
 
 const HomeSpring = Keyframes.Spring({
   entering: _defaultProps,
-  // mounted: _defaultProps,
   releases_in: { from: _homeProps, to: _releasesProps },
   releases_out: { to: _homeProps, from: _releasesProps },
   videos_in: { from: _homeProps, to: _videosProps },
@@ -173,9 +191,11 @@ const HomeSpring = Keyframes.Spring({
 class Home extends PureComponent {
 
   state = {
+    navState: 'idle',
     state: this.props.state,
     mounted: false,
-    breadcrumb: null
+    breadcrumb: null,
+    prevBreadcrumb: null
   };
 
   _ref = React.createRef();
@@ -185,6 +205,7 @@ class Home extends PureComponent {
 
     if(!prevState.mounted && state === 'mounted')
       return {
+        navState: 'mounted',
         mounted: true,
         state,
       }
@@ -224,26 +245,17 @@ class Home extends PureComponent {
 
   handleOnMouseEnter = breadcrumb => () => {
     if(this.state.state === 'mounted')
-      this.setState({ breadcrumb });
+      this.setState(({ breadcrumb: prevBreadcrumb }) => ({ breadcrumb, prevBreadcrumb, navState: 'breadcrumb_in' }));
   };
 
-  handleOnMouseLeave = () => this.setState({ breadcrumb: null });
+  handleOnMouseLeave = () => this.setState(({ breadcrumb }) => ({ breadcrumb: null,prevBreadcrumb: breadcrumb, navState: 'breadcrumb_out' }));
 
   //
   // Renderers
   // --------------------------------------------------
 
   render() {
-    const { state, mounted: ready, breadcrumb } = this.state;
-
-    // console.log('  ')
-    // console.log({hasVideoHeader: this.props.hasVideoHeader(), bkgdCanPlay: this.props.bkgdCanPlay()})
-    // console.log('HOME.HERO render')
-    // console.log({state: this.state})
-    // console.log(JSON.stringify(this.state, null, 2))
-    // console.log(JSON.stringify(this.props.getValue(), null, 2))
-    // console.log(JSON.stringify(this.props.getStrings(), null, 2))
-    // console.log(JSON.stringify(this.props.getContext(), null, 2))
+    const { state, mounted: ready, breadcrumb, prevBreadcrumb, navState } = this.state;
 
     if(state === 'idle') return null;
 
@@ -262,21 +274,23 @@ class Home extends PureComponent {
                 <BlockquoteEnd ready={ready}>
                   <BlockquoteEndContent ready={ready} />
                 </BlockquoteEnd>
-                <div onMouseLeave={this.handleOnMouseLeave}>
-                  <Abstract ready={ready} breadcrumb={breadcrumb} />
+                <div className="home__menu">
+                  <Abstract breadcrumb={breadcrumb || prevBreadcrumb} state={navState} />
                   <HomeNav
                     ready={ready}
                     items={RELEASES_ID}
                     from={50}
                     section="releases"
-                    onBreadcrumb={this.handleOnMouseEnter}
+                    onMouseEnter={this.handleOnMouseEnter}
+                    onMouseLeave={this.handleOnMouseLeave}
                    />
                   <HomeNav
                     ready={ready}
                     items={VIDEOS_ID}
                     from={-50}
                     section="videos"
-                    onBreadcrumb={this.handleOnMouseEnter}
+                    onMouseEnter={this.handleOnMouseEnter}
+                    onMouseLeave={this.handleOnMouseLeave}
                     onRest={this.props.onNext}
                   />
                 </div>
@@ -293,7 +307,6 @@ class Home extends PureComponent {
 }
 
 const mapAppContextToProps = context => ({
-  // isIdle: context.matches('ready.home.hero.idle'),
   state: context.value.ready.home.hero
 });
 

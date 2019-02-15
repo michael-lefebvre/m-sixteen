@@ -47,7 +47,6 @@ class HomeBkgd extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(this._player)
     if (snapshot === true)
       return this._togglePlayer()
 
@@ -73,9 +72,7 @@ class HomeBkgd extends PureComponent {
       this._player[playerState]()
     }
     catch( e ) {
-      // console.log({snapshot, playerState})
-      // console.log(this._player)
-      console.log(e)
+      // console.log(e)
     }
   }
 
