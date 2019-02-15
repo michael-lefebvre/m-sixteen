@@ -6,24 +6,30 @@ import { HOME_BKGD_VIDEOID } from 'Constants'
 
 import './index.scss'
 
+const getInitialState = ({ state }) => {
+
+  const showPlayer = ['idle', 'mounted'].indexOf(state) === -1;
+
+  return {
+    playerState: showPlayer ? state : null,
+    showPlayer
+  }
+};
+
 class HomeBkgd extends PureComponent {
 
-  state = {
-    bkgdCanPlay: this.props.bkgdCanPlay(),
-    showPlayer: this.props.hasVideoHeader(),
-  };
+  state = getInitialState(this.props);
 
   _player = null;
 
   _sendNext = false;
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const showPlayer = nextProps.hasVideoHeader();
-    const bkgdCanPlay = nextProps.bkgdCanPlay();
+    const { showPlayer, playerState } = getInitialState(nextProps);
 
-    if(showPlayer !== prevState.showPlayer || bkgdCanPlay !== prevState.bkgdCanPlay)
+    if(showPlayer !== prevState.showPlayer || playerState !== prevState.playerState)
       return {
-        bkgdCanPlay,
+        playerState,
         showPlayer
       }
 
@@ -35,7 +41,7 @@ class HomeBkgd extends PureComponent {
   // --------------------------------------------------
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    return prevState.bkgdCanPlay !== this.state.bkgdCanPlay;
+    return prevState.playerState !== this.state.playerState;
   }
 
   componentDidMount() {
@@ -43,8 +49,10 @@ class HomeBkgd extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (snapshot === true && this._player) {
-      this._player[ this.state.bkgdCanPlay ? 'playVideo' : 'pauseVideo']()
+    const { playerState } = this.state
+
+    if (snapshot === true && this._player && playerState) {
+      this._player[playerState]()
       return
     }
 
@@ -56,12 +64,12 @@ class HomeBkgd extends PureComponent {
   // --------------------------------------------------
 
   _shouldForceOnReady() {
-    if (this.props.state === "mounted" && !this._sendNext) {
-      console.log('_shouldForceOnReady')
-      this._sendNext = true
+    if (this.props.state === "mounted" && this._hasNext()) {
       this.props.onSend('HERO.NEXT')
     }
   }
+
+  _hasNext = () => this.props.getNextEvents().indexOf('HERO.NEXT') !== -1;
 
   //
   // Events Handlers
@@ -79,19 +87,12 @@ class HomeBkgd extends PureComponent {
   handleOnPlay = ({ target }) => {
     this._player = target
 
-    if(this.state.bkgdCanPlay !== true)
+    if(this.state.playerState !== 'playVideo')
       this._player.pauseVideo()
 
-    if(!this.props.isIdle && !this._sendNext){
-      // console.log('onSend')
-      this._sendNext = true;
+    if(this._hasNext()){
       this.props.onSend('HERO.NEXT')
     }
-  };
-
-  handleOnStateChange = (evt) => (e) => {
-    const { data } = e
-    console.log({evt, data})
   };
 
   //
@@ -103,7 +104,6 @@ class HomeBkgd extends PureComponent {
 
     if(!showPlayer) {
       this._player = null;
-      this._sendNext = false;
       return null;
     }
 
@@ -140,11 +140,8 @@ class HomeBkgd extends PureComponent {
   }
 
   render() {
-    const { showPlayer, bkgdCanPlay } = this.state;
-
     const className = classNames('home-video', {
-      'home-video--mobile': !showPlayer,
-      'home-video--paused': showPlayer && !bkgdCanPlay
+      'home-video--mobile': !this.props.isDesktop(),
     })
 
     return (
@@ -158,11 +155,7 @@ class HomeBkgd extends PureComponent {
 }
 
 const mapAppContextToProps = context => ({
-  isIdle: context.matches('ready.home.bkgd.idle'),
   state: context.value.ready.home.bkgd
-  // bkgdCanPlay: state.bkgdCanPlay(),
-  // showPlayer: state.hasVideoHeader(),
-  // showPlayer: false,
 });
 
 export default withApp(mapAppContextToProps)(HomeBkgd);

@@ -23,7 +23,6 @@ const homeStates = {
         entering: {
           on: {
             'HERO.NEXT': 'mounted',
-            NEXT: { target: 'mounted', cond: ctx => contextMatch(ctx, 'section.current:home') }
           },
         },
         mounted: {
@@ -61,10 +60,6 @@ const homeStates = {
         releases_out: {
           on: {
             'HERO.NEXT': 'mounted',
-            NEXT: {
-              target: 'mounted',
-              cond: ctx => contextMatch(ctx, 'section.current:home') && contextMatch(ctx, 'section.previous:releases')
-            }
           }
         },
         videos_in: {
@@ -85,10 +80,6 @@ const homeStates = {
         videos_out: {
           on: {
             'HERO.NEXT': 'mounted',
-            NEXT: {
-              target: 'mounted',
-              cond: ctx => contextMatch(ctx, 'section.current:home') && contextMatch(ctx, 'section.previous:videos')
-            }
           }
         },
       },
@@ -102,7 +93,7 @@ const homeStates = {
         unknown: {
           on: {
             '': [
-              { target: 'play', cond: 'canPlayHomeVideo' },
+              { target: 'playVideo', cond: 'canPlayHomeVideo' },
               { target: 'mounted', cond: 'canMountHomeVideo' },
               { target: 'idle' },
             ],
@@ -125,15 +116,15 @@ const homeStates = {
             }
           }
         },
-        play: {
+        playVideo: {
           on: {
             'SECTION.NAVIGATE': {
-              target: 'pause',
+              target: 'pauseVideo',
               cond: (ctx, { context }) => context && context.section.next !== null && ctx.section.current === 'home'
             }
           }
         },
-        pause: {
+        pauseVideo: {
           on: {
             NEXT: {
               target: 'unknown',

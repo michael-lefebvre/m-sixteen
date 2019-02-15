@@ -89,8 +89,8 @@ const withRelease = (WrappedComponent, { release, assets = null }) => {
 
     if( isPrevious && !isLeaving )
       return {
-        state: getReleaseStage(_get(context.history.value, 'ready.releases')),
-        story: context.history.matches('ready.releases.mounted.story'),
+        state: context.history ? getReleaseStage(_get(context.history.value, 'ready.releases')) : "mounted",
+        story: context.history ? context.history.matches('ready.releases.mounted.story') : false,
       }
 
     return {
