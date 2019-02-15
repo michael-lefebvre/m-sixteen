@@ -19,10 +19,10 @@
     background-size: cover;
   }
 
-  // &--paused .home-video__background {
-  //   opacity: 0;
-  //   transition: opacity .2s linear .2s;
-  // }
+  &--paused .home-video__background {
+    opacity: 0;
+    transition: opacity .2s linear .2s;
+  }
 
   &::after {
     background: rgba(0,0,0,0.35);

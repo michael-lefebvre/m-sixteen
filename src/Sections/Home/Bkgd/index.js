@@ -142,6 +142,7 @@ class HomeBkgd extends PureComponent {
   render() {
     const className = classNames('home-video', {
       'home-video--mobile': !this.props.isDesktop(),
+      'home-video--paused': this.state.playerState === 'pauseVideo'
     })
 
     return (
