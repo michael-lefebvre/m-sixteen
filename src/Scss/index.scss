@@ -96,6 +96,33 @@ ol {
   box-sizing: border-box;
 }
 
+.error-boundary {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+
+  img {
+    display: block;
+    margin: 0 auto 1rem;
+    width: 380px;
+  }
+
+  h1 {
+    font-size: $font-size-extra;
+    margin-bottom: .5rem;
+  }
+
+  a {
+    color: $red;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+  }
+}
+
 
 .layer {
   bottom: 0;
@@ -109,4 +136,16 @@ ol {
   &--active {
     pointer-events: auto;
   }
+}
+
+
+.mini-debug {
+  bottom: 10px;
+  left: 10px;
+  position: fixed;
+  pointer-events: none;
+  z-index: $zindex-higher + $zindex-higher;
+  background: #ccc;
+  color: #000;
+  font-size: 10px;
 }

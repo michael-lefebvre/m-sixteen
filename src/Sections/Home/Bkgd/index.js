@@ -47,12 +47,9 @@ class HomeBkgd extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { playerState } = this.state
-
-    if (snapshot === true && this._player && playerState) {
-      this._player[playerState]()
-      return
-    }
+    console.log(this._player)
+    if (snapshot === true)
+      return this._togglePlayer()
 
     this._shouldForceOnReady()
   }
@@ -64,6 +61,21 @@ class HomeBkgd extends PureComponent {
   _shouldForceOnReady() {
     if (this.props.state === "mounted" && this._hasNext()) {
       this.props.onSend('HERO.NEXT')
+    }
+  }
+
+  _togglePlayer() {
+    const { playerState } = this.state
+
+    if (!this._player || !playerState) return
+
+    try {
+      this._player[playerState]()
+    }
+    catch( e ) {
+      // console.log({snapshot, playerState})
+      // console.log(this._player)
+      console.log(e)
     }
   }
 
