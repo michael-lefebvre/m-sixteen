@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react'
 import hoistStatics from 'hoist-non-react-statics'
 import _get from 'lodash.get'
 import withApp from './App'
-import { getComponentName } from 'Utils'
+import { ReleasesLoading } from 'Sections/Releases'
+import { getComponentName, ImgsPrefetch } from 'Utils'
 
 // const getStateFromProps = ({ state, story, isLeaving, isCurrent, isPrevious }) => ({
 //   state,
@@ -13,6 +14,11 @@ const getReleaseStage = value => typeof value === 'string' ? value : Object.keys
 
 const withRelease = (WrappedComponent, { release, assets = null }) => {
   class ReleaseHoc extends PureComponent {
+
+    state = {
+      assetsLoaded: assets === null,
+      assetsLoading: false
+    };
 
     //
     // Life cycle
@@ -26,13 +32,38 @@ const withRelease = (WrappedComponent, { release, assets = null }) => {
     //   console.log('Release componentDidUpdate', release, getStateFromProps(this.props))
     // }
 
+    getSnapshotBeforeUpdate(
+      prevProps,
+      prevState
+    ) {
+      return prevProps.state === 'idle' && this.props.state !== 'idle'
+    }
+
+    componentDidUpdate(
+      prevProps,
+      prevState,
+      snapshot
+    ) {
+      if (snapshot && !this.state.assetsLoaded && !this.state.assetsLoading)
+        this.handleOnLoadAssets()
+    }
+
     //
     // Helpers
     // --------------------------------------------------
 
+    _loadAssets = () => {
+      ImgsPrefetch(assets, true)
+        .then(() =>
+          this.setState({ assetsLoading: false, assetsLoaded: true })
+        )
+    };
+
     //
     // Events Handlers
     // --------------------------------------------------
+
+    handleOnLoadAssets = () => this.setState({ assetsLoading: true }, () => this._loadAssets());
 
     handleOnMounted = evt => () => this.props.onSend(evt);
 
@@ -50,6 +81,9 @@ const withRelease = (WrappedComponent, { release, assets = null }) => {
 
       if(state === 'idle')
         return null
+
+      if(!this.state.assetsLoaded)
+        return <ReleasesLoading />
 
       return (
         <div className={`release release--${release}`}>

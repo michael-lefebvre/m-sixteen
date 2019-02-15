@@ -32,12 +32,16 @@
 
 .split__photo__full {
   text-align: center;
+
+  .split__photo {
+    width: 100%;
+  }
 }
 
 .split__photo {
   display: inline-block;
   border-width: 15px;
-  border-image: url(/static/images/releases/split/frame_img.png) 15 stretch;
+  border-image: url(../Assets/releases_split_frame.png) 15 stretch;
   border-style: solid;
   margin: auto;
 

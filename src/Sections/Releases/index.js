@@ -1,5 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import classNames from 'classnames'
+
+import { Spinner } from 'Components'
 import { withApp } from 'Hoc'
 import ReleasesNav from './Nav'
 import './index.scss'
@@ -14,6 +16,12 @@ export const ReleasesScrollInvite  = ({ show }) => (
     <div className="release__scroll-invite__mouse">
       <div className="release__scroll-invite__scroller" />
     </div>
+  </div>
+)
+
+export const ReleasesLoading  = () => (
+  <div className="release__loading release__loading--show">
+    <Spinner theme="white" />
   </div>
 )
 

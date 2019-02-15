@@ -1,8 +1,11 @@
 import React from 'react';
 import { withRelease } from 'Hoc'
 
+import assets from './Assets';
+
 import Cover from './Cover';
 import Story from './Story';
+
 import './index.scss'
 
 const ReleaseEp = ({ story, state, onNext, onMounted }) => (
@@ -17,4 +20,4 @@ const ReleaseEp = ({ story, state, onNext, onMounted }) => (
   </Cover>
 );
 
-export default withRelease(ReleaseEp, { release: 'ep', assets: ['a'] });
+export default withRelease(ReleaseEp, { release: 'ep', assets });

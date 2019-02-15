@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { Keyframes, animated/*, config*/ } from 'react-spring'
 import delay from 'delay'
 import { withRelease } from 'Hoc'
+
+import assets from './Assets';
 import Cover from './Cover';
 import Story from './Story';
 
@@ -110,4 +112,4 @@ class ReleaseSplit extends PureComponent {
   }
 }
 
-export default withRelease(ReleaseSplit, { release: 'split', assets: ['a'] });
+export default withRelease(ReleaseSplit, { release: 'split', assets });
