@@ -93,7 +93,7 @@ const AbstractKf = Keyframes.Spring({
   idle: { immediate: true, from: _abstractDefaultProps, to: _abstractDefaultProps },
   mounted: { delay: 800, w: 100, t: 0, from: _abstractDefaultProps },
   breadcrumb_in: { delay: 100,  t: 100, sY: 1, o: 0, iY: 0 },
-  breadcrumb_out: { delay: 300, iY: -100, t: 0, sY: -21, o: 1 }
+  breadcrumb_out: [{ delay: 300, iY: -100, t: 0, sY: -21}, {delay: 100,  o: 1 }]
 })
 
 const Abstract = ({ ready, breadcrumb, state }) => (
