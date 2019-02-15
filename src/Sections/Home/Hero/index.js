@@ -3,12 +3,9 @@ import { Spring, Keyframes, Trail, animated } from 'react-spring'
 import { Link } from "react-router-dom";
 import { getNavImgSrc } from 'Utils'
 import { withApp } from 'Hoc'
-import { VIDEOS, VIDEOS_ID, RELEASES, RELEASES_ID } from 'Constants'
+import { VIDEOS_ID, RELEASES_ID } from 'Constants'
 
 import './index.scss'
-
-
-const getItemTitle = ({section, item}) => (section === 'videos' ? VIDEOS : RELEASES)[item].title;
 
 const BlockquoteStart = ({ ready }) => {
   const from = 'polygon(0% 0%, 0% 0%, -10% 100%, 0% 100%)'
@@ -88,47 +85,36 @@ const Title = ({ ready }) => (
   </Spring>
 )
 
-const _abstractDefaultProps = { w: 0, t: -100, sY: -21, o: 1, iY: -100 }
+const _abstractDefaultProps = { w: 0, t: -100, sY: -21 }
 const AbstractKf = Keyframes.Spring({
   idle: { immediate: true, from: _abstractDefaultProps, to: _abstractDefaultProps },
   mounted: { delay: 800, w: 100, t: 0, from: _abstractDefaultProps },
-  breadcrumb_in: { delay: 100,  t: 100, sY: 1, o: 0, iY: 0 },
-  breadcrumb_out: [{ delay: 300, iY: -100, t: 0, sY: -21}, {delay: 100,  o: 1 }]
+  breadcrumb_in: { delay: 100, sY: -1 },
+  breadcrumb_out: { delay: 300, sY: -21 }
 })
 
-const Abstract = ({ ready, breadcrumb, state }) => (
+const Abstract = ({ breadcrumb = '', state }) => (
   <AbstractKf
     native
     state={state}
     // config={{ mass: 5, tension: 2000, friction: 200 }}
     >
-    {({ w, t, sY, o, iY }) => (
+    {({ w, t, sY }) => (
       <div className="home__abstract">
         <div className="home__abstract__drawer">
           <animated.p
             className="home__abstract__txt"
-            style={{
-              opacity: o,
-              transform: t.interpolate(t => `translateY(${t}%)`)
-            }}
+            style={{ transform: t.interpolate(t => `translateY(${t}%)`) }}
            >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent condimentum bibendum rhoncus. Duis viverra tempus felis.
           </animated.p>
         </div>
-        <div className="home__breadcrumb home__breadcrumb--item">
-          <animated.div
-            className="home__breadcrumb__item"
-            style={{ transform: iY.interpolate(t => `translateY(${t}%)`) }}
-          >
-            {breadcrumb ? getItemTitle(breadcrumb) : ''}
-          </animated.div>
-        </div>
-        <div className={`home__breadcrumb home__breadcrumb--section home__breadcrumb--${breadcrumb ? breadcrumb.section : ''}`}>
+        <div className={`home__breadcrumb home__breadcrumb--section home__breadcrumb--${breadcrumb}`}>
           <animated.div
             className="home__breadcrumb__section"
             style={{ transform: sY.interpolate(t => `translateY(${t}px)`) }}
           >
-             {breadcrumb ? breadcrumb.section : ''}
+             {breadcrumb}
           </animated.div>
         </div>
         <animated.hr className="home__abstract__hr" style={{ width: w.interpolate(w => `${w}%`) }} />
@@ -163,7 +149,7 @@ const HomeNav = ({ ready, items, from, section, onMouseEnter, onMouseLeave, onRe
               // console.log(item)
               return (
               <animated.li className="home__nav__item" style={styles}>
-                <Link to={`/${section}/${item}`} onMouseEnter={onMouseEnter({section, item})}>
+                <Link to={`/${section}/${item}`} onMouseEnter={onMouseEnter(section)}>
                   <img src={getNavImgSrc(section, item)} className="home__nav__thumb" alt="" />
                 </Link>
               </animated.li>
@@ -248,7 +234,7 @@ class Home extends PureComponent {
       this.setState(({ breadcrumb: prevBreadcrumb }) => ({ breadcrumb, prevBreadcrumb, navState: 'breadcrumb_in' }));
   };
 
-  handleOnMouseLeave = () => this.setState(({ breadcrumb }) => ({ breadcrumb: null,prevBreadcrumb: breadcrumb, navState: 'breadcrumb_out' }));
+  handleOnMouseLeave = () => this.setState(({ breadcrumb }) => ({ breadcrumb: null, prevBreadcrumb: breadcrumb, navState: 'breadcrumb_out' }));
 
   //
   // Renderers
