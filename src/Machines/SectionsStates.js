@@ -59,6 +59,7 @@ const getSectionStates = (section) => ({
 })
 
 export const videos = _merge({}, getSectionStates('videos'))
+export const shows = _merge({}, getSectionStates('shows'))
 
 export const releases = _merge({}, getSectionStates('releases'), {
   states: {

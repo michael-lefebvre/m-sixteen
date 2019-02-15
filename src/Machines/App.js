@@ -3,7 +3,7 @@ import _merge from 'lodash.merge'
 import { ObserveFontsLoading, ImgsPrefetch } from 'Utils'
 // import { actionLog } from 'Utils'
 import home from './HomeStates'
-import { releases, videos } from './SectionsStates'
+import { releases, videos, shows } from './SectionsStates'
 import { APP_IMAGES_ONLOAD } from 'Constants'
 
 const appMachine = Machine(
@@ -45,6 +45,7 @@ const appMachine = Machine(
           home,
           releases,
           videos,
+          shows
         }
       },
       fatal: {

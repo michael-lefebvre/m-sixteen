@@ -1,0 +1,11 @@
+@import "Scss/variables.scss";
+
+.shows {
+  opacity: 0;
+  overflow: auto;
+  &--active {
+    background: $black;
+    color: $white;
+    opacity: 1;
+  }
+}

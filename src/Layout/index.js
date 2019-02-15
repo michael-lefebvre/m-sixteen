@@ -3,6 +3,7 @@ import { AppContext } from 'Contexts/App'
 import Home from 'Sections/Home'
 import Releases from 'Sections/Releases'
 import Videos from 'Sections/Videos'
+import Shows from 'Sections/Shows'
 
 export default class Layout extends PureComponent {
   static contextType = AppContext;
@@ -33,6 +34,7 @@ export default class Layout extends PureComponent {
         <Home />
         <Releases />
         <Videos />
+        <Shows />
       </Fragment>
     )
   }
