@@ -24,19 +24,16 @@ const withRelease = (WrappedComponent, { release, assets = null }) => {
     // Life cycle
     // --------------------------------------------------
 
-    // componentDidMount() {
-    //   console.log('Release componentDidMount', release, getStateFromProps(this.props))
-    // }
-
-    // componentDidUpdate() {
-    //   console.log('Release componentDidUpdate', release, getStateFromProps(this.props))
-    // }
-
     getSnapshotBeforeUpdate(
       prevProps,
       prevState
     ) {
       return prevProps.state === 'idle' && this.props.state !== 'idle'
+    }
+
+    componentDidMount() {
+      if(this.props.state !== 'idle' && !this.state.assetsLoaded && !this.state.assetsLoading)
+        this.handleOnLoadAssets()
     }
 
     componentDidUpdate(
