@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import YouTube from 'react-youtube'
 import { withApp } from 'Hoc'
 import { HOME_BKGD_VIDEOID } from 'Constants'
-import { getImageUrl } from 'Utils'
 
 import './index.scss'
 
@@ -22,8 +21,6 @@ class HomeBkgd extends PureComponent {
   state = getInitialState(this.props);
 
   _player = null;
-
-  _style = { backgroundImage: `url(${getImageUrl('home-bkgd.jpg')})` };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { showPlayer, playerState } = getInitialState(nextProps);
@@ -141,6 +138,9 @@ class HomeBkgd extends PureComponent {
   }
 
   render() {
+    if(this.props.state === 'idle')
+      return null
+
     const {showPlayer, playerState } = this.state;
 
     const className = classNames('home-video', {
@@ -149,7 +149,7 @@ class HomeBkgd extends PureComponent {
     })
 
     return (
-      <div className={className} style={!showPlayer ? this._style : {}}>
+      <div className={className}>
         <div className="home-video__background">
         {this.playerRenderer()}
         </div>

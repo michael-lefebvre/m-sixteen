@@ -13,6 +13,7 @@
   z-index: $zindex-home-video;
 
   &--mobile {
+    background-image: url(./home-bkgd.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

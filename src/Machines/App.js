@@ -1,9 +1,10 @@
 import { Machine, assign, send } from 'xstate'
 import _merge from 'lodash.merge'
-import { ObserveFontsLoading, ImgsPrefetch } from 'Utils'
+import { ObserveFontsLoading, ImgPrefetch, ImgsPrefetch } from 'Utils'
 // import { actionLog } from 'Utils'
 import home from './HomeStates'
 import { releases, videos, shows } from './SectionsStates'
+import ImgBkgd from 'Sections/Home/Bkgd/home-bkgd.jpg'
 import { APP_IMAGES_ONLOAD } from 'Constants'
 
 const appMachine = Machine(
@@ -111,9 +112,10 @@ const appMachine = Machine(
     },
     services: {
       loadAppAssets: async context => {
+        const image = await ImgPrefetch(ImgBkgd, true).catch(e => false)
         const images = await ImgsPrefetch(APP_IMAGES_ONLOAD).catch(e => false)
         const fonts = await ObserveFontsLoading().catch(e => false)
-        const loaded = !!images && !!fonts
+        const loaded = !!image && !!images && !!fonts
         return Promise[loaded ? 'resolve' : 'reject'](true)
       }
     },
