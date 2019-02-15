@@ -15,7 +15,7 @@ const MainRoute = () => (
 )
 
 const App = () => (
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Route path="/:section?/:id?" component={MainRoute} />
   </BrowserRouter>
 )
