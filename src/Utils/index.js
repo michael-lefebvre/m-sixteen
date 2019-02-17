@@ -2,6 +2,7 @@ import { Globals, animated } from 'react-spring';
 import { getStaticUrl } from './Paths';
 
 export { default as StoryTrigger } from './StoryTrigger';
+export { default as ImgTracker } from './ImgTracker';
 export * from './ImgPrefetch';
 export * from './Machines';
 export * from './Fonts';
