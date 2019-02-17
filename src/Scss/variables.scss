@@ -19,7 +19,7 @@ $color-bkgd: $black;
 
 $release-bkgd-album: $black;
 $release-bkgd-split: #812125;
-$release-bkgd-ep: #e65139;
+$release-bkgd-ep: #e55139;
 
 @function size-ratio($base, $ratio) {
   @return calc(#{$base} * #{$ratio}); //$base * $ratio

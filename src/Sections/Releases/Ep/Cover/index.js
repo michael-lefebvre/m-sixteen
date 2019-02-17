@@ -14,7 +14,7 @@ const Inner = Keyframes.Spring({
   leaving: { delay: 0, o: 0 }
 });
 
-const ReleaseEpCover = ({ children, state, onRest }) => (
+const ReleaseEpCover = ({ state, onRest }) => (
   <Bkgd native state={state} onRest={onRest('leaving')}>
     {({ o }) => (
       <animated.div
@@ -29,7 +29,6 @@ const ReleaseEpCover = ({ children, state, onRest }) => (
             />
           )}
         </Inner>
-        {children}
       </animated.div>
     )}
   </Bkgd>

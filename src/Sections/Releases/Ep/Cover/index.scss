@@ -1,15 +1,28 @@
-@import "Scss/variables.scss";
+@import 'Scss/variables.scss';
+
+.release__cover--ep,
+.release__cover--ep__inner {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 
 .release__cover--ep {
   background: $release-bkgd-ep;
-  height: 100%;
-  width: 100%;
+  mix-blend-mode: luminosity;
+  z-index: 0;
 }
 
 .release__cover--ep__inner {
   background: url(../Assets/releases_ep_cover.jpg) bottom right no-repeat;
-  background-repeat: no-repeat;
-  background-size: auto 80%;
-  height: 100%;
-  width: 100%;
+  background-size: auto 60%;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (min-aspect-ratio: 8/5) {
+  .release__cover--ep__inner {
+    background-size: auto 80%;
+  }
 }

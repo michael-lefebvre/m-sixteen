@@ -129,7 +129,9 @@ export const APP_FONTS_LIST = [
   { name: 'Open Sans', weight: 700 },
   { name: 'Open Sans', weight: 800 },
   // { name: 'Open_Sans', weight: 900 },
-  { name: 'Rubik', weight: 500 }
+  { name: 'Rubik', weight: 500 },
+  { name: 'IM Fell English' },
+  { name: 'Zilla Slab' }
 ];
 export const APP_FONTS_TIMEOUT = 5000;
 export const APP_IMAGES_ONLOAD = RELEASES_COVERS.concat(VIDEOS_THUMBS);

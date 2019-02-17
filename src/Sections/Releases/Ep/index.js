@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { withRelease } from 'Hoc';
 
 import assets from './Assets';
@@ -9,12 +9,10 @@ import Story from './Story';
 import './index.scss';
 
 const ReleaseEp = ({ story, state, onNext, onMounted }) => (
-  <Cover state={state} onRest={onNext}>
-    <Story
-      story={story}
-      // story={state.matches('ready.releases.mounted.story')}
-    />
-  </Cover>
+  <Fragment>
+    <Cover state={state} onRest={onNext} />
+    <Story state={state} story={story} />
+  </Fragment>
 );
 
 export default withRelease(ReleaseEp, { release: 'ep', assets });
