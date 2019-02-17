@@ -1,0 +1,148 @@
+@import 'Scss/variables.scss';
+
+.releases {
+  overflow: hidden;
+
+  &__debug,
+  &__nav {
+    position: absolute;
+    z-index: 5000;
+  }
+
+  &__debug {
+    background: #fafafa;
+    color: #000;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  $releases: 'ep', 'split', 'album';
+  @each $release in $releases {
+    &--next-#{$release} .release--#{$release} {
+      z-index: 150;
+    }
+    &--current-#{$release} .release--#{$release} {
+      z-index: 100;
+    }
+    &--previous-#{$release} .release--#{$release} {
+      z-index: 50;
+    }
+  }
+}
+
+.release {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+
+  &--current,
+  &--previous {
+  }
+
+  &--current {
+    z-index: 100;
+  }
+  &--previous {
+    z-index: 50;
+  }
+}
+
+.releases__cover {
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+
+  &--current,
+  &--previous {
+    opacity: 1;
+  }
+
+  &--current {
+    z-index: 100;
+  }
+  &--previous {
+    z-index: 50;
+  }
+}
+
+@include respond-below(sm) {
+  .releases__cover {
+    transition: opacity 0.6s linear;
+
+    &--previous {
+      opacity: 0;
+    }
+  }
+}
+
+.release__loading,
+.release__scroll-invite {
+  background: rgba(#000, 0.5);
+  border-radius: 6px;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  opacity: 0;
+  padding: 20px;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 250ms ease-in;
+  z-index: 2000;
+
+  &--show {
+    opacity: 1;
+  }
+}
+
+.release__loading {
+  height: 84px;
+  width: 84px;
+}
+
+.release__scroll-invite {
+  height: 98px;
+  width: 76px;
+}
+
+.release__scroll-invite__mouse {
+  border-radius: 25px;
+  border: 2px solid #fff;
+  height: 100%;
+  opacity: 0.9;
+  padding: 10px 15px;
+  width: 100%;
+}
+
+.release__scroll-invite__scroller {
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-name: animScroll;
+  animation-timing-function: cubic-bezier(0.15, 0.41, 0.69, 0.94);
+  background-color: #fff;
+  border-radius: 25%;
+  height: 10px;
+  width: 3px;
+}
+
+@keyframes animScroll {
+  100% {
+    opacity: 0;
+  }
+  90% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+}

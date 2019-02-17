@@ -1,0 +1,96 @@
+@import 'Scss/variables.scss';
+
+.home-video {
+  background-color: $color-bkgd;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: $zindex-home-video;
+
+  &--mobile {
+    background-image: url(./home-bkgd.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(0);
+    transition: all 0.2s linear;
+  }
+
+  &--paused {
+    background-size: 100%;
+    filter: blur(10px);
+
+    // .home-video__background {
+    //   opacity: 0;
+    //   transition: opacity .2s linear .2s;
+    // }
+  }
+
+  &::after {
+    background: rgba(0, 0, 0, 0.35);
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &:before {
+    background-image: linear-gradient(
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 1) 50%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.06),
+        rgba(0, 255, 0, 0.02),
+        rgba(0, 0, 255, 0.06)
+      );
+    background-size: 100% 2px, 3px 100%;
+    bottom: 0;
+    content: ' ';
+    display: block;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
+}
+
+.home-video__background {
+  opacity: 1;
+  transition: opacity 0.2s linear;
+}
+
+.home-video__background,
+.home-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .home-video__background {
+    height: 300%;
+    top: -100%;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  .home-video__background {
+    width: 300%;
+    left: -100%;
+  }
+}

@@ -1,15 +1,25 @@
-import React                 from 'react'
-import ReactDOM              from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { AppContext } from 'Contexts';
+import Layout from 'Layout';
+// import Layout from 'Layout/Debug'
+import registerServiceWorker from 'registerServiceWorker';
 
-// import App                   from 'Views/App'
-import App                   from 'Views/Timeline'
-import registerServiceWorker from 'registerServiceWorker'
+import 'Scss/index.scss';
 
-import 'Scss/index.css'
+const MainRoute = () => (
+  <AppContext>
+    <Layout />
+  </AppContext>
+);
 
-ReactDOM.render(
-    <App />
-  , document.getElementById('app-root')
-)
+const App = () => (
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <Route path="/:section?/:id?" component={MainRoute} />
+  </BrowserRouter>
+);
 
-registerServiceWorker()
+ReactDOM.render(<App />, document.getElementById('app-root'));
+
+registerServiceWorker();

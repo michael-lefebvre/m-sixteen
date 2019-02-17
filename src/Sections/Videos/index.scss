@@ -1,0 +1,226 @@
+@import 'Scss/variables.scss';
+
+//== Video Modal
+//
+//##
+
+.videos {
+  align-items: center;
+  background: linear-gradient(to top, rgba($black, 1) 0%, rgba($black, 0) 100%);
+  background-repeat: no-repeat;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  overflow-y: auto;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: $zindex-higher;
+
+  &--mounted {
+    pointer-events: auto;
+
+    .videos__close {
+      opacity: 1;
+      transition: opacity 200ms linear 500ms;
+
+      &:after {
+        transform: rotate(135deg);
+        transition: transform 600ms ease 500ms;
+      }
+
+      &:before {
+        transform: rotate(45deg);
+        transition: transform 300ms ease 500ms;
+      }
+    }
+  }
+
+  &--ready {
+    .videos__spinner {
+      display: none;
+    }
+
+    .videos__thumb {
+      pointer-events: auto;
+
+      &:before {
+        opacity: 1;
+      }
+    }
+
+    .videos__player {
+      opacity: 1;
+    }
+  }
+}
+
+.videos__close {
+  position: absolute;
+  top: 20px;
+  right: 37px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 200ms linear;
+
+  &:after,
+  &:before {
+    background: #fff;
+    border-radius: 2px;
+    content: '';
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: rotate(0);
+    transition: transform 1s ease;
+  }
+
+  &:after {
+    transition: transform 300ms ease;
+  }
+  &:before {
+    transition: transform 200ms ease;
+  }
+}
+
+.videos__content {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+  width: 854px;
+  z-index: 10;
+  position: relative;
+}
+
+.videos__legend {
+  display: flex;
+  color: #fff;
+  justify-content: space-between;
+
+  h3 {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  h4 {
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 4px;
+  }
+
+  img {
+    height: 50px;
+  }
+}
+
+.videos__thumb {
+  cursor: pointer;
+  pointer-events: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  transition: opacity 200ms linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &:before {
+    background-color: rgba($black, 0.4);
+    background-image: url(./icon-play.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40%;
+    border-radius: 42px;
+    border: 2px solid rgba(#fff, 0.8);
+    content: '';
+    display: block;
+    height: 84px;
+    left: 50%;
+    opacity: 0;
+    margin-left: -42px;
+    margin-top: -42px;
+    position: absolute;
+    top: 50%;
+    transition: all 0.2s linear;
+    width: 84px;
+    z-index: 100;
+    cursor: pointer;
+  }
+}
+
+.videos__body {
+  flex: 1;
+}
+
+// source: https://loading.io/css/
+.videos__spinner {
+  display: inline-block;
+  position: absolute;
+  width: 84px;
+  height: 84px;
+  top: 50%;
+  left: 50%;
+  margin-left: -42px;
+  margin-top: -42px;
+  z-index: 110;
+
+  div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 84px;
+    height: 84px;
+    margin: 0;
+    border: 2px solid #fff;
+    border-radius: 42px;
+    animation: videoSpinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+
+    &:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    &:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    &:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+  }
+}
+
+@keyframes videoSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.videos__player {
+  // height: 0;
+  opacity: 0;
+  // overflow: hidden;
+  // padding-bottom: 56.25%; /* 16:9 */
+  // padding-top: 25px;
+  // position: relative;
+
+  // iframe {
+  //   height: 100%;
+  //   left: 0;
+  //   position: absolute;
+  //   top: 0;
+  //   width: 100%;
+  // }
+}

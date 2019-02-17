@@ -1,0 +1,81 @@
+@import 'Scss/variables.scss';
+
+$release-nav-width: 36px;
+$release-nav-link-height: 10px;
+$release-nav-drawer-padding: 2px;
+$release-nav-cover-margin: 5px;
+
+.releases__nav {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  width: $release-nav-width;
+}
+
+.releases__nav__hr {
+  background: #fff;
+  height: 2px;
+  width: 100%;
+}
+
+.releases__nav__drawer {
+  height: auto;
+  overflow: hidden;
+
+  &--close {
+    .releases__nav__link {
+      margin-bottom: $release-nav-drawer-padding + 1;
+    }
+  }
+
+  &--covers {
+    .releases__nav__link {
+      margin-top: $release-nav-drawer-padding;
+    }
+  }
+}
+
+.releases__nav__link {
+  color: #fff !important;
+  cursor: pointer;
+  display: block;
+  font-size: 10px;
+  height: $release-nav-link-height;
+  line-height: $release-nav-link-height;
+  text-align: center;
+  text-transform: uppercase;
+  // transition: transform .2s linear;
+  // transform: scale(1);
+
+  // &:hover {
+  //   transform: scale(1.1);
+  // }
+}
+
+.releases__nav__covers__link {
+  display: block;
+  margin-top: $release-nav-cover-margin;
+  opacity: 0.5;
+  transition: opacity 0.2s linear;
+  width: $release-nav-width;
+
+  &--active,
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.releases__nav__covers__img {
+  width: 100%;
+
+  &--ep {
+    background: $release-bkgd-ep;
+  }
+  &--split {
+    background: $release-bkgd-split;
+  }
+  &--album {
+    background: $release-bkgd-album;
+  }
+}

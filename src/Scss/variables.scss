@@ -2,38 +2,61 @@
 // Variables
 // --------------------------------------------------
 
+//== Colors
+//
+
+$black: #040203;
+$red: #e1011c;
+$white: #fff; //#f6f3ea;
+
+$color-base: $white;
+$color-active: $red;
+$color-bkgd: $black;
+
+//== Albums
+//
+//## Settings for some of the most global styles.
+
+$release-bkgd-album: $black;
+$release-bkgd-split: #812125;
+$release-bkgd-ep: #e55139;
+
+@function size-ratio($base, $ratio) {
+  @return calc(#{$base} * #{$ratio}); //$base * $ratio
+}
+
+$title-primary-size: 40px;
+$title-primary-line-height: 34px;
+$title-sub-margin: 3px; //2px;
+$title-sub-size: 12px;
+$title-sub-line-height: 15px;
+$title-sub-letter-spacing: 2.05px;
+$title-ratio: 1.4;
+
 //== Miscellaneous
 //
 //## stuffs
 
-  //== z-index
-  //
+//== z-index
+//
 
-$zindex-higher:          2000;
-$zindex-content:         1000;
-$zindex-header:          200;
-$zindex-legend:          100;
-$zindex-home:            100;
-$zindex-root:             10;
+$zindex-higher: 2000;
+$zindex-content: 1000;
+$zindex-header: 200;
+$zindex-legend: 100;
+$zindex-home: 100;
+$zindex-root: 10;
+$zindex-home-hero: 10;
+$zindex-home-bkgd: 0;
+$zindex-home-video: -99;
 
-  //== Scroll Bar
-  //
-
-$scroll-bar-height: 1px;
-
-  //== Fake transparent GIF
-  //
-
-$oldschool-spacer:  'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)';
-
-
-  //== Transitions
-  //
+//== Transitions
+//
 
 $ease: cubic-bezier(0, 0.79, 0.38, 0.96);
 
-@mixin pane-transition( $duration: 800ms, $property: all ) {
-    transition: $property $duration $ease;
+@mixin pane-transition($duration: 800ms, $property: all) {
+  transition: $property $duration $ease;
 }
 
 //== Typography
@@ -42,42 +65,36 @@ $ease: cubic-bezier(0, 0.79, 0.38, 0.96);
 
 $baseline: 1.5rem;
 
-  //== Font Size
-  //
+//== Font Size
+//
 
-$font-size-extra-small:   11px;
-$font-size-small:         12px;
-$font-size-regular:       14px;
-$font-size-base:          $font-size-regular;
-$font-size-large:         16px;
-$font-size-extra:         20px;
+$font-size-extra-small: 11px;
+$font-size-small: 12px;
+$font-size-regular: 14px;
+$font-size-base: $font-size-regular;
+$font-size-large: 16px;
+$font-size-extra: 20px;
 
-  //== Font Weight
-  //
+//== Font Weight
+//
 
 $font-weight-regular: 400;
-$font-weight-medium:  500;
-$font-weight-bold:    700;
+$font-weight-bold: 700;
+$font-weight-heavy: 800;
 
-  //== Font Family
-  //
+//== Font Family
+//
 
-$font-family-system:     'Fira Sans', sans-serif; //'Source Sans Pro', sans-serif;
-// -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-
-  //== Colors
-  //
-
-$color-medium:            #d6e8fe;
-$color-light:             #e8f3fe;
-$color-extra-light:       #f4faff;
+$font-family-system: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+  'Helvetica Neue', sans-serif;
 
 //== Scaffolding
 //
 //## Settings for some of the most global styles.
 
-  //== Screen break points
-  //
+//== Screen break points
+//
 
 $screen-xs: 480px;
 $screen-sm: 600px;
@@ -87,7 +104,6 @@ $screen-md: 960px;
 $screen-lg: 1080px;
 $screen-xl: 1280px;
 
-
 $breakpoints: (
   xs: 0,
   sm: 576px,
@@ -96,13 +112,10 @@ $breakpoints: (
   xl: 1200px
 ) !default;
 
-
 // @include respond-below(sm) {}
 @mixin respond-below($breakpoint) {
-
   // If the breakpoint exists in the map.
   @if map-has-key($breakpoints, $breakpoint) {
-
     // Get the breakpoint value.
     $breakpoint-value: map-get($breakpoints, $breakpoint);
 
@@ -111,19 +124,16 @@ $breakpoints: (
       @content;
     }
 
-  // If the breakpoint doesn't exist in the map.
+    // If the breakpoint doesn't exist in the map.
   } @else {
-
     // Log a warning.
     @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
 
 @mixin respond-above($breakpoint) {
-
   // If the breakpoint exists in the map.
   @if map-has-key($breakpoints, $breakpoint) {
-
     // Get the breakpoint value.
     $breakpoint-value: map-get($breakpoints, $breakpoint);
 
@@ -132,21 +142,9 @@ $breakpoints: (
       @content;
     }
 
-  // If the breakpoint doesn't exist in the map.
+    // If the breakpoint doesn't exist in the map.
   } @else {
-
     // Log a warning.
     @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
-
-
-
-
-//== Albums
-//
-//## Settings for some of the most global styles.
-
-$album-1-bkgd: #040301;
-$album-2-bkgd: #812125;
-$album-3-bkgd: #e65139;

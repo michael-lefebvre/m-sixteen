@@ -1,0 +1,129 @@
+@import 'Scss/variables.scss';
+
+$stripe_height: 40px;
+$stripe_height_with_mask: $stripe_height * 2;
+$stripes_total: 12;
+$stripes_width: 500px;
+$letter_width: 225px;
+$letter_left: $stripes_width - $letter_width;
+
+.album__cover__debug {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background: #ccc;
+  color: #000;
+}
+
+.album__clipped--cover {
+  // background: red;
+  position: relative;
+}
+
+.album__cover {
+  background: $black;
+  position: absolute;
+  bottom: calc(100vh - 0.5px);
+  // bottom: 0vh;
+  transform: rotate(-45deg);
+  transform-origin: bottom right;
+
+  display: flex;
+  align-items: flex-end;
+
+  p {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.album__cover__letters,
+.album__cover__stripes {
+  // background: pink;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  will-change: width;
+  z-index: 1;
+}
+
+/*
+  a___b      d___e
+  |    \    /    |
+  |     \  /     |
+  |  k\  .c  /h  |
+  |  | \    / |  |
+  m__l  j__i  g__f
+*/
+
+$letter_w_unit: $letter_width / 10;
+$a: 0 0;
+$b: '#{$letter_w_unit*3} 0';
+$c: '#{$letter_width/2} #{1.6*$stripe_height_with_mask}';
+$d: '#{$letter_w_unit*7} 0';
+$e: '#{$letter_width} 0';
+$f: '#{$letter_width} 100%';
+$g: '#{$letter_w_unit*8} 100%';
+$h: '#{$letter_w_unit*8} #{$stripe_height_with_mask}';
+$i: '#{$letter_w_unit*6} 100%';
+$j: '#{$letter_w_unit*4} 100%';
+$k: '#{$letter_w_unit*2} #{$stripe_height_with_mask}';
+$l: '#{$letter_w_unit*2} 100%';
+$m: '0 100%';
+
+.album__cover__m {
+  background: $red;
+  bottom: 2 * $stripe_height_with_mask;
+  clip-path: polygon(
+    #{$a},
+    #{$b},
+    #{$c},
+    #{$d},
+    #{$e},
+    #{$f},
+    #{$g},
+    #{$h},
+    #{$i},
+    #{$j},
+    #{$k},
+    #{$l},
+    #{$m}
+  );
+  height: 3 * $stripe_height_with_mask - $stripe_height;
+  left: $letter_left;
+  opacity: 1;
+  position: absolute;
+  width: $letter_width;
+  z-index: 100;
+}
+
+.album__cover__stripe {
+  background: rgba($white, 1);
+  bottom: 0;
+  height: $stripe_height;
+  left: 0;
+  position: absolute;
+  z-index: 1;
+
+  @for $i from 0 to $stripes_total {
+    &--#{$i} {
+      bottom: ($stripe_height_with_mask * $i);
+
+      @if $i >= 5 {
+        width: $stripes_width;
+      }
+
+      @if $i >= 2 and $i < 5 {
+        width: $letter_left;
+      }
+
+      @if $i >= 0 and $i < 2 {
+        width: 100%;
+      }
+    }
+  }
+}
