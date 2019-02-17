@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { VideoContext } from 'Contexts';
-import { getPhotoUrl } from 'Utils';
+import { getVideoUrl } from 'Utils';
 import { VIDEOS_ID } from 'Constants';
 
 const NextLink = () => {
@@ -15,7 +15,7 @@ const NextLink = () => {
 
   return (
     <Link to={`/videos/${next}`}>
-      <img src={getPhotoUrl(`videos/${next}-md.jpg`)} alt="" />
+      <img src={getVideoUrl(`${next}-md.jpg`)} alt="" />
     </Link>
   );
 };
