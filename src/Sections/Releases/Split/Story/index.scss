@@ -33,14 +33,15 @@
   text-align: center;
 
   .split__photo {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
   }
 }
 
 .split__photo {
   display: inline-block;
-  border-width: 15px;
-  border-image: url(../Assets/releases_split_frame.png) 15 stretch;
+  border-width: 20px;
+  border-image: url(../Assets/releases_split_frame.png) 20 stretch;
   border-style: solid;
   margin: auto;
 

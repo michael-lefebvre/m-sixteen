@@ -1,3 +1,5 @@
+// https://lesdieuxducode.com/blog/2018/7/charger-des-images-lors-du-scroll-avec-lintersectionobserver
+
 export default class ImgTracker {
   static observedImages = new Map();
 
@@ -14,7 +16,7 @@ export default class ImgTracker {
             });
           },
           {
-            rootMargin: '50px 0px',
+            rootMargin: '50px 50px',
             threshold: 0.01
           }
         )

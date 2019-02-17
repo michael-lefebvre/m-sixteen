@@ -1,117 +1,59 @@
-import React, { PureComponent, Fragment } from 'react';
-import { caf, raf, getPhotoUrl } from 'Utils';
+import React, { PureComponent } from 'react';
+import { getPhotoUrl, ImgTracker, ImgPrefetch } from 'Utils';
 import './index.scss';
-
-const getImages = ({ src, extension }) => ({
-  imgSmall: getPhotoUrl(`${src}-sm.${extension}`),
-  imgMedium: getPhotoUrl(`${src}-md.${extension}`)
-});
 
 export default class Image extends PureComponent {
   static defaultProps = {
     extension: 'jpg',
-    className: '',
-    offset: 0,
-    partialVisibility: true
+    className: ''
   };
 
   state = {
-    isVisible: false,
-    ...getImages(this.props)
+    isLoaded: false
   };
 
-  _refs = {
-    small: React.createRef(),
-    medium: React.createRef()
-  };
-
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   const { isVisible } = nextProps
-  //   if(prevState.isVisible !== isVisible )
-  //     return {
-  //       isVisible,
-  //     }
-
-  //   return null;
-  // }
+  _imgRef = React.createRef();
 
   //
   // Life cycle
   // --------------------------------------------------
 
   componentDidMount() {
-    if (!this.state.isVisible) this._rafRef = raf(this._isComponentVisible);
+    ImgTracker.observe(this._imgRef.current, this.handleOnVisible);
   }
 
   componentDidUpdate() {}
 
   componentWillUnmount() {
-    if (this._rafRef !== null) caf(this._rafRef);
+    if (this._imgRef.current && !this.state.isLoaded)
+      ImgTracker.unobserve(this._imgRef.current);
   }
 
   //
   // Helpers
   // --------------------------------------------------
 
-  _isVisible = (
-    { top, left, bottom, right, width, height },
-    windowWidth,
-    windowHeight
-  ) => {
-    const { offset, partialVisibility } = this.props;
-
-    if (top + right + bottom + left === 0) {
-      return false;
-    }
-
-    const topThreshold = 0 - offset;
-    const leftThreshold = 0 - offset;
-    const widthCheck = windowWidth + offset;
-    const heightCheck = windowHeight + offset;
-
-    return partialVisibility
-      ? top + height >= topThreshold &&
-          left + width >= leftThreshold &&
-          bottom - height <= heightCheck &&
-          right - width <= widthCheck
-      : top >= topThreshold &&
-          left >= leftThreshold &&
-          bottom <= heightCheck &&
-          right <= widthCheck;
+  _getImgPath = () => {
+    const { src, extension } = this.props;
+    const format = this.state.isLoaded ? 'md' : 'sm';
+    return getPhotoUrl(`${src}-${format}.${extension}`);
   };
 
-  _isComponentVisible = () => {
-    // isComponentVisible might be called from componentDidMount, before component ref is assigned
-    if (
-      !this._refs.small.current ||
-      !this._refs.small.current.getBoundingClientRect
-    )
-      return;
+  _getRest = () => {
+    const { className, extension, src, ...rest } = this.props;
 
-    const html = document.documentElement;
-    const boundingClientRect = this._refs.small.current.getBoundingClientRect();
-    const windowWidth = window.innerWidth || html.clientWidth;
-    const windowHeight = window.innerHeight || html.clientHeight;
-
-    const isVisible = this._isVisible(
-      boundingClientRect,
-      windowWidth,
-      windowHeight
-    );
-
-    if (!isVisible) this._rafRef = raf(this._isComponentVisible);
-    else {
-      this._rafRef = null;
-      this.setState({ isVisible });
-    }
+    return rest;
   };
 
   //
   // Handlers
   // --------------------------------------------------
 
-  handleOnLoad = ref => () => {
-    this._refs[ref].current.classList.add('figure__img--loaded');
+  handleOnVisible = () => {
+    ImgTracker.unobserve(this._imgRef.current);
+    ImgPrefetch(this._getImgPath('md'), true)
+      .then(r => this.setState({ isLoaded: true }))
+      .catch(e => console.log(e));
   };
 
   //
@@ -119,38 +61,16 @@ export default class Image extends PureComponent {
   // --------------------------------------------------
 
   render() {
-    const {
-      className,
-      extension,
-      src,
-      offset,
-      partialVisibility,
-      ...rest
-    } = this.props;
+    const { className } = this.props;
 
     return (
-      <Fragment>
-        {this.state.isVisible && (
-          <img
-            ref={this._refs.medium}
-            className={`figure__img figure__img--medium ${className}`}
-            // className="figure__img figure__img--medium"
-            src={this.state.imgMedium}
-            onLoad={this.handleOnLoad('medium')}
-            alt=""
-            {...rest}
-          />
-        )}
-        <img
-          ref={this._refs.small}
-          src={this.state.imgSmall}
-          className={`figure__img figure__img--small  ${className}`}
-          // className="figure__img figure__img--small"
-          onLoad={this.handleOnLoad('small')}
-          alt=""
-          {...rest}
-        />
-      </Fragment>
+      <img
+        ref={this._imgRef}
+        src={this._getImgPath()}
+        className={`figure__img figure__img--small  ${className}`}
+        alt=""
+        {...this._getRest()}
+      />
     );
   }
 }
