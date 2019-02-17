@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { VideoContext } from 'Contexts';
-import { getPhotoUrl } from 'Utils';
+import { getVideoUrl } from 'Utils';
 
 const Thumb = ({ onClick }) => {
   const { videoId, state, playerState, playerReady } = useContext(VideoContext);
@@ -10,7 +10,7 @@ const Thumb = ({ onClick }) => {
   const isPayling = playerState === 'playVideo';
   const showSpinner = state !== 'leaving' && !playerReady;
   const style = {
-    backgroundImage: `url(${getPhotoUrl(`videos/${videoId}-md.jpg`)})`,
+    backgroundImage: `url(${getVideoUrl(`${videoId}-lg.jpg`)})`,
     opacity: isPayling ? 0 : 1,
     pointerEvents: playerReady && isPayling ? 'none' : 'auto'
   };

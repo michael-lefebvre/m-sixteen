@@ -23,6 +23,7 @@ export const getRouteId = (props = null) =>
 
 export const getImageUrl = path => getStaticUrl(`images/${path}`);
 export const getPhotoUrl = path => getStaticUrl(`photos/${path}`);
+export const getVideoUrl = path => getStaticUrl(`videos/${path}`);
 
 export const getViewport = () => {
   const { width, height } = document.body.getBoundingClientRect();
@@ -38,7 +39,7 @@ export const getNavImgSrc = (section, item) => {
     case 'releases':
       return getStaticUrl(`covers/${item}.jpg`);
     case 'videos':
-      return getStaticUrl(`photos/videos/${item}-md.jpg`);
+      return getStaticUrl(`videos/${item}-md.jpg`);
     // case 'shows': return getStaticUrl(`covers/${item}.jpg`)
     default:
     // do nothing

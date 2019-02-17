@@ -118,7 +118,7 @@ export const VIDEOS = {
 };
 
 export const VIDEOS_ID = Object.keys(VIDEOS);
-export const VIDEOS_THUMBS = VIDEOS_ID.map(id => `photos/videos/${id}-md.jpg`);
+export const VIDEOS_THUMBS = VIDEOS_ID.map(id => `videos/${id}-md.jpg`);
 
 //
 // App Loading
