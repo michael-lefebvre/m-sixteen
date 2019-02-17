@@ -114,25 +114,23 @@ const Title = ({ ready }) => (
   </Spring>
 );
 
-const _abstractDefaultProps = { w: 0, t: -100, sY: -21 };
+const _abstractDefaultProps = { w: 0, t: -100 };
 const AbstractKf = Keyframes.Spring({
   idle: {
     immediate: true,
     from: _abstractDefaultProps,
     to: _abstractDefaultProps
   },
-  mounted: { delay: 800, w: 100, t: 0, from: _abstractDefaultProps },
-  breadcrumb_in: { delay: 100, sY: -1 },
-  breadcrumb_out: { delay: 300, sY: -21 }
+  mounted: { delay: 800, w: 100, t: 0, from: _abstractDefaultProps }
 });
 
-const Abstract = ({ breadcrumb = '', state }) => (
+const Abstract = ({ state }) => (
   <AbstractKf
     native
     state={state}
     // config={{ mass: 5, tension: 2000, friction: 200 }}
   >
-    {({ w, t, sY }) => (
+    {({ w, t }) => (
       <div className="home__abstract">
         <div className="home__abstract__drawer">
           <animated.p
@@ -143,16 +141,6 @@ const Abstract = ({ breadcrumb = '', state }) => (
             condimentum bibendum rhoncus. Duis viverra tempus felis.
           </animated.p>
         </div>
-        <div
-          className={`home__breadcrumb home__breadcrumb--section home__breadcrumb--${breadcrumb}`}
-        >
-          <animated.div
-            className="home__breadcrumb__section"
-            style={{ transform: sY.interpolate(t => `translateY(${t}px)`) }}
-          >
-            {breadcrumb}
-          </animated.div>
-        </div>
         <animated.hr
           className="home__abstract__hr"
           style={{ width: w.interpolate(w => `${w}%`) }}
@@ -162,15 +150,7 @@ const Abstract = ({ breadcrumb = '', state }) => (
   </AbstractKf>
 );
 
-const HomeNav = ({
-  ready,
-  items,
-  from,
-  section,
-  onMouseEnter,
-  onMouseLeave,
-  onRest = () => null
-}) => {
+const HomeNav = ({ ready, items, from, section, onRest = () => null }) => {
   return (
     <Spring
       native
@@ -182,7 +162,6 @@ const HomeNav = ({
     >
       {({ t }) => (
         <animated.ul
-          onMouseLeave={onMouseLeave}
           className={`home__nav home__nav--${section}`}
           style={{ transform: t.interpolate(t => `translateX(${t}%)`) }}
         >
@@ -196,10 +175,7 @@ const HomeNav = ({
               // console.log(item)
               return (
                 <animated.li className="home__nav__item" style={styles}>
-                  <Link
-                    to={`/${section}/${item}`}
-                    onMouseEnter={onMouseEnter(section)}
-                  >
+                  <Link to={`/${section}/${item}`}>
                     <img
                       src={getNavImgSrc(section, item)}
                       className="home__nav__thumb"
@@ -233,9 +209,7 @@ class Home extends PureComponent {
   state = {
     navState: 'idle',
     state: this.props.state,
-    mounted: false,
-    breadcrumb: null,
-    prevBreadcrumb: null
+    mounted: false
   };
 
   _ref = React.createRef();
@@ -252,7 +226,6 @@ class Home extends PureComponent {
 
     if (state !== prevState.state)
       return {
-        breadcrumb: null,
         state
       };
 
@@ -283,34 +256,12 @@ class Home extends PureComponent {
     this.props.onNext();
   };
 
-  handleOnMouseEnter = breadcrumb => () => {
-    if (this.state.state === 'mounted')
-      this.setState(({ breadcrumb: prevBreadcrumb }) => ({
-        breadcrumb,
-        prevBreadcrumb,
-        navState: 'breadcrumb_in'
-      }));
-  };
-
-  handleOnMouseLeave = () =>
-    this.setState(({ breadcrumb }) => ({
-      breadcrumb: null,
-      prevBreadcrumb: breadcrumb,
-      navState: 'breadcrumb_out'
-    }));
-
   //
   // Renderers
   // --------------------------------------------------
 
   render() {
-    const {
-      state,
-      mounted: ready,
-      breadcrumb,
-      prevBreadcrumb,
-      navState
-    } = this.state;
+    const { state, mounted: ready, navState } = this.state;
 
     if (state === 'idle') return null;
 
@@ -337,25 +288,18 @@ class Home extends PureComponent {
                   <BlockquoteEndContent ready={ready} />
                 </BlockquoteEnd>
                 <div className="home__menu">
-                  <Abstract
-                    breadcrumb={breadcrumb || prevBreadcrumb}
-                    state={navState}
-                  />
+                  <Abstract state={navState} />
                   <HomeNav
                     ready={ready}
                     items={RELEASES_ID}
                     from={50}
                     section="releases"
-                    onMouseEnter={this.handleOnMouseEnter}
-                    onMouseLeave={this.handleOnMouseLeave}
                   />
                   <HomeNav
                     ready={ready}
                     items={VIDEOS_ID}
                     from={-50}
                     section="videos"
-                    onMouseEnter={this.handleOnMouseEnter}
-                    onMouseLeave={this.handleOnMouseLeave}
                     onRest={this.props.onNext}
                   />
                 </div>

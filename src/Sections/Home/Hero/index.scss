@@ -111,52 +111,6 @@
   bottom: 0;
 }
 
-.home__breadcrumb {
-  font-size: 28px;
-  font-weight: $font-weight-heavy;
-  height: 30px;
-  left: 0;
-  letter-spacing: -1.2px;
-  line-height: 20px;
-  overflow: hidden;
-  position: absolute;
-  width: 100%;
-  z-index: 100;
-
-  &--releases .home__breadcrumb__section {
-    left: -2px;
-  }
-
-  &--section {
-    top: 100%;
-  }
-  &--item {
-    bottom: -5px;
-    left: -1px;
-  }
-}
-
-.home__breadcrumb__item,
-.home__breadcrumb__section {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.home__breadcrumb__section {
-  color: $red;
-  height: 20px;
-  font-size: 28px;
-  text-transform: uppercase;
-}
-
-.home__breadcrumb__item {
-  font-size: 20px;
-  small {
-    font-size: 16px;
-  }
-}
-
 .home__title {
   overflow: hidden;
   padding-right: 50%;
