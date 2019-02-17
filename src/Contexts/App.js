@@ -89,7 +89,9 @@ class App extends Component {
     });
 
     this.service.start();
-    this.service.devTools.init(this.state.machine);
+
+    if (process.env.NODE_ENV !== 'production' && this.service.devTools)
+      this.service.devTools.init(this.state.machine);
   }
 
   componentWillUnmount() {
