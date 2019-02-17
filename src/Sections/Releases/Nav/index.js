@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Keyframes, animated } from 'react-spring';
 import { Link, NavLink } from 'react-router-dom';
 import delay from 'delay';
-import { withApp } from 'Hoc';
+import withApp from 'Hoc/App';
 import { getNavImgSrc } from 'Utils';
 import './index.scss';
 

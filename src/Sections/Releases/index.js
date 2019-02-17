@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import classNames from 'classnames';
 
 import { Spinner } from 'Components';
-import { withApp } from 'Hoc';
+import withApp from 'Hoc/App';
 import ReleasesNav from './Nav';
 import './index.scss';
 
