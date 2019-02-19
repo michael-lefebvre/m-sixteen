@@ -1,57 +1,25 @@
 # m-sixteen
 
-## React Context
+## TODO
 
-### Global
+-  [ ] Hosting
+  - [ ] [Single Page Apps for GitHub Pages](https://github.com/rafrex/spa-github-pages)
+  - [ ] [Custom domains on GitHub Pages with HTTPS](https://github.blog/2018-05-01-github-pages-custom-domains-https/)
+- [ ] Responsives
+  - [ ] Home
+  - [ ] Videos
+  - [ ] Releases
+    - [ ] Album
+    - [ ] Split
+    - [ ] EP
+- [ ] Perf
+  - [ ] [Resource Prioritization](https://developers.google.com/web/fundamentals/performance/resource-prioritization)
+  - [ ] Images/Photos:
+    - [ ] automatic resizing script
+    - [ ] find a CDN
 
-#### Props
 
-- device
-- orientation
-- offsetWidth
-- offsetHeight
-- ready
-- currentSection
-- prevSection
-
-#### Method
-
-- isReady
-- getViewPort
-- isDesktop
-- isTablet
-- isMobile
-- isLandscape
-
-#### Actions
-
-- onReady
-- onSectionChange
-
-### Home
-
-#### Props
-
-- isMounted
-- isCurrentView
-- bkgdPlaying
-
-### Releases
-
-#### Props
-
-- current
-- previous
-- next
-
-### Release
-
-#### Props
-
-- stage (entering, entered, mounted, leaving, unmounted)
-- ready
--
-
+### Notes
 
 https://stackoverflow.com/questions/54211030/how-do-i-import-modernizr-in-react
 https://www.npmjs.com/package/css-mediaquery
