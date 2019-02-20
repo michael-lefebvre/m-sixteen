@@ -98,7 +98,6 @@ export const RELEASES = {
   }
 };
 export const RELEASES_ID = Object.keys(RELEASES);
-export const RELEASES_COVERS = RELEASES_ID.map(id => `covers/${id}.jpg`);
 
 //
 // VIDEOS
@@ -118,7 +117,6 @@ export const VIDEOS = {
 };
 
 export const VIDEOS_ID = Object.keys(VIDEOS);
-export const VIDEOS_THUMBS = VIDEOS_ID.map(id => `videos/${id}-md.jpg`);
 
 //
 // App Loading
@@ -127,13 +125,11 @@ export const VIDEOS_THUMBS = VIDEOS_ID.map(id => `videos/${id}-md.jpg`);
 export const APP_FONTS_LIST = [
   { name: 'Open Sans', weight: 400 },
   { name: 'Open Sans', weight: 700 },
-  { name: 'Open Sans', weight: 800 },
+  { name: 'Open Sans', weight: 800 }
   // { name: 'Open_Sans', weight: 900 },
-  { name: 'Rubik', weight: 500 },
-  { name: 'IM Fell English' },
-  { name: 'Zilla Slab' }
+  // { name: 'Rubik', weight: 500 },
+  // { name: 'IM Fell English' },
+  // { name: 'Zilla Slab' }
 ];
 export const APP_FONTS_TIMEOUT = 5000;
-export const APP_IMAGES_ONLOAD = RELEASES_COVERS.concat(VIDEOS_THUMBS);
-
 export const HOME_BKGD_VIDEOID = 'Pdni_p27l_0';
