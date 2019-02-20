@@ -20,8 +20,8 @@ const Spinner = ({ theme, className }) => {
       break;
     default:
     case 'dark':
-      f = '#ececec';
-      b = '#575757';
+      f = '#040203';
+      b = '#8b8b8b';
       o = 1;
   }
 

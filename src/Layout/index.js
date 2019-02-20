@@ -1,9 +1,10 @@
 import React, { PureComponent, Fragment } from 'react';
 import { AppContext } from 'Contexts/App';
+import { Spinner } from 'Components';
 import Home from 'Sections/Home';
-import Releases, { ReleasesLoading } from 'Sections/Releases';
+import Releases from 'Sections/Releases';
 import Videos from 'Sections/Videos';
-import Shows from 'Sections/Shows';
+//import Shows from 'Sections/Shows';
 import ImgErr from './img_error.jpg';
 
 const _DEBUG = false;
@@ -68,15 +69,20 @@ export default class Layout extends PureComponent {
   render() {
     if (this._hasErrorBoundary()) return this.errorBoundaryRenderer();
 
-    if (!this.context.matches('ready')) return <ReleasesLoading />;
-
     return (
       <Fragment>
-        <Home />
-        <Releases />
-        <Videos />
-        <Shows />
-        {this.miniDebugRenderer()}
+        <div className="root-loading">
+          <Spinner theme="dark" />
+        </div>
+        {this.context.matches('ready') && (
+          <Fragment>
+            <Home />
+            <Releases />
+            <Videos />
+            {/*<Shows />*/}
+            {this.miniDebugRenderer()}
+          </Fragment>
+        )}
       </Fragment>
     );
   }

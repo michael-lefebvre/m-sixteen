@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import classNames from 'classnames';
 import YouTube from 'react-youtube';
 import { withApp } from 'Hoc';
@@ -6,10 +6,13 @@ import { HOME_BKGD_VIDEOID } from 'Constants';
 
 import './index.scss';
 
+const _DEBUG = false;
+
 const getInitialState = ({ state }) => {
   const showPlayer = ['idle', 'mounted'].indexOf(state) === -1;
 
   return {
+    ready: false,
     playerState: showPlayer ? state : null,
     showPlayer
   };
@@ -98,6 +101,9 @@ class HomeBkgd extends PureComponent {
     if (this._hasNext()) {
       this.props.onSend('HERO.NEXT');
     }
+    if (!this.state.ready) {
+      this.setState({ ready: true });
+    }
   };
 
   //
@@ -145,20 +151,35 @@ class HomeBkgd extends PureComponent {
     );
   }
 
-  render() {
-    if (this.props.state === 'idle') return null;
+  miniDebugRenderer() {
+    if (!_DEBUG) return null;
 
-    const { showPlayer, playerState } = this.state;
+    return (
+      <div className="mini-debug">
+        <pre>{JSON.stringify(this.state, null, 2)}</pre>
+        <pre>{JSON.stringify(this.props, null, 2)}</pre>
+      </div>
+    );
+  }
+
+  render() {
+    if (this.props.state === 'idle') return this.miniDebugRenderer();
+
+    const { showPlayer, playerState, ready } = this.state;
 
     const className = classNames('home-video', {
+      'home-video--ready': !showPlayer || ready,
       'home-video--mobile': !showPlayer,
       'home-video--paused': playerState === 'pauseVideo'
     });
 
     return (
-      <div className={className}>
-        <div className="home-video__background">{this.playerRenderer()}</div>
-      </div>
+      <Fragment>
+        <div className={className}>
+          <div className="home-video__background">{this.playerRenderer()}</div>
+        </div>
+        {this.miniDebugRenderer()}
+      </Fragment>
     );
   }
 }
