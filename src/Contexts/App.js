@@ -15,10 +15,12 @@ const defaultViewport = {
   width: 0,
   height: 0,
   device: null,
-  orientation: null
+  orientation: null,
+  retina: false
 };
 
 const setCurrentMediaQueries = mq => ({
+  retina: window.devicePixelRatio >= 2,
   ...MEDIA_QUERIES_BY_MATCH[mq.media],
   ...getViewport()
 });

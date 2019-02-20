@@ -24,7 +24,8 @@ const appMachine = Machine(
       width: 0,
       height: 0,
       device: null,
-      orientation: null
+      orientation: null,
+      retina: false
     },
     initial: 'loadind',
     states: {
