@@ -1,6 +1,7 @@
 import { Globals, animated } from 'react-spring';
 import { getStaticUrl } from './Paths';
 
+export * from './Paths';
 export { default as StoryTrigger } from './StoryTrigger';
 export { default as ImgTracker } from './ImgTracker';
 export * from './ImgPrefetch';
@@ -38,9 +39,9 @@ export const roundToEven = n => 2 * Math.round(n / 2);
 export const getNavImgSrc = (section, item) => {
   switch (section) {
     case 'releases':
-      return getStaticUrl(`covers/${item}.jpg`);
+      return getStaticUrl(`covers/${item}`);
     case 'videos':
-      return getStaticUrl(`videos/${item}-md.jpg`);
+      return getStaticUrl(`videos/${item}`);
     // case 'shows': return getStaticUrl(`covers/${item}.jpg`)
     default:
     // do nothing

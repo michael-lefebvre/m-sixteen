@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Spring, Keyframes, Trail, animated } from 'react-spring';
 import { Link } from 'react-router-dom';
-import { getNavImgSrc } from 'Utils';
+import { Image } from 'Components';
 import { withApp } from 'Hoc';
 import { VIDEOS_ID, RELEASES_ID } from 'Constants';
 
@@ -176,10 +176,10 @@ const HomeNav = ({ ready, items, from, section, onRest = () => null }) => {
               return (
                 <animated.li className="home__nav__item" style={styles}>
                   <Link to={`/${section}/${item}`}>
-                    <img
-                      src={getNavImgSrc(section, item)}
+                    <Image
                       className="home__nav__thumb"
-                      alt=""
+                      src={item}
+                      type={section === 'releases' ? 'covers' : 'videos'}
                     />
                   </Link>
                 </animated.li>

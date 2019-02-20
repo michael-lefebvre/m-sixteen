@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import { getPhotoUrl, ImgTracker, ImgPrefetch } from 'Utils';
+import { getStaticUrl, ImgTracker, ImgPrefetch } from 'Utils';
 import './index.scss';
 
 export default class Image extends PureComponent {
   static defaultProps = {
     extension: 'jpg',
-    className: ''
+    className: '',
+    type: 'photos'
   };
 
   state = {
@@ -34,9 +35,9 @@ export default class Image extends PureComponent {
   // --------------------------------------------------
 
   _getImgPath = () => {
-    const { src, extension } = this.props;
+    const { src, extension, type } = this.props;
     const format = this.state.isLoaded ? 'md' : 'sm';
-    return getPhotoUrl(`${src}-${format}.${extension}`);
+    return getStaticUrl(`${type}/${src}-${format}.${extension}`);
   };
 
   _getRest = () => {

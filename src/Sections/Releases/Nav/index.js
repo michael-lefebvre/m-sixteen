@@ -3,7 +3,7 @@ import { Keyframes, animated } from 'react-spring';
 import { Link, NavLink } from 'react-router-dom';
 import delay from 'delay';
 import withApp from 'Hoc/App';
-import { getNavImgSrc } from 'Utils';
+import { getStaticUrl } from 'Utils';
 import './index.scss';
 
 const _NAV_WIDTH = 36;
@@ -135,7 +135,8 @@ class ReleasesNav extends PureComponent {
                       activeClassName="releases__nav__covers__link--active"
                     >
                       <img
-                        src={getNavImgSrc('releases', item)}
+                        //srcset={`${getStaticUrl(`covers/${item}-sm@2x.jpg`)} 2x`}
+                        src={getStaticUrl(`covers/${item}-sm.jpg`)}
                         className={`releases__nav__covers__img releases__nav__covers__img--${item}`}
                         alt=""
                       />
