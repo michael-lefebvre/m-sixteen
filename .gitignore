@@ -11,6 +11,9 @@
 /build
 /src/**/*.css
 
+# CDN
+.cloud
+
 # misc
 .DS_Store
 .env.local
