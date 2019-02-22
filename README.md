@@ -3,7 +3,7 @@
 ## TODO
 
 - [ ] Hosting
-  - [ ] [Single Page Apps for GitHub Pages](https://github.com/rafrex/spa-github-pages)
+  - [x] [Single Page Apps for GitHub Pages](https://github.com/rafrex/spa-github-pages)
   - [ ] [Custom domains on GitHub Pages with HTTPS](https://github.blog/2018-05-01-github-pages-custom-domains-https/)
 - [ ] Responsives
   - [ ] Home
