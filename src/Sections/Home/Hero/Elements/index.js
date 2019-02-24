@@ -223,7 +223,14 @@ const Abstract = ({ style: { AbstractWidth, AbstractTranslateY } }) => (
   </div>
 );
 
-const HomeNav = ({ translateX, HomeNavActive, mounted, items, section }) => (
+const HomeNav = ({
+  translateX,
+  HomeNavActive,
+  mounted,
+  items,
+  section,
+  onClick = () => null
+}) => (
   <animated.ul
     className={`home__nav home__nav--${section}`}
     style={{ transform: translateX.interpolate(t => `translateX(${t}%)`) }}
@@ -240,8 +247,9 @@ const HomeNav = ({ translateX, HomeNavActive, mounted, items, section }) => (
           <Link to={`/${section}/${item}`}>
             <Image
               className={`home__nav__thumb home__nav__thumb--${section}`}
-              src={item}
               type={section === 'releases' ? 'covers' : 'videos'}
+              onClick={onClick}
+              src={item}
             />
           </Link>
         </animated.li>

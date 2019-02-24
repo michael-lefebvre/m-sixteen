@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { VIDEOS_ID, RELEASES_ID } from 'Constants';
+import HomeWrapper from '../HomeWrapper';
 import Elements from '../Elements';
 
 import './index.scss';
 
-const HeroMedium = ({ state, mounted }) => (
-  <Elements native state={`medium:${state}`}>
-    {style => (
-      <header className="home home--medium" tabIndex="-1">
-        <div className="home__wrapper">
+const HeroMedium = ({ state, mounted, onNext }) => (
+  <HomeWrapper state={state} onNext={onNext} screen="medium">
+    <Elements native state={`medium:${state}`}>
+      {style => (
+        <Fragment>
           <div className="home--medium__top">
             <div className="home--medium__left">
               <Elements.BlockquoteStart style={style} />
@@ -37,10 +38,10 @@ const HeroMedium = ({ state, mounted }) => (
               section="videos"
             />
           </div>
-        </div>
-      </header>
-    )}
-  </Elements>
+        </Fragment>
+      )}
+    </Elements>
+  </HomeWrapper>
 );
 
 export default HeroMedium;

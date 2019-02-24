@@ -59,7 +59,7 @@ class Hero extends PureComponent {
 
   render() {
     const { state, mounted } = this.state;
-    const { screen, onNext, onSend } = this.props;
+    const { screen, onNext } = this.props;
 
     if (state === 'idle') return null;
 
@@ -67,7 +67,6 @@ class Hero extends PureComponent {
       state,
       mounted,
       onNext,
-      onSend,
       onMounted: this.handleOnRest
     };
 
