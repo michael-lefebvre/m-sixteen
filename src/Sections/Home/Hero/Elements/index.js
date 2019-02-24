@@ -247,7 +247,7 @@ const HomeNav = ({
           <Link to={`/${section}/${item}`}>
             <Image
               className={`home__nav__thumb home__nav__thumb--${section}`}
-              type={section === 'releases' ? 'covers' : 'videos'}
+              type={section}
               onClick={onClick}
               src={item}
             />

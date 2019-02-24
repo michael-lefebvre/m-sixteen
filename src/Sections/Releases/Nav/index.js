@@ -135,8 +135,8 @@ class ReleasesNav extends PureComponent {
                       activeClassName="releases__nav__covers__link--active"
                     >
                       <img
-                        //srcset={`${getStaticUrl(`covers/${item}-sm@2x.jpg`)} 2x`}
-                        src={getStaticUrl(`covers/${item}-sm.jpg`)}
+                        //srcset={`${getStaticUrl(`releases/${item}-sm@2x.jpg`)} 2x`}
+                        src={getStaticUrl(`releases/${item}-sm.jpg`)}
                         className={`releases__nav__covers__img releases__nav__covers__img--${item}`}
                         alt=""
                       />
