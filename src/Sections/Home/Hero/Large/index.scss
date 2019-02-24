@@ -1,0 +1,124 @@
+@import 'Scss/variables.scss';
+
+.home--desktop {
+  will-change: transform;
+
+  .home__wrapper {
+    width: 680px;
+    transform-origin: 35% 45%;
+    will-change: opacity;
+  }
+
+  .home__menu {
+    height: 360px;
+  }
+
+  .home__quote {
+    font-size: 28px;
+    line-height: 30px;
+
+    &--start {
+      width: 50%;
+    }
+
+    &--end {
+      margin-left: 51%;
+
+      &__hr {
+        position: absolute;
+        left: 0;
+        top: calc(100% + 4px);
+      }
+    }
+  }
+
+  .home__abstract {
+    text-align: left;
+    margin-left: 160px; //24%;
+    margin-top: 40px;
+    width: 430px;
+    opacity: 1;
+    position: relative;
+  }
+
+  .home__abstract__txt {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 0 0 16px;
+  }
+
+  .home__abstract__hr {
+    border-bottom-width: 8px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .home__title {
+    padding-right: 50%;
+
+    &__primary {
+      font-size: size-ratio($title-primary-size, $title-ratio);
+      line-height: size-ratio($title-primary-line-height, $title-ratio);
+      letter-spacing: 0.04rem;
+    }
+
+    &__sub {
+      // font-weight: 400;
+      font-size: size-ratio($title-sub-size, $title-ratio);
+      line-height: size-ratio($title-sub-line-height, $title-ratio);
+      // letter-spacing: size-ratio($title-sub-letter-spacing, $title-ratio);
+      letter-spacing: 0.15rem;
+    }
+  }
+
+  .home__menu {
+    position: relative;
+  }
+
+  .home__nav {
+    margin-top: 20px;
+    flex-direction: row-reverse;
+    display: flex;
+    width: 430px;
+
+    &--releases {
+      margin-left: 312px;
+
+      .home__nav__thumb {
+        transform: rotate(90deg);
+        width: 130px;
+      }
+    }
+
+    &--videos {
+      margin-left: 85px;
+
+      .home__nav__thumb {
+        width: 210px;
+      }
+    }
+
+    &--shows {
+      .home__nav__item {
+        display: block;
+        margin-right: 0 !important;
+      }
+      .home__nav__item,
+      .home__nav__item a,
+      .home__nav__thumb {
+        display: block;
+        height: 100px;
+        width: 100px;
+      }
+    }
+  }
+
+  .home__nav__item {
+    display: inline-block;
+
+    &:not(:first-child) {
+      margin-right: 20px;
+    }
+  }
+}

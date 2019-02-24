@@ -38,7 +38,7 @@ const withApp = (mapContextToProps = v => v) => WrappedComponent => {
 
     isTablet = () => this.isDevice('tablet');
 
-    isMobile = () => this.isDevice('mobild');
+    isMobile = () => this.isDevice('mobile');
 
     isLandscape = () => this.getContext().orientation === 'landscape';
 
@@ -61,11 +61,12 @@ const withApp = (mapContextToProps = v => v) => WrappedComponent => {
       stateMatches: this.stateMatches,
       isReady: this.isReady,
       hasVideoHeader: this.hasVideoHeader,
-      bkgdCanPlay: this.bkgdCanPlay,
-      isDesktop: this.isDesktop,
-      isTablet: this.isTablet,
-      isMobile: this.isMobile,
-      isLandscape: this.isLandscape
+      bkgdCanPlay: this.bkgdCanPlay
+      // getDevice: this.getDevice,
+      // isDesktop: this.isDesktop,
+      // isTablet: this.isTablet,
+      // isMobile: this.isMobile,
+      // isLandscape: this.isLandscape
     });
 
     //

@@ -22,13 +22,13 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(0);
+    // filter: blur(0);
     transition: all 0.2s linear;
   }
 
   &--paused {
     background-size: 100%;
-    filter: blur(10px);
+    // filter: blur(10px);
 
     // .home-video__background {
     //   opacity: 0;

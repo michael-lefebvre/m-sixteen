@@ -1,0 +1,120 @@
+@import 'Scss/variables.scss';
+
+.home--medium {
+  .home__wrapper {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home__quote {
+    font-size: 28px;
+    letter-spacing: -1.2px;
+    line-height: 30px;
+
+    &--end {
+      width: 100%;
+
+      &__hr {
+        margin-top: 5px;
+        height: 7.5px;
+      }
+    }
+  }
+
+  .home__abstract {
+    text-align: right;
+    padding: 20px 0;
+    position: relative;
+  }
+
+  .home__abstract__txt {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .home__abstract__hr {
+    display: none;
+  }
+
+  .home__title {
+    &__primary {
+      font-size: size-ratio($title-primary-size, $title-ratio);
+      line-height: size-ratio($title-primary-line-height, $title-ratio);
+      letter-spacing: 0.04rem;
+    }
+
+    &__sub {
+      font-size: size-ratio($title-sub-size, $title-ratio);
+      letter-spacing: 0.15rem;
+
+      span {
+        // padding-top: 5px;
+      }
+    }
+  }
+
+  .home__nav {
+    display: flex;
+  }
+
+  .home__nav__thumb--releases {
+    width: 94px;
+  }
+}
+
+.home--medium__top {
+  display: flex;
+  flex-direction: row;
+}
+.home--medium__bottom {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  padding-left: 40%;
+
+  .home__nav {
+    padding-top: 10px;
+  }
+
+  .home__nav__thumb {
+    width: 160px;
+  }
+  .home__nav__item {
+    margin-left: 14px;
+  }
+}
+
+.home--medium__left,
+.home--medium__right {
+  display: flex;
+  flex-direction: column;
+}
+
+.home--medium__left {
+  width: 55%;
+}
+
+.home--medium__right {
+  width: 45%;
+  padding-left: 10px;
+  padding-top: 70px;
+
+  .home__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 23px;
+  }
+
+  .home__nav__item {
+    margin-left: 10px;
+
+    &:nth-child(3n) {
+      margin-top: 10px;
+      padding-left: 150px;
+    }
+  }
+}
