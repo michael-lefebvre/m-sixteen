@@ -102,17 +102,24 @@ export const RELEASES_ID = Object.keys(RELEASES);
 //
 // VIDEOS
 // --------------------------------------------------
+//
+// Get video info
+// https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=VIDEO_ID&format=json
 
 export const VIDEOS = {
   nevers: {
     videoId: '_IG6yXX8r4I',
     title: 'Live at Nevers, FR',
-    description: 'Nov. 16 2007, Le café charbon'
+    description: 'Nov. 16 2007, Le café charbon',
+    height: 270,
+    width: 480
   },
   rouge: {
     videoId: 'iV8GV8fxLdI',
     title: 'Rouge',
-    description: 'music video'
+    description: 'music video',
+    height: 270,
+    width: 480
   }
 };
 

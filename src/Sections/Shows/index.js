@@ -5,7 +5,7 @@ import Lists from './Data';
 // import { DatesByRange } from './Data'
 import './index.scss';
 
-const { Dates, Countries, Cities, Bands } = Lists;
+const { Dates, Countries, Cities, Bands, Data } = Lists;
 
 // console.log(DatesByRange({year: 2007, mounth: 5, day: 1 }, {year: 2007, mounth: 6, day: 1 }))
 
@@ -37,7 +37,7 @@ class Shows extends PureComponent {
     return (
       <div className={className}>
         <div>
-          <h1>Show</h1>
+          <h1>Show - {Data.length}</h1>
           <ul>
             {Object.keys(Dates).map(year => (
               <li key={`shows__fulllist__${year}`}>

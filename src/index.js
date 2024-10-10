@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { AppContext } from 'Contexts';
 import Layout from 'Layout';
 // import Layout from 'Layout/Debug'
-import registerServiceWorker from 'registerServiceWorker';
+// import registerServiceWorker from 'registerServiceWorker';
 
 import 'Scss/index.scss';
 
@@ -22,4 +22,4 @@ const App = () => (
 
 ReactDOM.render(<App />, document.getElementById('app-root'));
 
-registerServiceWorker();
+// registerServiceWorker();

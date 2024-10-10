@@ -212,8 +212,8 @@ const Abstract = ({ style: { AbstractWidth, AbstractTranslateY } }) => (
           transform: AbstractTranslateY.interpolate(t => `translateY(${t}%)`)
         }}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-        condimentum bibendum rhoncus. Duis viverra tempus felis.
+        A trifling story drew upon the 90's Punk Rock revival's teenage lust to
+        his inevitable forfeit.
       </animated.p>
     </div>
     <animated.hr

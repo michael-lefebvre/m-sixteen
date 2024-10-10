@@ -23,6 +23,7 @@ export const getRouteSection = (props = null) =>
 export const getRouteId = (props = null) =>
   getRouteParams(props || defaultRouteProps).id;
 
+export const getHomeUrl = path => getStaticUrl(`home/${path}`);
 export const getImageUrl = path => getStaticUrl(`images/${path}`);
 export const getPhotoUrl = path => getStaticUrl(`photos/${path}`);
 export const getVideoUrl = path => getStaticUrl(`videos/${path}`);

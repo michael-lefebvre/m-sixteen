@@ -4,7 +4,7 @@ import { Spinner } from 'Components';
 import Home from 'Sections/Home';
 import Releases from 'Sections/Releases';
 import Videos from 'Sections/Videos';
-//import Shows from 'Sections/Shows';
+import Shows from 'Sections/Shows';
 import ImgErr from './img_error.jpg';
 
 const _DEBUG = false;
@@ -79,7 +79,7 @@ export default class Layout extends PureComponent {
             <Home />
             <Releases />
             <Videos />
-            {/*<Shows />*/}
+            <Shows />
             {this.miniDebugRenderer()}
           </Fragment>
         )}

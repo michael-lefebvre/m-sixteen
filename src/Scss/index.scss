@@ -127,8 +127,7 @@ ol {
 }
 
 @include respond-below(md) {
-  .layer,
-  .videos {
+  .layer {
     display: none;
   }
 }

@@ -7,9 +7,9 @@ import { VideoContext } from 'Contexts';
 import { getInitialContext } from 'Contexts/Video';
 import { withApp } from 'Hoc';
 import { VIDEOS } from 'Constants';
-import Thumb from './Thumb';
-import Legend from './Legend';
-import NextLink from './Next';
+// import Thumb from './Thumb';
+// import Legend from './Legend';
+// import NextLink from './Next';
 
 import './index.scss';
 
@@ -17,7 +17,7 @@ const _defaultProps = { b: 500, s: 1, t: 5, o: 0 };
 const _mountedProps = { b: 100, s: 1, t: 0, o: 1 };
 
 const VideoSpring = Keyframes.Spring({
-  idle: { immediate: true, from: _defaultProps, to: _defaultProps },
+  idle: { immediate: true, to: _defaultProps },
   entering: { to: _mountedProps, from: _defaultProps },
   // mounted: { s: 1, t: 0, o: 1 },
   leaving: _defaultProps
@@ -28,6 +28,7 @@ const getId = ({ current, next, previous }) =>
 
 const getInitialState = ({ state, videoId }) => ({
   ...getInitialContext(),
+  playerError: null,
   videoId,
   state
 });
@@ -38,17 +39,17 @@ class Videos extends PureComponent {
   _player = null;
 
   _videoOpts = {
-    width: 854,
-    height: 480,
+    // width: 854,
+    // height: 480,
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 0, // Auto-play the video on load
       disablekb: 1,
-      controls: 0, // Hide pause/play buttons in player
+      controls: 1, // Hide pause/play buttons in player
       showinfo: 0, // Hide the video title
       modestbranding: 1, // Hide the Youtube Logo
       loop: 0, // Run the video in a loop
-      fs: 0, // Hide the full screen button
+      fs: 1, // Hide the full screen button
       autohide: 2, // Hide video controls when playing
       rel: 0,
       enablejsapi: 1
@@ -94,6 +95,16 @@ class Videos extends PureComponent {
     this.props.onNext();
   };
 
+  handleOnError = e => {
+    console.log(e);
+    this._player = null;
+    this.setState({
+      playerError: true,
+      playerReady: true,
+      playerState: 'pauseVideo'
+    });
+  };
+
   handleOnReady = ({ target }) => {
     this._player = target;
     this.setState({ playerReady: true, playerState: 'pauseVideo' });
@@ -130,10 +141,10 @@ class Videos extends PureComponent {
         videoId={VIDEOS[this.state.videoId].videoId}
         opts={this._videoOpts}
         onReady={this.handleOnReady}
-        // onError={console.log}
-        // onStateChange={console.log}
-        // onPlaybackRateChange={console.log}
-        // onPlaybackQualityChange={console.log}
+        onError={this.handleOnError}
+        onStateChange={console.log}
+        onPlaybackRateChange={console.log}
+        onPlaybackQualityChange={console.log}
         onPlay={this.handleOnPlay}
         onPause={this.handleOnPause}
       />
@@ -167,12 +178,14 @@ class Videos extends PureComponent {
                   )
                 }}
               >
-                <Thumb onClick={this.handleOnClick} />
+                {/*<Thumb onClick={this.handleOnClick} />*/}
                 {this.playerRenderer()}
+                {/*
                 <div className="videos__legend">
                   <Legend />
                   <NextLink />
                 </div>
+                */}
               </animated.div>
             </animated.div>
           )}

@@ -39,7 +39,8 @@ const Lists = {
   Countries: ListSorted(countries),
   Cities: ListSorted(cities),
   Bands: ListSorted(bands),
-  Dates: dates
+  Dates: dates,
+  Data
 };
 
 export const DatesByRange = (f, t) => {
