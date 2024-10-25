@@ -4,7 +4,7 @@
 
 ## Motivation
 
-A static website covering the band career.   
+A static website covering the band career.  
 Consider it as the band's enhanced tombstone and a personal playground of the latest trendy APIs and libraries.
 
 **Key features:**
@@ -19,7 +19,7 @@ Consider it as the band's enhanced tombstone and a personal playground of the la
 - fancy orchestrated pages transitions behind the classics (and boring) cross-fade effect
 - measurable performances
 
-## Content 
+## Content
 
 The website exposes the band's career through a chronological list, where each item has an unique ID, a date, and belongs to one of the following type:
 
@@ -33,14 +33,14 @@ If an URL is provided (including `slug`, `meta`, etc.), the item can be accessed
 
 ## Routing
 
-The `window.location.pathname` is the app context source of truth. On update the `pathname` string expose an object with the current `type/slug` pairs.  
+The `window.location.pathname` is the app context source of truth. On update the `pathname` string expose an object with the current `type/slug` pairs.
 
 - `/` (_home page_)
 - `/videos/live-nevers-2007`
-- `/moments/first-time-in-berlin` 
-- `/moments/shooting-rouge-video/videos/rouge` 
-- `/releases/debut-ep` 
-- `/releases/split-with-the-missing-23rd/moments/hogsteen-tour-2004` 
+- `/moments/first-time-in-berlin`
+- `/moments/shooting-rouge-video/videos/rouge`
+- `/releases/debut-ep`
+- `/releases/split-with-the-missing-23rd/moments/hogsteen-tour-2004`
 - `/releases/self-titled/moments/euro-tour-part-2/videos/feed-by-anger-selencha-serbia`
 
 ---
