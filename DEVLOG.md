@@ -11,3 +11,5 @@
 > pnpm create vite-extra .
 
 Added the `prerender.js` script based on [Vite's official documentation](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/prerender.js).
+
+Upgraded to React 19@rc following the [official guide](https://react.dev/blog/2024/04/25/react-19-upgrade-guide).
