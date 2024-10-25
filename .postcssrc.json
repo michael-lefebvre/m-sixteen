@@ -1,0 +1,20 @@
+{
+  "map": true,
+  "plugins": {
+    "postcss-nested": {},
+    "postcss-import": {},
+    "postcss-preset-env": {
+      "stage": 1,
+      "browsers": [
+        ">0.5%",
+        "last 2 major versions",
+        "not dead",
+        "not op_mini all"
+      ],
+      "autoprefixer": false,
+      "features": {
+        "nesting-rules": false
+      }
+    }
+  }
+}
