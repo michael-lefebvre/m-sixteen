@@ -13,3 +13,6 @@ dist
 
 # dotenv environment variables file
 .env*
+
+# Cache
+.eslintcache
