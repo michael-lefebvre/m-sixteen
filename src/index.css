@@ -1,4 +1,24 @@
+@property --_w {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 100vw;
+}
+@property --_h {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 100vh;
+}
+
 :root {
+  /* 
+  CSS Type Casting to Numeric: tan(atan2()) Scalars
+  Get the screen width & height without JavaScript
+  The result is an integer without unit  
+  https://dev.to/janeori/css-type-casting-to-numeric-tanatan2-scalars-582j
+  */
+  --w: tan(atan2(var(--_w), 1px)); /* screen width */
+  --h: tan(atan2(var(--_h), 1px)); /* screen height*/
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -79,6 +99,7 @@ button {
     background: green;
     & > div {
       opacity: 0.5;
+      width: calc(var(--w) * 1px);
     }
   }
 }

@@ -45,7 +45,12 @@ function App() {
       </div>
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
       <div className="releases--ghost"></div>
-      <div className="releases--ghost">
+      <div
+        className="releases--ghost"
+        style={{
+          '--releases-ghost-opacity': 0.5,
+        }}
+      >
         <div>👻</div>
       </div>
     </>
