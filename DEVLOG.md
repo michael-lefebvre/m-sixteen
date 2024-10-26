@@ -8,7 +8,9 @@
 
 ## 2024-10-26 **project setup**
 
-> pnpm create vite-extra .
+```sh
+$ pnpm create vite-extra .
+```
 
 Added the `prerender.js` script based on [Vite's official documentation](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/prerender.js).
 
@@ -16,7 +18,12 @@ Upgraded to React 19@rc following the [official guide](https://react.dev/blog/20
 
 Set up PostCSS. Did minor tweaks to the the config file to accept nested rules.
 
-We now know how to distinguish execution context using `import.meta.env` and `import.meta.env.SSR`. This will be useful for permute rendering strategies, eg: use `Suspense` in the client only.
+~~We now know how to distinguish execution context using `import.meta.env` and `import.meta.env.SSR`. This will be useful for permute rendering strategies, eg: use `Suspense` in the client only.~~
+
+> [!WARNING]  
+> Using `import.meta.SSR` will trigger an error while hydrating the app.
+> We can use `suppressHydrationWarning={true}` to prevent the error from being displayed, but the app will not be hydrated properly.  
+> the recommended solution is to [do a two-pass rendering](https://react.dev/reference/react-dom/client/hydrateRoot#handling-different-client-and-server-content), but it makes the logic more complex.
 
 #### A note on the `prerender.js` script
 

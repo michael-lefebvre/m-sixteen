@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import reactLogo from '@/assets/react.svg';
 
@@ -6,7 +6,11 @@ import '@/App.css';
 
 function App() {
   const [count, setCount] = useState(0);
-  const envExec = import.meta.env.SSR ? 'server' : 'client';
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <>
@@ -32,7 +36,7 @@ function App() {
           />
         </a>
       </div>
-      <h1>Vite + React from {envExec}</h1>
+      <h1>Vite + React from {isClient ? 'Client' : 'Server'}</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
