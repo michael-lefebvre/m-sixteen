@@ -6,6 +6,7 @@ import '@/App.css';
 
 function App() {
   const [count, setCount] = useState(0);
+  const envExec = import.meta.env.SSR ? 'server' : 'client';
 
   return (
     <>
@@ -31,7 +32,7 @@ function App() {
           />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React from {envExec}</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
