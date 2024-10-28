@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
 import reactLogo from '@/assets/react.svg';
 
 import '@/App.css';
 
+// Works also with SSR as expected
+const Card = lazy(() => import('./Card'));
+
 function App() {
-  const [count, setCount] = useState(0);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -15,20 +17,14 @@ function App() {
   return (
     <>
       <div>
-        <a
-          href="https://vitejs.dev"
-          target="_blank"
-        >
+        <a href="/releases/debut-ep">
           <img
             src="/vite.svg"
             className="logo"
             alt="Vite logo"
           />
         </a>
-        <a
-          href="https://reactjs.org"
-          target="_blank"
-        >
+        <a href="/moments/early-years">
           <img
             src={reactLogo}
             className="logo react"
@@ -37,12 +33,10 @@ function App() {
         </a>
       </div>
       <h1>Vite + React from {isClient ? 'Client' : 'Server'}</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
+
+      <Suspense fallback={<p>Loading card component...</p>}>
+        <Card />
+      </Suspense>
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
       <div className="releases--ghost"></div>
       <div

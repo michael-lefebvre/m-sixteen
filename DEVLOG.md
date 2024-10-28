@@ -37,3 +37,43 @@ $ npx vite-node index.ts
 ```
 
 A quick test shows that it works. We need to adapt our `tsconfig.json`, and most importantly, we will have to be careful with the `window` object in the app code as it won't be defined in a Node.js environment.
+
+## 2024-10-27 **Basic routing and server-rendered content**
+
+I added a basic routing system, defining the routes in several Array objects, with a `path` property to define the URL. I imitated the structure of the [yeolyi blog](https://yeolyi.com/post/blog-ssr), but fixed the issue with calling the `lazy` function from the component (I must remember to share my findings with the author). I installed all the `MDX` dependencies and created placeholder files for the content.  
+The current file structure is a bit messy. The main issue is that a "story" could need to import subcomponents and putting everything in the same folder is not a good idea. I will have to find a way to organize the files.
+
+> [!IMPORTANT]  
+> **I was all wrong!**  
+> The `renderToString` API not only prevents us from distinguishing server from client content but also prohibits the use of `Suspense` in the server-rendered content. We must change our approach to use `renderToPipeableStream` instead.
+
+Switching to `renderToPipeableStream` was not as straightforward as I thought. There is a gap between the official React documentation and the examples in the `create-vite-extra` repository, and the "streaming" method makes the templating logic more complex. It's not as easy as just searching and replacing patterns. We need to rethink the way we handle the content and the layout.
+
+Here are some resources that helped me understand the issue:
+
+- [Waiting for all content to load for crawlers and static generation](https://19.react.dev/reference/react-dom/server/renderToPipeableStream#waiting-for-all-content-to-load-for-crawlers-and-static-generation)
+- [fixtures/fizz/server/render-to-buffer.js](https://github.com/facebook/react/blob/fe04dbcbc4185d7c9d7afebbe18589d2b681a88c/fixtures/fizz/server/render-to-buffer.js#L21)
+- [React Streaming example is different than the React recomendation](https://github.com/bluwy/create-vite-extra/issues/61)
+- [React SSR with custom html](https://stackoverflow.com/a/72859191/3908378)
+
+## 2024-10-28 **content generation**
+
+I adapted the `prerender.js` script to import the page list from the app code. The new script, `generate.ts`, uses the `vite-node` package to run the app code in a Node.js environment. This way, we can use dynamic imports for the content.
+
+The new workflow is as follows:
+
+- Run `pnpm run build`.
+- A prebuild script cleans the `dist` and `build` folders.
+- The build script generates the client and server bundles into the `build` folder.
+- A post-build script runs `vite-node generate.ts`:
+  - It copies the `public` folder to the `dist` folder.
+  - Get a list of all the pages from the app code.
+  - Create all the nested folders from the pages list.
+  - Generate the content for each page by calling the `build/server/entry-server.js` script.
+  - Save the content in the `dist` folder.
+
+In a perfect world, we would run the `generate.ts` script as a post-build Vite plugin to clean the repository. But it seems that I must tweak the TS config to make it work and I'm not sure it's worth the effort.
+
+I'm still wondering about the benefits of using the manifest files as they are not used to generate the content. I guess it's a way to add the preload tags in the HTML template. I will have to investigate this further.
+
+I introduced new Tags into the `index.html` template as "canonical," meta descriptions. I need to include them in the content generation process, plus fix the issue with the `base` property. Until the site is hosted at the root of the domain, the `base` property must adapt to the subfolder where the site is hosted.
