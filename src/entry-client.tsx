@@ -12,7 +12,7 @@ const url = window.location.pathname;
 function render() {
   const urlWithLeadingSlash = url.startsWith('/') ? url : `/${url}`;
   const page = allMdxPosts.find((p) => p.path === urlWithLeadingSlash);
-  const content = page ? <Page mdxPage={page.id} /> : <App />;
+  const content = page ? <Page pageId={page.id} /> : <App />;
 
   return <StrictMode>{content}</StrictMode>;
 }

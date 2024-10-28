@@ -1,3 +1,6 @@
+import type { LazyExoticComponent } from 'react';
+import type { MDXProps } from 'mdx/types';
+
 /*
  Logic for the `Page` and `MdxPage` types inspired by [yeolyi blog](https://github.com/yeolyi/blog)
  */
@@ -21,3 +24,7 @@ export type MdxPage = Page & {
   // let's keep it for reference
   objectFit?: 'contain' | 'cover';
 };
+
+export type MdxPageId = MdxPage['id'];
+
+export type MdxPromiseType = Promise<LazyExoticComponent<(props: MDXProps) => JSX.Element>>;

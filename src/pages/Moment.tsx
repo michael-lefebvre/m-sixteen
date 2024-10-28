@@ -1,35 +1,25 @@
-import { lazy, LazyExoticComponent, Suspense, use } from 'react';
-import type { MDXComponents, MDXProps } from 'mdx/types';
+import { Suspense } from 'react';
 
-import { allMdxPosts } from '@/mdx';
-import type { MdxPage } from '@/types/page';
+import { Mdx } from '@/components/Mdx';
+import type { MdxPageId } from '@/types/page';
 
-const mdxComponents: MDXComponents = {
+const mdxComponents: typeof Mdx.components = {
   img: (props) => (
     <img
       {...props}
-      className="asd"
+      className="LOL"
+    />
+  ),
+  h1: (props) => (
+    <h1
+      {...props}
+      className="LOL"
     />
   ),
 };
 
-type MomentFileType = Promise<LazyExoticComponent<(props: MDXProps) => JSX.Element>>;
-
-async function loadMomentFile(pageId: MdxPage['id']): MomentFileType {
-  const page = allMdxPosts.find((p) => p.id === pageId);
-  if (!page) {
-    throw new Error(`Page not found: ${pageId}`);
-  }
-  return lazy(page.importMdx);
-}
-
-function MomentStory({ moment }: { moment: MomentFileType }) {
-  const Mdx = use(moment);
-  return <Mdx components={mdxComponents} />;
-}
-
-function Moment({ mdxPage }: { mdxPage: MdxPage['id'] }) {
-  const moment = loadMomentFile(mdxPage);
+function Moment({ pageId }: { pageId: MdxPageId }) {
+  const mdxPromise = Mdx.load(pageId);
 
   return (
     <>
@@ -38,7 +28,10 @@ function Moment({ mdxPage }: { mdxPage: MdxPage['id'] }) {
         <a href="/">Back</a>
       </header>
       <Suspense fallback={<div>Loading...</div>}>
-        <MomentStory moment={moment} />
+        <Mdx
+          mdxPromise={mdxPromise}
+          components={mdxComponents}
+        />
       </Suspense>
     </>
   );
