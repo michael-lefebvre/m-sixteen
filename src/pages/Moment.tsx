@@ -22,18 +22,12 @@ function Moment({ pageId }: { pageId: MdxPageId }) {
   const mdxPromise = Mdx.load(pageId);
 
   return (
-    <>
-      <header>
-        <h6>Moment</h6>
-        <a href="/">Back</a>
-      </header>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Mdx
-          mdxPromise={mdxPromise}
-          components={mdxComponents}
-        />
-      </Suspense>
-    </>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Mdx
+        mdxPromise={mdxPromise}
+        components={mdxComponents}
+      />
+    </Suspense>
   );
 }
 

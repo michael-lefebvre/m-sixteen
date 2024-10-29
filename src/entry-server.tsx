@@ -1,9 +1,7 @@
 import { StrictMode } from 'react';
 import { renderToPipeableStream, type RenderToPipeableStreamOptions } from 'react-dom/server';
 
-import App from '@/App';
-import { allMdxPosts } from '@/mdx';
-import Page from '@/pages/Moment';
+import AppRouter from '@/routers';
 
 export function render(
   url: string,
@@ -11,8 +9,11 @@ export function render(
   options?: RenderToPipeableStreamOptions,
 ) {
   const urlWithLeadingSlash = url.startsWith('/') ? url : `/${url}`;
-  const page = allMdxPosts.find((p) => p.path === urlWithLeadingSlash);
-  const content = page ? <Page pageId={page.id} /> : <App />;
 
-  return renderToPipeableStream(<StrictMode>{content}</StrictMode>, options);
+  return renderToPipeableStream(
+    <StrictMode>
+      <AppRouter pathname={urlWithLeadingSlash} />
+    </StrictMode>,
+    options,
+  );
 }

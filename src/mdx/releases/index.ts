@@ -1,6 +1,6 @@
-import { MdxPage } from '@/types/page';
+import { ReleasePage } from '@/types/page';
 
-export const releasePageList: MdxPage[] = [
+export const releasePageList: ReleasePage[] = [
   {
     id: 'ep',
     title: 'Debut EP',

@@ -25,6 +25,17 @@ export type MdxPage = Page & {
   objectFit?: 'contain' | 'cover';
 };
 
+export type VideoPage = Page & {
+  source: string;
+  height: number;
+  width: number;
+};
+
+export type ReleasePage = Page &
+  Pick<MdxPage, 'importMdx'> & {
+    nestedPath?: string[];
+  };
+
 export type MdxPageId = MdxPage['id'];
 
 export type MdxPromiseType = Promise<LazyExoticComponent<(props: MDXProps) => JSX.Element>>;

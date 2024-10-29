@@ -51,6 +51,7 @@ await copyDir(toAbsolute('public'), toAbsolute('dist'));
 console.log('Creating dist nested directories...');
 await fs.mkdir(toAbsolute('dist/releases'));
 await fs.mkdir(toAbsolute('dist/moments'));
+await fs.mkdir(toAbsolute('dist/videos'));
 console.log('Copying build/client/assets directory into dist/assets...');
 await copyDir(toAbsolute('build/client/assets'), toAbsolute('dist/assets'));
 

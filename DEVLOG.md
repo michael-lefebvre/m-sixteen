@@ -3,8 +3,8 @@
 ## day to day TODOs
 
 - [x] setup the Vite/React/SSG tooling. Generate a static website from dummy data with nested routes.
-- [ ] Router, client-side navigation.
-- [ ] Generate content from MDX and JSON files.
+- [x] Router, client-side navigation.
+- [x] Generate content from MDX and JSON files.
 
 ## 2024-10-26 **project setup**
 
@@ -77,3 +77,8 @@ In a perfect world, we would run the `generate.ts` script as a post-build Vite p
 I'm still wondering about the benefits of using the manifest files as they are not used to generate the content. I guess it's a way to add the preload tags in the HTML template. I will have to investigate this further.
 
 I introduced new Tags into the `index.html` template as "canonical," meta descriptions. I need to include them in the content generation process, plus fix the issue with the `base` property. Until the site is hosted at the root of the domain, the `base` property must adapt to the subfolder where the site is hosted.
+
+## 2024-10-29 **Router and client-side navigation**
+
+I did a quick test with the `react-router-dom` package. At first, I thought it would be a good idea to use the `StaticRouter` for the server-rendered content and the `BrowserRouter` for the client-rendered content. But I ended up with a tone of unnecessary refactoring. I will stick to a minimal pseudo-router and a rip-off of the `bloody-use-url` package for the client-side navigation.  
+It's not perfect, but it's good enough for now.
