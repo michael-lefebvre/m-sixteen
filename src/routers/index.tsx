@@ -4,12 +4,14 @@ import { URLPattern } from 'urlpattern-polyfill';
 import ClientOnly from '@/components/ClientOnly';
 import { ErrorBoundary as RootErrorBoundary } from '@/components/ErrorBoundary';
 import { Link } from '@/components/Link';
+import { ENV_BASE_URL_ORIGIN, ENV_BASE_URL_PATHNAME } from '@/constants';
 import { PointerLayout as Layout } from '@/layouts/Pointer';
 import { Home } from '@/pages/Home';
 import { Moments } from '@/pages/Moments';
 import { Releases } from '@/pages/Releases';
 import { Videos } from '@/pages/Videos';
 import { watchUrl } from '@/utils/navigation';
+import { removeTrailingSlash } from '@/utils/path';
 
 const params = { release: null, moment: null, video: null } as const;
 type ParamsKeys = keyof typeof params;
@@ -19,14 +21,16 @@ type ParamsProps = { [key in ParamsKeys]: string | null };
 const defaultParams: ParamsProps = { ...params };
 
 const routesPattern = new URLPattern({
-  pathname: '{/releases/:release}?{/moments/:moment}?{/videos/:video}?',
+  pathname: `${removeTrailingSlash(ENV_BASE_URL_PATHNAME)}{/releases/:release}?{/moments/:moment}?{/videos/:video}?`,
 });
 
 const getPathnameParams = (pathname: string) => {
-  if (pathname === '/') return defaultParams;
-  const urlObject = new URL(pathname, import.meta.env.VITE_APP_CANONICAL);
+  if (pathname === ENV_BASE_URL_PATHNAME) return defaultParams;
+  const urlObject = new URL(removeTrailingSlash(pathname), ENV_BASE_URL_ORIGIN);
   const match = routesPattern.exec(urlObject);
-  if (!match) throw new Error('Invalid pathname');
+  if (!match) {
+    throw new Error('Invalid pathname');
+  }
 
   const groups = match.pathname.groups;
   return {

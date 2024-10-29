@@ -1,6 +1,7 @@
 import { useCallback, useSyncExternalStore } from 'react';
 
 import { getUrl, watchUrl } from '@/utils/navigation';
+import { removeTrailingSlash } from '@/utils/path';
 
 function getServerSnapshot() {
   return false;
@@ -14,7 +15,7 @@ function getServerSnapshot() {
  */
 export const useIsActivePath = (path: string, extact = true) => {
   const getSnapshot = useCallback(() => {
-    const currentPathname = getUrl().pathname;
+    const currentPathname = removeTrailingSlash(getUrl().pathname);
     const nextPathname = new URL(path, window.location.origin).pathname;
     const pathMatch = extact
       ? currentPathname === nextPathname

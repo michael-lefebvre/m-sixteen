@@ -37,7 +37,7 @@ if (!isProduction) {
 // Serve HTML
 app.use('*', async (req, res) => {
   try {
-    // Create a new writable stream to capture the HTML
+    // 🤔 no idea why `transformIndexHtml` require to remove Vite.base from request url???
     const url = req.originalUrl.replace(base, '');
 
     let template;
@@ -55,7 +55,7 @@ app.use('*', async (req, res) => {
     let didError = false;
     let didFinish = false;
 
-    const { pipe, abort } = render(url, ssrManifest, {
+    const { pipe, abort } = render(req.originalUrl, ssrManifest, {
       onShellError() {
         res.status(500);
         res.set({ 'Content-Type': 'text/html' });
