@@ -1,6 +1,7 @@
 import type { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { Link } from '@/components/Link';
+import { ENV_BASE_URL } from '@/constants';
 
 const styleFnc = ({ active }: { active: boolean }) => ({
   color: active ? 'red' : undefined,
@@ -10,7 +11,7 @@ export const PointerLayout: FC<PropsWithChildren<{ children: ReactNode }>> = ({ 
   return (
     <div>
       <h1>
-        <Link href="/">m-sixteen</Link>
+        <Link href={ENV_BASE_URL}>m-sixteen</Link>
       </h1>
       <h3>Pointer Layout</h3>
 
@@ -42,7 +43,7 @@ export const PointerLayout: FC<PropsWithChildren<{ children: ReactNode }>> = ({ 
         </li>
         <li>
           <Link
-            href="/videos/rouge"
+            href="/m-sixteen/videos/rouge"
             style={styleFnc}
           >
             video rouge

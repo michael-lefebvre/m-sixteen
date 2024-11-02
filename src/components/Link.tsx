@@ -1,9 +1,7 @@
 import { useCallback, useMemo, type AnchorHTMLAttributes, type DetailedHTMLProps } from 'react';
 
-import { ENV_BASE_URL } from '@/constants';
 import { useIsActivePath } from '@/hooks/useIsActivePath';
 import { push } from '@/utils/navigation';
-import { withLeadingBasePath } from '@/utils/path';
 
 type AnchorProps = DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
@@ -26,7 +24,7 @@ export const Link = ({
   exact,
   ...props
 }: LinkProps) => {
-  const realHref = useMemo(() => withLeadingBasePath(href, ENV_BASE_URL), [href]);
+  const realHref = useMemo(() => href, [href]);
   const isActive = useIsActivePath(realHref, exact);
 
   const config = useMemo<Config>(() => ({ active: isActive }), [isActive]);

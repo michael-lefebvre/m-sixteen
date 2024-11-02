@@ -52,3 +52,12 @@ export const getReleaseUrl = (path: string) => getStaticUrl(joinUrlSegments('rel
 
 export const getDiscographyUrl = (path: string) =>
   getStaticUrl(joinUrlSegments('discography', path));
+
+const getContentPath = (path: string, kind: 'releases' | 'videos' | 'moments') =>
+  withLeadingBasePath(joinUrlSegments(kind, path), ENV_BASE_URL);
+
+export const getReleasePath = (path: string) => getContentPath(path, 'releases');
+
+export const getVideoPath = (path: string) => getContentPath(path, 'videos');
+
+export const getMomentPath = (path: string) => getContentPath(path, 'moments');

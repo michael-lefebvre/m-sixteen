@@ -22,6 +22,29 @@ const copyDir = async (src, dest) => {
   }
 };
 
+const isExists = async (path) => {
+  try {
+    await fs.access(path);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+const writeFile = async (filePath, data) => {
+  try {
+    const dirname = path.dirname(filePath);
+    const exist = await isExists(dirname);
+    if (!exist) {
+      await fs.mkdir(dirname, { recursive: true });
+    }
+
+    await fs.writeFile(filePath, data, 'utf8');
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 const toAbsolute = (p) => path.resolve(__dirname, p);
 
 let didError = false;
@@ -48,10 +71,6 @@ if (existsSync(toAbsolute('dist'))) {
 
 console.log('Copying public directory into fresh dist directory...');
 await copyDir(toAbsolute('public'), toAbsolute('dist'));
-console.log('Creating dist nested directories...');
-await fs.mkdir(toAbsolute('dist/releases'));
-await fs.mkdir(toAbsolute('dist/moments'));
-await fs.mkdir(toAbsolute('dist/videos'));
 console.log('Copying build/client/assets directory into dist/assets...');
 await copyDir(toAbsolute('build/client/assets'), toAbsolute('dist/assets'));
 
@@ -68,7 +87,7 @@ for (const url of routesToPrerender) {
     const html = [htmlStart, writable.getHtml(), htmlEnd].join('');
 
     const filePath = `dist${url === '/' ? '/index' : url}.html`;
-    await fs.writeFile(toAbsolute(filePath), html);
+    await writeFile(toAbsolute(filePath), html);
     console.log(`Wrote ${filePath}`);
   });
 

@@ -94,3 +94,55 @@ We created a barebone `AssetProps` interface to handle the media data, regardles
 Then, we add a `ImageBase` component to handle any kind of image usage (photo, video poster, etc.). We extend it with a `LazyImage` component that uses the `IntersectionObserver` API to lazy load the images.
 
 We also add the `ReactPlayer` package to handle the video content.
+
+## 2024-11-02 **Content models**
+
+> [!IMPORTANT]  
+> I removed the `withLeadingBasePath` function from the `Link` component. It's not the responsibility of the component to handle the base path. We must provide the full and correct URL to the component. So, it's the job of each page definition to generate the correct URL depending on the context.
+
+At this point, I think the correct approach is to see the content schema as a pyramid, with a common base for every entity accessible from an URL, and extending this base with specific properties for each kind of entity (discography, concerts, etc.).
+
+Concerning the `Asset`, it's seems less verbose to centralize them all in a single list, and only reference them in the content by their `publicId`. This way, it will be easier to write scripts to manage files upload or update, or any other kind of batch operation.
+
+to sum up, we have the following content base:
+
+```ts
+// pseudo code, WIP
+
+interface Asset {
+  publicId: string;
+  kind: 'photo' | 'video';
+  width: number;
+  height: number;
+  // ...
+}
+
+interface PageMeta {
+  title: string;
+  description: string;
+  src?: Asset['publicId'];
+}
+
+interface PageMdx {
+  importMdx: () => Promise<typeof import('*.mdx')>;
+};
+
+interface Page & PageMeta {
+  pageId: string;
+  path: string;
+  kind: 'release' | 'concert' | 'video' | 'photo';
+}
+
+interface Release extends Page & PageMdx {
+  kind: 'release';
+  cover: Asset['publicId'];
+  tracks: string[];
+  // ...
+}
+
+interface Video extends Page {
+  kind: 'video';
+  video: Asset['publicId'];
+  // ...
+}
+```
