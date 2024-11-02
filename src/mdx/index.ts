@@ -4,7 +4,7 @@ import { VideoPage } from '@/types/page';
 
 // TEMP
 
-const videoPageList: VideoPage[] = [
+export const videoPageList: VideoPage[] = [
   {
     id: '_IG6yXX8r4I',
     title: 'Live at Nevers, FR',
@@ -45,4 +45,6 @@ const videoPageList: VideoPage[] = [
   },
 ];
 
-export const allMdxPosts = [...momentPageList, ...releasePageList, ...videoPageList];
+export const allMdxPosts = [...momentPageList, ...releasePageList];
+
+export const allPosts = [...allMdxPosts, ...videoPageList];

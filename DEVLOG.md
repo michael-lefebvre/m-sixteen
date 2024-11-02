@@ -88,3 +88,9 @@ It's not perfect, but it's good enough for now.
 ## 2024-11-01 **Media components**
 
 First, we copy-pasted the `picture`/`source`/`img` components from [Apple Music](https://music.apple.com/fr/album/m-sixteen/1128780088), including the medias themselves to create a specific component for band releases called `DiscographyCover`. Later, we will have to decide if the 296/316 variant is worth the effort.
+
+We created a barebone `AssetProps` interface to handle the media data, regardless of the kind (image or video) and add a `PhotoProps` and `VideoProps` interfaces that extend the `AssetProps` interface with the specific properties of each kind of media. They aren't clean yet, I'm doubtful about some "duplicate" properties, but it's a start.
+
+Then, we add a `ImageBase` component to handle any kind of image usage (photo, video poster, etc.). We extend it with a `LazyImage` component that uses the `IntersectionObserver` API to lazy load the images.
+
+We also add the `ReactPlayer` package to handle the video content.

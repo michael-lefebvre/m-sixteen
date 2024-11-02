@@ -14,3 +14,13 @@ export const ENV_BASE_URL_OBJECT = new URL(baseUrl);
 export const ENV_BASE_URL_HREF = ENV_BASE_URL_OBJECT.href;
 export const ENV_BASE_URL_ORIGIN = ENV_BASE_URL_OBJECT.origin;
 export const ENV_BASE_URL_PATHNAME = ENV_BASE_URL_OBJECT.pathname;
+
+//
+// Cloudinary
+// --------------------------------------------------
+
+export const CLOUDINARY_BASE_URL = 'https://res.cloudinary.com/m-sixteen/';
+export const CLOUDINARY_IMAGE_BASE_URL = `${CLOUDINARY_BASE_URL}image/upload/`;
+export const CLOUDINARY_VIDEO_BASE_URL = `${CLOUDINARY_BASE_URL}video/upload/`;
+export const CLOUDINARY_IMAGE_OPTIMIZED_URL = `${CLOUDINARY_IMAGE_BASE_URL}f_auto,q_auto/v1/`;
+export const CLOUDINARY_VIDEO_OPTIMIZED_URL = `${CLOUDINARY_VIDEO_BASE_URL}f_auto:video,q_auto/v1/`;

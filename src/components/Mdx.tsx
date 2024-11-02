@@ -1,14 +1,15 @@
 import { lazy, use } from 'react';
 import type { MDXComponents } from 'mdx/types';
 
+import { ImageBase } from '@/components/ImageBase';
 import { allMdxPosts } from '@/mdx';
 import type { MdxPage, MdxPromiseType } from '@/types/page';
 
 const mdxComponents: MDXComponents = {
   img: (props) => (
-    <img
+    <ImageBase
       {...props}
-      className="asd"
+      className="image-base"
     />
   ),
 };

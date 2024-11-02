@@ -103,3 +103,14 @@ button {
     }
   }
 }
+
+.lazy-img {
+  display: inline-block;
+  color: transparent;
+  max-width: 100%;
+  min-height: auto;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=);
+}

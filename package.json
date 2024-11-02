@@ -21,8 +21,10 @@
     "fmt:check": "prettier --check ."
   },
   "dependencies": {
+    "@cloudinary/url-gen": "^1.21.0",
     "react": "19.0.0-rc-cae764ce-20241025",
     "react-dom": "19.0.0-rc-cae764ce-20241025",
+    "react-player": "^3.0.0-canary.0",
     "urlpattern-polyfill": "^10.0.0"
   },
   "devDependencies": {

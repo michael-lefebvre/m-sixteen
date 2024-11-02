@@ -4,6 +4,7 @@ interface ImportMetaEnv {
   readonly VITE_APP_CANONICAL: string;
   readonly VITE_APP_TITLE: string;
   readonly VITE_APP_DESCRIPTION: string;
+  readonly VITE_CLOUDINARY_NAME: string;
   // more env variables...
 }
 
