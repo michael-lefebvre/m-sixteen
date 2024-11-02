@@ -45,3 +45,10 @@ export function withLeadingBasePath(path: string, base: string): string {
 const staticBaseURL = joinUrlSegments(ENV_BASE_URL, 'static');
 
 export const getStaticUrl = (relativePath: string) => joinUrlSegments(staticBaseURL, relativePath);
+
+export const getPhotoUrl = (path: string) => getStaticUrl(joinUrlSegments('photos', path));
+
+export const getReleaseUrl = (path: string) => getStaticUrl(joinUrlSegments('releases', path));
+
+export const getDiscographyUrl = (path: string) =>
+  getStaticUrl(joinUrlSegments('discography', path));
