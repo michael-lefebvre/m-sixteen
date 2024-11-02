@@ -23,3 +23,8 @@ export const releasePageList: ReleasePage[] = [
     importMdx: () => import('./split.mdx'),
   },
 ];
+
+export type ReleaseId = 'ep' | 'album' | 'split';
+
+export const releaseFromId = (id: ReleaseId): ReleasePage =>
+  releasePageList.find((release) => release.id === id)!;

@@ -1,3 +1,5 @@
+import { ENV_BASE_URL } from '@/constants';
+
 export function joinUrlSegments(a: string, b: string): string {
   if (!a || !b) return a || b || '';
 
@@ -39,3 +41,7 @@ export function withLeadingBasePath(path: string, base: string): string {
   if (path[0] === '/') return joinUrlSegments(base, path.slice(1));
   return joinUrlSegments(base, path);
 }
+
+const staticBaseURL = joinUrlSegments(ENV_BASE_URL, 'static');
+
+export const getStaticUrl = (relativePath: string) => joinUrlSegments(staticBaseURL, relativePath);

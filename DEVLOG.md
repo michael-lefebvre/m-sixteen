@@ -5,6 +5,8 @@
 - [x] setup the Vite/React/SSG tooling. Generate a static website from dummy data with nested routes.
 - [x] Router, client-side navigation.
 - [x] Generate content from MDX and JSON files.
+- [ ] Structured media data. Image + Video components.
+- [ ] All the content models, discography, concerts, etc., mergable into a single page a.k.a. the "Timeline".
 
 ## 2024-10-26 **project setup**
 
@@ -82,3 +84,7 @@ I introduced new Tags into the `index.html` template as "canonical," meta descri
 
 I did a quick test with the `react-router-dom` package. At first, I thought it would be a good idea to use the `StaticRouter` for the server-rendered content and the `BrowserRouter` for the client-rendered content. But I ended up with a tone of unnecessary refactoring. I will stick to a minimal pseudo-router and a rip-off of the `bloody-use-url` package for the client-side navigation.  
 It's not perfect, but it's good enough for now.
+
+## 2024-11-01 **Media components**
+
+First, we copy-pasted the `picture`/`source`/`img` components from [Apple Music](https://music.apple.com/fr/album/m-sixteen/1128780088), including the medias themselves to create a specific component for band releases called `DiscographyCover`. Later, we will have to decide if the 296/316 variant is worth the effort.
