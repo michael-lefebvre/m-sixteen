@@ -1,8 +1,15 @@
+interface Scheduler {
+  postTask: (cb: () => void, options: { priority: string }) => void;
+}
+
 declare global {
   interface Window {
     __historyLengthOnStart: number;
     cssPath: string;
   }
+
+  // eslint-disable-next-line no-var
+  var scheduler: Scheduler;
 }
 
 declare module 'mdx/types' {
