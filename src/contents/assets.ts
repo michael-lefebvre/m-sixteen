@@ -175,6 +175,14 @@ const assetsSrc: AssetProps[] = [
     height: 480,
     kind: 'video',
   },
+  {
+    publicId: 'videos/nevers',
+    src: 'https://vimeo.com/936124',
+    source: 'vimeo',
+    width: 640,
+    height: 480,
+    kind: 'video',
+  },
 ];
 
 const assetsDic = assetsSrc.reduce(

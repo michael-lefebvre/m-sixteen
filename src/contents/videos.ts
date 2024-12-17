@@ -12,7 +12,8 @@ export const videos: VideoProps[] = [
     // width: 320,
     title: 'Split Loko Teaser',
     caption: 'A teaser for the Split CD. Footage from the recording in the Loko Studio in 2004',
-    poster: 'photos/split/recording-l12-md.jpg',
+    // poster: 'photos/split/recording-l12-md.jpg',
+    poster: 'photos/nevers_2007/nevers2.jpg',
     // poster: {
     //   placeholder: '255,0,0',
     //   src: '/static/photos/split/recording-l12-md.jpg',

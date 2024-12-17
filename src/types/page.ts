@@ -25,7 +25,9 @@ export type MdxPage = Page & {
   objectFit?: 'contain' | 'cover';
 };
 
-export type VideoPage = Page & {};
+export type VideoPage = Page & {
+  publicId: string;
+};
 
 export type ReleasePage = Page &
   Pick<MdxPage, 'importMdx'> & {
