@@ -12,12 +12,13 @@ declare global {
   var scheduler: Scheduler;
 }
 
-declare module 'mdx/types' {
-  namespace JSX {
-    type Element = runtime.JSX.Element;
-    type ElementClass = runtime.JSX.ElementClass;
-    type IntrinsicElements = runtime.JSX.IntrinsicElements;
-  }
-}
+// Should be unnecessary with the latest React@19 codemods
+// declare module 'mdx/types' {
+//   namespace JSX {
+//     type Element = runtime.JSX.Element;
+//     type ElementClass = runtime.JSX.ElementClass;
+//     type IntrinsicElements = runtime.JSX.IntrinsicElements;
+//   }
+// }
 
 export {};

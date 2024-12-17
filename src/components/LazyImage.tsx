@@ -21,7 +21,10 @@ type OnLoad = ReactEventHandler<HTMLImageElement> | undefined;
 
 // See https://stackoverflow.com/q/39777833/266535 for why we use this ref
 // handler instead of the img's onLoad attribute.
-function handleLoading(img: ImgElementWithDataProp, onLoadRef: RefObject<OnLoad | undefined>) {
+function handleLoading(
+  img: ImgElementWithDataProp,
+  onLoadRef: RefObject<OnLoad | undefined | null>,
+) {
   const src = img?.src;
   if (!img || img['data-src'] === src) {
     return;

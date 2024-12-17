@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+import type { JSX } from 'react';
 
 interface ImportMetaEnv {
   readonly VITE_APP_CANONICAL: string;

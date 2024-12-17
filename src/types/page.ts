@@ -1,4 +1,4 @@
-import type { LazyExoticComponent } from 'react';
+import type { JSX, LazyExoticComponent } from 'react';
 import type { MDXProps } from 'mdx/types';
 
 /*
