@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.21.0",
-    "react": "19.0.0-rc-cae764ce-20241025",
-    "react-dom": "19.0.0-rc-cae764ce-20241025",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-player": "^3.0.0-canary.0",
     "urlpattern-polyfill": "^10.0.0"
   },
@@ -35,8 +35,8 @@
     "@types/mdx": "^2.0.13",
     "@types/node": "^20.12.7",
     "@types/postcss-import": "^14.0.3",
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",
     "compression": "^1.7.4",
@@ -59,14 +59,10 @@
     "vite": "^5.4.8",
     "vite-node": "^2.1.4"
   },
-  "overrides": {
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc"
-  },
   "pnpm": {
     "peerDependencyRules": {
       "allowedVersions": {
-        "react": "19.0.0-rc-cae764ce-20241025"
+        "react": "^19.0.0"
       }
     }
   },
