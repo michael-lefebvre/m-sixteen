@@ -5,7 +5,7 @@ import express from 'express';
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
 const port = process.env.PORT || 5173;
-const base = process.env.BASE || '/m-sixteen/'; // todo: handle nested base, e.g. /m-sixteen/
+const base = process.env.BASE || '/'; // todo: handle nested base, e.g. /m-sixteen/
 const ABORT_DELAY = 10000;
 
 // Cached production assets

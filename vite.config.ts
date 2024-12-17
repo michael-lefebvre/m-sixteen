@@ -31,7 +31,7 @@ export default defineConfig({
   },
   server: {
     port: 3004,
-    open: '/m-sixteen/',
+    open: '/',
   },
   resolve: {
     alias: {

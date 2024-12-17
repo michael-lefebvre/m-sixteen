@@ -43,7 +43,7 @@ export const PointerLayout: FC<PropsWithChildren<{ children: ReactNode }>> = ({ 
         </li>
         <li>
           <Link
-            href="/m-sixteen/videos/rouge"
+            href="/videos/rouge"
             style={styleFnc}
           >
             video rouge
