@@ -7,6 +7,11 @@
 - [x] Generate content from MDX and JSON files.
 - [ ] Structured media data. Image + Video components.
 - [ ] All the content models, discography, concerts, etc., mergable into a single page a.k.a. the "Timeline".
+- [ ] Update React 19 to stable release.
+- [ ] Lightbox component for the media with view transition.
+- [ ] List valuable pages to prerender for SEO.
+- [ ] Define responsive layouts detection and breakpoints.
+- [ ] Resolve routes/path helpers.
 
 ## 2024-10-26 **project setup**
 
@@ -146,3 +151,28 @@ interface Video extends Page {
   // ...
 }
 ```
+
+## 2024-12-12 **Notes**
+
+After a long break, I'm back on the project. I'm still struggling with the content model.
+
+Fun fact: The same day I returned to the project, `react@19` and `react-router@7` was released.
+I will have to update the project to use the latest and stable versions of `react` and codmods, then look for potential breaking changes.
+
+I'm not sure if I should use `react-router`. The modified `bloody-use-url` package works well despite the massive number of missing features like routes/path helpers.
+The major benefit of `react-router@7` is that it delegates the pre-rendering `vite` plugin to the package. But I feel like it's a bit overkill for my needs,
+It will force us to adopt the `react-router` way of doing things, and I'm not sure it's worth the effort.
+
+By the way, it was a good opportunity to rethink the code-splitting strategy. The whole website concept is based on unique section layouts. Without a proper code-splitting strategy, the initial loading will be too heavy.
+We can't just isolate each section with its dependencies, as it will make assets preloading a complex task to escape the FOUC (Flash Of Unstyled Content) and the FOUT (Flash Of Unstyled Text).
+
+We must identify the critical UI elements like CSS themes, fonts, and other global assets and preload them using link tags in the HTML template.
+The JSX part of this critical UI will be included in the initial bundle as a `/routes` component file, with all the async loader and suspense logic.
+The non-critical UI elements will be lazy-loaded from a `/pages` component.
+
+Interesting reads:
+
+- [Fix Your Annoying Popups with the CloseWatcher API](https://logaretm.com/blog/fix-your-annoying-popups-with-the-closewatcher-api/) • we may find a better way to manage `TopLayer` component state.
+- [How to lazy load YouTube videos with vanilla JavaScript](https://gomakethings.com/how-to-lazy-load-youtube-videos-with-vanilla-javascript/) • an lightweight alternative to the `ReactPlayer` package. [alternative with vimeo included](https://dev.to/madsstoumann/how-to-embed-youtube-and-vimeo-the-light-way-2pek)
+- [SPA lazy loading](SPA Lazy Loading Pitfalls) • a good reminder of the pitfalls of lazy loading in a SPA context.
+- [How <canvas> Saved the Day - Handling Large Images in the Browser](https://dev.to/tomj/how-saved-the-day-handling-large-images-in-the-browser-7e6)
