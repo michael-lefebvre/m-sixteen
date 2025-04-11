@@ -7,7 +7,7 @@
 - [x] Generate content from MDX and JSON files.
 - [ ] Structured media data. Image + Video components.
 - [ ] All the content models, discography, concerts, etc., mergable into a single page a.k.a. the "Timeline".
-- [ ] Update React 19 to stable release.
+- [x] Update React 19 to stable release.
 - [ ] Lightbox component for the media with view transition.
 - [ ] List valuable pages to prerender for SEO.
 - [ ] Define responsive layouts detection and breakpoints.
@@ -174,5 +174,12 @@ Interesting reads:
 
 - [Fix Your Annoying Popups with the CloseWatcher API](https://logaretm.com/blog/fix-your-annoying-popups-with-the-closewatcher-api/) • we may find a better way to manage `TopLayer` component state.
 - [How to lazy load YouTube videos with vanilla JavaScript](https://gomakethings.com/how-to-lazy-load-youtube-videos-with-vanilla-javascript/) • an lightweight alternative to the `ReactPlayer` package. [alternative with vimeo included](https://dev.to/madsstoumann/how-to-embed-youtube-and-vimeo-the-light-way-2pek)
-- [SPA lazy loading](SPA Lazy Loading Pitfalls) • a good reminder of the pitfalls of lazy loading in a SPA context.
+- [SPA Lazy Loading Pitfalls](https://reacttraining.com/blog/spa-lazy-loading-pitfalls) • a good reminder of the pitfalls of lazy loading in a SPA context.
 - [How <canvas> Saved the Day - Handling Large Images in the Browser](https://dev.to/tomj/how-saved-the-day-handling-large-images-in-the-browser-7e6)
+
+## 2024-12-26 **Quick notes**
+
+Two API responses as inspiration for the image/video content model:
+
+- `https://react-tweet.vercel.app/api/tweet/1847032286476488785`: `video_info`includes aspect ratio as array. The `sizes` object lists the available pressets for the image including the resize method (crop or fit).
+- `https://api.fxtwitter.com/status/1847032286476488785`: the `media` object includes well structured data for the image and video content.
